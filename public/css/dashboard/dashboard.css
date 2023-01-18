@@ -1,0 +1,1111 @@
+* {
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: "Poppins", sans-serif;
+}
+
+#expensesCategory {
+    height: 100%;
+    min-height: 10em;
+}
+
+.column_content_info {
+    border: 1px solid #ffffff;
+    /* box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09); */
+    border-radius: 5px;
+    background-color: #ffffff;
+    margin: 10px 0;
+    padding: 5px;
+    color: black;
+    height: 150px;
+    max-height: 15em;
+}
+
+/* @media only screen and (max-width:1300px){
+                                    .coloumn__info{
+
+                                        float: left;
+                                        width: 100%;
+                                        max-width: 100px;
+                                    }
+                                    .coloumn__info p {
+                                    color: black;
+                                    font-size: 9px;
+                                }
+                                } */
+
+.column_content_info .title__amount {
+    font-size: 0.7em;
+}
+
+.column_content_info p {
+    color: black;
+    font-size: 9px;
+}
+
+.column_content_info .total_amount {
+    color: black;
+    font-size: 0.8em;
+}
+
+#number_format {
+    font-size: 1em;
+}
+
+#form_number_format {
+    color: black;
+    font-size: 0.8em;
+    padding: 5px 0;
+}
+
+#hr_remain {
+    border: 2px solid #000000;
+    margin-top: 0px;
+}
+
+#hr_budget {
+    border: 2px solid #000000;
+    margin-top: 50px;
+}
+
+#hr_used {
+    border: 2px solid #000000;
+    margin-top: 50px;
+}
+
+@media only screen and (min-width: 240px) and (max-width: 659px) {
+    .column_content_info .title__amount {
+        font-size: 12px !important;
+    }
+
+    #number_format {
+        font-size: 14px !important;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 12px;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 0.7em !important;
+        padding: 5px 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black !important;
+        font-size: 15px !important;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 0;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 30px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (min-width: 660px) and (max-width: 767px) {
+    .column_content_info .title__amount {
+        font-size: 0.8em;
+        /* color: #ff720c; */
+    }
+
+    #number_format {
+        font-size: 1.4em;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 0.8em;
+        padding: 5px 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black;
+        font-size: 13px !important;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 5px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 33px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 789px) {
+    .column_content_info .title__amount {
+        font-size: 0.5em;
+    }
+
+    #number_format {
+        font-size: 0.8em;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.6em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 0.8em;
+        padding: 5px 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black;
+        font-size: 9px !important;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 0;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 40px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 40px;
+    }
+}
+
+@media only screen and (min-width: 790px) and (max-width: 794px) {
+    .column_content_info .title__amount {
+        font-size: 0.5em;
+    }
+
+    #number_format {
+        font-size: 0.8em;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.6em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 0.8em;
+        padding: 5px 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black;
+        font-size: 9px !important;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 10px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 38px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 40px;
+    }
+}
+
+@media only screen and (min-width: 795px) and (max-width: 847px) {
+    .column_content_info .title__amount {
+        font-size: 0.5em;
+    }
+
+    #number_format {
+        font-size: 0.8em;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.6em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 0.8em;
+        padding: 5px 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black;
+        font-size: 9px !important;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 10px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 38px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 50px;
+    }
+}
+
+@media only screen and (min-width: 848px) and (max-width: 899px) {
+    .column_content_info .title__amount {
+        font-size: 0.5em;
+    }
+
+    #number_format {
+        font-size: 0.8em;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.6em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 0.8em;
+        padding: 5px 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black;
+        font-size: 9px !important;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 10px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 50px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 50px;
+    }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 912px) {
+    .column_content_info .title__amount {
+        font-size: 10px;
+    }
+
+    #number_format {
+        font-size: 9px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 6px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black;
+        font-size: 9.5px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 10px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 45px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 60px;
+    }
+}
+
+@media only screen and (min-width: 913px) and (max-width: 957px) {
+    .column_content_info .title__amount {
+        font-size: 10px;
+    }
+
+    #number_format {
+        font-size: 9px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 6px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black;
+        font-size: 9.5px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 25px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 45px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 60px;
+    }
+}
+
+@media only screen and (min-width: 958px) and (max-width: 983px) {
+    .column_content_info .title__amount {
+        font-size: 10px;
+    }
+
+    #number_format {
+        font-size: 9px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 6px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black;
+        font-size: 9.5px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 38px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 45px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 60px;
+    }
+}
+
+@media only screen and (min-width: 984px) and (max-width: 999px) {
+    .column_content_info .title__amount {
+        font-size: 10px;
+    }
+
+    #number_format {
+        font-size: 9px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 6px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black;
+        font-size: 9.5px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 38px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 60px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 60px;
+    }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1114px) {
+    .column_content_info .title__amount {
+        font-size: 10px;
+    }
+
+    #number_format {
+        font-size: 12px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 6px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black;
+        font-size: 12px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 10px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 50px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 50px;
+    }
+}
+
+/* @media only screen and (max-width:1114px) {
+
+                .column_content_info span {
+                    font-size: 10px;
+                }
+
+                #number_format {
+                    font-size: 8px;
+                }
+
+                .column_content_info p {
+                    color: black;
+                    font-size: 6px;
+                    padding: 0;
+                }
+
+                .column_content_info label {
+                    color: black;
+                    font-size: 9.5px;
+                }
+
+                #hr_remain {
+                    border: 2px solid #000000;
+                    margin-top: -5px;
+                }
+
+                #hr_budget {
+                    border: 2px solid #000000;
+                    margin-top: 40px;
+                }
+
+                #hr_used {
+                    border: 2px solid #000000;
+                    margin-top: 40px;
+                }
+            } */
+
+@media only screen and (min-width: 1114px) and (max-width: 1119px) {
+    .column_content_info .title__amount {
+        font-size: 12px;
+    }
+
+    #number_format {
+        font-size: 11px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 9px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black !important;
+        font-size: 13px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 20px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 30px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 50px;
+    }
+}
+
+@media only screen and (min-width: 1120px) and (max-width: 1199px) {
+    .column_content_info .title__amount {
+        font-size: 12px;
+    }
+
+    #number_format {
+        font-size: 11px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 9px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black !important;
+        font-size: 13px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 20px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 50px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 50px;
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1244px) {
+    .column_content_info .title__amount {
+        font-size: 10.5px;
+    }
+
+    #number_format {
+        font-size: 11px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 9px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black !important;
+        font-size: 12px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 10px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 35px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 35px;
+    }
+}
+
+@media only screen and (min-width: 1245px) and (max-width: 1261px) {
+    .column_content_info .title__amount {
+        font-size: 10.5px;
+    }
+
+    #number_format {
+        font-size: 11px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 9px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black !important;
+        font-size: 12px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 10px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 35px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 53px;
+    }
+}
+@media only screen and (min-width: 1262px) and (max-width: 1267px) {
+    .column_content_info .title__amount {
+        font-size: 10.5px;
+    }
+
+    #number_format {
+        font-size: 11px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 9px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black !important;
+        font-size: 12px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 13px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 53px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 53px;
+    }
+}
+@media only screen and (min-width: 1268px) and (max-width: 1280px) {
+    .column_content_info .title__amount {
+        font-size: 10.5px;
+    }
+
+    #number_format {
+        font-size: 11px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 9px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black !important;
+        font-size: 12px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 13px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 53px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 53px;
+    }
+}
+
+@media only screen and (min-width: 1281px) and (max-width: 1299px) {
+    .column_content_info .title__amount {
+        font-size: 0.7em;
+    }
+
+    #number_format {
+        font-size: 12px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 9px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black !important;
+        font-size: 12px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 11px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 35px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 53px;
+    }
+}
+@media only screen and (min-width: 1300px) and (max-width:1350px) {
+    .column_content_info .title__amount {
+        font-size: 12px;
+    }
+
+    #number_format {
+        font-size: 12px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.5em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 9px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black !important;
+        font-size: 14px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 8px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 30px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 49px;
+    }
+}
+@media only screen and (min-width: 1351px) and (max-width:1376px){
+    .column_content_info .title__amount {
+        font-size: 13px;
+    }
+
+    #number_format {
+        font-size: 12px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.6em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 9px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black !important;
+        font-size: 13px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 5px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 30px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 50px;
+    }
+}
+
+@media screen and (min-width: 1514px){
+    .column_content_info .title__amount {
+        font-size: 13px;
+    }
+
+    #number_format {
+        font-size: 12px;
+    }
+
+    #form_number_format {
+        color: black;
+        font-size: 0.6em;
+        padding: 5px 0;
+    }
+
+    .column_content_info p {
+        color: black;
+        font-size: 9px;
+        padding: 0;
+    }
+
+    .column_content_info .total_amount {
+        color: black !important;
+        font-size: 13px;
+    }
+
+    #hr_remain {
+        border: 2px solid #000000;
+        margin-top: 15px;
+    }
+
+    #hr_budget {
+        border: 2px solid #000000;
+        margin-top: 45px;
+    }
+
+    #hr_used {
+        border: 2px solid #000000;
+        margin-top: 45px;
+    }
+}
+
+.coloumn__card {
+    /* background-color: #ff720c; */
+    background: rgb(255, 114, 12);
+    background: linear-gradient(
+        110deg,
+        rgba(255, 114, 12, 1) 71%,
+        rgba(25, 25, 75, 1) 71%
+    );
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 20px;
+    /* box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09); */
+    height: 100%;
+    max-height: 12.4em;
+    width: 100%;
+}
+
+.coloumn__expense {
+    border: 1px solid #ffffff;
+    /* box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09); */
+    border-radius: 5px;
+    background-color: #ffffff;
+    margin: 10px 0;
+    padding: 20px;
+    color: black;
+    height: 100%;
+    min-height: 10em;
+}
+
+.coloumn__expense__category {
+    border: 1px solid #ffffff;
+    /* box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09); */
+    border-radius: 5px;
+    background-color: #ffffff;
+    margin: 10px 0;
+    padding: 20px;
+    color: black;
+    height: 100%;
+    min-height: 10em;
+}
+
+#expenses {
+    height: 100%;
+    min-height: 10em;
+}
+
+.coloumn__recent__expense {
+    background-color: #ffffff;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+    /* box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09); */
+    height: 100%;
+    min-height: 10em;
+}
+
+.coloumn__recent__expense p {
+    color: black;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.coloumn__quick__access {
+    background-color: #ffffff;
+    height: 150px;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 5px;
+    color: black;
+    /* box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09); */
+}
+
+.coloumn__quick__access p {
+    color: black;
+    font-weight: 700;
+}
+
+.new_expense:hover {
+    transform: scale(1.1);
+    transition-delay: 1s;
+    transition: 1s ease-in-out;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+.column_info {
+    float: left;
+    width: 33.33%;
+    /* padding: 10px; */
+    /* height: 300px; */
+    /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column_info {
+        width: 100%;
+    }
+}
