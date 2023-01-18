@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Http;
 
 class LoginController extends Controller
 {
@@ -55,8 +56,27 @@ class LoginController extends Controller
 
                 $AuthToken = $authAPI->authorization->token;
                 $TenantCode = $authAPI->authorization->tenant_code;
+                $userId = $authAPI->authorization->user_id;
                 Session::put('AuthToken', $AuthToken);
                 Session::put('TenantCode', $TenantCode);
+
+                $permission = self::detailProfil($userId, $AuthToken);
+
+                if ($permission == false) {
+                    Session::forget('AuthToken');
+                    Session::forget('TenantCode');
+                    Auth::logout();
+                    return redirect("/sign-in");
+                } else {
+                    Session::put('policies', $permission['policies']);
+                    Session::put('approval_topup', $permission['approval_topup']);
+                    Session::put('approval_expense', $permission['approval_expense']);
+                    Session::put('approval_prebudget', $permission['approval_prebudget']);
+                    Session::put('manage_user', $permission['manage_user']);
+                    Session::put('manage_budget', $permission['manage_budget']);
+                    Session::put('manage_tenant', $permission['manage_tenant']);
+                    Session::put('manage_cards', $permission['manage_cards']);
+                }
 
                 return redirect("/");
             } else {
@@ -95,5 +115,38 @@ class LoginController extends Controller
         $res = $client->sendAsync($request, $options)->wait();
         $response = json_decode($res->getBody());
         return $response;
+    }
+
+    public function detailProfil($user_id, $token)
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json'
+        ];
+        
+        $url = config('api.base_url') . 'api/user/profile/info?user_id=' . $user_id;
+        $response = Http::withHeaders($headers)
+            ->get($url);
+
+        if ($response->successful()) {
+            return $response->json()['data']['permission'];
+        }
+
+        return false;
+
+        // $client = new Client();
+        // $headers = [
+        //     'Authorization' => 'Bearer ' . $token,
+        //     'Accept' => 'application/json'
+        // ];
+        // $request = new Psr7Request('GET', config('api.base_url') . 'api/user/profile/info?user_id=' . $user_id, $headers);
+        // $res = $client->sendAsync($request)->wait();
+        // $response = json_decode($res->getBody());      
+
+        // if ($response->success == false) {
+        //     return [];
+        // } else {
+        //     return $response->data->permission;
+        // }
     }
 }
