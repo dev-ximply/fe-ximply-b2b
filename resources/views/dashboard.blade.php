@@ -302,7 +302,7 @@
                                         <ul class="splide__list">
                                             @foreach ($data['voucher'] as $voucher)
                                                 <li class="splide__slide">
-                                                    <img src="{{ env('STORAGE_URL') . $voucher->discount_picture }}"
+                                                    <img src="{{ config('storage.base_url') . $voucher->discount_picture }}"
                                                         class="" style="width: 12em" alt="">
                                                 </li>
                                             @endforeach
