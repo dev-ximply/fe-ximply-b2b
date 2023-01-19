@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Http;
 
 class PartnerController extends Controller
 {
-    public static function index(){
+    public function index(){
+        // dd(self::asyncGetMembers());
         return view(
             'partner',
             [
@@ -20,8 +21,9 @@ class PartnerController extends Controller
                 'section' => 'partner',
                 'data'  => [
                     'groups' => self::groups(Auth::user()['id']),
-                    'partners' => self::partners(Auth::user()['id'])
-                ]
+                    'partners' => self::partners(Auth::user()['id']),
+                ],
+                'members' => self::asyncGetMembers(),
             ]
         );
     }
@@ -40,6 +42,19 @@ class PartnerController extends Controller
         ];
 
         return self::asyncUpdateParner($params);
+    }
+
+    public function updatePartnerAssign(Request $request){
+        // dd($request->all());
+
+        $params =[
+            'user_id' => Auth::user()['id'],
+            'tenant_code' => session()->get('TenantCode'),
+            'assign_user_id' => $request->assign_user_id,
+            'partner_id' => $request->partner_id,
+        ];
+
+        return self::asyncUpdatePartnerAssign($params);
     }
 
     public static function partners($user_id){
@@ -92,6 +107,45 @@ class PartnerController extends Controller
 
         if ($response->successful()) {
             return $response->json();
+        }
+
+        throw new \Exception($response->json()['message']);
+    }
+
+    public function asyncUpdatePartnerAssign($params)
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $url = config('api.base_url') . 'api/partner/relation/add';
+        $response = Http::withHeaders($headers)
+            ->asForm()
+            ->post($url, $params);
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        throw new \Exception($response->json()['message']);
+    }
+
+    public function asyncGetMembers()
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+        // api/group/member/list/{{TenantCode}}?user_id=1000001
+        $url = config('api.base_url') . 'api/group/member/list/'.session()->get('TenantCode').'?user_id='.Auth::user()['id'];
+        // dd($url);
+        $response = Http::withHeaders($headers)
+            // ->asForm()
+            ->get($url);
+
+        if ($response->successful()) {
+            return $response->json()['data'];
         }
 
         throw new \Exception($response->json()['message']);
