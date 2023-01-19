@@ -47,7 +47,7 @@
                                         Name</label>
                                     <input onchange="changeInfoProfile(this.value, 'first_name')" type="text"
                                         class="form-control text-dark text-capitalize" placeholder="Company Name"
-                                        value="PT Aplikasi Lintas Bangsa">
+                                        value="PT Aplikasi Lintas Bangsagit ">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Industry</label>
