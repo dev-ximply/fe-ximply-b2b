@@ -25,7 +25,7 @@
                         <a class="" data-bs-toggle="collapse" href="#collapseExample1{{ $iterate }}"
                             role="button" aria-expanded="false" aria-controls="collapseExample1">
                             <div class="w-100">
-                                <img src="{{ env('STORAGE_URL') . $itemCoupon->discount_picture }}" alt=""
+                                <img src="{{ config('storage.base_url') . $itemCoupon->discount_picture }}" alt=""
                                     class="img-fluid" style="width: 100%" srcset="">
                             </div>
                         </a>
@@ -39,7 +39,7 @@
                                                 15%!!</b></span>
                                     </div> --}}
                                             <div class="d-flex flex-column align-items-center p-0 justify-content-center">
-                                                <img src="{{ env('STORAGE_URL') . $itemCoupon->discount_barcode_picture }}"
+                                                <img src="{{ config('storage.base_url') . $itemCoupon->discount_barcode_picture }}"
                                                     class="img-fluid" alt="" style="width: 90px">
 
                                                 {{-- <span class="text-xs font-weight-bold">Scan QR Code Above</span>
