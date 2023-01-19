@@ -29,27 +29,47 @@ class MembersController extends Controller
         );
     }
 
-    public function updateEmployee(Request $request){
-        $userId= Auth::user()['id'];
+    public function updateEmployee(Request $request)
+    {
         $tenantCode = session()->get('TenantCode');
-
+        $userId = Auth::user()['id'];
         // update departement
-        $paramsDepartements =[
+        $paramsDepartements = [
             'tenant_code' => $tenantCode,
             'group_id' => $request->departement_id,
             'user_id' => $userId,
+            'assign_user_id' => $request->user_id,
         ];
 
-        $paramsRole =[
+        $paramsRole = [
             'tenant_code' => $tenantCode,
             'role_id' => $request->role_id,
             'user_id' => $userId,
+            'assign_user_id' => $request->user_id,
         ];
 
-        // dd($paramsRole);
+       try{
+        if($request->departement_id){
 
-       return self::updateRole($paramsRole);
-    //    return self::updateDepartement($paramsDepartements);
+            self::updateDepartement($paramsDepartements);
+        }
+
+        if($request->role_id){
+
+            self::updateRole($paramsRole);
+        }
+
+        return [
+            "status" => 200,
+            "success" => true,
+            "message" => "berhasil"
+        ];
+
+       }catch(\Exception $e){
+
+        throw new \Exception($e->getMessage());
+       }
+
 
     }
 
@@ -107,7 +127,8 @@ class MembersController extends Controller
         return $response->data;
     }
 
-    public function updateDepartement($params){
+    public function updateDepartement($params)
+    {
 
         $headers = [
             'Authorization' => 'Bearer ' . session()->get('AuthToken'),
@@ -126,7 +147,8 @@ class MembersController extends Controller
         throw new \Exception($response->json()['message']);
     }
 
-    public function updateRole($params){
+    public function updateRole($params)
+    {
 
         $headers = [
             'Authorization' => 'Bearer ' . session()->get('AuthToken'),

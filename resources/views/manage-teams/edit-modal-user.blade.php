@@ -12,7 +12,7 @@
                     <div class="card-body pt-0">
                         <form onsubmit="updateEmploye(event)">
                             <div class="row">
-                                <input type="hidden" name="test" id="name_id">
+                                <input type="hidden" name="test" id="user_id">
                                 <div class="col-6">
                                     <label class="form-label mt-2"
                                         style="color: black; font-weight:500">Department</label>
@@ -210,6 +210,7 @@
 
         let departementId = event.target.querySelector("#edit_department_id").value;
         let roleId = event.target.querySelector("#edit_role_id").value;
+        let userId = event.target.querySelector("#user_id").value;
         console.log(roleId);
         console.log(departementId);
         console.log('submit')
@@ -220,6 +221,7 @@
                 data: {
                     role_id: roleId,
                     departement_id: departementId,
+                    user_id: userId,
                 },
                 success: function(response) {
 
@@ -229,6 +231,11 @@
                         message
                     } = response;
 
+                    if(success===true){
+                        setTimeout(function() {
+                            window.location.reload(true);
+                        }, 1000);
+                    }
                 }
 
             });

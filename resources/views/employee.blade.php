@@ -72,7 +72,7 @@
                                         <td class="text-xs font-weight-bold">
                                             <div class="d-flex justify-content-center pb-0 mt-3">
                                                 <button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
-                                                    data-bs-title="View Your Expense Member" data-bs-toggle="modal" data-id="{{ $item->email }}" data-bs-target="#edit_modal_users"
+                                                    data-bs-title="View Your Expense Member" data-bs-toggle="modal" data-id="{{ $item->id }}" data-bs-target="#edit_modal_users"
                                                     style="background-color: #ff720c;width:65px;height:25px;font-size:12px; font-weight:500;" onclick="changeEmploye(this.getAttribute('data-id'))">
                                                     Edit
                                                 </button>
@@ -102,7 +102,7 @@
     <script>
         function changeEmploye(value){
             console.log(value)
-            document.getElementById('name_id').value=value;
+            document.getElementById('user_id').value=value;
         }
     </script>
 @endsection
