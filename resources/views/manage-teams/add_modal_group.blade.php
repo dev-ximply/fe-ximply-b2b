@@ -16,7 +16,7 @@
                         <input type="text" class="form-control" id="GroupName" name="Group_name">
                     </div>
                     <div class="form-group ">
-                        <label for="message-text" style="color: black; font-weight:500">Have Clients</label>
+                        <label for="message-text" style="color: black; font-weight:500">Have Clients or Vendor</label>
                         <div class="d-flex flex-row mx-2">
                             <div class="form-check me-2">
                                 <input class="form-check-input" type="checkbox" id="haveClient" name="have_client">

@@ -8,12 +8,12 @@
     <div class="modal" tabindex="-1" id="modalExpenses">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
-                <div class="modal-header" style="background: #19194b" >
+                <div class="modal-header" style="background: #19194b">
                     <p class="modal-title text-white text-center" style="font-size: 15px;font-weight:600">New Expense</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                 
+
                     <div class="d-flex py-2 justify-content-center align-items-center flex-column text-center">
                         <a class="new_expense text-white bg-gradient-primary px-3 py-1 rounded mb-2" href="#"
                             data-bs-toggle="modal" data-bs-target="#manualForm" onclick="handlingModalForm(false)"
@@ -115,8 +115,8 @@
                 </div>
 
                 <div class="col-md pt-0 mt-3">
-                    <div class="row">
-                        <div class="column_info  text-center   pb-0">
+                    <div class="row justify-content-between">
+                        <div class="col-md column_info text-center">
                             <div class="column_content_info card">
                                 <span class="title__amount" style="font-weight: 600;">Remain Budget <p>(Remain Expense)
                                     </p>
@@ -128,17 +128,20 @@
                                     {{ number_format($data['limit']['remain_limit'], 2) }}</p>
                             </div>
                         </div>
-                        <div class="column_info text-center  pb-0">
-                            <div class="column_content_info card">
-                                <span class="title__amount" style="font-weight: 600;">Budget Spending <p>Amount Spending
-                                    </p>
-                                </span>
-                                <hr id="hr_budget" style="">
-                                <p class="total_amount text-center" style="font-weight:600">
-                                    {{ number_format($data['limit']['budget_spending'], 2) }}</p>
+                        @if (session()->get('manage_budget') == 1)
+                            <div class="col-md column_info text-center">
+                                <div class="column_content_info card">
+                                    <span class="title__amount" style="font-weight: 600;">Budget Spending <p>Amount
+                                            Spending
+                                        </p>
+                                    </span>
+                                    <hr id="hr_budget" style="">
+                                    <p class="total_amount text-center" style="font-weight:600">
+                                        {{ number_format($data['limit']['budget_spending'], 2) }}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="column_info  text-center  pb-0">
+                        @endif
+                        <div class="col-md column_info text-center">
                             <div class="column_content_info card">
                                 <span class="title__amount" style="font-weight: 600;">Used Expense <p>Limit has been used
                                     </p>
@@ -581,6 +584,7 @@
                             'rgba(255,255,255,0.25)'
                     },
                     series: [{
+                        maxPointWidth: 20,
                         name: '',
                         type: 'column',
                         yAxis: 1,

@@ -133,20 +133,5 @@ class LoginController extends Controller
         }
 
         return false;
-
-        // $client = new Client();
-        // $headers = [
-        //     'Authorization' => 'Bearer ' . $token,
-        //     'Accept' => 'application/json'
-        // ];
-        // $request = new Psr7Request('GET', config('api.base_url') . 'api/user/profile/info?user_id=' . $user_id, $headers);
-        // $res = $client->sendAsync($request)->wait();
-        // $response = json_decode($res->getBody());      
-
-        // if ($response->success == false) {
-        //     return [];
-        // } else {
-        //     return $response->data->permission;
-        // }
     }
 }

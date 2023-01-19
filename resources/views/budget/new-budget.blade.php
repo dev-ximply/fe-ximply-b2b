@@ -10,7 +10,7 @@
                     <h5 class=" mb-0 font-weight-bolder text-dark">
                         Rp
                         <span>
-                            {{ $data['limit']['remain_limit'] != null ? number_format($data['data']['remain_limit'], 2) : '0' }}
+                            {{ $data['limit']['remain_limit'] != null ? number_format($data['limit']['remain_limit'], 2) : '0' }}
                         </span>
                     </h5>
                     {{-- @endif --}}

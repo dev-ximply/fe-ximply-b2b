@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request as Psr7Request;
-use Hamcrest\SelfDescribing;
-use Symfony\Component\HttpFoundation\Session\Session as SessionSession;
 
 class NewBudgetController extends Controller
 {
@@ -51,33 +49,16 @@ class NewBudgetController extends Controller
 
         $user_id = Auth::user()['id'];
         $tenant_code = Session::get('TenantCode');
-        // $assign_user = "";
-        // $limit = "";
-        // $auto_approve_limit = "";
-        // $expire_date = "";
-
-        // if($request['assign_user_id'] == "" || $request['assign_user_id'] == null){
-        //     return back()->withInput()->with(['assign_user_id.required', 'Name is required']);
-        // }
-
-        // if($request['limit'] == "" || $request['limit'] == null){
-        //     return back()->withInput()->with(['limit.required', 'Limit is required']);
-        // }
-
-        // if($request['auto_approve_limit'] == "" || $request['auto_approve_limit'] == null){
-        //     return back()->withInput()->with(['auto_approve_limit.required', 'Auto Approve Limit is required']);
-        // }
-
-        // if($request['expire_date'] == "" || $request['expire_date'] == null){
-        //     return back()->withInput()->with(['expire_date.required', 'Expire Date is required']);
-        // }
-
         $assign_user = $request['assign_user_id'];
         $limit = $request['limit'];
         $auto_approve_limit = $request['auto_approve_limit'];
         $expire_date = $request['expire_date'];
 
         $client = new Client();
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
         $options = [
             'multipart' => [
                 [
@@ -106,12 +87,15 @@ class NewBudgetController extends Controller
                 ]
             ]
         ];
-        $request = new Psr7Request('POST', config('api.base_url') . 'api/spend/member/assign');
+        
+        $request = new Psr7Request('POST', config('api.base_url') . 'api/spend/member/assign', $headers);        
+
         $res = $client->sendAsync($request, $options)->wait();
+
         $response = json_decode($res->getBody());
 
         if($response->success == false){
-            $request->session();
+            session();
             return back()->with('error', $response->message)->withInput();
         }
 

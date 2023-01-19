@@ -76,9 +76,6 @@
                                                     style="background-color: #ff720c;width:65px;height:25px;font-size:12px; font-weight:500;" onclick="changeEmploye(this.getAttribute('data-id'))">
                                                     Edit
                                                 </button>
-                                                {{-- <button
-                                                    class="btn text-white d-flex justify-content-center align-items-center text-capitalize ms-2 delete"
-                                                    style="background-color: #D42A34;width:65px;height:25px;font-size:12px;font-weight:500">Unbind</button> --}}
                                             </div>
                                         </td>
                                     </tr>

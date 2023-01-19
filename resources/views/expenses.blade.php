@@ -451,6 +451,7 @@
                         document.getElementById('detail_location').value = response['location'];
                         document.getElementById('detail_category').value = response['category'];
                         document.getElementById('detail_sub_category').value = response['sub_category'];
+                        document.getElementById('detail_partner').value = response['client_name'];
                         document.getElementById('detail_purpose').value = response['purpose'];
                         document.getElementById('dataExpenseOf').value = response['expense_of'];
                         $('#ex1').zoom();
