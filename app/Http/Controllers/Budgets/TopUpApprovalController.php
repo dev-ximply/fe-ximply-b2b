@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Session;
 class TopUpApprovalController extends Controller
 {
     //
-    public function index(){
-        // dd(self::asyncGetApprovals(Auth::user()['id']));
+    public function index(Request $request){
+
+        // dd($request->all());
+        $statusType = $request->statusType;
+
         return view(
             'budget.top-up-approval',
             [
@@ -24,14 +27,12 @@ class TopUpApprovalController extends Controller
                     'top_up' => self::top_up(Auth::user()['id']),
 
                 ],
-                'approvals' => self::asyncGetApprovals(Auth::user()['id']),
+                'approvals' => self::asyncGetApprovals(Auth::user()['id'], $statusType),
             ]
         );
     }
 
     public function upprove(Request $request){
-        // dd($request->all());
-
         $params =[
             'user_id' => Auth::user()['id'],
             'topup_id' => $request->topup_id,
@@ -60,14 +61,18 @@ class TopUpApprovalController extends Controller
         return $response->data;
     }
 
-    public function asyncGetApprovals($userId){
+    public function asyncGetApprovals($userId, $statusType=null){
         $headers = [
             'Authorization' => 'Bearer ' . session()->get('AuthToken'),
             'Accept' => 'application/json'
         ];
+        $params =[
+            'status' => $statusType,
+        ];
         $url = config('api.base_url') . 'api/topup/approval/list/' . $userId;
         $response = Http::withHeaders($headers)
-            ->get($url);
+            ->asForm()
+            ->get($url, $params);
 
         if ($response->successful()) {
             return $response->json()['data'];
