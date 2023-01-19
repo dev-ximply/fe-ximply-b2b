@@ -91,7 +91,7 @@
                                     <tr>
                                         <td class="align-middle text-start text-capitalize text-xs">
                                             <div class="d-flex">
-                                                <img src="{{ env('STORAGE_URL') . $expense_approval->receipt_picture_directory }}"
+                                                <img src="{{ config('storage.base_url') . $expense_approval->receipt_picture_directory }}"
                                                     class="img-fluid ms-3" alt="receipt" style="width: 50px">
                                                 <div class="ms-3 my-auto show-modal">
                                                     <div>
