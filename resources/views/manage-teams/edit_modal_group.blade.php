@@ -9,8 +9,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <input type="text" id="groupId" hidden>
+                <form onsubmit="handleSubmitChangeGroup(event)">
+                    <input type="hidden" id="group_id">
                     <div class="form-group">
                         <label for="recipient-name" style="color: black; font-weight:500">Group Name</label>
                         <input type="text" class="form-control" value="" id="groupName">
@@ -19,8 +19,9 @@
                         <label for="message-text" style="color: black; font-weight:500">Have Clients</label>
                         <div class="d-flex flex-column mx-2">
                             <div class="form-check me-2">
-                                <input class="form-check-input" type="checkbox" value="" id="IsHaveClient">
-                                <label class="custom-control-label" for="IsHaveClient" style="color: black; font-weight:500">Yes</label>
+                                <input class="form-check-input" type="checkbox" id="IsHaveClient">
+                                <label class="custom-control-label" for="IsHaveClient"
+                                    style="color: black; font-weight:500">Yes</label>
                             </div>
                         </div>
                     </div>
@@ -34,14 +35,15 @@
                             <option value="Choice 1">Rio Ferdian</option>
                         </select>
                     </div>
-                </form>
-                <div class="d-flex justify-content-end">
-                    <div>
-                        <button type="button" class="btn text-white" data-bs-dismiss="modal"
-                            style="background-color: #D42A34">Cancel</button>
-                        <button onclick="editGroup({{ Auth::user()['id'] }}, document.getElementById('groupId').value, document.getElementById('groupName').value, document.getElementById('IsHaveClient').checked, )" type="button" class="btn text-white" style="background-color: #62ca50">Submit</button>
+                    <div class="d-flex justify-content-end">
+                        <div>
+                            <button type="button" class="btn text-white" data-bs-dismiss="modal"
+                                style="background-color: #D42A34">Cancel</button>
+                            <button type="submit" class="btn text-white"
+                                style="background-color: #62ca50">Submit</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -50,7 +52,6 @@
 <script src="{{ asset('js/plugins/choices.min.js') }}"></script>
 <script src="{{ asset('js/plugins/flatpickr.min.js') }}"></script>
 <script>
-
     function editGroup(userId,groupId,groupName,IsHaveClient){
         console.log(userId);
         console.log(groupId);
@@ -77,7 +78,7 @@
             .then((result) => {
                 if (result.isConfirmed) {
 
-                    var formData = new FormData();  
+                    var formData = new FormData();
 
                     if(IsHaveClient == true){
                         IsHaveClient = 1;
@@ -201,5 +202,43 @@
             'label',
             false,
         );
+    }
+</script>
+
+<script>
+    function handleSubmitChangeGroup(event){
+        event.preventDefault();
+
+        let groupId = event.target.querySelector("#group_id").value;
+        let groupName = event.target.querySelector("#groupName").value;
+        let hasClient = event.target.querySelector("#IsHaveClient").checked;
+
+        console.log('submit')
+
+        $.ajax({
+                type: "PUT",
+                url: "{{ route('groups.update') }}",
+                data: {
+                    group_id: groupId,
+                    group_name: groupName,
+                    has_client: hasClient,
+                },
+                success: function(response) {
+                    console.log(response)
+                    const {
+                        success,
+                        status,
+                        message
+                    } = response;
+
+                    if(success===true){
+                        setTimeout(function() {
+                            window.location.reload(true);
+                        }, 1000);
+                    }
+                }
+
+            });
+
     }
 </script>
