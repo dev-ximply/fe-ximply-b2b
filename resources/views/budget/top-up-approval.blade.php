@@ -255,6 +255,14 @@
         function handleSubmitApprove(event){
             event.preventDefault();
 
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success-cstm mx-2",
+                    cancelButton: "btn btn-danger-cstm mx-2",
+                },
+                buttonsStyling: false,
+            });
+
             var topUpId = document.getElementById("topUpId").value;
             var topupAmount = document.getElementById("topupAmount").value;
             var topupAmountApprove = document.getElementById("topupAmountApprove").value;
@@ -270,7 +278,6 @@
                     amount_approved: document.getElementById('topupAmountApprove').value,
                 },
                 success: function(response) {
-                    console.log(response)
                     const {
                         success,
                         status,
@@ -278,9 +285,23 @@
                     } = response;
 
                     if(success===true){
+                        swalWithBootstrapButtons
+                        .fire(
+                            "Success!",
+                            "Your request success.",
+                            "success"
+                        );
+
                         setTimeout(function() {
                             window.location.reload(true);
                         }, 1000);
+                    }else{
+                        swalWithBootstrapButtons
+                        .fire(
+                            "Error!",
+                            message,
+                            "error"
+                        );
                     }
                 }
 
@@ -311,7 +332,6 @@
                     })
                     .then((result) => {
                     if (result.isConfirmed) {
-                        console.log('submit');
                         $.ajax({
                         type: "POST",
                         url: "{{ route('approves.action') }}",
@@ -321,7 +341,6 @@
                             amount_approved: amountApproved,
                         },
                         success: function(response) {
-                            console.log(response);
                             const { success, status, message } = response;
                             if (success === true) {
                                 swalWithBootstrapButtons.fire(
