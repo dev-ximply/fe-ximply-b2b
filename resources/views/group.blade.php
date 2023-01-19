@@ -123,11 +123,17 @@
                                     </td>
                                     <td class="text-sm d-flex justify-content-md-center justify-content-between"
                                         data-label="Action">
-                                        <button onclick=""
+                                        {{-- <button onclick=""
                                             class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
                                             data-bs-toggle="modal" data-bs-target="#editModalGroup"
                                             style="background-color: #ff720c;width:65px;height:25px;font-size:12px;font-weight:500">
-                                            Edit</button>
+                                            Edit
+                                        </button> --}}
+                                        <button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
+                                            data-bs-title="View Your Expense Member" data-bs-toggle="modal" data-id="{{ $item->id }}" data-bs-target="#editModalGroup"
+                                            style="background-color: #ff720c;width:65px;height:25px;font-size:12px; font-weight:500;" onclick="changeGroup(this.getAttribute('data-id'))">
+                                            Edit
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -140,7 +146,12 @@
 
     </div>
 
-
+    <script>
+        function changeGroup(value){
+                console.log(value)
+                document.getElementById('group_id').value=value;
+            }
+    </script>
     <script>
         function getData(id) {
             $.ajax({

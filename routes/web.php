@@ -70,8 +70,10 @@ Route::get('/employee', [MembersController::class, 'index'])->middleware('auth')
 Route::put('/employees', [MembersController::class, 'updateEmployee'])->middleware('auth')->name('employees.update');
 
 Route::get('/group', [GroupController::class, 'index'])->middleware('auth');
+Route::put('/groups', [GroupController::class, 'updateGroup'])->middleware('auth')->name('groups.update');
 
 Route::get('/partner', [PartnerController::class, 'index'])->middleware('auth');
+Route::put('/partners', [PartnerController::class, 'updatePartner'])->middleware('auth')->name('partners.update');
 
 Route::get('/expense/{user_id}', [MemberExpenseController::class, 'index'])->middleware('auth');
 
@@ -82,6 +84,9 @@ Route::get('/new-budget', [NewBudgetController::class, 'index'])->middleware('au
 Route::post('/spend/add', [NewBudgetController::class, 'add_spend'])->name('add_spend')->middleware('auth');
 
 Route::get('/spend/request', [TopUpApprovalController::class, 'index'])->middleware('auth');
+
+// Approve
+Route::post('/approves', [TopUpApprovalController::class, 'upprove'])->middleware('auth')->name('approves.action');
 
 Route::get('/pre-approval', function () {
     return view(
