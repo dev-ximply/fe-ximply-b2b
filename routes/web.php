@@ -73,6 +73,7 @@ Route::get('/group', [GroupController::class, 'index'])->middleware('auth');
 Route::put('/groups', [GroupController::class, 'updateGroup'])->middleware('auth')->name('groups.update');
 
 Route::get('/partner', [PartnerController::class, 'index'])->middleware('auth');
+Route::put('/partners', [PartnerController::class, 'updatePartner'])->middleware('auth')->name('partners.update');
 
 Route::get('/expense/{user_id}', [MemberExpenseController::class, 'index'])->middleware('auth');
 

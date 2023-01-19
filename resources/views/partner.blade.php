@@ -131,11 +131,11 @@
 
                                     <td class="text-sm d-flex justify-content-md-center justify-content-between"
                                         data-label="Action">
-                                        <button onclick=""
-                                            class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
-                                            data-bs-toggle="modal" data-bs-target="#editModalPartner"
-                                            style="background-color: #ff720c;width:65px;height:25px;font-size:12px;font-weight:500">
-                                            Edit</button>
+                                        <button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
+                                            data-bs-title="View Your Expense Member" data-bs-toggle="modal" data-id="{{ $item->id }}" data-bs-target="#editModalPartner"
+                                            style="background-color: #ff720c;width:65px;height:25px;font-size:12px; font-weight:500;" onclick="changeEmploye(this.getAttribute('data-id'))">
+                                            Edit
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -170,6 +170,16 @@
                 }
 
             });
+        }
+    </script>
+    <script>
+        function changeEmploye(value, companyName, editEmail, editHandphone){
+            console.log(value)
+            document.getElementById('pertner_id').value=value;
+            // document.getElementById('editcompanyName').value=value;
+            // document.getElementById('editcompanyName').value=companyName;
+            // document.getElementById('editEmail').value=editEmail;
+            // document.getElementById('editHandphone').value=editHandphone;
         }
     </script>
 @endsection
