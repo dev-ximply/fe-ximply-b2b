@@ -70,6 +70,7 @@ Route::get('/employee', [MembersController::class, 'index'])->middleware('auth')
 Route::put('/employees', [MembersController::class, 'updateEmployee'])->middleware('auth')->name('employees.update');
 
 Route::get('/group', [GroupController::class, 'index'])->middleware('auth');
+Route::put('/groups', [GroupController::class, 'updateGroup'])->middleware('auth')->name('groups.update');
 
 Route::get('/partner', [PartnerController::class, 'index'])->middleware('auth');
 
