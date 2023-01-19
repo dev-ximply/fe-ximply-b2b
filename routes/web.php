@@ -85,6 +85,9 @@ Route::post('/spend/add', [NewBudgetController::class, 'add_spend'])->name('add_
 
 Route::get('/spend/request', [TopUpApprovalController::class, 'index'])->middleware('auth');
 
+// Approve
+Route::post('/approves', [TopUpApprovalController::class, 'upprove'])->middleware('auth')->name('approves.action');
+
 Route::get('/pre-approval', function () {
     return view(
         'pre-approval',
