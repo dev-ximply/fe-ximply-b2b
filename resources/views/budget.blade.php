@@ -60,23 +60,22 @@
                     <i class="fas fa-plus text-md"></i> --}}
                 </a>
             </div>
-            {{-- @if (Auth::user()->account_detail()['role_level'] != 0) --}}
+            {{-- @if (Auth::user()->account_detail()['role_level'] != 0)
                 <div class="d-flex me-2">
                     <a href="/spend/request" class="btn btn-outline-dark btn-icon text-xs d-flex align-items-center">
                         Top Up Requested
-                         {{-- &nbsp;<i class="fa-solid fa-circle-exclamation text-md text-warning"></i> --}}
+                         &nbsp;<i class="fa-solid fa-circle-exclamation text-md text-warning"></i>
                     </a>
                 </div>
-            {{-- @endif --}}
+            @endif --}}
         </div>
         <div class="col-md text-md-end text-start mt-2 px-0 mx-0">
-            {{-- @if (Auth::user()->account_detail()['role_level'] != 0) --}}
+            @if (session()->get('is_superadmin') == false)
                 <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Remain Budget</p>
                 <h5 class=" mb-0 text-dark font-weight-bolder">
-                    {{-- Rp <span>{{ $data['remain_limit'] != null ? number_format($data['remain_limit']) : '0' }}</span> --}}
-                    Rp. 10.000.000,00
+                    Rp <span>{{ $data['limit']->remain_limit != null ? number_format($data['limit']->remain_limit, 2) : '0' }}</span>
                 </h5>
-            {{-- @endif --}}
+            @endif
         </div>
     </div>
 
@@ -94,7 +93,7 @@
                                                 {{ $item->full_name }}
                                             </h6>
                                         </div>
-                                        {{-- <div class="ms-auto">
+                                        <div class="ms-auto">
                                             <div class="dropdown">
                                                 <button class="btn btn-link text-secondary ps-0 pe-2"
                                                     id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
@@ -103,12 +102,11 @@
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end me-sm-n4 me-n3"
                                                     aria-labelledby="navbarDropdownMenuLink">
-                                                    <a class="dropdown-item"
-                                                        href="/spends/edit/{{ $item['spend_relation_member_id'] }}">Edit</a>
-                                                    <a class="dropdown-item" href="javascript:;">Retire</a>
+                                                    <a class="dropdown-item">Edit</a>
+                                                    {{-- <a class="dropdown-item" href="javascript:;">Retire</a> --}}
                                                 </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                     <div class="w-100 mt-1">
                                         <span class="me-2 font-weight-normal " style="font-size: 0.8em">Department : <span
@@ -121,25 +119,28 @@
                                             {{ number_format($item->limit->assign_limit) }}</span>
                                     </div>
                                     <div class="w-100 mt-1">
-                                        <span class="me-2 font-weight-normal" style="font-size: 0.8em">Auto Approve Limit : Rp
+                                        <span class="me-2 font-weight-normal" style="font-size: 0.8em">Remain : Rp
+                                            {{ number_format($item->limit->remain_limit) }}</span>
+                                    </div>
+                                    <div class="w-100 mt-1">
+                                        <span class="me-2 font-weight-normal" style="font-size: 0.8em">Auto Approve : Rp
                                             {{ number_format($item->limit->auto_approve) }}</span>
                                     </div>
                                     <hr class="horizontal dark">
                                     <div class="w-100 mt-1">
                                         <div class="d-flex mb-2">
-                                            <span class="me-2 text-sm font-weight-normal">budget used : Rp
+                                            <span class="me-2 text-sm font-weight-normal">Used : Rp
                                                 {{ number_format($item->limit->used_limit) }}
                                             </span>
-                                            <span
+                                            {{-- <span
                                                 class="ms-auto text-sm font-weight-normal">
-                                                {{ number_format($item->limit->budget_spending) }}
-                                                %</span>
+                                                {{ number_format($item->limit->budget_spending) }} %</span> --}}
                                         </div>
-                                    </div>
+                                </div>
                                     <div class="row mt-2">
                                         <div class="col text-end">
                                             <h6 class="text-sm mb-0">
-                                                {{-- {{ $item['expire_date'] }} --}}
+                                                {{ $item->limit->expire_date }}
                                             </h6>
                                             <p class="text-secondary text-sm font-weight-normal mb-0">Expired Date</p>
                                         </div>

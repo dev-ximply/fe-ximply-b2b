@@ -89,7 +89,7 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col-md mb-2">
-                                <label for="" class="text-dark" style="font-weight:500">Partner</label>
+                                <label for="" class="text-dark" style="font-weight:500">Client/Vendor</label>
                                 <input type="text" placeholder="" class="form-control bg-white" id="detail_partner"
                                     readonly>
                             </div>

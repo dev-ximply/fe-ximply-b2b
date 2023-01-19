@@ -60,7 +60,9 @@ class LoginController extends Controller
                 Session::put('AuthToken', $AuthToken);
                 Session::put('TenantCode', $TenantCode);
 
-                $permission = self::detailProfil($userId, $AuthToken);
+                $detail = self::detailProfil($userId, $AuthToken);
+
+                $permission = $detail['permission'];
 
                 if ($permission == false) {
                     Session::forget('AuthToken');
@@ -68,6 +70,7 @@ class LoginController extends Controller
                     Auth::logout();
                     return redirect("/sign-in");
                 } else {
+                    Session::put('is_superadmin', $detail['is_superadmin']);
                     Session::put('policies', $permission['policies']);
                     Session::put('approval_topup', $permission['approval_topup']);
                     Session::put('approval_expense', $permission['approval_expense']);
@@ -78,7 +81,11 @@ class LoginController extends Controller
                     Session::put('manage_cards', $permission['manage_cards']);
                 }
 
-                return redirect("/");
+                if($detail['is_superadmin'] == true){
+                    return redirect("/group");
+                }else{
+                    return redirect("/");
+                }                
             } else {
                 return redirect("/sign-in")->with('error', 'Email or password wrong!');
             }
@@ -129,24 +136,9 @@ class LoginController extends Controller
             ->get($url);
 
         if ($response->successful()) {
-            return $response->json()['data']['permission'];
+            return $response->json()['data'];
         }
 
         return false;
-
-        // $client = new Client();
-        // $headers = [
-        //     'Authorization' => 'Bearer ' . $token,
-        //     'Accept' => 'application/json'
-        // ];
-        // $request = new Psr7Request('GET', config('api.base_url') . 'api/user/profile/info?user_id=' . $user_id, $headers);
-        // $res = $client->sendAsync($request)->wait();
-        // $response = json_decode($res->getBody());      
-
-        // if ($response->success == false) {
-        //     return [];
-        // } else {
-        //     return $response->data->permission;
-        // }
     }
 }

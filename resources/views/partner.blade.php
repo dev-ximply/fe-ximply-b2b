@@ -88,7 +88,7 @@
     <div class="row">
         <div>
             <button class="btn  text-md text-white @if ($section == 'add user') active @endif" data-bs-toggle="modal"
-                data-bs-target="#addModalPartner" style="background-color: #19194b">Add Partner
+                data-bs-target="#addModalPartner" style="background-color: #19194b">New Client or Vendor
                 <i class="fa-solid fa-user-plus ms-2" style="font-size: 1em"></i>
             </button>
         </div>
