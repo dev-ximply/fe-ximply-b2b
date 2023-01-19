@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request as Psr7Request;
+use Illuminate\Support\Facades\Http;
 
 class MembersController extends Controller
 {
@@ -26,6 +27,30 @@ class MembersController extends Controller
                 ]
             ]
         );
+    }
+
+    public function updateEmployee(Request $request){
+        $userId= Auth::user()['id'];
+        $tenantCode = session()->get('TenantCode');
+
+        // update departement
+        $paramsDepartements =[
+            'tenant_code' => $tenantCode,
+            'group_id' => $request->departement_id,
+            'user_id' => $userId,
+        ];
+
+        $paramsRole =[
+            'tenant_code' => $tenantCode,
+            'role_id' => $request->role_id,
+            'user_id' => $userId,
+        ];
+
+        // dd($paramsRole);
+
+       return self::updateRole($paramsRole);
+    //    return self::updateDepartement($paramsDepartements);
+
     }
 
     public static function list($user_id)
@@ -80,5 +105,43 @@ class MembersController extends Controller
         }
 
         return $response->data;
+    }
+
+    public function updateDepartement($params){
+
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $url = config('api.base_url') . 'api/group/member/change';
+        $response = Http::withHeaders($headers)
+            ->asForm()
+            ->post($url, $params);
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        throw new \Exception($response->json()['message']);
+    }
+
+    public function updateRole($params){
+
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $url = config('api.base_url') . 'api/user/role/edit';
+        $response = Http::withHeaders($headers)
+            ->asForm()
+            ->post($url, $params);
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        throw new \Exception($response->json()['message']);
     }
 }

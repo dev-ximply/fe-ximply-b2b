@@ -1,4 +1,4 @@
-<div class="modal fade" id="add_modal_users" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
+<div class="modal fade" id="edit_modal_users" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -10,75 +10,47 @@
             <div class="modal-body">
                 <div class="card-text mt-4" id="basic-info">
                     <div class="card-body pt-0">
-                        <div class="row">
-                            <div class="col-6">
-                                <label class="form-label" style="color: black; font-weight:500">Firstname</label>
-                                <div class="input-group">
-                                    <input id="edit_first_name" placeholder="Firstname" name="edit_first_name"
-                                        class="form-control" type="text" required="required">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label" style="color: black; font-weight:500">Lastname</label>
-                                <div class="input-group">
-                                    <input id="edit_last_name" placeholder="Lastname" name="edit_last_name" class="form-control"
-                                        type="text" required="required">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <label class="form-label mt-2" style="color: black; font-weight:500">Email</label>
-                                <div class="input-group">
-                                    <input id="edit_email" placeholder="Email" name="edit_email" class="form-control"
-                                        type="email">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label mt-2" style="color: black; font-weight:500">Employee
-                                    Code</label>
-                                <div class="input-group">
-                                    <input id="edit_employee_code" placeholder="Employee Code" name="edit_employee_code"
-                                        class="form-control" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <label class="form-label mt-2" style="color: black; font-weight:500">Department</label>
-                                <div class="">
-                                    <select class="form-control " name="edit_department_id" id="edit_department_id">
-                                        <option value="" selected>Select</option>
-                                        @foreach ($data['list_department'] as $item_departement)
+                        <form onsubmit="updateEmploye(event)">
+                            <div class="row">
+                                <input type="hidden" name="test" id="name_id">
+                                <div class="col-6">
+                                    <label class="form-label mt-2"
+                                        style="color: black; font-weight:500">Department</label>
+                                    <div class="">
+                                        <select class="form-control " name="edit_department_id" id="edit_department_id">
+                                            <option value="" selected>Select</option>
+                                            @foreach ($data['list_department'] as $item_departement)
                                             <option value="{{ $item_departement->id }}">
                                                 {{ $item_departement->group_name }}
                                             </option>
-                                        @endforeach
-                                    </select>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label mt-2" style="color: black; font-weight:500">Role</label>
-                                <div class="">
-                                    <select class="form-control " name="edit_role_id" id="edit_role_id">
-                                        <option value="" selected>Select</option>
-                                        @foreach ($data['list_role'] as $item_role)
+                                <div class="col-6">
+                                    <label class="form-label mt-2" style="color: black; font-weight:500">Role</label>
+                                    <div class="">
+                                        <select class="form-control " name="edit_role_id" id="edit_role_id">
+                                            <option value="" selected>Select</option>
+                                            @foreach ($data['list_role'] as $item_role)
                                             <option value="{{ $item_role->id }}">{{ $item_role->role_name }}
                                             </option>
-                                        @endforeach
-                                    </select>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mt-2 ">
-                            <div class="d-flex mt-4 justify-content-end mb-0">
-                                <div class="mb-0">
-                                    <button class="btn text-white" data-bs-dismiss="modal"
-                                        style="background-color: #D42A34">Cancel</button>
-                                    <button type="sumbit" class="btn text-white" style="background-color: #62ca50">Submit</button>
+                            <div class="row mt-2 ">
+                                <div class="d-flex mt-4 justify-content-end mb-0">
+                                    <div class="mb-0">
+                                        <button class="btn text-white" data-bs-dismiss="modal"
+                                            style="background-color: #D42A34">Cancel</button>
+                                        <button type="sumbit" class="btn text-white"
+                                            style="background-color: #62ca50">Submit</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -229,5 +201,37 @@
     if (document.getElementById('role_id')) {
         var roleChoice = document.getElementById('role_id');
         const example = new Choices(roleChoice);
+    }
+</script>
+<script>
+    function updateEmploye(e){
+        e.preventDefault();
+
+
+        let departementId = event.target.querySelector("#edit_department_id").value;
+        let roleId = event.target.querySelector("#edit_role_id").value;
+        console.log(roleId);
+        console.log(departementId);
+        console.log('submit')
+
+        $.ajax({
+                type: "PUT",
+                url: "{{ route('employees.update') }}",
+                data: {
+                    role_id: roleId,
+                    departement_id: departementId,
+                },
+                success: function(response) {
+
+                    const {
+                        success,
+                        status,
+                        message
+                    } = response;
+
+                }
+
+            });
+
     }
 </script>
