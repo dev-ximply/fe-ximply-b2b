@@ -158,12 +158,12 @@
                         <div class="col-md progress-wrapper bg-white  rounded pb-2">
                             <div class="progress-info">
                                 <div class="progress-percentage">
-                                    <span class="text-xs font-weight-bold text-dark">60%</span>
+                                    {{-- <span class="text-xs font-weight-bold text-dark">60%</span> --}}
                                 </div>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                    aria-valuemax="100" style="width: 60%; background:#19194b"></div>
+                                {{-- <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                    aria-valuemax="100" style="width: 60%; background:#19194b"></div> --}}
                             </div>
                         </div>
                     </div>
@@ -181,8 +181,8 @@
                                     </div>
                                     <div class="d-flex flex-column ms-2">
                                         <span style="font-size: 16px;color:black;font-weight:400">Expenses</span>
-                                        <span style="font-size: 16px;color:black;font-weight:700">
-                                            {{ number_format($data['limit']['used_limit'], 2) }}</span>
+                                        {{-- <span style="font-size: 16px;color:black;font-weight:700">
+                                            {{ number_format($data['limit']['used_limit'], 2) }}</span> --}}
                                     </div>
                                 </div>
                                 <div class="row flex-md-row flex-column ms-auto">
@@ -333,10 +333,9 @@
                             <table class="table">
                                 <tbody>
                                     <tr class="text-start" style="font-size:12px;color:#000000">
-                                        <th>No</th>
+                                        <th>status</th>
                                         <th>Expense</th>
                                         <th>Total</th>
-                                        <th>Status</th>
                                     </tr>
                                     @foreach ($data['recent_expenses'] as $recentExpenses)
                                         @php
@@ -344,11 +343,10 @@
                                         @endphp
                                         @if ($no <= 10)
                                             <tr class="text-start" style="font-size:12px;color:#000000">
-                                                <td>{{ $recentExpenses->merchant }}</td>
-                                                <td>{{ $recentExpenses->category }}</td>
+                                                <td style="font-size:11px">{{ $recentExpenses->status }}</td>
+                                                <td><span class="fw-bold">{{ $recentExpenses->category }}</span><br><span style="font-size:10px">{{ $recentExpenses->merchant }}</span></td>
                                                 <td class="fw-bold">Rp
-                                                    {{ number_format($recentExpenses->total_amount, 2) }}</td>
-                                                <td>{{ $recentExpenses->status }}</td>
+                                                    {{ number_format($recentExpenses->total_amount, 2) }}</td>                                                
                                             </tr>
                                         @endif
                                     @endforeach

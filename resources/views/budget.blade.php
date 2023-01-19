@@ -70,12 +70,12 @@
             @endif --}}
         </div>
         <div class="col-md text-md-end text-start mt-2 px-0 mx-0">
-            {{-- @if (Auth::user()->account_detail()['role_level'] != 0) --}}
+            @if (session()->get('is_superadmin') == false)
                 <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Remain Budget</p>
                 <h5 class=" mb-0 text-dark font-weight-bolder">
                     Rp <span>{{ $data['limit']->remain_limit != null ? number_format($data['limit']->remain_limit, 2) : '0' }}</span>
                 </h5>
-            {{-- @endif --}}
+            @endif
         </div>
     </div>
 

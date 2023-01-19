@@ -71,7 +71,7 @@
                                         </td>
                                         <td class="text-xs font-weight-bold">
                                             <div class="d-flex justify-content-center pb-0 mt-3">
-                                                <button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
+                                                <button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
                                                     data-bs-title="View Your Expense Member" data-bs-toggle="modal" data-id="{{ $item->id }}" data-bs-target="#edit_modal_users"
                                                     style="background-color: #ff720c;width:65px;height:25px;font-size:12px; font-weight:500;" onclick="changeEmploye(this.getAttribute('data-id'))">
                                                     Edit

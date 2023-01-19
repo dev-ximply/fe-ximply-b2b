@@ -55,7 +55,7 @@
                                     <span for="" class="input-group-text z-index-1 font-weight-bold text-dark"
                                         id="basic-addon1"
                                         style="border-right: 1px solid #adadadad; font-size:11px;height:35px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
-                                    <input type="text" class="form-control px-2 text-dark" id="filter_start_date"
+                                    <input type="date" class="form-control px-2 text-dark" id="filter_start_date"
                                         name="filter_start_date"
                                         style="font-size:11px;height:35px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
                                 </div>
@@ -64,7 +64,7 @@
                                 <div class="input-group">
                                     <span for="" class="input-group-text z-index-1 font-weight-bold text-dark"
                                         style="border-right: 1px solid #adadadad; font-size:11px;height:35px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
-                                    <input type="text" class="form-control px-2 text-dark" id="filter_end_date"
+                                    <input type="date" class="form-control px-2 text-dark" id="filter_end_date"
                                         name="filter_end_date"
                                         style="font-size:11px;height:35px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
                                 </div>
@@ -121,35 +121,35 @@
 <script src="{{ asset('js/plugins/smooth-scrollbar.min.js') }}"></script>
 
 <script>
-    jQuery(function($) {
-        var from = $("#filter_start_date")
-            .datepicker({
-                dateFormat: "yy-mm-dd",
-                changeMonth: true
-            })
-            .on("change", function() {
-                to.datepicker("option", "minDate", getDate(this));
-            }),
-            to = $("#filter_end_date").datepicker({
-                dateFormat: "yy-mm-dd",
-                changeMonth: true
-            })
-            .on("change", function() {
-                from.datepicker("option", "maxDate", getDate(this));
-            });
+    // jQuery(function($) {
+    //     var from = $("#filter_start_date")
+    //         .datepicker({
+    //             dateFormat: "yy-mm-dd",
+    //             changeMonth: true
+    //         })
+    //         .on("change", function() {
+    //             to.datepicker("option", "minDate", getDate(this));
+    //         }),
+    //         to = $("#filter_end_date").datepicker({
+    //             dateFormat: "yy-mm-dd",
+    //             changeMonth: true
+    //         })
+    //         .on("change", function() {
+    //             from.datepicker("option", "maxDate", getDate(this));
+    //         });
 
-        function getDate(element) {
-            var date;
-            var dateFormat = "yy-mm-dd";
-            try {
-                date = $.datepicker.parseDate(dateFormat, element.value);
-            } catch (error) {
-                date = null;
-            }
+    //     function getDate(element) {
+    //         var date;
+    //         var dateFormat = "yy-mm-dd";
+    //         try {
+    //             date = $.datepicker.parseDate(dateFormat, element.value);
+    //         } catch (error) {
+    //             date = null;
+    //         }
 
-            return date;
-        }
-    });
+    //         return date;
+    //     }
+    // });
 </script>
 
 <script>

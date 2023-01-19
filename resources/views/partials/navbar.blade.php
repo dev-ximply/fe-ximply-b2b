@@ -139,7 +139,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="mb-0">
+                        {{-- <li class="mb-0">
                             <a class="dropdown-item border-radius-md" href="/setting">
                                 <div class="d-flex flex-column justify-content-center">
                                     <h6 class="text-sm font-weight-normal mb-1">
@@ -149,7 +149,7 @@
                                     </h6>
                                 </div>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="mb-0">
                             <a class="dropdown-item border-radius-md" href="{{ route('logout_action') }}"
                                 onclick="event.preventDefault();
