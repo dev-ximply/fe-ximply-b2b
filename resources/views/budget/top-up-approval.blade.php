@@ -75,20 +75,25 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="d-flex mb-4 justify-content-start justify-content-md-end">
-                        <form action="" style="z-index: 0">
+                        <form id="formSearch" action="" style="z-index: 0" onsubmit="handleChangeStatus(event)">
                             <div class="row">
                                 <div class="col-md mt-2">
-                                    <select name="3ff" id="3ff" class="rounded border border-secondary text-secondary"
+                                    <select
+                                        name="statusType" id="status" class="rounded border border-secondary text-secondary"
                                         style="font-size:12px; height: 25px; width: 150px">
                                         <option value="">Status</option>
-                                        <option value="fvds">new</option>
-                                        <option value="sdfsd">approved</option>
-                                        <option value="sdfsd">rejected</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="rejected">Rejected</option>
+                                        <option value="approved">Approved</option>
+                                        <option value="done">Done</option>
                                     </select>
                                 </div>
                                 <div class="col-md mt-2">
-                                    <input type="text" class="rounded border border-secondary text-secondary"
-                                        style="font-size:12px; height: 25px; width: 150px" placeholder="search..." />
+                                    <button type="submit"
+                                            style="line-height:10px; height:25px; font-size:9px"
+                                            class="form-control text-bold" id="filter_button">
+                                            F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -127,6 +132,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (count($approvals) > 0)
                                 @foreach ($approvals as $approval)
                                 <tr>
                                     <td class="align-middle text-start text-xs text-dark">
@@ -221,6 +227,13 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                    <tr class="text-center">
+                                        <td colspan="5">
+                                            Data tidak di temukan
+                                        </td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -346,5 +359,11 @@
                 perPageSelect: false
             });
         }
+</script>
+
+<script>
+    function handleChangeStatus(event){
+        event.submit();
+    }
 </script>
 @endsection
