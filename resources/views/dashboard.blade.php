@@ -8,12 +8,12 @@
     <div class="modal" tabindex="-1" id="modalExpenses">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
-                <div class="modal-header" style="background: #19194b" >
+                <div class="modal-header" style="background: #19194b">
                     <p class="modal-title text-white text-center" style="font-size: 15px;font-weight:600">New Expense</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                 
+
                     <div class="d-flex py-2 justify-content-center align-items-center flex-column text-center">
                         <a class="new_expense text-white bg-gradient-primary px-3 py-1 rounded mb-2" href="#"
                             data-bs-toggle="modal" data-bs-target="#manualForm" onclick="handlingModalForm(false)"
@@ -115,8 +115,8 @@
                 </div>
 
                 <div class="col-md pt-0 mt-3">
-                    <div class="row">
-                        <div class="column_info  text-center   pb-0">
+                    <div class="row justify-content-between">
+                        <div class="col-md column_info text-center">
                             <div class="column_content_info card">
                                 <span class="title__amount" style="font-weight: 600;">Remain Budget <p>(Remain Expense)
                                     </p>
@@ -128,17 +128,20 @@
                                     {{ number_format($data['limit']['remain_limit'], 2) }}</p>
                             </div>
                         </div>
-                        <div class="column_info text-center  pb-0">
-                            <div class="column_content_info card">
-                                <span class="title__amount" style="font-weight: 600;">Budget Spending <p>Amount Spending
-                                    </p>
-                                </span>
-                                <hr id="hr_budget" style="">
-                                <p class="total_amount text-center" style="font-weight:600">
-                                    {{ number_format($data['limit']['budget_spending'], 2) }}</p>
+                        @if (session()->get('manage_budget') == 1)
+                            <div class="col-md column_info text-center">
+                                <div class="column_content_info card">
+                                    <span class="title__amount" style="font-weight: 600;">Budget Spending <p>Amount
+                                            Spending
+                                        </p>
+                                    </span>
+                                    <hr id="hr_budget" style="">
+                                    <p class="total_amount text-center" style="font-weight:600">
+                                        {{ number_format($data['limit']['budget_spending'], 2) }}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="column_info  text-center  pb-0">
+                        @endif
+                        <div class="col-md column_info text-center">
                             <div class="column_content_info card">
                                 <span class="title__amount" style="font-weight: 600;">Used Expense <p>Limit has been used
                                     </p>
@@ -155,12 +158,12 @@
                         <div class="col-md progress-wrapper bg-white  rounded pb-2">
                             <div class="progress-info">
                                 <div class="progress-percentage">
-                                    <span class="text-xs font-weight-bold text-dark">60%</span>
+                                    {{-- <span class="text-xs font-weight-bold text-dark">60%</span> --}}
                                 </div>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                    aria-valuemax="100" style="width: 60%; background:#19194b"></div>
+                                {{-- <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                    aria-valuemax="100" style="width: 60%; background:#19194b"></div> --}}
                             </div>
                         </div>
                     </div>
@@ -178,8 +181,8 @@
                                     </div>
                                     <div class="d-flex flex-column ms-2">
                                         <span style="font-size: 16px;color:black;font-weight:400">Expenses</span>
-                                        <span style="font-size: 16px;color:black;font-weight:700">
-                                            {{ number_format($data['limit']['used_limit'], 2) }}</span>
+                                        {{-- <span style="font-size: 16px;color:black;font-weight:700">
+                                            {{ number_format($data['limit']['used_limit'], 2) }}</span> --}}
                                     </div>
                                 </div>
                                 <div class="row flex-md-row flex-column ms-auto">
@@ -302,8 +305,8 @@
                                         <ul class="splide__list">
                                             @foreach ($data['voucher'] as $voucher)
                                                 <li class="splide__slide">
-                                                    <img src="{{ config('storage.base_url') . $voucher->discount_picture }}"
-                                                        class="" style="width: 12em" alt="">
+                                                    <img src="{{ config('storage.merchant_url') . $voucher->discount_picture }}"
+                                                        class="rounded" style="width: 12em;" alt="">
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -330,10 +333,9 @@
                             <table class="table">
                                 <tbody>
                                     <tr class="text-start" style="font-size:12px;color:#000000">
-                                        <th>No</th>
+                                        <th>status</th>
                                         <th>Expense</th>
                                         <th>Total</th>
-                                        <th>Status</th>
                                     </tr>
                                     @foreach ($data['recent_expenses'] as $recentExpenses)
                                         @php
@@ -341,11 +343,10 @@
                                         @endphp
                                         @if ($no <= 10)
                                             <tr class="text-start" style="font-size:12px;color:#000000">
-                                                <td>{{ $recentExpenses->merchant }}</td>
-                                                <td>{{ $recentExpenses->category }}</td>
+                                                <td style="font-size:11px">{{ $recentExpenses->status }}</td>
+                                                <td><span class="fw-bold">{{ $recentExpenses->category }}</span><br><span style="font-size:10px">{{ $recentExpenses->merchant }}</span></td>
                                                 <td class="fw-bold">Rp
-                                                    {{ number_format($recentExpenses->total_amount, 2) }}</td>
-                                                <td>{{ $recentExpenses->status }}</td>
+                                                    {{ number_format($recentExpenses->total_amount, 2) }}</td>                                                
                                             </tr>
                                         @endif
                                     @endforeach
@@ -459,7 +460,7 @@
                 focus: 'center',
                 autoWidth: true,
                 autoplay: true,
-                gap: 5,
+                gap: 10,
                 speed: 1500,
                 perPage: 1,
             }).mount();
@@ -581,6 +582,7 @@
                             'rgba(255,255,255,0.25)'
                     },
                     series: [{
+                        maxPointWidth: 20,
                         name: '',
                         type: 'column',
                         yAxis: 1,

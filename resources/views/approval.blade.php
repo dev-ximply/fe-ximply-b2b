@@ -178,7 +178,7 @@
                                             @else
                                                 <div class="pt-3 d-flex justify-content-center">
                                                     <button
-                                                        onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category }}', '{{ $expense_approval->sub_category }}', '{{ $expense_approval->purpose }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
+                                                        onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category }}', '{{ $expense_approval->sub_category }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
                                                         data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"
                                                         class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"
                                                         style="width: 60px; height:25px; background-color:#FFCF23">
@@ -219,7 +219,7 @@
 
     <script>
         function getExpenseData(receipt_directory, additional_directory, receipt_date, merchant, total_amount, location,
-            category, sub_category, purpose, expense_of, status, approval_id) {
+            category, sub_category, partner, purpose, expense_of, status, approval_id) {
             document.getElementById('detail_receipt_file').src = STORAGE_URL + receipt_directory;
             document.getElementById('detail_additional_file').src = STORAGE_URL + additional_directory;
             document.getElementById('detail_date').value = receipt_date;
@@ -228,6 +228,7 @@
             document.getElementById('detail_location').value = location;
             document.getElementById('detail_category').value = category;
             document.getElementById('detail_sub_category').value = sub_category;
+            document.getElementById('detail_partner').value = partner;
             document.getElementById('detail_purpose').value = purpose;
             document.getElementById('dataExpenseOf').value = expense_of;
             approvalID = approval_id;
