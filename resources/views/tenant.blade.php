@@ -20,8 +20,8 @@
                             <div class="row justify-content-center">
                                 <div class="bg-secondary overflow-hidden d-flex align-items-center justify-content-center mb-2 mt-3"
                                     style="border-radius: 50%; width:156px; height:156px">
-                                    <img src="" alt="Company Logo" class=""
-                                        style="min-width: 155px !important; min-height:155px !important; border-radius:50%"
+                                    <img src="{{ asset('img\logos\logo-new\logo-companyyy.png') }}" alt="Company Logo" class=""
+                                        style="min-width: 155px !important; min-height:155px !important; border-radius:50%;"
                                         id="ava-pic-2">
                                 </div>
                                 <div class="mx-2 text-center">
@@ -47,13 +47,13 @@
                                         Name</label>
                                     <input onchange="changeInfoProfile(this.value, 'first_name')" type="text"
                                         class="form-control text-dark text-capitalize" placeholder="Company Name"
-                                        value="">
+                                        value="PT Aplikasi Lintas Bangsa">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Industry</label>
                                     <input onchange="changeInfoProfile(this.value, 'industry')" type="text"
                                         class="form-control text-dark text-capitalize" placeholder="Industry"
-                                        value="">
+                                        value="TECH">
                                 </div>
                             </div>
                             <div class="row">
@@ -67,7 +67,7 @@
                                     <div class="col-md-12 mb-2">
                                         <input onchange="changeInfoProfile(this.value, 'birthday_date')" type="text"
                                             onfocus="(this.type='text')" class="form-control bg-white text-dark"
-                                            placeholder="Company Size" value="">
+                                            placeholder="Company Size" value="100">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="col-md-12 mb-2">
                                         <input onchange="changeInfoProfile(this.value, 'birthday_place')" type="text"
-                                            class="form-control bg-white text-dark" placeholder="Country" value="">
+                                            class="form-control bg-white text-dark" placeholder="Country" value="ID">
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-6">

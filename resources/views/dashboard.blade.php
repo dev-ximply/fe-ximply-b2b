@@ -305,8 +305,8 @@
                                         <ul class="splide__list">
                                             @foreach ($data['voucher'] as $voucher)
                                                 <li class="splide__slide">
-                                                    <img src="{{ config('storage.base_url') . $voucher->discount_picture }}"
-                                                        class="" style="width: 12em" alt="">
+                                                    <img src="{{ config('storage.merchant_url') . $voucher->discount_picture }}"
+                                                        class="rounded" style="width: 12em;" alt="">
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -462,7 +462,7 @@
                 focus: 'center',
                 autoWidth: true,
                 autoplay: true,
-                gap: 5,
+                gap: 10,
                 speed: 1500,
                 perPage: 1,
             }).mount();

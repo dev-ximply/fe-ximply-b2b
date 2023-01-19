@@ -131,10 +131,10 @@
                                     </div>
                                     <div class="col-md mb-2">
                                         <label for="" class="text-dark"
-                                            style="font-weight:500">Partner</label>
+                                            style="font-weight:500">Client/Vendor</label>
                                         <select class="form-select text-dark" aria-label="Default select example"
                                             name="purpose" id="purpose">
-                                            <option selected>Partner</option>
+                                            <option selected>Select</option>
                                             <option value="1">test</option>
                                         </select>
                                     </div>

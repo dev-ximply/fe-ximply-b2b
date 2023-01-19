@@ -58,7 +58,7 @@ class DashboardController extends Controller
             'Accept' => 'application/json'
         ];
 
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/coupon/list?limit=6&user_id=' . $user_id, $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/v2/coupon/list?limit=6&user_id=' . $user_id, $headers);
         try {
             $res = $client->sendAsync($request)->wait();
             $response = json_decode($res->getBody());

@@ -193,7 +193,7 @@
                                 <span class="sidenav-mini-icon text-white"> O </span>
                                 <span class="nav-link-text ms-1  text-white">Permission</span>
                             </a>
-                            <a class="nav-link @if ($section == 'tenant') active @endif " href="/tenants">
+                            <a class="nav-link @if ($section == 'tenant') active @endif " href="/tenant">
                                 <span class="sidenav-mini-icon text-white"> O </span>
                                 <span class="nav-link-text ms-1  text-white">Tenants</span>
                             </a>
