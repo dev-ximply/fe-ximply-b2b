@@ -67,6 +67,7 @@ Route::get('/approval', [ApprovalController::class, 'index'])->name('approval')-
 
 // Manage Teams
 Route::get('/employee', [MembersController::class, 'index'])->middleware('auth');
+Route::put('/employees', [MembersController::class, 'updateEmployee'])->middleware('auth')->name('employees.update');
 
 Route::get('/group', [GroupController::class, 'index'])->middleware('auth');
 
