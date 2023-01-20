@@ -190,6 +190,13 @@
                 .then((result) => {
                     if (result.isConfirmed) {
                         console.log('update')
+                        $.ajaxSetup({
+                            headers: {
+                                "Authorization": "Bearer " + AUTH_TOKEN,
+                                "Accept": "application/json",
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
                         $.ajax({
                             type: "PUT",
                             url: "{{ route('permissions.change') }}",
@@ -232,6 +239,13 @@
 
         function changeRoleName(value, roleId) {
             console.log(value);
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": "Bearer " + AUTH_TOKEN,
+                    "Accept": "application/json",
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $.ajax({
                 type: "PUT",
                 url: "{{ route('permissions.role-name.change') }}",
@@ -240,7 +254,6 @@
                     role_id: roleId,
                 },
                 success: function(response) {
-
                     const {
                         success,
                         status,

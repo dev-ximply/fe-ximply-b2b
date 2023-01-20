@@ -15,6 +15,7 @@
             </div>
             <div class="modal-body">
                 <form action="" onsubmit="handleSubmitAssign(event)">
+                    @csrf
                     <div class="row">
                         <div class="col-6">
                             <input type="hidden" id="partner_assign_id">
@@ -261,6 +262,7 @@
                 type: "PUT",
                 url: "{{ route('partners.assign.update') }}",
                 data: {
+                    _token: "{{ csrf_token() }}",
                     partner_id: partnerId,
                     assign_user_id: userAssignId,
                 },
@@ -282,9 +284,9 @@
                             "success"
                         );
 
-                        setTimeout(function() {
-                            window.location.reload(true);
-                        }, 1000);
+                        // setTimeout(function() {
+                        //     window.location.reload(true);
+                        // }, 1000);
                     }else{
                         swalWithBootstrapButtons
                         .fire(
@@ -292,9 +294,9 @@
                             message,
                             "error"
                         );
-                        setTimeout(function() {
-                            window.location.reload(true);
-                        }, 1000);
+                        // setTimeout(function() {
+                        //     window.location.reload(true);
+                        // }, 1000);
                     }
                 }
 
