@@ -179,7 +179,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            background: url(icon.png);
+            /* background: url(icon.png); */
         }
 
         .zoom img {

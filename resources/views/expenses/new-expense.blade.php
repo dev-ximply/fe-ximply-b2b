@@ -133,9 +133,8 @@
                                         <label for="" class="text-dark"
                                             style="font-weight:500">Client/Vendor</label>
                                         <select class="form-select text-dark" aria-label="Default select example"
-                                            name="purpose" id="purpose">
+                                            name="client" id="client_id">
                                             <option selected>Select</option>
-                                            <option value="1">test</option>
                                         </select>
                                     </div>
                                 </div>
@@ -329,6 +328,7 @@
                 // send receipt to nanonets
                 setTimeout(function() {
                     var formdata = new FormData();
+                    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
                     formdata.append("tenant_code", TENANT_CODE);
                     formdata.append("user_id", $("#user_id").val());
                     formdata.append("file_receipt", fileReceipt[0]);
@@ -531,6 +531,25 @@
                     }
                 } else {
                     $("#purpose").empty();
+                }
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: API_URL + "api/partner/list/" + TENANT_CODE + "?user_id=" + document.getElementById(
+                'user_id').value,
+            success: function(res) {
+                if (res) {
+                    var response = res['data'];
+                    for (const obj of response) {
+                        var client_id = obj.id;
+                        var client_name = obj.company_name;
+                        $("#client_id").append('<option value="' + client_id +
+                            '">' + client_name + '</option>');
+                    }
+                } else {
+                    $("#client_id").empty();
                 }
             }
         });

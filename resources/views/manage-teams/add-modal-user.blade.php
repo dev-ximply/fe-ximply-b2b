@@ -92,9 +92,8 @@
 
 <script>
     //send invitation
-    function sendInvitation(user_id, email, first_name, last_name, department_id, role_id) {
+    function sendInvitation(user_id, email, first_name, last_name, group_id, role_id) {
         var tenant_code = TENANT_CODE;
-
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: "btn btn-success-cstm mx-2",
@@ -122,8 +121,8 @@
                     formNewMember.append('email', email);
                     formNewMember.append('first_name', first_name);
                     formNewMember.append('last_name', last_name);
-                    if (department_id != "" || department_id != null) {
-                        formNewMember.append('department_id', department_id);
+                    if (group_id != "" || group_id != null) {
+                        formNewMember.append('group_id', group_id);
                     }
                     if (role_id != "" || role_id != null) {
                         formNewMember.append('role_id', role_id);

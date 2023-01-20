@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Role;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class PermissionController extends Controller
@@ -45,6 +46,7 @@ class PermissionController extends Controller
 
         $params = [
             'tenant_code' => session()->get('TenantCode'),
+            'user_id' => Auth::user()['id'],
             $request->permission => $request->value,
             'role_id' => $request->role_id,
         ];
@@ -72,6 +74,7 @@ class PermissionController extends Controller
 
         $params = [
             'tenant_code' => session()->get('TenantCode'),
+            'user_id' => Auth::user()['id'],
             'new_role_name' => $request->new_role_name,
             'role_id' => $request->role_id,
         ];
