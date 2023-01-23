@@ -196,7 +196,6 @@
 <script>
     // new expense
     function NewExpenses() {
-        var formDataExpense = new FormData();
         var user_id = $("#user_id").val();
         var category = $("#category").val();
         var sub_category = $("#sub_category").val();
@@ -208,6 +207,29 @@
         var total_amount = $("#total_amount").val();
         var fileReceipt = $('#file_receipt')[0].files;
         var fileAdditional = $('#file_additional')[0].files;
+
+        var formDataExpense = new FormData();
+
+        formDataExpense.append('tenant_code', TENANT_CODE);
+        formDataExpense.append('user_id', user_id);
+        formDataExpense.append('category', category);
+        formDataExpense.append('sub_category', sub_category);
+        formDataExpense.append('purpose', purpose);
+        formDataExpense.append('client_id', client_id);
+        formDataExpense.append('receipt_date', receipt_date);
+        formDataExpense.append('merchant', merchant);
+        formDataExpense.append('location', location);
+        formDataExpense.append('total_amount', total_amount);
+
+        if (fileReceipt.length > 0) {
+            formDataExpense.append('file_receipt', fileReceipt[0]);
+        }
+
+        if (fileAdditional.length > 0) {
+            formDataExpense.append('file_additional', fileAdditional[0]);
+        }
+
+        // console.log(formDataExpense);
 
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -228,25 +250,6 @@
             })
             .then((result) => {
                 if (result.isConfirmed) {
-
-                    formDataExpense.append('tenant_code', TENANT_CODE);
-                    formDataExpense.append('user_id', user_id);
-                    formDataExpense.append('category', category);
-                    formDataExpense.append('sub_category', sub_category);
-                    formDataExpense.append('purpose', purpose);
-                    formDataExpense.append('client_id', client_id);
-                    formDataExpense.append('receipt_date', receipt_date);
-                    formDataExpense.append('merchant', merchant);
-                    formDataExpense.append('location', location);
-                    formDataExpense.append('total_amount', total_amount);
-
-                    if (fileReceipt.length > 0) {
-                        formDataExpense.append('file_receipt', fileReceipt[0]);
-                    }
-
-                    if (fileReceipt.length > 0) {
-                        formDataExpense.append('file_additional', fileReceipt[0]);
-                    }
 
                     $.ajaxSetup({
                         headers: {
@@ -273,9 +276,9 @@
                                     "Your request success.",
                                     "success"
                                 );
-                                setTimeout(function() {
-                                    window.location.reload(true);
-                                }, 1000);
+                                // setTimeout(function() {
+                                //     window.location.reload(true);
+                                // }, 1000);
                             } else {
                                 swalWithBootstrapButtons.fire(
                                     "oops!",

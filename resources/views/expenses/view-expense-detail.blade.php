@@ -111,15 +111,15 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active text-xs" data-bs-toggle="tab"
-                                    href="#home">Upload&nbsp;Receipt</a>
+                                    href="#receipt_view">Upload&nbsp;Receipt</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-xs" data-bs-toggle="tab" href="#additionalPhoto">Additional
+                                <a class="nav-link text-xs" data-bs-toggle="tab" href="#additional_view">Additional
                                     Photo</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div id="home" class="tab-pane active">
+                            <div id="receipt_view" class="tab-pane active">
                                 <div class="col-md mt-2  d-flex align-items-center justify-content-center h-100">
                                     <div>
                                         <div id="ava-upload-button-3"
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="additionalPhoto" class="tab-pane fade">
+                            <div id="additional_view" class="tab-pane fade">
                                 <div class="col-md mt-2  d-flex align-items-center justify-content-center h-100">
                                     <div>
                                         <div id="ava-upload-button-4"

@@ -209,9 +209,10 @@
             </div>
         </div>
         <div class="col-md dropdown text-end">
-            <button class="btn text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+            <button class="btn text-white" type="button" id="dropDownExpense" data-bs-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false" style="background-color: #191a4d">New Expense</button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+            <ul class="dropdown-menu" aria-labelledby="dropDownExpense">
                 <li>
                     <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal" data-bs-target="#manualForm"
                         onclick="handlingModalForm(false)">
@@ -239,6 +240,7 @@
                     </a>
                 </li>
             </ul>
+            
         </div>
     </div>
     <div class="row" style="display: none">
