@@ -54,47 +54,27 @@
             @endif
 
             @if (session()->get('is_superadmin') == false)
+                <li class="nav-item">
+                    <a class="nav-link @if ($section == 'expense') active @endif" href="/expense">
+                        <div
+                            class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'expense' ? 'bg-orange' : 'bg-purple' }}">
+                            <i class="fa-sharp fa-solid fa-basket-shopping {{ $section == 'expense' ? 'text-white' : 'text-white' }}"
+                                style="font-size:15px"></i>
+                        </div>
+                        <span
+                            class="nav-link-text ms-1 {{ $section == 'expense' ? 'text-orange' : 'text-white' }}">Expenses</span>
+                    </a>
+                </li>
                 @if (session()->get('approval_expense') == 1)
                     <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#expenseDown"
-                            class="nav-link @if ($section == 'expense' || $section == 'approval') active @endif">
+                        <a class="nav-link @if ($section == 'approval') active @endif" href="/approval">
                             <div
-                                class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'expense' ? 'bg-orange' : 'bg-purple' }}">
-                                <i class="fa-sharp fa-solid fa-basket-shopping {{ $section == 'expense' ? 'text-white' : 'text-white' }}"
+                                class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'approval' ? 'bg-orange' : 'bg-purple' }}">
+                                <i class="fa-solid fa-handshake {{ $section == 'approval' ? 'text-white' : 'text-white' }}"
                                     style="font-size:15px"></i>
                             </div>
                             <span
-                                class="nav-link-text ms-1  {{ $section == 'expense' || $section == 'approval' ? 'text-orange' : 'text-white' }}">Manage
-                                Expenses</span>
-                        </a>
-                        <div class="collapse @if ($section == 'expense' || $section == 'approval') show @endif" id="expenseDown">
-                            <ul class="nav ms-4 ps-3">
-                                <li class="nav-item ">
-                                    <a class="nav-link @if ($section == 'expense') active @endif" href="/expense">
-                                        <span class="sidenav-mini-icon text-white"> O </span>
-                                        <span class="nav-link-text ms-1 text-white">Expenses</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link @if ($section == 'approval') active @endif"
-                                        href="/approval">
-                                        <span class="sidenav-mini-icon text-white"> O </span>
-                                        <span class="nav-link-text ms-1 text-white">Approval</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                @else
-                    <li class="nav-item">
-                        <a class="nav-link @if ($section == 'expense') active @endif" href="/expense">
-                            <div
-                                class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'expense' ? 'bg-orange' : 'bg-purple' }}">
-                                <i class="fa-solid fa-bar-chart {{ $section == 'expense' ? 'text-white' : 'text-white' }}"
-                                    style="font-size:15px"></i>
-                            </div>
-                            <span
-                                class="nav-link-text ms-1 {{ $section == 'expense' ? 'text-orange' : 'text-white' }}">Expenses</span>
+                                class="nav-link-text ms-1 {{ $section == 'approval' ? 'text-orange' : 'text-white' }}">Approval</span>
                         </a>
                     </li>
                 @endif
@@ -123,14 +103,12 @@
                                 </a>
                                 <a class="nav-link @if ($section == 'employee') active @endif" href="/employee">
                                     <span class="sidenav-mini-icon text-white"> O </span>
-                                    <span class="nav-link-text ms-1 text-white">Employee</span>
+                                    <span class="nav-link-text ms-1 text-white">Member</span>
                                 </a>
-
                                 <a class="nav-link @if ($section == 'partner') active @endif " href="/partner">
                                     <span class="sidenav-mini-icon text-white"> O </span>
                                     <span class="nav-link-text ms-1  text-white">Client/Vendor</span>
                                 </a>
-
                             </li>
                         </ul>
                     </div>
@@ -169,17 +147,19 @@
                 </li>
             @endif
 
-            <li class="nav-item">
-                <a class="nav-link @if ($section == 'card') active @endif" href="/card">
-                    <div
-                        class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'card' ? 'bg-orange' : 'bg-purple' }}">
-                        <i class="fa-solid fa-credit-card {{ $section == 'card' ? 'text-white' : 'text-white' }}"
-                            style="font-size:15px"></i>
-                    </div>
-                    <span
-                        class="nav-link-text ms-1 {{ $section == 'card' ? 'text-orange' : 'text-white' }}">Card</span>
-                </a>
-            </li>
+            @if (session()->get('is_superadmin') == true)
+                <li class="nav-item">
+                    <a class="nav-link @if ($section == 'card') active @endif" href="/card">
+                        <div
+                            class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'card' ? 'bg-orange' : 'bg-purple' }}">
+                            <i class="fa-solid fa-credit-card {{ $section == 'card' ? 'text-white' : 'text-white' }}"
+                                style="font-size:15px"></i>
+                        </div>
+                        <span
+                            class="nav-link-text ms-1 {{ $section == 'card' ? 'text-orange' : 'text-white' }}">Card</span>
+                    </a>
+                </li>
+            @endif
 
             @if (session()->get('is_superadmin') == false)
                 <li class="nav-item">

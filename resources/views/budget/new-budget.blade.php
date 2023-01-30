@@ -74,11 +74,11 @@
                                 new NumericInput(document.getElementById('auto_approve_limit'), 'en-CA');
                             </script>
                         </div>
-                        <div class="col-6">
+                        {{-- <div class="col-6">
                             <label class="form-label text-dark" style="font-weight: 600">Expire Date</label>
                             <input class="form-control datetimepicker" type="text" name="expire_date" id="expire_date"
                                 value="{{ old('expire_date') }}" placeholder="Please select date" data-input>
-                        </div>
+                        </div> --}}
                     </div>
                     {{-- <div class="row">
                         <div class="col-md">
