@@ -185,7 +185,45 @@
                                             {{ number_format($data['limit']['used_limit'], 2) }}</span> --}}
                                     </div>
                                 </div>
-                                <div class="row flex-md-row flex-column ms-auto">
+                                <div class="d-flex flex-lg-row flex-column ms-auto">
+                                    <div class="me-2" style="width: 100%; max-width:155px">
+                                        <div class="input-group">
+                                            <span for=""
+                                                class="input-group-text z-index-1 font-weight-bold text-dark px-1"
+                                                id="basic-addon1"
+                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
+                                            <input type="date" class="form-control px-1" id="filter_start_date"
+                                                name="filter_start_date"
+                                                style="font-size:10px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
+                                        </div>
+                                    </div>
+                                    <div class="me-2" style="width: 100%; max-width:155px">
+                                        <div class="input-group">
+                                            <span for="" class="input-group-text z-index-1 font-weight-bold"
+                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
+                                            <input type="date" class="form-control px-1" id="filter_end_date"
+                                                name="filter_end_date"
+                                                style="font-size:10px; height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
+                                        </div>
+                                    </div>
+                                    <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
+                                        <select name="filter_expense_type" id="filter_expense_type"
+                                            class="form-select text-dark"
+                                            style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
+                                            <option value="" class="text-dark px-1" selected>Expense Type</option>
+                                        </select>
+                                    </div>
+                                    <div class=" mb-2 ms-auto " style="width: 100%; max-width:65px">
+                                        <button type="submit" value="submit"
+                                            style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
+                                            class="form-control text-bold d-flex justify-content-center"
+                                            id="filter_button">
+                                            {{-- F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R --}}
+                                            <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                {{-- <div class="row flex-md-row flex-column ms-auto">
                                     <div class="col-md">
                                         <div class="input-group">
                                             <span for=""
@@ -219,7 +257,7 @@
                                             class="form-control text-bold" id="filter_button">
                                             F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R</button>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </form>
                         <div class="chart">
@@ -344,9 +382,10 @@
                                         @if ($no <= 10)
                                             <tr class="text-start" style="font-size:12px;color:#000000">
                                                 <td style="font-size:11px">{{ $recentExpenses->status }}</td>
-                                                <td><span class="fw-bold">{{ $recentExpenses->category }}</span><br><span style="font-size:10px">{{ $recentExpenses->merchant }}</span></td>
+                                                <td><span class="fw-bold">{{ $recentExpenses->category }}</span><br><span
+                                                        style="font-size:10px">{{ $recentExpenses->merchant }}</span></td>
                                                 <td class="fw-bold">Rp
-                                                    {{ number_format($recentExpenses->total_amount, 2) }}</td>                                                
+                                                    {{ number_format($recentExpenses->total_amount, 2) }}</td>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -675,7 +714,7 @@
                                     showInLegend: true,
                                     dataLabels: {
                                         enabled: true,
-                                        distance: -30,
+                                        distance: 35,
                                         style: {
                                             color: 'white'
                                         },

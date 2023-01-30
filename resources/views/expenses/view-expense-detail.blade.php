@@ -104,7 +104,7 @@
                                 <label for="dataExpenseOf" class="text-dark" style="font-weight:500">Expense Of</label>
                                 <input type="text" placeholder="" class="form-control bg-white" id="dataExpenseOf"
                                     readonly>
-                            </div>
+                        </div>
                         </div>
                     </div>
                     <div class="col-md-6 px-4">

@@ -9,7 +9,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background: #19194b">
-                <h6 class="font-weight-bolder" style="color: white">Add Partner</h6>
+                <h6 class="font-weight-bolder" style="color: white">Add Client Vendor</h6>
                 <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
@@ -129,7 +129,7 @@
 <div class="row">
     <div>
         <button class="btn  text-md text-white @if ($section == 'add user') active @endif" data-bs-toggle="modal"
-            data-bs-target="#addModalPartner" style="background-color: #19194b">Add Partner
+            data-bs-target="#addModalPartner" style="background-color: #19194b">Add Client Vendor
             <i class="fa-solid fa-user-plus ms-2" style="font-size: 1em"></i>
         </button>
     </div>
