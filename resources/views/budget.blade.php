@@ -58,65 +58,34 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{-- <div class="card card-body mt-3"> --}}
-                    {{-- <hr class="horizontal dark my-3"> --}}
-                    <form action="" method="post">
+                    <form method="post">
                         @csrf
-                        <input type="text" id="user_id" name="user_id" value="" hidden>
-                        <input type="text" id="form_ui" name="form_ui" value="true" hidden>
+                        <input type="text" id="edit_user_id" hidden>
                         <div class="my-2">
                             <label for="projectName" class="form-label text-dark" style="font-weight: 600">Name</label>
-                            <select class="form-select" name="member_user_id">
-                                <option value="" selected>Select</option>
-                                {{-- @foreach ($data_person as $item1) --}}
-                                <option value="" class="text-capitlize"></option>
-                                {{-- @endforeach --}}
-                            </select>
+                            <input type="text" class="form-control" id="edit_budget_name" disabled>
+                        </div>
+                        <div class="my-2">
+                            <label for="projectName" class="form-label text-dark" style="font-weight: 600">Budget</label>
+                            <input type="text" class="form-control" id="edit_budget_limit_avail" disabled>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <label class="form-label text-dark" style="font-weight: 600">Budget Limit </label>
-                                <input type="number" class="form-control" id="s" name="set_limit">
+                                <label class="form-label text-dark" style="font-weight: 600">Topup Limit</label>
+                                <input type="number" class="form-control" id="edit_budget_limit" name="edit_budget_limit">
                             </div>
                             <div class="col-6">
                                 <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
-                                <input type="number" class="form-control" id="f" name="auto_approve_limit">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <label class="form-label text-dark" style="font-weight: 600">Frequency</label>
-                                <select class="form-select" name="frequency">
-                                    <option value="onetime">Onetime</option>
-                                    <option value="monthly">Monthly</option>
-                                </select>
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label text-dark" style="font-weight: 600">Expire Date</label>
-                                <input class="form-control datetimepicker" type="date" placeholder="Please select date"
-                                    data-input name="expire_date">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md">
-                                <label class="form-label text-dark" style="font-weight: 600">Category Exceptions</label>
-                                <select class="getcategory form-control" name="except_category_id"
-                                    id="choices-multiple-remove-button2" multiple>
-                                    {{-- @foreach ($data_category as $item2) --}}
-                                    <option value="" class="text-capitlize">
-                                        {{-- {{ $item2->category_name }} --}}
-                                    </option>
-                                    {{-- @endforeach --}}
-                                </select>
+                                <input type="number" class="form-control" id="edit_approve_limit"
+                                    name="edit_approve_limit">
                             </div>
                         </div>
                         <div class="d-flex justify-content-end mt-3">
                             <button type="button" name="button" class="btn btn-danger-cstm m-0"
                                 data-bs-dismiss="modal">Cancel</button>
-                            <input type="submit" name="button" value="Submit" class="btn btn-success-cstm m-0 ms-2">
+                            <input type="button" onclick="postEditBudget()" name="button" value="Submit" class="btn btn-success-cstm m-0 ms-2">
                         </div>
                     </form>
-                    {{-- </div> --}}
                 </div>
             </div>
         </div>
@@ -173,7 +142,8 @@
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-end me-sm-n4 me-n3"
                                         aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit_modal_budget">Edit</a>
+                                        <a class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#edit_modal_budget" onclick="getDetailBudget('{{ $item->full_name }}', {{ $item->id }}, {{ $item->limit->remain_limit }}, {{ $item->limit->auto_approve }})">Edit</a>
                                         {{-- TEST<a class="dropdown-item" href="javascript:;">Retire</a> --}}
                                     </div>
                                 </div>
@@ -223,6 +193,92 @@
     </div>
 
     <script>
+
+        function getDetailBudget($uname, $uid, $limit, $auto_approve) {
+            document.getElementById('edit_budget_name').value = $uname;
+            document.getElementById('edit_user_id').value = $uid;
+            document.getElementById('edit_budget_limit_avail').value = $limit;
+            document.getElementById('edit_budget_limit').value = 0;
+            document.getElementById('edit_approve_limit').value = $auto_approve;
+        }
+
+        function postEditBudget() {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success-cstm mx-2",
+                    cancelButton: "btn btn-danger-cstm mx-2",
+                },
+                buttonsStyling: false,
+            });
+            swalWithBootstrapButtons
+                .fire({
+                    title: "<h5>are you sure you want to process?</h5>",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    reverseButtons: false,
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = new FormData();
+                        formData.append('tenant_code', TENANT_CODE);
+                        formData.append('user_id', USR_ID);
+                        formData.append('assign_user_id', document.getElementById('edit_user_id').value);
+                        formData.append('limit', document.getElementById('edit_budget_limit').value);
+                        formData.append('auto_approve_limit', document.getElementById('edit_approve_limit').value);
+
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+
+                        $.ajax({
+                            url: API_URL + "api/spend/member/assign",
+                            type: 'post',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            beforeSend: function() {
+                                if ($("#loader")) {
+                                    $("#loader").show();
+                                }
+                            },
+                            success: function(res) {
+                                if (res['success'] == "true" || res['success'] == true) {
+                                    swalWithBootstrapButtons.fire(
+                                        "Success!",
+                                        "Your request success.",
+                                        "success"
+                                    );
+                                } else {
+                                    swalWithBootstrapButtons.fire(
+                                        "Error!",
+                                        "Your request can't processed.",
+                                        "error"
+                                    );
+                                }
+                            },
+                            complete: function(data) {
+                                if ($("#loader")) {
+                                    $("#loader").hide();
+                                }
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1000);
+                            }
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        swalWithBootstrapButtons.fire(
+                            "Cancelled",
+                            "Your request cancelled :)",
+                            "error"
+                        );
+                    }
+                });
+        }
+
         $(".responsive").slick({
             prevArrow: $(".prev"),
             nextArrow: $(".next"),

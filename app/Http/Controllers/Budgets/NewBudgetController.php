@@ -52,7 +52,10 @@ class NewBudgetController extends Controller
         $assign_user = $request['assign_user_id'];
         $limit = $request['limit'];
         $auto_approve_limit = $request['auto_approve_limit'];
-        $expire_date = date("Y-m-d H:i:s");
+
+        $now = date("Y-m-d");
+        $expire_date = date("Y-m-d H:i:s", strtotime("+1 month", strtotime($now)));
+
         // $expire_date = $request['expire_date'];
 
         $client = new Client();

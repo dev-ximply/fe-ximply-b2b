@@ -97,7 +97,7 @@
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">Group Name
                                 </th>
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
-                                    Have Partner
+                                    Have Client Vendor
                                 </th>
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
                                     Member

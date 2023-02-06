@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header" style="background: #19194b">
                 {{-- <h5 class="modal-title" id="exampleModalLabel">Add Department</h5> --}}
-                <h6 class="font-weight-bolder" style="color: white">Edit Partner</h6>
+                <h6 class="font-weight-bolder" style="color: white">Edit Client Vendor</h6>
                 <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
                     {{-- <span aria-hidden="true">×</span> --}}
                 </button>
@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <label class="form-label" style="color: black; font-weight:500">Partner Name</label>
+                            <label class="form-label" style="color: black; font-weight:500">Contact Name</label>
                             <div class="input-group">
                                 <input name="editPartnerName" class="form-control" type="text" id="editPartnerName"
                                     required="required">

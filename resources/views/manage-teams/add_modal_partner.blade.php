@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background: #19194b">
-                <h6 class="font-weight-bolder" style="color: white">new client or vendor</h6>
+                <h6 class="font-weight-bolder" style="color: white">Add Client Vendor</h6>
                 <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>

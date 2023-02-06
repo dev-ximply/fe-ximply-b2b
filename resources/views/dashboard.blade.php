@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
     @include('expenses.new-expense')
     @include('budget.modal-top-up-approval')
-
     <div class="modal" tabindex="-1" id="modalExpenses">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
@@ -207,6 +206,13 @@
                                         </div>
                                     </div>
                                     <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
+                                        <select name="filter_member" id="filter_member" class="form-select text-dark"
+                                            style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
+                                            <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
+                                                Member</option>
+                                        </select>
+                                    </div>
+                                    <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
                                         <select name="filter_expense_type" id="filter_expense_type"
                                             class="form-select text-dark"
                                             style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
@@ -394,7 +400,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -426,12 +431,12 @@
 
                         $('#ex1').zoom();
                     } else {
-                        Swal.fire('failed<br>Please contact Beazy support');
+                        Swal.fire('failed<br>Please contact ximply support');
                     }
                 },
                 complete: function(data) {
                     if (data.status != 200) {
-                        Swal.fire('failed<br>Please contact Beazy support');
+                        Swal.fire('failed<br>Please contact ximply support');
                     }
                 }
             });
@@ -461,7 +466,7 @@
 
                 swalWithBootstrapButtons
                     .fire({
-                        title: "<h5>Are you sure want to process?</h5>",
+                        title: "<h5>are you sure want to process?</h5>",
 
                         icon: "warning",
                         showCancelButton: true,
@@ -510,6 +515,7 @@
         var FilterExpenseType = "";
         var FilterStartDate = "";
         var FilterEndDate = "";
+        var FilterMember = "";
 
         if (window.location.search) {
             const queryString = window.location.search;
@@ -518,6 +524,7 @@
                 FilterExpenseType = urlParams.get('filter_expense_type');
                 FilterStartDate = urlParams.get('filter_start_date');
                 FilterEndDate = urlParams.get('filter_end_date');
+                FilterMember = urlParams.get('filter_member');
             }
         }
 
@@ -532,7 +539,8 @@
             url: API_URL + "api/analytics/series/" + document.getElementById('user_id').value +
                 "?expense_type=" + FilterExpenseType +
                 "&start_date=" + FilterStartDate +
-                "&end_date=" + FilterEndDate,
+                "&end_date=" + FilterEndDate +
+                "&member_id=" + FilterMember,
             success: function(res) {
                 var time = [0];
                 var total_amount = [0];
@@ -787,6 +795,35 @@
                         }
                     } else {
                         $("#filter_expense_type").empty();
+                    }
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": "Bearer " + AUTH_TOKEN,
+                    "Accept": "application/json"
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: API_URL + "api/spend/list/assigned/" + TENANT_CODE +
+                    "?user_id=" + document.getElementById(
+                        'user_id').value,
+                success: function(res) {
+                    if (res) {
+                        var response = res['data'];
+                        for (const obj of response) {
+                            var uid = obj.id;
+                            var uname = obj.full_name;
+                            $("#filter_member").append('<option value="' + uid +
+                                '">' + uname + '</option>');
+                        }
+                    } else {
+                        $("#filter_member").empty();
                     }
                 }
             });

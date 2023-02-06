@@ -76,11 +76,20 @@
                                 <option value="" class="text-dark" selected>Expense Type</option>
                             </select>
                         </div>
-                        <div class="col-md-1 mb-2 d-flex" style="">
+                        {{-- <div class="col-md-1 mb-2 d-flex" style="">
                             <button type="submit" value="submit" style="line-height:16px; font-size:10px"
                                 class="form-control text-bold" id="filter_button">
                                 F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R</button>
-                        </div>
+                        </div> --}}
+                        <div class="col-md mb-2">
+                            <button type="submit" value="submit"
+                                style="line-height:16px;  font-size:11px;background:#19194b;color:white"
+                                class="form-control text-bold d-flex justify-content-center"
+                                id="filter_button">
+                                {{-- F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R --}}
+                                <span>FILTER&nbsp;&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
+                            </button>
+                        </div>  
                     </div>
                 </form>
                 <div class="row">

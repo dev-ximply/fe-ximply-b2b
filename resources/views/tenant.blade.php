@@ -11,8 +11,8 @@
             <div class="card" style="border-radius: 5px">
                 <div class="card-body">
                     <div class="col-12">
-                        <span class="text-lg font-weight-bolder text-dark">Company
-                            <p class="text-xs text-dark">Your Company Informations</p>
+                        <span class="text-lg font-weight-bolder text-dark">Corporate
+                            <p class="text-xs text-dark">Your Corporate Informations</p>
                         </span>
                     </div>
                     <div class="row">
