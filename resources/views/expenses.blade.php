@@ -239,8 +239,7 @@
                             </div>
                     </a>
                 </li>
-            </ul>
-
+            </ul>            
         </div>
     </div>
     <div class="row" style="display: none">

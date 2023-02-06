@@ -4,6 +4,7 @@
     @include('manage-teams.add_modal_partner')
     @include('manage-teams.edit_modal_partner')
 
+
     <div class="modal fade" id="modalAssignPartner" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
