@@ -6,7 +6,7 @@
     <div class="">
         <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#add_modal_users"
             style="background-color: #19194b">
-            <span>Add Employee</span>&nbsp;
+            <span>Add Member</span>&nbsp;
             <i class="fa-solid fa-user-plus ms-2"></i>
         </button>
     </div>
@@ -90,8 +90,8 @@
         <div class="row justify-content-center h-100 align-items-center">
             <div class="d-flex align-items-center justify-content-center flex-column py-5">
                 <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid" alt="" style="width: 100px">
-                <h6 class="font-weight-bold text-dark py-0">You don't have employee</h6>
-                <span class="text-xs" style="text-align: center">Create your employee with click the button above</span>
+                <h6 class="font-weight-bold text-dark py-0">You don't have member</h6>
+                <span class="text-xs" style="text-align: center">Create your member with click the button above</span>
             </div>
         </div>
     @endif

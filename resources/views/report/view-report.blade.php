@@ -26,7 +26,7 @@
                         <div class="col-md">
                             <div class="row">
                                 <div class="col-md">
-                                    <label class="text-xs text-dark" style="font-weight: 500">Memo</label>
+                                    <label class="text-xs text-dark" style="font-weight: 500">Subject</label>
                                 </div>
                             </div>
                             <input type="text" id="memo" class="form-control bg-white"
@@ -173,8 +173,8 @@
                             success: function(res) {
                                 if (res['success'] == true) {
                                     swalWithBootstrapButtons.fire(
-                                        "Success!",
-                                        "Your request success.",
+                                        "success!",
+                                        "your request success.",
                                         "success"
                                     );
                                     setTimeout(function() {
@@ -196,7 +196,7 @@
                                 if (data.status != 200) {
                                     Swal.fire(
                                         "something wrong",
-                                        "please contact Beazy support!",
+                                        "please contact ximply support!",
                                         "error"
                                     );
                                 }
@@ -204,8 +204,8 @@
                         });
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
                         swalWithBootstrapButtons.fire(
-                            "Cancelled",
-                            "Your request cancelled :)",
+                            "cancelled",
+                            "your request cancelled :)",
                             "error"
                         );
                     }

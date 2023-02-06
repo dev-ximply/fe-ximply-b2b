@@ -174,9 +174,9 @@
                                                     class=" ava-upload-button  my-3 d-flex align-items-center justify-content-center"
                                                     style="vertical-align: middle; height: auto;width:auto; min-height:240px; min-width:300px">
                                                     <img id="ava-pic-5" class="ava-pic"
-                                                        src="{{ asset('img/icons/receipt.png') }}">
+                                                        src="{{ asset('img/icons/receipt.png') }}" alt="additional_photo">
                                                 </div>
-                                                <input required name="file_additional" id="file_additional"
+                                                <input name="file_additional" id="file_additional"
                                                     class="ava-file-upload" type="file" accept="image/*" />
                                             </div>
                                         </div>
@@ -276,9 +276,9 @@
                                     "Your request success.",
                                     "success"
                                 );
-                                // setTimeout(function() {
-                                //     window.location.reload(true);
-                                // }, 1000);
+                                setTimeout(function() {
+                                    window.location.reload(true);
+                                }, 1000);
                             } else {
                                 swalWithBootstrapButtons.fire(
                                     "oops!",

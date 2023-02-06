@@ -151,23 +151,22 @@
 
                                                         </span></div>
                                                     <div><span>Remain Limit : </span><span class="text-xs font-weight-bold">
-                                                            {{ $approval['remain_limit'] }}
+                                                            {{ number_format($approval['remain_limit'], 2) }}
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td class="align-middle text-start text-xs text-dark">
                                                     <span class="text-xs">Top Up : </span><span class="font-weight-bold">
-                                                        {{ $approval['amount'] }}
+                                                        {{ number_format($approval['amount'], 2) }}
                                                     </span>
-                                                    <div><span>Approved : <span class="font-weight-bold">
-                                                                {{ $approval['approval_amount'] ?? 0 }}
+                                                    {{-- <div><span>Approved : <span class="font-weight-bold">
+                                                                {{ $approval['approval_amount'] }}
                                                             </span></span>
-                                                    </div>
+                                                    </div> --}}
                                                 </td>
                                                 <td class="align-middle text-start text-xs text-dark">
                                                     <div class="" style="max-width: 300px">
-                                                        <div><span>Purpose : </span><span
-                                                                class="font-weight-bold text-wrap"
+                                                        <div><span>Purpose : </span><span class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">
                                                                 {{-- {{ $item['purpose'] }} --}}
                                                                 Award & Recognition
@@ -276,6 +275,12 @@
 
             console.log(topupAmount, topupAmountApprove);
 
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             $.ajax({
                 type: "POST",
                 url: "{{ route('approves.action') }}",
@@ -291,24 +296,24 @@
                         message
                     } = response;
 
-                    if(success===true){
+                    if (success === true) {
                         swalWithBootstrapButtons
-                        .fire(
-                            "Success!",
-                            "Your request success.",
-                            "success"
-                        );
+                            .fire(
+                                "Success!",
+                                "Your request success.",
+                                "success"
+                            );
 
                         setTimeout(function() {
                             window.location.reload(true);
                         }, 1000);
-                    }else{
+                    } else {
                         swalWithBootstrapButtons
-                        .fire(
-                            "Error!",
-                            message,
-                            "error"
-                        );
+                            .fire(
+                                "Error!",
+                                message,
+                                "error"
+                            );
                     }
                 }
 
@@ -339,22 +344,31 @@
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
                         $.ajax({
-                        type: "POST",
-                        url: "{{ route('approves.action') }}",
-                        data: {
-                            topup_id: topupId,
-                            decision: decision,
-                            amount_approved: amountApproved,
-                        },
-                        success: function(response) {
-                            const { success, status, message } = response;
-                            if (success === true) {
-                                swalWithBootstrapButtons.fire(
-                                    "Success!",
-                                    "Your request success.",
-                                    "success"
-                                );
+                            type: "POST",
+                            url: "{{ route('approves.action') }}",
+                            data: {
+                                topup_id: topupId,
+                                decision: decision,
+                                amount_approved: amountApproved,
+                            },
+                            success: function(response) {
+                                const {
+                                    success,
+                                    status,
+                                    message
+                                } = response;
+                                if (success === true) {
+                                    swalWithBootstrapButtons.fire(
+                                        "Success!",
+                                        "Your request success.",
+                                        "success"
+                                    );
 
                                     setTimeout(function() {
                                         window.location.reload(true);

@@ -5,15 +5,15 @@
         <div class="col-lg col-12 mx-auto">
             <div class="d-flex justify-content-between">
                 <div>
-                    {{-- @if (Auth::user()->account_detail()['role_level'] != 0) --}}
-                    <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Remain Budget</p>
-                    <h5 class=" mb-0 font-weight-bolder text-dark">
-                        Rp
-                        <span>
-                            {{ $data['limit']['remain_limit'] != null ? number_format($data['limit']['remain_limit'], 2) : '0' }}
-                        </span>
-                    </h5>
-                    {{-- @endif --}}
+                    @if (session()->get('is_superadmin') == false)
+                        <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Remain Budget</p>
+                        <h5 class=" mb-0 font-weight-bolder text-dark">
+                            Rp
+                            <span>
+                                {{ $data['limit']['remain_limit'] != null ? number_format($data['limit']['remain_limit'], 2) : '0' }}
+                            </span>
+                        </h5>
+                    @endif
                 </div>
                 <div>
                     <button class="btn btn-sm text-white" style="background-color: #19194b"
@@ -50,7 +50,7 @@
                             </select>
                         </div>
                         <div class="col-6">
-                            <label class="form-label text-dark" style="font-weight: 600">Budget Limit </label>
+                            <label class="form-label text-dark" style="font-weight: 600">Spending Budget Limit </label>
                             <input type="text" class="form-control" id="limit" name="limit"
                                 value="{{ old('limit') }}">
                             <script>

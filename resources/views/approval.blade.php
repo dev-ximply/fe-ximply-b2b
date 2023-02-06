@@ -142,7 +142,7 @@
                                             @if ($expense_approval->status == 'pending')
                                                 <div class="d-flex flex-row pt-3 d-flex justify-content-center">
                                                     <button
-                                                        onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category }}', '{{ $expense_approval->sub_category }}', '{{ $expense_approval->purpose }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
+                                                        onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category }}', '{{ $expense_approval->sub_category }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
                                                         class="mx-1
                                                         btn text-white d-flex align-items-center d-flex
                                                         justify-content-center"

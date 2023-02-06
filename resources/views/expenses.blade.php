@@ -240,7 +240,7 @@
                     </a>
                 </li>
             </ul>
-            
+
         </div>
     </div>
     <div class="row" style="display: none">
@@ -267,17 +267,20 @@
                         </div>
                     </div>
                     <div class="col-md mt-2">
-                        <select name="category" id="" class="form-select text-dark"
+                        <select name="category" id="list_category" class="form-select text-dark"
                             style="font-size:11px;line-height:16px !important;border-radius:5px !important">
                             <option value="" class="text-dark" selected>Expense Type</option>
-                            <option value="" class="text-dark">Meal</option>
-                            <option value="" class="text-dark">Transportstion</option>
                         </select>
                     </div>
-                    <div class="col-md mt-2 d-flex align-items-end">
-                        <input type="search" name="" id="" placeholder="Search..."
-                            class="form-control w-100"
+                    <div class="col-md mt-2">
+                        <select name="category" id="" class="form-select text-dark"
                             style="font-size:11px;line-height:16px !important;border-radius:5px !important">
+                            <option value="" class="text-dark" selected>Status</option>
+                            <option value="done" class="text-dark">done</option>
+                            <option value="pending" class="text-dark">pending</option>
+                            <option value="approved" class="text-dark">approved</option>
+                            <option value="rejected" class="text-dark">rejected</option>
+                        </select>
                     </div>
                     <div class="col-md-2 mt-2 d-flex" style="width: 70px">
                         <button type="submit" style="line-height:16px;" class="form-control" value="Search">
@@ -338,31 +341,31 @@
             <div class="col-12">
                 <div class="card" style="border-radius: 5px">
                     <div class="table-responsive">
-                        <table class="table table-borderless text-dark">
+                        <table class="table table-borderless text-dark" border="1">
                             <thead>
                                 <tr>
-                                    <th class="col font-weight-bolder text-dark text-uppercase text-xxs"
-                                        style="color: #000000; ">Date
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">Date Receipts
                                     </th>
-                                    <th class="col font-weight-bolder text-dark text-uppercase text-xxs"
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
                                         style="color: #000000; ">Status
                                     </th>
-                                    <th class="col font-weight-bolder text-dark text-uppercase text-xxs"
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
                                         style="color: #000000; ">Purpose
                                     </th>
-                                    <th class="col font-weight-bolder text-dark text-uppercase text-xxs"
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
                                         style="color: #000000; ">
                                         Merchant
                                     </th>
-                                    <th class="col font-weight-bolder text-dark text-uppercase text-xxs"
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
                                         style="color: #000000; ">
                                         Amount
                                     </th>
-                                    <th class="col font-weight-bolder text-dark text-uppercase text-xxs"
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
                                         style="color: #000000; ">
                                         Expense
                                     </th>
-                                    <th class="col font-weight-bolder text-dark text-uppercase text-xxs"
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
                                         style="color: #000000; ">
                                         Action
                                     </th>
@@ -370,41 +373,69 @@
                             </thead>
                             <tbody>
                                 @foreach ($data['expenses'] as $item)
-                                    <tr>
-                                        <td colspan="7"
-                                            style="color: #000000;font-weight:500;font-size:12px; text-align:left"><span
-                                                class="mx-2 text-break text-wrap text-dark">{{ $item->long_date }}</span>
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    <tr class="align-middle">
+                                        <td colspan="7" style="color: #000000;font-weight:500;font-size:12px;"
+                                            class="text-md-start text-end ps-md-4 text-break text-wrap">
+                                            {{-- <span
+                                                class="px-md-1 text-break text-wrap text-dark"> --}}
+                                            {{ $item->long_date }}
+                                            {{-- </span> --}}
                                         </td>
                                     </tr>
                                     @foreach ($item->expenses as $expense)
                                         <tr class="">
-                                            <td class="" data-label="Date" style="color: #000000">
-                                                {{ $expense->receipt_date }}
+                                            <td>{{ '#' . $i++ }}</td>
+                                            <td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center"
+                                                data-label="Status" style="color: #000000;">
+                                                @if ($expense->status == 'approved')
+                                                    <span class="badge badge-xs d-flex justify-content-center"
+                                                        style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">
+                                                        {{ $expense->status }}
+                                                    </span>
+                                                @elseif($expense->status == 'pending')
+                                                    <span class="badge badge-xs d-flex justify-content-center"
+                                                        style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">
+                                                        {{ $expense->status }}
+                                                    </span>
+                                                @elseif($expense->status == 'rejected')
+                                                    <span class="badge badge-xs d-flex justify-content-center"
+                                                        style=" background:#E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">
+                                                        {{ $expense->status }}
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-xs d-flex justify-content-center"
+                                                        style=" background:gray; color:gray; padding:5px; border-radius:5px; width:55px">
+                                                        {{ $expense->status }}
+                                                    </span>
+                                                @endif
                                             </td>
-                                            <td class="" data-label="Status" style="color: #000000">
-                                                {{ $expense->status }}
-                                            </td>
-                                            <td class="" data-label="Purpose" style="color: #000000">
+                                            <td class="text-md-start ps-md-4 text-end text-break text-wrap"
+                                                data-label="Purpose" style="color: #000000">
                                                 {{ $expense->purpose }}
                                             </td>
-                                            <td class="text-break text-wrap" data-label="Merchant"
-                                                style="color: #000000">
+                                            <td class="text-break text-wrap text-md-start text-end ps-md-4"
+                                                data-label="Merchant" style="color: #000000">
                                                 {{ $expense->merchant }}
                                             </td>
-                                            <td class="" data-label="Total Amount" style="color: #000000">
+                                            <td class="text-break text-wrap ps-md-4 text-md-start text-end"
+                                                data-label="Total Amount" style="color: #000000">
                                                 <span class="">
                                                     {{ number_format($expense->total_amount, 2) }}
                                                 </span>
                                             </td>
-                                            <td class="text-break text-wrap" data-label="Expense" style="color: #000000">
+                                            <td class="text-break text-wrap ps-md-4 text-md-start text-end"
+                                                data-label="Expense" style="color: #000000">
                                                 {{ $expense->category }}
                                             </td>
-                                            <td class="text-sm d-flex justify-content-md-center justify-content-between"
+                                            <td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between"
                                                 data-label="Action">
                                                 <button onclick="getExpenseData({{ $expense->id }})"
                                                     class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
                                                     data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"
-                                                    style="background-color: #ff720c;width:65px;height:25px;font-size:12px;font-weight:500">
+                                                    style="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">
                                                     View</button>
                                             </td>
                                         </tr>
@@ -428,6 +459,33 @@
     @endif
 
     <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": "Bearer " + AUTH_TOKEN,
+                    "Accept": "application/json"
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: API_URL + "api/category/list/main?user_id=" + USR_ID,
+                success: function(res) {
+                    if (res) {
+                        var response = res['data'];
+                        for (const obj of response) {
+                            var CategoryId = obj.category_name;
+                            var CategoryName = obj.category_name;
+                            $("#list_category").append('<option value="' + CategoryName +
+                                '">' + CategoryName + '</option>');
+                        }
+                    } else {
+                        $("#list_category").empty();
+                    }
+                }
+            });
+        });
+
         function getExpenseData(expense_id) {
             $.ajaxSetup({
                 headers: {

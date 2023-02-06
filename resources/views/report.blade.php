@@ -419,9 +419,9 @@
                                                         </button>
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2"
                                                             style="border: 1px solid gray">
-                                                            <li><a  href="{{ config('api.base_url') . 'api/report/export/pdf/' . $item->id }}"
+                                                            {{-- <li><a  href="{{ config('api.base_url') . 'api/report/export/pdf/' . $item->id }}"
                                                                     download class="text-dark text-start px-3" >Export
-                                                                    PDF</a></li>
+                                                                    PDF</a></li> --}}
                                                             <li> <a href="{{ config('api.base_url') . 'api/report/export/excel/' . $item->id }}"
                                                                     download class="text-dark text-start px-3">Export
                                                                     Excel</a></li>

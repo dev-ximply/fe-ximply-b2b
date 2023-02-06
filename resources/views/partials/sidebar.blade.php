@@ -65,19 +65,20 @@
                             class="nav-link-text ms-1 {{ $section == 'expense' ? 'text-orange' : 'text-white' }}">Expenses</span>
                     </a>
                 </li>
-                @if (session()->get('approval_expense') == 1)
-                    <li class="nav-item">
-                        <a class="nav-link @if ($section == 'approval') active @endif" href="/approval">
-                            <div
-                                class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'approval' ? 'bg-orange' : 'bg-purple' }}">
-                                <i class="fa-solid fa-handshake {{ $section == 'approval' ? 'text-white' : 'text-white' }}"
-                                    style="font-size:15px"></i>
-                            </div>
-                            <span
-                                class="nav-link-text ms-1 {{ $section == 'approval' ? 'text-orange' : 'text-white' }}">Approval</span>
-                        </a>
-                    </li>
-                @endif
+            @endif
+
+            @if (session()->get('approval_expense') == 1)
+                <li class="nav-item">
+                    <a class="nav-link @if ($section == 'approval') active @endif" href="/approval">
+                        <div
+                            class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'approval' ? 'bg-orange' : 'bg-purple' }}">
+                            <i class="fa-solid fa-handshake {{ $section == 'approval' ? 'text-white' : 'text-white' }}"
+                                style="font-size:15px"></i>
+                        </div>
+                        <span
+                            class="nav-link-text ms-1 {{ $section == 'approval' ? 'text-orange' : 'text-white' }}">Approval</span>
+                    </a>
+                </li>
             @endif
 
             @if (session()->get('manage_user') == 1)
@@ -97,10 +98,13 @@
                     <div class="collapse @if ($section == 'employee' || $section == 'group' || $section == 'partner') show @endif" id="manage-teams">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link @if ($section == 'group') active @endif " href="/group">
-                                    <span class="sidenav-mini-icon text-white"> O </span>
-                                    <span class="nav-link-text ms-1  text-white">Group</span>
-                                </a>
+                                @if (session()->get('is_superadmin') == true)
+                                    <a class="nav-link @if ($section == 'group') active @endif "
+                                        href="/group">
+                                        <span class="sidenav-mini-icon text-white"> O </span>
+                                        <span class="nav-link-text ms-1  text-white">Group</span>
+                                    </a>
+                                @endif
                                 <a class="nav-link @if ($section == 'employee') active @endif" href="/employee">
                                     <span class="sidenav-mini-icon text-white"> O </span>
                                     <span class="nav-link-text ms-1 text-white">Member</span>
@@ -115,7 +119,7 @@
                 </li>
             @endif
 
-            @if (session()->get('manage_budget') == 1)
+            @if (session()->get('manage_budget') == 1 || session()->get('approval_topup') == 1)
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#ecommerceExamples"
                         class="nav-link  @if ($section == 'budget' || $section == 'top_up_approval' || $section == 'pre-approval') active @endif"
@@ -132,15 +136,20 @@
                     <div class="collapse @if ($section == 'budget' || $section == 'top_up_approval' || $section == 'pre-approval') show @endif" id="ecommerceExamples">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link @if ($section == 'budget') active @endif" href="/budget">
-                                    <span class="sidenav-mini-icon text-white"> O </span>
-                                    <span class="nav-link-text ms-1 text-white">Budget</span>
-                                </a>
-                                <a class="nav-link @if ($section == 'top_up_approval') active @endif "
-                                    href="/spend/request">
-                                    <span class="sidenav-mini-icon text-white"> O </span>
-                                    <span class="nav-link-text ms-1  text-white">Top Up Approval</span>
-                                </a>
+                                @if (session()->get('manage_budget') == 1)
+                                    <a class="nav-link @if ($section == 'budget') active @endif"
+                                        href="/budget">
+                                        <span class="sidenav-mini-icon text-white"> O </span>
+                                        <span class="nav-link-text ms-1 text-white">Budget</span>
+                                    </a>
+                                @endif
+                                @if (session()->get('approval_topup') == 1)
+                                    <a class="nav-link @if ($section == 'top_up_approval') active @endif "
+                                        href="/spend/request">
+                                        <span class="sidenav-mini-icon text-white"> O </span>
+                                        <span class="nav-link-text ms-1  text-white">Approval Top Up</span>
+                                    </a>
+                                @endif
                             </li>
                         </ul>
                     </div>
@@ -198,7 +207,7 @@
                                 </a>
                                 <a class="nav-link @if ($section == 'tenant') active @endif " href="/tenant">
                                     <span class="sidenav-mini-icon text-white"> O </span>
-                                    <span class="nav-link-text ms-1  text-white">Tenants</span>
+                                    <span class="nav-link-text ms-1  text-white">Corporate Info</span>
                                 </a>
 
                             </li>
