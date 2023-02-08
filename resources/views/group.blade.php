@@ -195,9 +195,7 @@
                                 </th>
 
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
-
                                     Have Client Vendor
-
                                 </th>
 
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">

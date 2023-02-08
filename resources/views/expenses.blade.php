@@ -283,39 +283,50 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-borderless text-dark" border="1">
-                        <thead>
-                            <tr>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Date Receipts
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Status
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Purpose
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Merchant
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Amount
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Expense
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (count($data['expenses']) != 0)
+            </div>
+            @php
+                $iterateCoupon = $iterateCoupon + 1;
+            @endphp
+        @endforeach
+    </div>
+
+    @if (count($data['expenses']) != 0)
+        <div class="row mt-4 position-relative">
+            <div class="col-12">
+                <div class="card" style="border-radius: 5px">
+                    <div class="table-responsive">
+                        <table class="table table-borderless text-dark" border="1">
+                            <thead>
+                                <tr>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">Date Receipts
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">Status
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">Purpose
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">
+                                        Merchant
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">
+                                        Amount
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">
+                                        Expense
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
                                 @foreach ($data['expenses'] as $item)
                                     @php
                                         $i = 1;

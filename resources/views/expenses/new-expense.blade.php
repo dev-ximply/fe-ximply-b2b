@@ -276,9 +276,9 @@
                                     "Your request success.",
                                     "success"
                                 );
-                                setTimeout(function() {
-                                    window.location.reload(true);
-                                }, 1000);
+                                // setTimeout(function() {
+                                //     window.location.reload(true);
+                                // }, 1000);
                             } else {
                                 swalWithBootstrapButtons.fire(
                                     "oops!",
@@ -331,6 +331,7 @@
                 // send receipt to nanonets
                 setTimeout(function() {
                     var formdata = new FormData();
+                    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
                     formdata.append("tenant_code", TENANT_CODE);
                     formdata.append("user_id", $("#user_id").val());
                     formdata.append("file_receipt", fileReceipt[0]);

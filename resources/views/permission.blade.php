@@ -176,17 +176,11 @@
                                                                     </th>
 
                                                                     {{-- <th class="text-center text-dark">
-
                                                                         <p class="mb-0 text-dark">Approval PreBudget</p>
-
                                                                     </th> --}}
-
                                                                     {{-- <th class="text-center text-dark">
-
                                                                         <p class="mb-0 text-dark">Manage Tenant</p>
-
                                                                     </th> --}}
-
                                                                 </tr>
 
                                                             </thead>
@@ -260,7 +254,6 @@
                                                                     </td>
 
                                                                     {{-- <td>
-
                                                                         <div
 
                                                                             class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
@@ -272,11 +265,8 @@
                                                                                 {{ $permission['permission'][0]['approval_prebudget'] ? 'checked' : '' }}>
 
                                                                         </div>
-
                                                                     </td> --}}
-
                                                                     {{-- <td>
-
                                                                         <div
 
                                                                             class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
@@ -384,21 +374,13 @@
                     if (result.isConfirmed) {
 
                         console.log('update')
-
                         $.ajaxSetup({
-
                             headers: {
-
                                 "Authorization": "Bearer " + AUTH_TOKEN,
-
                                 "Accept": "application/json",
-
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
                             }
-
                         });
-
                         $.ajax({
 
                             type: "PUT",
@@ -482,21 +464,13 @@
         function changeRoleName(value, roleId) {
 
             console.log(value);
-
             $.ajaxSetup({
-
                 headers: {
-
                     "Authorization": "Bearer " + AUTH_TOKEN,
-
                     "Accept": "application/json",
-
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
                 }
-
             });
-
             $.ajax({
 
                 type: "PUT",
@@ -512,7 +486,6 @@
                 },
 
                 success: function(response) {
-
                     const {
 
                         success,
