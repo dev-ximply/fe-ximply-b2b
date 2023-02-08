@@ -72,7 +72,7 @@
                     var formData = new FormData();
 
                     formData.append('tenant_code', TENANT_CODE);
-                    formData.append('user_id', userId);
+                    formData.append('user_id', USR_ID);
                     formData.append('group_name', groupName);
                     formData.append('have_partnership', have_client);
 

@@ -3,6 +3,20 @@
 const API_URL = "http://127.0.0.1:8000/";
 const STORAGE_URL = "http://127.0.0.1:8000/";
 
+function getQueryParams() {
+    const search = window.location.search.substring(1);
+    return search ?
+        JSON.parse(
+            '{"' +
+            decodeURI(search)
+            .replace(/"/g, '\\"')
+            .replace(/&/g, '","')
+            .replace(/=/g, '":"') +
+            '"}'
+        ) :
+        {};
+}
+
 function NumericInput(inp, locale) {
     var numericKeys = '0123456789.';
 
