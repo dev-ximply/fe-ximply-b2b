@@ -85,10 +85,10 @@
                                             class="rounded border border-secondary text-secondary"
                                             style="font-size:12px; height: 25px; width: 150px">
                                             <option value="">Status</option>
-                                            <option value="pending">Pending</option>
-                                            <option value="rejected">Rejected</option>
-                                            <option value="approved">Approved</option>
-                                            <option value="done">Done</option>
+                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "pending" ? 'selected' : '') }} value="pending">Pending</option>
+                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "rejected" ? 'selected' : '') }} value="rejected">Rejected</option>
+                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "approved" ? 'selected' : '') }} value="approved">Approved</option>
+                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "done" ? 'selected' : '') }} value="done">Done</option>
                                         </select>
                                     </div>
                                     <div class="col-md mt-2">
@@ -235,8 +235,13 @@
                                         @endforeach
                                     @else
                                         <tr class="text-center">
-                                            <td colspan="5">
-                                                Data tidak di temukan
+                                            <td colspan="6">
+                                                <div class="row justify-content-center h-100 align-items-center">
+                                                    <div class="d-flex align-items-center justify-content-center flex-column py-5">
+                                                        <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid" alt="" style="width: 100px">
+                                                        <h6 class="font-weight-bold text-dark py-0">no have topup request</h6>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endif

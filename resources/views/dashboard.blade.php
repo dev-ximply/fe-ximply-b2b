@@ -193,6 +193,7 @@
                                                 style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
                                             <input type="date" class="form-control px-1" id="filter_start_date"
                                                 name="filter_start_date"
+                                                value='{{ isset($_GET['filter_start_date']) ? $_GET['filter_start_date'] : '' }}'
                                                 style="font-size:10px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
                                         </div>
                                     </div>
@@ -202,6 +203,7 @@
                                                 style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
                                             <input type="date" class="form-control px-1" id="filter_end_date"
                                                 name="filter_end_date"
+                                                value='{{ isset($_GET['filter_end_date']) ? $_GET['filter_end_date'] : '' }}'
                                                 style="font-size:10px; height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
                                         </div>
                                     </div>
@@ -772,6 +774,8 @@
             }
         });
 
+        const params = getQueryParams();
+
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
@@ -791,7 +795,8 @@
                             var CategoryId = obj.id;
                             var CategoryName = obj.category_name;
                             $("#filter_expense_type").append('<option value="' + CategoryName +
-                                '">' + CategoryName + '</option>');
+                                '"' + (CategoryName == params.filter_expense_type ? 'selected' :
+                                    '') + '>' + CategoryName + '</option>');
                         }
                     } else {
                         $("#filter_expense_type").empty();
@@ -820,7 +825,8 @@
                             var uid = obj.id;
                             var uname = obj.full_name;
                             $("#filter_member").append('<option value="' + uid +
-                                '">' + uname + '</option>');
+                                '"' + (uid == params.filter_member ? 'selected' :
+                                    '') + '>' + uname + '</option>');
                         }
                     } else {
                         $("#filter_member").empty();
