@@ -12,7 +12,7 @@
 <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-3 top-1 px-0  shadow-none border-radius-xl"
     id="navbarBlur" data-scroll="true" style="z-index: 1;">
     <form action="">
-        <input type="text" class="text-dark" id="navbar_uid" value="{{ Auth::user()['id'] }}" hidden>
+        <input type="text" class="text-dark" id="navbar_uid" value="'{{ Auth::user()['id'] }}'" hidden>
     </form>
     <div class="container-fluid py-1 ">
         <nav aria-label="breadcrumb">
@@ -128,17 +128,31 @@
                             style="width: 2em; height: 2em; border-radius:50%; border: 1px solid grey">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                        @if (session()->get('is_superadmin') == false)
                         <li class="mb-0">
                             <a class="dropdown-item border-radius-md" href="/profile">
                                 <div class="d-flex flex-column justify-content-center">
                                     <h6 class="text-sm font-weight-normal mb-1">
                                         <span class="font-weight-bold"><i
                                                 class="fa-solid fa-user me-sm-1"></i></i></span><span
-                                            class="font-weight-bold"> Account</span>
+                                            class="font-weight-bold">Profile</span>
                                     </h6>
                                 </div>
                             </a>
                         </li>
+                        @else
+                        <li class="mb-0">
+                            <a class="dropdown-item border-radius-md" href="/tenant">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="text-sm font-weight-normal mb-1">
+                                        <span class="font-weight-bold"><i
+                                                class="fa-solid fa-user me-sm-1"></i></i></span><span
+                                            class="font-weight-bold"> Corporate Info</span>
+                                    </h6>
+                                </div>
+                            </a>
+                        </li>
+                        @endif
                         {{-- <li class="mb-0">
                             <a class="dropdown-item border-radius-md" href="/setting">
                                 <div class="d-flex flex-column justify-content-center">
