@@ -49,7 +49,7 @@
 
     <div class="modal fade" id="edit_modal_budget" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background: #19194B; color:white">
                     <h5 class="modal-title text-white" id="exampleModalLabel">Edit Budget</h5>
@@ -123,6 +123,7 @@
         </div>
     </div>
 
+    
     <div class="row" style="margin-left: -5px;">
         @foreach ($data['members'] as $item)
             <div class="col-md-3">
@@ -143,7 +144,7 @@
                                     <div class="dropdown-menu dropdown-menu-end me-sm-n4 me-n3"
                                         aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" data-bs-toggle="modal"
-                                            data-bs-target="#edit_modal_budget" onclick="getDetailBudget('{{ $item->full_name }}', {{ $item->id }}, {{ $item->limit->remain_limit }}, {{ $item->limit->auto_approve }})">Edit</a>
+                                            data-bs-target="#edit_modal_budget" onclick="getDetailBudget('{{ $item->full_name }}', '{{ $item->id }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}')">Edit</a>
                                         {{-- TEST<a class="dropdown-item" href="javascript:;">Retire</a> --}}
                                     </div>
                                 </div>
@@ -166,6 +167,10 @@
                         <div class="w-100 mt-1">
                             <span class="me-2 font-weight-normal" style="font-size: 0.8em">Auto Approve : Rp
                                 {{ number_format($item->limit->auto_approve) }}</span>
+                        </div>
+                        <div class="w-100 mt-1">
+                            <span class="me-2 font-weight-normal" style="font-size: 0.8em">Created : 
+                        </span>
                         </div>
                         <hr class="horizontal dark">
                         <div class="w-100 mt-1">
