@@ -185,7 +185,7 @@
                             </div>
                         </div>
                         <div style="text-align: right; margin-top:20px; margin-right:12px">
-                            <button class="btn text-white" style="background: #62CA50">Submit</button>
+                            <button type="submit" class="btn text-white" style="background: #62CA50">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -206,6 +206,7 @@
         var location = $("#location").val();
         var total_amount = $("#total_amount").val();
         var fileReceipt = $('#file_receipt')[0].files;
+        console.log(fileReceipt);
         var fileAdditional = $('#file_additional')[0].files;
 
         var formDataExpense = new FormData();
@@ -220,7 +221,7 @@
         formDataExpense.append('merchant', merchant);
         formDataExpense.append('location', location);
         formDataExpense.append('total_amount', total_amount);
-
+        console.log(formDataExpense);
         if (fileReceipt.length > 0) {
             formDataExpense.append('file_receipt', fileReceipt[0]);
         }
@@ -331,7 +332,7 @@
                 // send receipt to nanonets
                 setTimeout(function() {
                     var formdata = new FormData();
-                    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+         
                     formdata.append("tenant_code", TENANT_CODE);
                     formdata.append("user_id", $("#user_id").val());
                     formdata.append("file_receipt", fileReceipt[0]);

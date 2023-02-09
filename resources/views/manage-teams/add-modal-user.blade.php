@@ -75,8 +75,8 @@
                                 <div class="mb-0">
                                     <button class="btn text-white" data-bs-dismiss="modal"
                                         style="background-color: #D42A34">Cancel</button>
-                                    <button type="sumbit" class="btn text-white" style="background-color: #62ca50"
-                                        onclick="sendInvitation({{ Auth::user()['id'] }}, document.getElementById('email').value, document.getElementById('first_name').value, document.getElementById('last_name').value, document.getElementById('department_id').value, document.getElementById('role_id').value)">Submit</button>                                    
+                                    <button type="submit" class="btn text-white" style="background-color: #62ca50"
+                                        onclick="sendInvitation({{ Auth::user()['id'] }})">Submit</button>                                    
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,8 @@
 
 <script>
     //send invitation
-    function sendInvitation(user_id, email, first_name, last_name, group_id, role_id) {
+    function sendInvitation(user_id) {
+        console.log("ads");
         var tenant_code = TENANT_CODE;
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {

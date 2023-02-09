@@ -285,9 +285,9 @@
                 </div>
             </div>
             @php
-                $iterateCoupon = $iterateCoupon + 1;
+                    // $iterateCoupon = $iterateCoupon + 1;
             @endphp
-        @endforeach
+        {{-- @endforeach --}}
     </div>
 
     @if (count($data['expenses']) != 0)

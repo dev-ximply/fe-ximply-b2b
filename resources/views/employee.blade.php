@@ -13,7 +13,7 @@
 
     <div class="d-flex justify-content-between">
 	
-
+        {{-- {{var_dump(Session::get('TenantCode'))}} --}}
 	<div class="mt-2">
 	   <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#add_modal_users"
 
@@ -26,6 +26,7 @@
           </button>
 
 	</div>
+    {{-- {{ dd($data)}} --}}
 
         <div class="d-flex justify-content-end flex-column text-end mb-2">
           <h6 class="text-dark fs-6">Total Member</h6>
@@ -171,7 +172,7 @@
 
                                                 <button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
                                                     style="background-color: #85cdfd;width:50px;height:25px;font-size:12px; font-weight:500;" data-bs-target="#modalInfoMember" data-bs-toggle="modal"
-                                                    onclick="getInfoMember('{{ $item->id }}','{{  $item->first_name  }}', '{{  $item->last_name  }}', '{{  $item->email  }}', '{{  $item->group_id  }}','{{  $item->group_name  }}', '{{  $item->role_name  }}')"
+                                                    onclick="getInfoMember('{{ $item->id }}','{{  's'  }}', '{{  '$item->last_name'  }}', '{{  $item->email  }}', '{{  $item->group_id  }}','{{  $item->group_name  }}', '{{  $item->role_name  }}')"
                                                     >
                                                     Info
                                                 </button>
