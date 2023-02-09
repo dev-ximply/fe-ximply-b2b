@@ -62,7 +62,6 @@ class GroupInfoController extends Controller
 
         return $response->data;
     }
-
     public static function member($user_id)
     {
         $client = new Client();

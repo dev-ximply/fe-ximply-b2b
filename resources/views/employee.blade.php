@@ -9,28 +9,29 @@
     @include('manage-teams.edit-modal-user')
     @include('manage-teams.info-member')
 
-
-
     <div class="d-flex justify-content-between">
 	
         {{-- {{var_dump(Session::get('TenantCode'))}} --}}
 	<div class="mt-2">
 	   <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#add_modal_users"
 
-            style="background-color: #19194b">
+        <div class="mt-2">
+            <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#add_modal_users"
+                style="background-color: #19194b">
 
-            <span>Add Member</span>&nbsp;
+                <span>Add Member</span>&nbsp;
 
-            <i class="fa-solid fa-user-plus ms-2"></i>
+                <i class="fa-solid fa-user-plus ms-2"></i>
 
-          </button>
+            </button>
 
 	</div>
     {{-- {{ dd($data)}} --}}
 
         <div class="d-flex justify-content-end flex-column text-end mb-2">
-          <h6 class="text-dark fs-6">Total Member</h6>
-          <p class="text-dark font-weight-bold fs-5">{{ count($data['employee']) }} <span style="font-weight:400; font-size:14px">Members</span></p>
+            <h6 class="text-dark fs-6">Total Member</h6>
+            <p class="text-dark font-weight-bold fs-5">{{ count($data['employee']) }} <span
+                    style="font-weight:400; font-size:14px">Members</span></p>
         </div>
 
 
@@ -47,9 +48,7 @@
                     <div class="col-md-4 mt-2 d-flex align-items-end">
 
                         <input type="search" name="" id="" placeholder="Search..."
-
                             class="form-control text-dark"
-
                             style="font-size:11px;line-height:16px !important;border-radius:5px !important">
 
                     </div>
@@ -73,9 +72,8 @@
 
 
     @if (count($data['employee']) != 0)
-        
         @php
-           $i = 1;
+            $i = 1;
         @endphp
         <div class="row mt-1">
 
@@ -90,15 +88,12 @@
                             <thead class="thead-light">
 
                                 <tr>
-  				  
                                     <th class="text-sm ps-5" style="font-weight: 600">Name</th>
-
-                                    <th class="text-sm px-0" style="font-weight: 600">Contact Info</th>
-
-                                    <th class="text-sm px-0" style="font-weight: 600">Department</th>
-
+                                    <th class="text-sm px-0" style="font-weight: 600">Contact Company</th>
+                                    <th class="text-sm px-0" style="font-weight: 600">Group</th>
                                     <th class="text-sm px-0" style="font-weight: 600">Role</th>
                                     <th class="text-sm px-0" style="font-weight: 600">Approver</th>
+                                    <th class="text-sm px-0" style="font-weight: 600">Created</th>
                                     <th class="text-sm px-0 text-center" style="font-weight: 600">Action</th>
 
                                 </tr>
@@ -108,11 +103,8 @@
                             <tbody>
 
                                 @foreach ($data['employee'] as $item)
-
-                                    <tr class="align-middle">
-					
+                                    <tr class="">
                                         <td class="text-xs font-weight-bold text-capitalize ps-5 pb-0 pt-3">
-
                                             <p class="text-dark" style="font-size: 13px">
 
                                                 {{ $item->full_name }}
@@ -131,7 +123,7 @@
 
                                             <p class="text-dark" style="font-size: 13px">
 
-                                                {{ ($item->handphone != "" ? $item->handphone : "-") }}
+                                                {{ $item->handphone != '' ? $item->handphone : '-' }}
 
                                             </p>
 
@@ -140,9 +132,7 @@
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
 
                                             <p class="text-dark" style="font-size: 13px">
-
-                                                {{ ($item->group_name != "" ? $item->group_name : "-") }}
-
+                                                {{ $item->group_name != '' ? $item->group_name : '-' }}
                                             </p>
 
                                         </td>
@@ -151,7 +141,7 @@
 
                                             <p class="text-dark" style="font-size: 13px">
 
-                                                {{ ($item->role_name != "" ? $item->role_name : "-") }}
+                                                {{ $item->role_name != '' ? $item->role_name : '-' }}
 
                                             </p>
 
@@ -159,49 +149,57 @@
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
 
                                             <p class="text-dark" style="font-size: 13px">
-
+                                                {{-- {{ $item->role_name != '' ? $item->role_name : '-' }} --}}
+                                            </p>
+                                        </td>
+                                        <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
+                                            <p class="text-dark" style="font-size: 13px">
+                                                {{-- {{   }} --}}
                                                 -
                                             </p>
-
+                                            <span class="text-xs">
+                                                {{-- {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
+                                                {{-- 2023-02-06 --}}
+                                            </span>
                                         </td>
+                              
 
 
                                         <td class="text-xs font-weight-bold">
 
                                             <div class="d-flex justify-content-center pb-0 mt-3">
-
-                                                <button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
-                                                    style="background-color: #85cdfd;width:50px;height:25px;font-size:12px; font-weight:500;" data-bs-target="#modalInfoMember" data-bs-toggle="modal"
-                                                    onclick="getInfoMember('{{ $item->id }}','{{  's'  }}', '{{  '$item->last_name'  }}', '{{  $item->email  }}', '{{  $item->group_id  }}','{{  $item->group_name  }}', '{{  $item->role_name  }}')"
-                                                    >
-                                                    Info
-                                                </button>
-
-                                                <button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
-
-                                                    data-bs-title="View Your Expense Member" data-bs-toggle="modal" data-id="{{ $item->id }}" data-bs-target="#edit_modal_users"
-
-                                                    style="background-color: #ff720c;width:50px;height:25px;font-size:12px; font-weight:500;" onclick="changeEmploye(this.getAttribute('data-id'))">
-
-                                                    Edit
-
-                                                </button>
-                                                <button
-                                                    class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
-                                                    data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                                    data-id="{{ $item->id }}" data-bs-target="#editModalPartner"
-                                                    style="background-color: #E40909;width:50px;height:25px;font-size:12px; font-weight:500;"
-                                                    onclick="">
-                                                    Disable
-                                                </button>
-                                            
+                                                @if (session()->get('is_superadmin') == false)
+                                                    <button
+                                                        class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
+                                                        style="background-color: #85cdfd;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                        data-bs-target="#modalInfoMember" data-bs-toggle="modal"
+                                                        onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')">
+                                                        Info
+                                                    </button>
+                                                @else
+                                                    <button
+                                                        class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
+                                                        data-bs-title="Edit" data-bs-toggle="modal"
+                                                        data-id="'{{ $item->id }}'" data-bs-target="#edit_modal_users"
+                                                        style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                        onclick="getDataMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}', '{{ $item->group_name }}', '{{ $item->role_name }}')">
+                                                        View
+                                                    </button>
+                                                    <button
+                                                        class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
+                                                        data-bs-title="View Your Expense Member" data-bs-toggle="modal"
+                                                        data-id="'{{ $item->id }}'" data-bs-target="#editModalPartner"
+                                                        style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                        onclick="">
+                                                        Deactived
+                                                    </button>
+                                                @endif
 
                                             </div>
 
                                         </td>
 
                                     </tr>
-
                                 @endforeach
 
                             </tbody>
@@ -215,9 +213,7 @@
             </div>
 
         </div>
-
     @else
-
         <div class="row justify-content-center h-100 align-items-center">
 
             <div class="d-flex align-items-center justify-content-center flex-column py-5">
@@ -231,26 +227,19 @@
             </div>
 
         </div>
-
     @endif
 
 
 
     <script>
-
-        function changeEmploye(value){
-
+        function changeEmploye(value) {
             console.log(value)
-
-            document.getElementById('user_id').value=value;
-
+            document.getElementById('user_id').value = value;
         }
-
     </script>
 
-     <script>
-
-        function getInfoMember(role_id, first_name, last_name, email, group_id, group_name, role_name){
+    <script>
+        function getInfoMember(role_id, first_name, last_name, email, group_id, group_name, role_name) {
             console.log("Success", role_id);
             console.log("Success", first_name);
             console.log("Success", last_name);
@@ -266,22 +255,25 @@
             document.getElementById('info_email').value = email;
             document.getElementById('info_employee_code').value = group_id;
             document.getElementById('info_department').value = group_name;
-            document.getElementById('info_role_name').value =  role_name;
+            document.getElementById('info_role_name').value = role_name;
         }
 
-        function getDataMember(user_id, group_name, role_name, email) {
-            console.log('Success', user_id);
-            console.log('Success', group_name);
-            console.log('Success', role_name);
-            console.log('Success', email);
+        function getDataMember(id, first_name, last_name, email, group_id, group_name, role_name) {
 
-            document.getElementById('user_id').value = user_id;
-            document.getElementById('edit_department_id').value = group_name;
-            document.getElementById('edit_role_id').value = role_name;
-            document.getElementById('email_id').value = email;
+
+
+
+            document.getElementById('user_id').value = id;
+            document.getElementById('edit_first_name').value = first_name;
+            document.getElementById('edit_last_name').value = last_name;
+            document.getElementById('edit_email').value = email;
+            document.getElementById('edit_employee_code').value = group_id;
+            document.getElementById('edit_department_name').innerHTML = group_name;
+            document.getElementById('edit_department_name').value = group_name;
+            document.getElementById('edit_role_name').innerHTML = role_name;
+            document.getElementById('edit_role_name').value = role_name;
 
         }
     </script>
 
 @endsection
-

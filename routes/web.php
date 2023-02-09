@@ -50,6 +50,7 @@ use App\Http\Controllers\Budgets\TopUpApprovalController;
 
 use App\Http\Controllers\Group\GroupController;
 use App\Http\Controllers\Group\GroupInfoController;
+use App\Http\Controllers\Members\MemberInfoController;
 use App\Http\Controllers\Partner\PartnerController;
 
 use App\Http\Controllers\Role\PermissionController;
@@ -138,6 +139,7 @@ Route::get('/employee', [MembersController::class, 'index'])->middleware('auth')
 
 Route::put('/employees', [MembersController::class, 'updateEmployee'])->middleware('auth')->name('employees.update');
 
+// Route::get('/info-member', [MemberInfoController::class, 'index'])->middleware('auth');
 
 
 Route::get('/group', [GroupController::class, 'index'])->middleware('auth');
@@ -145,8 +147,6 @@ Route::get('/group', [GroupController::class, 'index'])->middleware('auth');
 Route::put('/groups', [GroupController::class, 'updateGroup'])->middleware('auth')->name('groups.update');
 
 Route::get('/group-info', [GroupInfoController::class, 'index'])->middleware('auth')->name('groupInfo');
-
-
 
 Route::get('/partner', [PartnerController::class, 'index'])->middleware('auth');
 
@@ -178,7 +178,7 @@ Route::get('/spend/request', [TopUpApprovalController::class, 'index'])->middlew
 
 // Approve
 
-Route::post('/approves', [TopUpApprovalController::class, 'upprove'])->middleware('auth')->name('approves.action');
+Route::post('/approves', [TopUpApprovalController::class, 'approve'])->middleware('auth')->name('approves.action');
 
 
 
@@ -220,6 +220,17 @@ Route::get('/account-settings', function(){
         'title' => 'Account Settings',
         'section' => 'account_settings'
     ]);
+});
+
+// Tenant
+Route::get('/tenant', function () {
+    return view(
+        'tenant',
+        [
+            'title' => 'Manage Tenant',
+            'section' => 'tenant'
+        ]
+    );
 });
 
 // Tenant

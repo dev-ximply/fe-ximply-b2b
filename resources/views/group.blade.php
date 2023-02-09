@@ -208,7 +208,9 @@
                                 </th>
 
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
-
+                                    Created
+                                </th>
+                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
                                     Action
 
                                 </th>
@@ -224,15 +226,12 @@
                                 <tr class="">
 
                                     <td class="text-sm" data-label="Group Name" style="color: #000000">
-
-                                        {{ $item->group_name }}
-
+                                        {{ $item->group_name }} <br>
+                                       
                                     </td>
 
                                     <td class="text-sm" data-label="Have Partner" style="color: #000000">
-
-                                        {{ ($item->have_partnership == '1' ? 'yes' : 'no') }}
-
+                                        {{ $item->have_partnership == '1' ? 'yes' : 'no' }}
                                     </td>
 
                                     <td class="text-sm" data-label="Member" style="color: #000000">
@@ -243,6 +242,13 @@
 
                                         </span>
 
+                                    </td>
+                                    <td>
+                                        <span class="text-dark" style="font-size: 15px">
+                                       
+                                           {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }}
+                                     
+                                        </span>
                                     </td>
                                     <td>
                                         <span class="text-dark" style="font-size: 15px">
@@ -292,15 +298,12 @@
                                             <button
                                                 class="btn text-white d-flex justify-content-center me-2 align-items-center text-capitalize btn-update"
                                                 data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                                data-id="{{ $item->id }}" data-bs-target="#editModalPartner"
-                                                style="background-color: #E40909;width:50px;height:25px;font-size:12px; font-weight:500;"
+                                                data-id="'{{ $item->id }}'" data-bs-target="#deleteGroup"
+                                                style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
                                                 onclick="">
-                                                Delete
+                                                Deactived
                                             </button>
                                         </div>
-
-
-
                                     </td>
 
                                 </tr>

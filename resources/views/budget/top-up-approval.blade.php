@@ -180,13 +180,13 @@
                                                 <td class="align-middle text-center text-xs d-flex justify-content-center">
                                                     @if ($approval['status'] == 'pending')
                                                         <span class="badge badge-xs d-flex justify-content-center"
-                                                            style="background-color: #FFCF23; width: 60px; margin-top:20px">pending</span>
+                                                            style="border:1px solid #FFCF23; color:#FFCF23; width: 60px; margin-top:20px">pending</span>
                                                     @elseif ($approval['status'] == 'approved')
                                                         <span class="badge badge-xs d-flex justify-content-center"
-                                                            style="background-color: #50B720; width: 60px; margin-top:20px">approved</span>
+                                                            style="border: 1px solid #50B720; color:#50B720; width: 60px; margin-top:20px">approved</span>
                                                     @elseif ($approval['status'] == 'rejected')
                                                         <span class="badge badge-xs d-flex justify-content-center"
-                                                            style="background-color: #E40909; width: 60px; margin-top:20px">rejected</span>
+                                                            style="border:1px solid #E40909; color:#E40909; width: 60px; margin-top:20px">rejected</span>
                                                     @else
                                                         <span class="badge badge-secondary badge-xs">unknown</span>
                                                     @endif
@@ -197,7 +197,7 @@
                                                             <button onclick="getDetail(this)"
                                                                 class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center "
                                                                 data-toggle="tooltip" data-placement="left"
-                                                                title="approve this"
+                                                                title="Edit"
                                                                 style="width: 60px; height:25px; background-color:#FFCF23"
                                                                 data-topup-id={{ $approval['topup_id'] }}
                                                                 data-topup-request={{ $approval['amount'] }}
@@ -208,20 +208,20 @@
                                                                 <span style="font-size: 0.6em">Edit</span>
                                                             </button>
                                                             <button
-                                                                onclick="topupDecision({{ $approval['topup_id'] }}, {{ $approval['amount'] }}, 'approved')"
+                                                                onclick="topupDecision('{{ $approval['topup_id'] }}', '{{ $approval['amount'] }}', 'approved')"
                                                                 class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center approved"
                                                                 data-toggle="tooltip" data-placement="left"
-                                                                title="approve this"
+                                                                title="Approve"
                                                                 style="width: 60px; height:25px; background-color:#50B720">
                                                                 <i
                                                                     class="fa-solid fa-circle-check text-white text-lg me-1"></i>
                                                                 <span style="font-size: 0.6em">Approve</span>
                                                             </button>
                                                             <button data-bs-toggle="tooltip"
-                                                                onclick="topupDecision({{ $approval['topup_id'] }}, {{ $approval['amount'] }}, 'rejected')"
+                                                                onclick="topupDecision('{{ $approval['topup_id'] }}', '{{ $approval['amount'] }}', 'rejected')"
                                                                 class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center rejected"
                                                                 data-bs-original-title="reject" data-toggle="tooltip"
-                                                                data-placement="left" title="reject this"
+                                                                data-placement="left" title="Reject"
                                                                 style="width: 60px; height:25px; background-color: #E40909">
                                                                 <i class="fas fa-circle-xmark text-white text-lg me-1"></i>
                                                                 <span style="font-size: 0.6em">Reject</span>

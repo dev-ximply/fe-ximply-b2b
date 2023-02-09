@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-6">
                                 <label class="form-label mt-2" style="color: black; font-weight:500">Employee
-                                    Code</label>
+                                    Id</label>
                                 <div class="input-group">
                                     <input id="employee_code" placeholder="Employee Code" name="employee_code"
                                         class="form-control" type="text">
@@ -45,7 +45,7 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <label class="form-label mt-2" style="color: black; font-weight:500">Department</label>
+                                <label class="form-label mt-2" style="color: black; font-weight:500">Group</label>
                                 <div class="">
                                     <select class="form-control " name="department_id" id="department_id">
                                         <option value="" selected>Select</option>
@@ -75,8 +75,8 @@
                                 <div class="mb-0">
                                     <button class="btn text-white" data-bs-dismiss="modal"
                                         style="background-color: #D42A34">Cancel</button>
-                                    <button type="submit" class="btn text-white" style="background-color: #62ca50"
-                                        onclick="sendInvitation({{ Auth::user()['id'] }})">Submit</button>                                    
+                                    <button type="sumbit" class="btn text-white" style="background-color: #62ca50"
+                                        onclick="sendInvitation('{{ Auth::user()['id'] }}', document.getElementById('email').value, document.getElementById('first_name').value, document.getElementById('last_name').value, document.getElementById('department_id').value, document.getElementById('role_id').value)">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -92,8 +92,8 @@
 
 <script>
     //send invitation
-    function sendInvitation(user_id) {
-        console.log("ads");
+    function sendInvitation(user_id, email, first_name, last_name, group_id, role_id) {
+        console.log(user_id);
         var tenant_code = TENANT_CODE;
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -128,6 +128,9 @@
                     if (role_id != "" || role_id != null) {
                         formNewMember.append('role_id', role_id);
                     }
+
+ 
+     
 
                     $.ajaxSetup({
                         headers: {

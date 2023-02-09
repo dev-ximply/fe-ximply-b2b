@@ -57,7 +57,7 @@
             <h5 class="text-dark">Role Permission</h5>
 
             <p class="text-sm text-dark">Choose the permission your Company needs.</p>
-
+            
         </div>
 
         <div class="card-body pt-0">
@@ -152,9 +152,7 @@
                                                                 <tr>
 
                                                                     <th class="text-center text-dark">
-
-                                                                        <p class="mb-0 text-dark">Manage Spend</p>
-
+                                                                        <p class="mb-0 text-dark">Manage Budget</p>
                                                                     </th>
 
                                                                     <th class="text-center text-dark">
