@@ -127,13 +127,13 @@
                                         <td class="align-middle text-start text-xs">
                                             @if ($expense_approval->status == 'pending')
                                                 <span class="badge badge-xs d-flex justify-content-center"
-                                                    style="background-color: #FFCF23; width: 50px">pending</span>
+                                                    style="border:1px solid #FFCF23; color:#FFCF23; width: 55px">pending</span>
                                             @elseif ($expense_approval->status == 'approved')
                                                 <span class="badge badge-xs d-flex justify-content-center"
-                                                    style="background-color: #50B720; width: 50px">approved</span>
+                                                    style="border:1px solid #50B720; color:#50B720; width: 55px">approved</span>
                                             @elseif ($expense_approval->status == 'rejected')
                                                 <span class="badge badge-xs d-flex justify-content-center"
-                                                    style="background-color: #E40909; width: 50px">rejected</span>
+                                                    style="border:1px solid #E40909; color:#E40909; width: 55px">rejected</span>
                                             @else
                                                 <span class="badge badge-secondary badge-xs">unknown</span>
                                             @endif
@@ -147,7 +147,7 @@
                                                         btn text-white d-flex align-items-center d-flex
                                                         justify-content-center"
                                                         data-bs-original-title="approve" data-toggle="tooltip"
-                                                        data-placement="left" title="approve this expenses"
+                                                        data-placement="left" title="Review"
                                                         style="width: 60px; height:25px; background-color:#FFCF23"
                                                         data-bs-toggle="modal" data-bs-target="#viewExpenseDetail">
                                                         <i
@@ -155,21 +155,21 @@
                                                         <span style="font-size: 0.6em">Review</span>
                                                     </button>
                                                     <button
-                                                        onclick="approvalDecision({{ Auth::user()['id'] }}, {{ $expense_approval->approval_id }}, 'approved')"
+                                                        onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $expense_approval->approval_id }}', 'approved')"
                                                         data-bs-toggle="tooltip"
                                                         class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"
-                                                        data-bs-original-title="reject" data-toggle="tooltip"
-                                                        data-placement="left" title="reject this expenses"
+                                                        data-bs-original-title="Approve" data-toggle="tooltip"
+                                                        data-placement="left" title="Approve this expenses"
                                                         style="width: 60px; height:25px; background-color:#50B720">
                                                         <i class="fas fa-circle-check text-white text-md me-1"></i>
                                                         <span style="font-size: 0.6em">Approve</span>
                                                     </button>
                                                     <button
-                                                        onclick="approvalDecision({{ Auth::user()['id'] }}, {{ $expense_approval->approval_id }}, 'rejected')"
+                                                        onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $expense_approval->approval_id }}', 'rejected')"
                                                         data-bs-toggle="tooltip"
                                                         class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"
                                                         data-bs-original-title="reject" data-toggle="tooltip"
-                                                        data-placement="left" title="reject this expenses"
+                                                        data-placement="left" title="Reject this expenses"
                                                         style="width: 60px; height:25px; background-color:#E40909">
                                                         <i class="fas fa-circle-xmark text-white text-md me-1"></i>
                                                         <span style="font-size: 0.6em">Reject</span>
