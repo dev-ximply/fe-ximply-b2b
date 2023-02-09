@@ -38,11 +38,28 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
+
+                        <input type="hidden" id="partner_assign_id">
+
+                        <label class="form-label mt-4" style="color: black; font-weight:500">User</label>
+
+                        <select class="form-control " name="group_id" id="user_assign_id">
+
+                            <option value="" selected>Pilih User</option>
+
+                            @foreach ($members as $member)
+                                <option value="'{{ $member['id'] }}'">{{ $member['full_name'] }}</option>
+                            @endforeach
+
+                        </select>
+
+                    </div>
+                    <div class="col-6">
                         <label class="form-label mt-4" style="color: black; font-weight:500">Group</label>
                         <select class="form-control " name="group_id" id="group_id">
                             <option value="" selected>Select</option>
                             @foreach ($data['groups'] as $item_group)
-                                <option value="{{ $item_group->id }}">{{ strtolower($item_group->group_name) }}
+                                <option value="'{{ $item_group->id }}'">{{ strtolower($item_group->group_name) }}
                                 </option>
                             @endforeach
                         </select>
@@ -54,7 +71,7 @@
                             <button class="btn text-white" data-bs-dismiss="modal"
                                 style="background-color: #D42A34">Cancel</button>
                             <button class="btn text-white" style="background-color: #62ca50"
-                                onclick="addPartner({{ Auth::user()['id'] }}, document.getElementById('companyName').value, document.getElementById('picName').value, document.getElementById('email').value, document.getElementById('handphone').value, document.getElementById('group_id').value)">Submit</button>
+                                onclick="addPartner('{{ Auth::user()['id'] }}', document.getElementById('companyName').value, document.getElementById('picName').value, document.getElementById('email').value, document.getElementById('handphone').value, document.getElementById('group_id').value)">Submit</button>
                         </div>
                     </div>
                 </div>

@@ -28,6 +28,7 @@
         <div class="card-header">
             <h5 class="text-dark">Role Permission</h5>
             <p class="text-sm text-dark">Choose the permission your Company needs.</p>
+            
         </div>
         <div class="card-body pt-0">
             <div class="accordion-1">
@@ -43,11 +44,16 @@
                                                 <tr style="border-bottom: 1px solid rgb(210, 210, 210)">
                                                     <td width="10%" class="text-sm text-dark font-weight-bold">
                                                         LEVEL&nbsp;{{ $permission['role_level'] }}</td>
-                                                    <td width="40%" class="text-sm">
+                                                    <td width="40%" class="text-sm position-relative">
                                                         <input type="text" placeholder="Role Name..."
-                                                            onchange="changeRoleName(this.value, {{ $permission['id'] }})"
+                                                            onchange="changeRoleName(this.value, '{{ $permission['id'] }}')"
                                                             style="width: 100%; border:0.5px solid rgb(210, 210, 210)"
-                                                            class="rounded" value="{{ $permission['role_name'] }}">
+                                                            class="rounded" value="{{ $permission['role_name'] }}" id="tesLabel">
+                                                        {{-- <div class="" style="top: 0; left:0;"> --}}
+                                                            <label for="tesLabel" style="position: absolute; top:15px;right:10px" data-bs-toggle="tooltip" data-bs-title="Edit">
+                                                                <i class="fa-solid fa-pen-to-square text-secondary"  ></i>
+                                                            </label>
+                                                        {{-- </div> --}}
                                                     </td>
                                                     <td>
                                                         <button class="accordion-button font-weight-bold collapsed"
@@ -74,7 +80,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th class="text-center text-dark">
-                                                                        <p class="mb-0 text-dark">Manage Spend</p>
+                                                                        <p class="mb-0 text-dark">Manage Budget</p>
                                                                     </th>
                                                                     <th class="text-center text-dark">
                                                                         <p class="mb-0 text-dark">Manage User</p>
@@ -99,7 +105,7 @@
                                                                         <div
                                                                             class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
                                                                             <input class="form-check-input" type="checkbox"
-                                                                                onchange="changePermission('manage_budget', this, {{ $permission['id'] }})"
+                                                                                onchange="changePermission('manage_budget', this, '{{ $permission['id'] }}')"
                                                                                 {{ $permission['permission'][0]['manage_budget'] ? 'checked' : '' }}>
                                                                         </div>
                                                                     </td>
@@ -107,7 +113,7 @@
                                                                         <div
                                                                             class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
                                                                             <input class="form-check-input" type="checkbox"
-                                                                                onchange="changePermission('manage_user', this, {{ $permission['id'] }})"
+                                                                                onchange="changePermission('manage_user', this, '{{ $permission['id'] }}')"
                                                                                 {{ $permission['permission'][0]['manage_user'] ? 'checked' : '' }}>
                                                                         </div>
                                                                     </td>
@@ -115,7 +121,7 @@
                                                                         <div
                                                                             class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
                                                                             <input class="form-check-input" type="checkbox"
-                                                                                onchange="changePermission('approval_expense', this, {{ $permission['id'] }})"
+                                                                                onchange="changePermission('approval_expense', this, '{{ $permission['id'] }}')"
                                                                                 {{ $permission['permission'][0]['approval_expense'] ? 'checked' : '' }}>
                                                                         </div>
                                                                     </td>
@@ -123,7 +129,7 @@
                                                                         <div
                                                                             class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
                                                                             <input class="form-check-input" type="checkbox"
-                                                                                onchange="changePermission('approval_topup', this, {{ $permission['id'] }})"
+                                                                                onchange="changePermission('approval_topup', this, '{{ $permission['id'] }}')"
                                                                                 {{ $permission['permission'][0]['approval_topup'] ? 'checked' : '' }}>
                                                                         </div>
                                                                     </td>

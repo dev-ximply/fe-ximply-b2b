@@ -47,4 +47,31 @@ class ApprovalController extends Controller
 
         return $response->data;
     }
+
+    public function asyncGetExpenses($user_id, $statusType = null)
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $params = [];
+        $params['user_id'] = $user_id;
+        if ($statusType != null) {
+            $params['status'] = $statusType;
+        }
+
+        $url = config('api.base_url') . 'api/expense/approval/list/' . Session::get('TenantCode');
+        $response = Http::withHeaders($headers)
+            ->asForm()
+            ->get($url, $params);
+
+        $response = json_decode($response->getBody());
+
+        if ($response->success == false) {
+            return [];
+        }
+
+        return $response->data;
+    }
 }

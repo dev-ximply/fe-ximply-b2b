@@ -422,10 +422,10 @@
                                                             {{-- <li><a  href="{{ config('api.base_url') . 'api/report/export/pdf/' . $item->id }}"
                                                                     download class="text-dark text-start px-3" >Export
                                                                     PDF</a></li> --}}
-                                                            <li> <a href="{{ config('api.base_url') . 'api/report/export/excel/' . $item->id }}"
+                                                            <li> <a href="'{{ config('api.base_url') . 'api/report/export/excel/' . $item->id }}'"
                                                                     download class="text-dark text-start px-3">Export
                                                                     Excel</a></li>
-                                                            <li> <a href="{{ env('API_URL') . 'api/report/export/csv/' . $item->id }}"
+                                                            <li> <a href="'{{ env('API_URL') . 'api/report/export/csv/' . $item->id }}'"
                                                                     download class="text-dark text-start px-3">Export
                                                                     Csv</a></li>
                                                         </ul>

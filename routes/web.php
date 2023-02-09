@@ -24,6 +24,8 @@ use App\Http\Controllers\Auth\ConfirmationEmailController;
 use App\Http\Controllers\Budgets\NewBudgetController;
 use App\Http\Controllers\Budgets\TopUpApprovalController;
 use App\Http\Controllers\Group\GroupController;
+use App\Http\Controllers\Group\GroupInfoController;
+use App\Http\Controllers\Members\MemberInfoController;
 use App\Http\Controllers\Partner\PartnerController;
 use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\Subscription\PaySubscriptionController;
@@ -69,8 +71,13 @@ Route::get('/approval', [ApprovalController::class, 'index'])->name('approval')-
 Route::get('/employee', [MembersController::class, 'index'])->middleware('auth');
 Route::put('/employees', [MembersController::class, 'updateEmployee'])->middleware('auth')->name('employees.update');
 
+// Route::get('/info-member', [MemberInfoController::class, 'index'])->middleware('auth');
+
+
 Route::get('/group', [GroupController::class, 'index'])->middleware('auth');
 Route::put('/groups', [GroupController::class, 'updateGroup'])->middleware('auth')->name('groups.update');
+
+Route::get('/group-info', [GroupInfoController::class, 'index'])->middleware('auth')->name('groupInfo');
 
 Route::get('/partner', [PartnerController::class, 'index'])->middleware('auth');
 Route::put('/partners', [PartnerController::class, 'updatePartner'])->middleware('auth')->name('partners.update');
@@ -104,6 +111,16 @@ Route::get('/pre-approval', function () {
 Route::get('/permission', [PermissionController::class, 'index'])->name('permission')->middleware('auth');
 Route::put('/permissions', [PermissionController::class, 'changePermission'])->name('permissions.change')->middleware('auth');
 Route::put('/permissions/role-name', [PermissionController::class, 'changeRoleName'])->name('permissions.role-name.change')->middleware('auth');
+
+
+// Account Settings
+Route::get('/account-settings', function(){
+    return view('account-settings',
+    [
+        'title' => 'Account Settings',
+        'section' => 'account_settings'
+    ]);
+});
 
 // Tenant
 Route::get('/tenant', function () {

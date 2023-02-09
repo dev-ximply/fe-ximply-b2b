@@ -29,8 +29,8 @@
 <div class="modal fade" id="change-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-        <div class="modal-content" style="border-radius: 5px">
-            <div class="modal-header " style="background: #191a4d">
+        <div class="modal-content" style="border-radius: 16px">
+            <div class="modal-header" style="background: #191a4d">
                 <h6 class="modal-title fs-6 ms-3 text-white">Change Password</h6>
                 <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                     {{-- <i class="fa-solid fa-xmark"></i> --}}

@@ -12,7 +12,7 @@
 <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-3 top-1 px-0  shadow-none border-radius-xl"
     id="navbarBlur" data-scroll="true" style="z-index: 1;">
     <form action="">
-        <input type="text" class="text-dark" id="navbar_uid" value="'{{ Auth::user()['id'] }}'" hidden>
+        <input type="text" class="text-dark" id="navbar_uid" value="{{ Auth::user()['id'] }}" hidden>
     </form>
     <div class="container-fluid py-1 ">
         <nav aria-label="breadcrumb">
@@ -211,6 +211,7 @@
             success: function(res) {
                 if (res) {
                     var response = res['data'];
+                    console.log(response);
                     document.getElementById('navbar_fullname').innerHTML = "Welcome, " + response[
                         'full_name'];
                     document.getElementById('navbar_profilepict').src = STORAGE_URL + response[

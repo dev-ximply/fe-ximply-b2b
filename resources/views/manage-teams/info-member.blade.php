@@ -1,27 +1,77 @@
-<div class="modal fade" id="add_modal_users" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
+{{-- <div class="modal fade" id="modalInfoMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <th class="text-uppercase  text-xxs font-weight-bolder opacity-9"
+                                        style="color:black">Name
+                                    </th>
+                                    <th class="text-uppercase  text-xxs font-weight-bolder opacity-9"
+                                        style="color:black">Email
+                                    </th>
+                                    <th class="text-uppercase  text-xxs font-weight-bolder opacity-9"
+                                        style="color:black">
+                                        Employee Code</th>
+                                    <th class="text-uppercase  text-xxs font-weight-bolder opacity-9"
+                                        style="color:black">
+                                        Department</th>
+                                    <th class="text-uppercase  text-xxs font-weight-bolder opacity-9"
+                                        style="color:black">Role
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+
+
+<div class="modal fade" id="modalInfoMember" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background: #19194b">
-                <h6 class="font-weight-bolder text-white" style="font-weight: 600">Add Member</h6>
+                <h6 class="font-weight-bolder text-white" style="font-weight: 600">View Member</h6>
                 <button type="button" class="btn-close  text-white" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body mb-4">
                 <div class="card-text mt-4" id="basic-info">
                     <div class="card-body pt-0">
                         <div class="row">
                             <div class="col-6">
                                 <label class="form-label" style="color: black; font-weight:500">Firstname</label>
                                 <div class="input-group">
-                                    <input id="first_name" placeholder="Firstname" name="first_name"
+                                    <input id="info_first_name" placeholder="Firstname" name="info_first_name"
                                         class="form-control" type="text" required="required">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <label class="form-label" style="color: black; font-weight:500">Lastname</label>
                                 <div class="input-group">
-                                    <input id="last_name" placeholder="Lastname" name="last_name" class="form-control"
+                                    <input id="info_last_name" placeholder="Lastname" name="info_last_name" class="form-control"
                                         type="text" required="required">
                                 </div>
                             </div>
@@ -30,7 +80,7 @@
                             <div class="col-6">
                                 <label class="form-label mt-2" style="color: black; font-weight:500">Email</label>
                                 <div class="input-group">
-                                    <input id="email" placeholder="Email" name="email" class="form-control"
+                                    <input id="info_email" placeholder="Email" name="info_email" class="form-control"
                                         type="email">
                                 </div>
                             </div>
@@ -38,7 +88,7 @@
                                 <label class="form-label mt-2" style="color: black; font-weight:500">Employee
                                     Id</label>
                                 <div class="input-group">
-                                    <input id="employee_code" placeholder="Employee Code" name="employee_code"
+                                    <input id="info_employee_code" placeholder="Employee Code" name="info_employee_code"
                                         class="form-control" type="text">
                                 </div>
                             </div>
@@ -47,39 +97,18 @@
                             <div class="col-6">
                                 <label class="form-label mt-2" style="color: black; font-weight:500">Group</label>
                                 <div class="">
-                                    <select class="form-control " name="department_id" id="department_id">
-                                        <option value="" selected>Select</option>
-                                        @foreach ($data['list_department'] as $item_departement)
-                                            <option value="'{{ $item_departement->id }}'">
-                                                {{ $item_departement->group_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                   <input type="text" class="form-control" id="info_department">
+                    
                                 </div>
                             </div>
                             <div class="col-6">
                                 <label class="form-label mt-2" style="color: black; font-weight:500">Role</label>
                                 <div class="">
-                                    <select class="form-control " name="role_id" id="role_id">
-                                        <option value="" selected>Select</option>
-                                        @foreach ($data['list_role'] as $item_role)
-                                            <option value="'{{ $item_role->id }}'">{{ $item_role->role_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" class="form-control" id="info_role_name">
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-2 ">
-                            <div class="d-flex mt-4 justify-content-end mb-0">
-                                <div class="mb-0">
-                                    <button class="btn text-white" data-bs-dismiss="modal"
-                                        style="background-color: #D42A34">Cancel</button>
-                                    <button type="sumbit" class="btn text-white" style="background-color: #62ca50"
-                                        onclick="sendInvitation('{{ Auth::user()['id'] }}', document.getElementById('email').value, document.getElementById('first_name').value, document.getElementById('last_name').value, document.getElementById('department_id').value, document.getElementById('role_id').value)">Submit</button>                                    
-                                </div>
-                            </div>
-                        </div>
+       
                     </div>
                 </div>
             </div>
@@ -231,3 +260,4 @@
         const example = new Choices(roleChoice);
     }
 </script>
+

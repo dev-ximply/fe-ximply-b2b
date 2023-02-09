@@ -197,7 +197,7 @@
                                                             <button onclick="getDetail(this)"
                                                                 class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center "
                                                                 data-toggle="tooltip" data-placement="left"
-                                                                title="approve this"
+                                                                title="Edit"
                                                                 style="width: 60px; height:25px; background-color:#FFCF23"
                                                                 data-topup-id={{ $approval['topup_id'] }}
                                                                 data-topup-request={{ $approval['amount'] }}
@@ -211,7 +211,7 @@
                                                                 onclick="topupDecision({{ $approval['topup_id'] }}, {{ $approval['amount'] }}, 'approved')"
                                                                 class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center approved"
                                                                 data-toggle="tooltip" data-placement="left"
-                                                                title="approve this"
+                                                                title="Approve"
                                                                 style="width: 60px; height:25px; background-color:#50B720">
                                                                 <i
                                                                     class="fa-solid fa-circle-check text-white text-lg me-1"></i>
@@ -221,7 +221,7 @@
                                                                 onclick="topupDecision({{ $approval['topup_id'] }}, {{ $approval['amount'] }}, 'rejected')"
                                                                 class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center rejected"
                                                                 data-bs-original-title="reject" data-toggle="tooltip"
-                                                                data-placement="left" title="reject this"
+                                                                data-placement="left" title="Reject"
                                                                 style="width: 60px; height:25px; background-color: #E40909">
                                                                 <i class="fas fa-circle-xmark text-white text-lg me-1"></i>
                                                                 <span style="font-size: 0.6em">Reject</span>

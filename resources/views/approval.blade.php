@@ -29,28 +29,32 @@
                 <div class="card-header pb-0">
                     <div class="row">
                         <div class="d-flex mb-4 justify-content-start justify-content-md-end">
-                            <form action="" style="z-index: 0">
+                            <form id="formSearch" action="" style="z-index: 0" onsubmit="handleChangeStatus(event)">
                                 <div class="row">
                                     <div class="col-md mt-2">
-                                        <select name="2ff" id="2ff" class="rounded border border-secondary"
-                                            style="font-size:12px; height: 25px; color:black">
-                                            <option value="">Category</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md mt-2">
-                                        <select name="3ff" id="3ff" class="rounded border border-secondary"
-                                            style="font-size:12px; height: 25px; color:black">
+                                        <select name="statusType" id="status"
+                                            class="rounded border border-secondary text-secondary"
+                                            style="font-size:12px; height: 25px; width: 150px">
                                             <option value="">Status</option>
-                                            <option value="pending">Pending</option>
-                                            <option value="approved">Approved</option>
-                                            <option value="rejected">Rejected</option>
-                                            <option value="done">Done</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
+                                                value="pending">Pending</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'rejected' ? 'selected' : '' }}
+                                                value="rejected">Rejected</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'approved' ? 'selected' : '' }}
+                                                value="approved">Approved</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
+                                                value="done">Done</option>
                                         </select>
                                     </div>
                                     <div class="col-md mt-2">
-                                        <input type="submit" value="Search"
-                                            class="px-2 rounded bg-white border border-secondary text-dark"
-                                            style="font-size:12px; height: 25px; width: 100px" />
+                                        <button type="submit" style="line-height:10px; height:25px; font-size:9px"
+                                            class="form-control text-bold" id="filter_button">
+                                            F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -313,6 +317,12 @@
                         );
                     }
                 });
+        }
+    </script>
+
+    <script>
+        function handleChangeStatus(event) {
+            event.submit();
         }
     </script>
 @endsection
