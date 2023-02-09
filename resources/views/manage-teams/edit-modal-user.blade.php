@@ -57,7 +57,7 @@
                                             <option value="" id="edit_department_name" hidden selected>
                                             </option>
                                             @foreach ($data['list_department'] as $item_departement)
-                                                <option value="'{{ $item_departement->id }}'" >
+                                                <option value="{{ $item_departement->id }}" >
                                                     {{ $item_departement->group_name }}
                                                 </option>
                                             @endforeach
@@ -70,7 +70,7 @@
                                         <select class="form-select " name="edit_role_name" id="edit_role_id">
                                             <option value="" id="edit_role_name" hidden selected></option>
                                             @foreach ($data['list_role'] as $item_role)
-                                                <option value="'{{ $item_role->id }}'" >{{ $item_role->role_name }}
+                                                <option value="{{ $item_role->id }}" >{{ $item_role->role_name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -167,11 +167,11 @@
                     message
                 } = response;
 
-                // if (success === true) {
-                //     setTimeout(function() {
-                //         window.location.reload(true);
-                //     }, 1000);
-                // }
+                if (success === true) {
+                    setTimeout(function() {
+                        window.location.reload(true);
+                    }, 1000);
+                }
             }
 
         });

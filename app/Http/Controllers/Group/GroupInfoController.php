@@ -13,7 +13,6 @@ class GroupInfoController extends Controller
 {
     //
     public static function index(){
-        // dd($id);
         return view('group-info',
         [
             'title' => 'Group Info',
@@ -21,8 +20,7 @@ class GroupInfoController extends Controller
             'data' => [
                 'group' => self::group_(Auth::user()['id']),
                 'budget' => self::budget(Auth::user()['id']),
-                'member_list' => self::member(Auth::user()['id']),
-            ]
+		        'member_list' => self::member(Auth::user()['id']),            ]
         ]  
     );
     }

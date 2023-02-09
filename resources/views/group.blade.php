@@ -1,172 +1,253 @@
 @extends('layouts.main')
 
+
+
 @section('container')
+
     @include('manage-teams.add_modal_group')
+
     @include('manage-teams.edit_modal_group')
+
     {{-- @include('manage-teams.view_modal_members') --}}
+
     <style>
+
         table {
+
             border-radius: 5px;
+
             border-collapse: collapse;
+
             margin: 0;
+
             padding: 0;
+
             width: 100%;
+
             table-layout: fixed;
+
         }
+
+
 
         table caption {
+
             font-size: 1.5em;
+
             margin: .5em 0 .75em;
+
         }
+
+
 
         table tr {
+
             background-color: #ffffff;
+
             border: 1px solid #ddd;
+
             padding: .35em;
+
         }
+
+
 
         table th,
+
         table td {
+
             padding: .625em;
+
             text-align: center;
+
         }
+
+
 
         table th {
+
             font-size: .85em;
+
             letter-spacing: .1em;
+
             text-transform: uppercase;
+
         }
+
+
 
         @media screen and (max-width: 600px) {
+
             table {
+
                 border: 0;
+
             }
+
+
 
             table caption {
+
                 font-size: 1.3em;
+
             }
+
+
 
             table thead {
+
                 border: none;
+
                 clip: rect(0 0 0 0);
+
                 height: 1px;
+
                 margin: -1px;
+
                 overflow: hidden;
+
                 padding: 0;
+
                 position: absolute;
+
                 width: 1px;
+
             }
+
+
 
             table tr {
+
                 display: block;
+
                 margin-bottom: .625em;
+
             }
+
+
 
             table td {
+
                 display: block;
+
                 font-size: .8em;
+
                 text-align: right;
+
             }
+
+
 
             table td::before {
+
                 content: attr(data-label);
+
                 float: left;
+
                 font-weight: bold;
+
                 text-transform: uppercase;
+
             }
+
+
 
             table td:last-child {
+
                 border-bottom: 0;
+
             }
+
         }
+
     </style>
 
-    <!-- Modal -->
-    {{-- <div class="modal fade" id="groupInfoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header " style="background: #19194b">
-                    <h6 class="modal-title fs-5 text-white" id="exampleModalLabel">Group Info</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="modal-responsive table-responsive">
-                        <table class="table table-borderless">
-                            <thead>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Member Name</th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Role Name</th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Authorization</th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Budget Limit</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($data['groups_info'] as $group_info)
-                                    <tr>
-                                        <td class=" ps-md-4 text-sm  justify-content-between text-start" style="color: #000000">
-                                            <span>
-                                                {{ $group_info->full_name }}
-                                            </span>
-                                        </td>
-                                        <td class=" ps-md-4 text-sm  justify-content-between text-start" style="color: #000000">{{ $group_info->role_name }}</td>
-                                        <td class=" ps-md-4 text-sm  justify-content-between text-start" style="color: #000000">{{ $group_info->group_name }}</td>
-                                        <td class=" ps-md-4 text-sm  justify-content-between text-start" style="color: #000000">{{ $group_info->limit->budget_spending }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-
     <div class="row justify-content-center">
+
         <div class="">
+
             <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#addModalGroup"
+
                 style="background-color: #19194b">
+
                 <span>Add Group</span>&nbsp;
+
                 <i class="fa-sharp fa-solid fa-plus text-xs"></i>
+
             </button>
+
         </div>
+
         <div class="col-12">
+
             <div class="card" style="border-radius: 5px">
+
                 <div class="table-responsive">
+
                     <table class="table  text-dark">
+
                         <thead>
+
                             <tr>
+
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">Group Name
+
                                 </th>
+
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
                                     Have Client Vendor
                                 </th>
+
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+
                                     Member
+
                                 </th>
+                               <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+                                    Created
+                                </th>
+
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
                                     Created
                                 </th>
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
                                     Action
+
                                 </th>
+
                             </tr>
+
                         </thead>
+
                         <tbody>
+
                             @foreach ($data['groups'] as $item)
+
                                 <tr class="">
+
                                     <td class="text-sm" data-label="Group Name" style="color: #000000">
                                         {{ $item->group_name }} <br>
                                        
                                     </td>
+
                                     <td class="text-sm" data-label="Have Partner" style="color: #000000">
                                         {{ $item->have_partnership == '1' ? 'yes' : 'no' }}
                                     </td>
+
                                     <td class="text-sm" data-label="Member" style="color: #000000">
+
                                         <span class="text-dark" style="font-size: 15px">
+
                                             {{ $item->count_members }} members
+
+                                        </span>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-dark" style="font-size: 15px">
+                                       
+                                           {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }}
+                                     
                                         </span>
                                     </td>
                                     <td>
@@ -178,99 +259,141 @@
                                     </td>
 
                                     <td class="text-sm d-flex justify-content-md-center justify-content-between"
+
                                         data-label="Action">
+
                                         {{-- <button onclick=""
+
                                             class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
+
                                             data-bs-toggle="modal" data-bs-target="#editModalGroup"
+
                                             style="background-color: #ff720c;width:65px;height:25px;font-size:12px;font-weight:500">
+
                                             Edit
+
                                         </button> --}}
-                                        <div>
+
+					 <div>
                                             <a href="/group-info"
                                                 class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
-                                                data-bs-title="View Your Expense Member"
-                                                style="background-color: #85cdfd;width:60px;height:25px;font-size:12px; font-weight:500;">
+                                                data-bs-title="View Your Expense Member"      
+                                                style="background-color: #85CDFD;width:50px;height:25px;font-size:12px; font-weight:500;">
                                                 Info
                                             </a>
                                         </div>
-                                        {{-- <button
-                                            class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
-                                            data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                            data-id="{{ $item->id }}" data-bs-target="#editModalGroup"
-                                            style="background-color: #ff720c;width:50px;height:25px;font-size:12px; font-weight:500;"
-                                            onclick="changeGroup(this.getAttribute('data-id'))">
+
+                                    	<div class="me-2">
+                                        <button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
+
+                                            data-bs-title="View Your Expense Member" data-bs-toggle="modal" data-id="{{ $item->id }}" data-bs-target="#editModalGroup"
+
+                                            style="background-color: #ff720c;width:50px;height:25px;font-size:12px; font-weight:500;" onclick="getDataGroup('{{ $item->id}}', '{{$item->group_name}}', '{{ $item->have_partnership}}')">
+
                                             Edit
-                                        </button> --}}
-                                        <div class="me-2">
-                                            <button
-                                                class="btn text-white d-flex justify-content-center align-items-center  text-capitalize btn-update"
-                                                data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                                data-bs-target="#editModalGroup"
-                                                style="background-color: #ff720c;width:60px;height:25px;font-size:12px; font-weight:500;"
-                                                onclick="getCoupon( '{{ $item->id }}','{{ $item->group_name }}', '{{ $item->have_partnership }}')">
-                                                Edit
-                                            </button>
+
+                                        </button>
                                         </div>
                                         <div class="me-2">
                                             <button
                                                 class="btn text-white d-flex justify-content-center me-2 align-items-center text-capitalize btn-update"
                                                 data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                                data-id="'{{ $item->id }}'" data-bs-target="#editModalPartner"
+                                                data-id="'{{ $item->id }}'" data-bs-target="#deleteGroup"
                                                 style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
                                                 onclick="">
                                                 Deactived
                                             </button>
                                         </div>
                                     </td>
+
                                 </tr>
+
                             @endforeach
+
                         </tbody>
+
                     </table>
+
                 </div>
+
             </div>
+
         </div>
+
+
+
 
 
     </div>
 
+
+
     <script>
-        function changeGroup(value) {
-            console.log(value)
-            document.getElementById('group_id').value = value;
-        }
+
+        function changeGroup(value){
+
+                console.log(value)
+
+                document.getElementById('group_id').value=value;
+
+            }
+
     </script>
 
-    <script>
-        function getCoupon(id, group_name, have_partnership) {
-            console.log(group_name);
-            console.log(have_partnership);
+   <script>
+       function getDataGroup(group_id, group_name, have_partnership){
+            console.log('success', group_name);
+	    console.log('success', have_partnership);
 
-            document.getElementById('group_id').value = id;
+             document.getElementById('group_id').value = group_id;
             document.getElementById('groupName').value = group_name;
-            if (have_partnership == 1) {
+            if(have_partnership == 1){
                 document.getElementById('IsHaveClient').checked = true;
-            } else {
+            }else{
                 document.getElementById('IsHaveClient').checked = false;
             }
-        }
-    </script>
+
+   }
+	
+  </script>
+
     <script>
+
         function getData(id) {
+
             $.ajax({
+
                 type: "GET",
+
                 url: "/api/Group/select-single?id=" + id,
+
                 success: function(response) {
+
                     if (response['success'] == true) {
+
                         var data = response['data'];
+
                         document.getElementById('groupId').value = data['id'];
+
                         document.getElementById('groupName').value = data['group_name'];
+
                         document.getElementById('IsHaveClient').checked = data['is_have_client'];
+
                         document.getElementById('member').value = data['members_count'];
+
                     } else {
+
                         // todo do something
+
                     }
+
                 }
+
             });
+
         }
+
     </script>
+
 @endsection
+

@@ -141,15 +141,7 @@
             <div class="d-flex justify-content-between mb-3">
                 <div class="col-md-8 mb-3">
                     <span>
-                        {{-- @foreach ($data['group'] as $item) --}}
-                        {{-- @php
-                            var_dump($data);
-                        @endphp --}}
-                        <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Group
-                            {{-- {{ Carbon\Carbon::parse($data['groups']->created_at)->format('m-d-Y') }}  --}}
-
-                        </p>
-                        {{-- @endforeach --}}
+                        <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Group</p>
                         <h5 class=" mb-0 text-dark font-weight-bolder">
                             <span>IT Department</span>
                         </h5>

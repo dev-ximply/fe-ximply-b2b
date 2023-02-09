@@ -89,6 +89,7 @@
 
 
     <style>
+
         /* table */
 
         table {
@@ -244,6 +245,7 @@
             }
 
         }
+
     </style>
 
 
@@ -253,6 +255,7 @@
         <div>
 
             <button class="btn  text-md text-white @if ($section == 'add user') active @endif" data-bs-toggle="modal"
+
                 data-bs-target="#addModalPartner" style="background-color: #19194b">Add Client Vendor
 
                 <i class="fa-solid fa-user-plus ms-2" style="font-size: 1em"></i>
@@ -290,11 +293,13 @@
                                 Contact Company
 
                             </th>
+
                             <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
 
                                 Group
 
                             </th>
+
                             <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
 
                                 Added By
@@ -321,7 +326,9 @@
                     <tbody>
 
                         @if (count($data['partners']) > 0)
+
                             @foreach ($data['partners'] as $item)
+
                                 <tr class="">
 
                                     <td class="text-sm" data-label="Company Name" style="color: #000000">
@@ -399,8 +406,11 @@
                                     </td>
 
                                 </tr>
+
                             @endforeach
+
                         @else
+
                             <tr>
 
                                 <td colspan="4" style="font-size: 12px">
@@ -410,6 +420,7 @@
                                 </td>
 
                             </tr>
+
                         @endif
 
                     </tbody>
@@ -421,6 +432,22 @@
         </div>
 
     </div>
+
+       <script>
+        function getDataPartner(partner_id, company_name, contact_name, email, handphone){
+            console.log(partner_id);
+            console.log(company_name);
+            console.log(contact_name);
+            console.log(email);
+            console.log(handphone);
+
+            document.getElementById('pertner_id').value = partner_id;
+            document.getElementById('editcompanyName').value = company_name;
+            document.getElementById('editPartnerName').value = contact_name;
+            document.getElementById('editEmail').value = email;
+            document.getElementById('editHandphone').value = handphone;
+        }
+    </script>
 
     <script>
         function getDataPartner(partner_id, company_name, contact_name, email, handphone) {
@@ -504,6 +531,21 @@
             document.getElementById('partner_assign_id').value = partnerId;
 
         }
+    </script>
+
+
+
+    <script>
+
+        function changeAssign(partnerId) {
+
+            console.log(partnerId)
+
+            document.getElementById('partner_assign_id').value = partnerId;
+
+        }
+
+
 
 
 
@@ -576,7 +618,6 @@
                     console.log(response)
 
 
-
                     if (success === true) {
 
                         swalWithBootstrapButtons
@@ -590,7 +631,6 @@
                                 "success"
 
                             );
-
 
 
                         setTimeout(function() {
@@ -632,6 +672,8 @@
 
 
         }
+
     </script>
 
 @endsection
+

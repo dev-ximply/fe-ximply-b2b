@@ -119,7 +119,7 @@
 <script src="{{ asset('js/plugins/choices.min.js') }}"></script>
 <script src="{{ asset('js/plugins/flatpickr.min.js') }}"></script>
 
-<script>
+{{-- <script>
     //send invitation
     function sendInvitation(user_id, email, first_name, last_name, group_id, role_id) {
         var tenant_code = TENANT_CODE;
@@ -214,7 +214,7 @@
                 }
             });
     }
-</script>
+</script> --}}
 
 <script>
     function getMultiple(data) {

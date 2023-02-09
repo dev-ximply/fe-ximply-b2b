@@ -43,13 +43,14 @@
 
                         <label class="form-label mt-4" style="color: black; font-weight:500">User</label>
 
-                        <select class="form-control " name="group_id" id="user_assign_id">
+                        {{-- <select class="form-control " name="user_assign_id" id="user_assign_id"> --}}
+                        <select class="form-control " name="user_assign_id" id="">
 
                             <option value="" selected>Pilih User</option>
 
-                            @foreach ($members as $member)
+                            {{-- @foreach ($members as $member)
                                 <option value="'{{ $member['id'] }}'">{{ $member['full_name'] }}</option>
-                            @endforeach
+                            @endforeach --}}
 
                         </select>
 
@@ -59,7 +60,7 @@
                         <select class="form-control " name="group_id" id="group_id">
                             <option value="" selected>Select</option>
                             @foreach ($data['groups'] as $item_group)
-                                <option value="'{{ $item_group->id }}'">{{ strtolower($item_group->group_name) }}
+                                <option value="{{ $item_group->id }}">{{ strtolower($item_group->group_name) }}
                                 </option>
                             @endforeach
                         </select>

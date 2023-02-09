@@ -1516,11 +1516,7 @@
 
         });
 
-
-
         const params = getQueryParams();
-
-
 
         $(document).ready(function() {
 
@@ -1559,11 +1555,8 @@
                             var CategoryName = obj.category_name;
 
                             $("#filter_expense_type").append('<option value="' + CategoryName +
-
                                 '"' + (CategoryName == params.filter_expense_type ? 'selected' :
-
                                     '') + '>' + CategoryName + '</option>');
-
                         }
 
                     } else {
@@ -1619,11 +1612,8 @@
                             var uname = obj.full_name;
 
                             $("#filter_member").append('<option value="' + uid +
-
                                 '"' + (uid == params.filter_member ? 'selected' :
-
                                     '') + '>' + uname + '</option>');
-
                         }
 
                     } else {

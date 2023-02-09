@@ -27,12 +27,12 @@ class TopUpApprovalController extends Controller
                     'top_up' => self::top_up(Auth::user()['id']),
 
                 ],
-                'approvals' => self::asyncGetApprovals(Auth::user()['id'], $statusType),
+                'approvals' => self::asyncGetExpenses(Auth::user()['id'], $statusType),
             ]
         );
     }
 
-    public function upprove(Request $request){
+    public function approve(Request $request){
         $params =[
             'user_id' => Auth::user()['id'],
             'topup_id' => $request->topup_id,
@@ -61,7 +61,7 @@ class TopUpApprovalController extends Controller
         return $response->data;
     }
 
-    public function asyncGetApprovals($userId, $statusType=null){
+    public function asyncGetExpenses($userId, $statusType=null){
         $headers = [
             'Authorization' => 'Bearer ' . session()->get('AuthToken'),
             'Accept' => 'application/json'

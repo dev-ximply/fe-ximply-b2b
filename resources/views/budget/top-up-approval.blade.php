@@ -85,10 +85,10 @@
                                             class="rounded border border-secondary text-secondary"
                                             style="font-size:12px; height: 25px; width: 150px">
                                             <option value="">Status</option>
-                                            <option value="pending">Pending</option>
-                                            <option value="rejected">Rejected</option>
-                                            <option value="approved">Approved</option>
-                                            <option value="done">Done</option>
+                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "pending" ? 'selected' : '') }} value="pending">Pending</option>
+                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "rejected" ? 'selected' : '') }} value="rejected">Rejected</option>
+                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "approved" ? 'selected' : '') }} value="approved">Approved</option>
+                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "done" ? 'selected' : '') }} value="done">Done</option>
                                         </select>
                                     </div>
                                     <div class="col-md mt-2">
@@ -180,13 +180,13 @@
                                                 <td class="align-middle text-center text-xs d-flex justify-content-center">
                                                     @if ($approval['status'] == 'pending')
                                                         <span class="badge badge-xs d-flex justify-content-center"
-                                                            style="background-color: #FFCF23; width: 60px; margin-top:20px">pending</span>
+                                                            style="border:1px solid #FFCF23; color:#FFCF23; width: 60px; margin-top:20px">pending</span>
                                                     @elseif ($approval['status'] == 'approved')
                                                         <span class="badge badge-xs d-flex justify-content-center"
-                                                            style="background-color: #50B720; width: 60px; margin-top:20px">approved</span>
+                                                            style="border: 1px solid #50B720; color:#50B720; width: 60px; margin-top:20px">approved</span>
                                                     @elseif ($approval['status'] == 'rejected')
                                                         <span class="badge badge-xs d-flex justify-content-center"
-                                                            style="background-color: #E40909; width: 60px; margin-top:20px">rejected</span>
+                                                            style="border:1px solid #E40909; color:#E40909; width: 60px; margin-top:20px">rejected</span>
                                                     @else
                                                         <span class="badge badge-secondary badge-xs">unknown</span>
                                                     @endif
@@ -208,7 +208,7 @@
                                                                 <span style="font-size: 0.6em">Edit</span>
                                                             </button>
                                                             <button
-                                                                onclick="topupDecision({{ $approval['topup_id'] }}, {{ $approval['amount'] }}, 'approved')"
+                                                                onclick="topupDecision('{{ $approval['topup_id'] }}', '{{ $approval['amount'] }}', 'approved')"
                                                                 class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center approved"
                                                                 data-toggle="tooltip" data-placement="left"
                                                                 title="Approve"
@@ -218,7 +218,7 @@
                                                                 <span style="font-size: 0.6em">Approve</span>
                                                             </button>
                                                             <button data-bs-toggle="tooltip"
-                                                                onclick="topupDecision({{ $approval['topup_id'] }}, {{ $approval['amount'] }}, 'rejected')"
+                                                                onclick="topupDecision('{{ $approval['topup_id'] }}', '{{ $approval['amount'] }}', 'rejected')"
                                                                 class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center rejected"
                                                                 data-bs-original-title="reject" data-toggle="tooltip"
                                                                 data-placement="left" title="Reject"
@@ -235,8 +235,13 @@
                                         @endforeach
                                     @else
                                         <tr class="text-center">
-                                            <td colspan="5">
-                                                Data tidak di temukan
+                                            <td colspan="6">
+                                                <div class="row justify-content-center h-100 align-items-center">
+                                                    <div class="d-flex align-items-center justify-content-center flex-column py-5">
+                                                        <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid" alt="" style="width: 100px">
+                                                        <h6 class="font-weight-bold text-dark py-0">no have topup request</h6>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endif
