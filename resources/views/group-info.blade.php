@@ -8,8 +8,6 @@
         </div>
 
 
-
-
         {{-- modal edit group info --}}
         {{-- <div class="modal fade" id="edit_group_info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -79,10 +77,10 @@
                                             <div class="input-group">
                                                 <select class="form-select " name="group_role_name" id="group_role_id">
                                                     <option value="" id="group_role_name" hidden selected></option>
-                                                    {{-- @foreach ($data['group'] as $item_role)
-                                                        <option value="'{{ $item_role->id }}'">{{ $item_role->role_name }}
-                                                        </option>
-                                                    @endforeach --}}
+                                                    @foreach ($data['group'] as $item_role)
+                                                        {{-- <option value="{{ $item_role->id }}">{{ $item_role->role_name }}
+                                                        </option> --}}
+                                                    @endforeach
                                                 </select>
                                                
                                             </div>
@@ -137,13 +135,16 @@
             </div>
         </div>
 
+
+
+        
         <div class="col-md mb-3">
             <div class="d-flex justify-content-between mb-3">
                 <div class="col-md-8 mb-3">
                     <span>
                         <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Group</p>
                         <h5 class=" mb-0 text-dark font-weight-bolder">
-                            <span>{{  $data['group'][0]->group_name  }}</span>
+                            <span> {{ $data['group_detail']->group_name}} </span>
                         </h5>
                     </span>
                 </div>
@@ -161,14 +162,14 @@
                     <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Budget Total</p>
                     <h5 class=" mb-0 text-dark font-weight-bolder">
                         Rp
-                        <span>{{ $data['group'][0]->total_budget }}</span>
+                        <span> {{  number_format($data['group_detail']->total_budget,0,',','.')}} </span>
                     </h5>
                 </div>
 
                 <div class="col-md text-end">
                     <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Member</p>
                     <h5 class=" mb-0 text-dark font-weight-bolder">
-                        <span>{{ $data['group'][0]->count_members }}</span>
+                        <span> {{ $data['group_detail']->count_members}} </span>
                     </h5>
                 </div>
             </div>
@@ -204,32 +205,32 @@
                                     var total = 0;
                                     
                                 @endphp --}}
-                                @foreach ($data['member_list'] as $item)
+                                @foreach ($data['member_list'] as $member)
                                     <tr class="">
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             <span>
-                                                {{ $item->full_name }}
+                                                {{ $member->first_name }}
                                             </span>
                                         </td>
                                         {{-- <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             <span>
-                                                {{ $group_info->last_name }}
+                                                {{ $member->last_name }}
                                             </span>
                                         </td> --}}
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
-                                            {{ $item->role_name }}</td>
+                                            {{ $member->role_name }}</td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             -</td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
-                                            {{ $item->limit->remain_limit }}</td>
+                                            {{ $member->limit->remain_limit }}</td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
-                                            {{  $item->created_date  }}
+                                            {{ $member->limit->created_date }}
                                         </td>
                               
                                     </tr>
@@ -244,7 +245,7 @@
     </div>
 
 
-    <script>
+    {{-- <script>
         function getEditGroupInfo(id,first_name, last_name, role_name, email, remain_limit ) {
             console.log('tes',edit_budget_limit);
 
@@ -259,7 +260,7 @@
             // document.getElementById('edit_department_name').value = group_name;
     
         }
-    </script>
+    </script> --}}
     {{-- <script>
         function getTime(){
 

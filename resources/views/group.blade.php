@@ -260,8 +260,8 @@
 
                                         </button> --}}
 
-                                        <div>
-                                            <a href="/group-info"
+					 <div>
+                                            <a href="/group-info/{{ $item->id }}"
                                                 class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
                                                 data-bs-title="View Your Expense Member"
                                                 style="background-color: #85CDFD;width:50px;height:25px;font-size:12px; font-weight:500;">
