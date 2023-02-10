@@ -56,10 +56,7 @@ use App\Http\Controllers\Partner\PartnerController;
 use App\Http\Controllers\Role\PermissionController;
 
 use App\Http\Controllers\Subscription\PaySubscriptionController;
-
-
-
-
+use App\Http\Controllers\Tenant\TenansController;
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
 
@@ -119,6 +116,7 @@ Route::get('/referral-friends', [ListReferralController::class, 'index'])->middl
 
 //Dashboard
 
+
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
@@ -150,7 +148,11 @@ Route::get('/group-info/{id}', [GroupInfoController::class, 'index'])->middlewar
 
 Route::get('/partner', [PartnerController::class, 'index'])->middleware('auth');
 
+Route::post('/partners', [PartnerController::class, 'addPartner'])->middleware('auth')->name('parners.store');
+
 Route::put('/partners', [PartnerController::class, 'updatePartner'])->middleware('auth')->name('partners.update');
+
+Route::delete('/partners', [PartnerController::class, 'deletePartner'])->middleware('auth')->name('partners.delete');
 
 Route::put('/partners/assign', [PartnerController::class, 'updatePartnerAssign'])->middleware('auth')->name('partners.assign.update');
 
@@ -219,35 +221,36 @@ Route::put('/permissions/role-name', [PermissionController::class, 'changeRoleNa
 Route::get('/account-settings', [SettingsController::class, 'account_settings'])->name('permission')->middleware('auth');
 
 // Tenant
-Route::get('/tenant', function () {
-    return view(
-        'tenant',
-        [
-            'title' => 'Manage Tenant',
-            'section' => 'tenant'
-        ]
-    );
-});
+// Route::get('/tenant', function () {
+//     return view(
+//         'tenant',
+//         [
+//             'title' => 'Manage Tenant',
+//             'section' => 'tenant'
+//         ]
+//     );
+// });
+Route::get('/tenant', [TenansController::class, 'index'])->middleware('auth');
 
 // Tenant
 
-Route::get('/tenant', function () {
+// Route::get('/tenant', function () {
 
-    return view(
+//     return view(
 
-        'tenant',
+//         'tenant',
 
-        [
+//         [
 
-            'title' => 'Manage Tenant',
+//             'title' => 'Manage Tenant',
 
-            'section' => 'tenant'
+//             'section' => 'tenant'
 
-        ]
+//         ]
 
-    );
+//     );
 
-});
+// });
 
 
 

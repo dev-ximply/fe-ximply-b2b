@@ -152,7 +152,7 @@
                     <span>
                         <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Have Client</p>
                         <h5 class=" mb-0 text-dark font-weight-bolder">
-                            <span>Yes</span>
+                            <span>{{  $data['group'][0]->have_partnership  }}</span>
                         </h5>
                     </span>
                 </div>
@@ -184,9 +184,9 @@
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
                                     First Name</th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
+                                {{-- <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
-                                    Last Name</th>
+                                    Last Name</th> --}}
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
                                     Role Name</th>
@@ -213,12 +213,12 @@
                                                 {{ $member->first_name }}
                                             </span>
                                         </td>
-                                        <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
+                                        {{-- <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             <span>
                                                 {{ $member->last_name }}
                                             </span>
-                                        </td>
+                                        </td> --}}
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             {{ $member->role_name }}</td>

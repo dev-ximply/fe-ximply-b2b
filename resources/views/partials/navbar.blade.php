@@ -260,7 +260,7 @@
                         @if (session()->get('is_superadmin') == false)
                         <li class="mb-0">
 
-                            <a class="dropdown-item border-radius-md" href="/tenant">
+                            <a class="dropdown-item border-radius-md" href="/profile">
 
                                 <div class="d-flex flex-column justify-content-center">
 

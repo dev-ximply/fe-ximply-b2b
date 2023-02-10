@@ -79,7 +79,9 @@
 
                     session()->get('approval_topup') == 1 &&
 
-                    session()->get('manage_budget') == 1)
+                    session()->get('manage_budget') == 1 &&
+                    session()->get('analytics')==1
+                    )
 
                 <li class="nav-item">
 
@@ -135,7 +137,7 @@
 
 
 
-            @if (session()->get('approval_expense') == 1)
+            @if (session()->get('approval_expense') == 1 || (session()->get('manage_user') == 1))
 
                 <li class="nav-item">
 
@@ -159,11 +161,11 @@
 
                 </li>
 
-            @endif
+            {{-- @endif
 
 
 
-            @if (session()->get('manage_user') == 1)
+            @if (session()->get('manage_user') == 1) --}}
 
                 <li class="nav-item">
 
@@ -274,7 +276,7 @@
 
                             <li class="nav-item ">
 
-                                @if (session()->get('manage_budget') == 1)
+                                @if (session()->get('manage_budget') == 1 ||  (session()->get('approval_topup') == 1))
 
                                     <a class="nav-link @if ($section == 'budget') active @endif"
 
@@ -286,9 +288,9 @@
 
                                     </a>
 
-                                @endif
+                                {{-- @endif
 
-                                @if (session()->get('approval_topup') == 1)
+                                @if (session()->get('approval_topup') == 1) --}}
 
                                     <a class="nav-link @if ($section == 'top_up_approval') active @endif "
 
@@ -473,3 +475,4 @@
 
     </div>
 </aside>
+65bcdccaebb3
