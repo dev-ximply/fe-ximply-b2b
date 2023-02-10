@@ -79,6 +79,17 @@ class PartnerController extends Controller
         return self::asyncUpdateParner($params);
     }
 
+    public function deletePartner(Request $request){
+        // asyncDeletePartner
+        $params =[
+            'tenant_code' => session()->get('TenantCode'),
+            'user_id' => Auth::user()['id'],
+            'partner_id' => $request->partner_id
+        ];
+
+        return $this->asyncDeletePartner($params);
+    }
+
     public function updatePartnerAssign(Request $request)
     {
         // dd($request->all());
@@ -264,5 +275,24 @@ class PartnerController extends Controller
         }
 
         throw new \Exception($response->json()['message']);
+    }
+
+    public function asyncDeletePartner($params)
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $url = config('api.base_url') . 'api/partner/delete';
+        $response = Http::withHeaders($headers)
+            ->asForm()
+            ->post($url, $params);
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        $response->json()['message'];
     }
 }

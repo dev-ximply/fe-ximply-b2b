@@ -152,6 +152,8 @@ Route::post('/partners', [PartnerController::class, 'addPartner'])->middleware('
 
 Route::put('/partners', [PartnerController::class, 'updatePartner'])->middleware('auth')->name('partners.update');
 
+Route::delete('/partners', [PartnerController::class, 'deletePartner'])->middleware('auth')->name('partners.delete');
+
 Route::put('/partners/assign', [PartnerController::class, 'updatePartnerAssign'])->middleware('auth')->name('partners.assign.update');
 
 
