@@ -21,7 +21,7 @@ class BudgetController extends Controller
                 'data' => [
                     'limit' => self::get_limit(Auth::user()['id']),
                     'members' => self::list_member(Auth::user()['id']),
-                    'approval' => self::list_approval(Auth::user()['id'])
+                    // 'approval' => self::list_approval(Auth::user()['id'])
                 ]
             ]
         );
@@ -63,21 +63,21 @@ class BudgetController extends Controller
         return $response->data;
     }
 
-    public static function list_approval($user_id)
-    {
-        $client = new Client();
-        $headers = [
-            'Authorization' => 'Bearer ' . Session::get('AuthToken'),
-            'Accept' => 'application/json'
-        ];
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/topup/approval/list/' . $user_id, $headers);
-        $res = $client->sendAsync($request)->wait();
-        $response = json_decode($res->getBody());
+    // public static function list_approval($user_id)
+    // {
+    //     $client = new Client();
+    //     $headers = [
+    //         'Authorization' => 'Bearer ' . Session::get('AuthToken'),
+    //         'Accept' => 'application/json'
+    //     ];
+    //     $request = new Psr7Request('GET', config('api.base_url') . 'api/topup/approval/list/' . $user_id, $headers);
+    //     $res = $client->sendAsync($request)->wait();
+    //     $response = json_decode($res->getBody());
 
-        if ($response->success == false) {
-            return [];
-        }
+    //     if ($response->success == false) {
+    //         return [];
+    //     }
 
-        return $response->data;
-    }
+    //     return $response->data;
+    // }
 }

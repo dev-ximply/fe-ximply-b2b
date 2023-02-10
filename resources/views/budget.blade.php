@@ -72,15 +72,30 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            {{-- <div class="col-6">
                                 <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
                                 <input type="number" class="form-control" id="edit_approve_limit"
                                     name="edit_approve_limit">
+                            </div> --}}
+
+                            <div class="col-6">
+                                <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
+                                <input type="text" class="form-control" id="auto_approve_limit" name="auto_approve_limit"
+                                    value="{{ old('auto_approve_limit') }}">
+                                <script>
+                                    new NumericInput(document.getElementById('edit_approve_limit'), 'en-CA');
+                                </script>
                             </div>
                       
                             <div class="col-6"> 
                                 <label class="form-label text-dark" style="font-weight: 600">Period</label>
-                                <input type="text" class="form-control" id="period" name="period">
+                                <div class="col-6">
+              
+                                    <select class="form-control" name="frequency">
+                                        <option value="onetime">Onetime</option>
+                                        <option value="monthly">Monthly</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="row">

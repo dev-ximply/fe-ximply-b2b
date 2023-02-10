@@ -398,7 +398,7 @@
                                         <select name="filter_member" id="filter_member" class="form-select text-dark"
                                             style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
 
-                                            <option value="'{{ Auth::user()['id'] }}'" class="text-dark px-1" selected>
+                                            <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
 
                                                 Member</option>
 
@@ -758,7 +758,7 @@
                                                 </td>
 
 
-                                                <td><span class="fw-bold">{{ $recentExpenses->category }}</span><br><span
+                                                <td><span class="fw-bold">{{ $recentExpenses->category_name }}</span><br><span
                                                         style="font-size:10px">{{ $recentExpenses->merchant }}</span></td>
 
                                                 <td class="fw-bold">Rp

@@ -195,7 +195,7 @@
 
                                                                             <input class="form-check-input" type="checkbox"
 
-                                                                                onchange="changePermission('manage_budget', this, {{ $permission['id'] }})"
+                                                                                onchange="changePermission('manage_budget', this, '{{ $permission['id'] }}')"
 
                                                                                 {{ $permission['permission'][0]['manage_budget'] ? 'checked' : '' }}>
 
@@ -211,7 +211,7 @@
 
                                                                             <input class="form-check-input" type="checkbox"
 
-                                                                                onchange="changePermission('manage_user', this, {{ $permission['id'] }})"
+                                                                                onchange="changePermission('manage_user', this, '{{ $permission['id'] }}')"
 
                                                                                 {{ $permission['permission'][0]['manage_user'] ? 'checked' : '' }}>
 
@@ -227,7 +227,7 @@
 
                                                                             <input class="form-check-input" type="checkbox"
 
-                                                                                onchange="changePermission('approval_expense', this, {{ $permission['id'] }})"
+                                                                                onchange="changePermission('approval_expense', this, '{{ $permission['id'] }}')"
 
                                                                                 {{ $permission['permission'][0]['approval_expense'] ? 'checked' : '' }}>
 
@@ -243,7 +243,7 @@
 
                                                                             <input class="form-check-input" type="checkbox"
 
-                                                                                onchange="changePermission('approval_topup', this, {{ $permission['id'] }})"
+                                                                                onchange="changePermission('approval_topup', this, '{{ $permission['id'] }}')"
 
                                                                                 {{ $permission['permission'][0]['approval_topup'] ? 'checked' : '' }}>
 
