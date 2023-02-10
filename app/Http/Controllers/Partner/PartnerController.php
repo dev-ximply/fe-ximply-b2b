@@ -64,8 +64,6 @@ class PartnerController extends Controller
 
     public function updatePartner(Request $request)
     {
-        dd($request->all());
-
         $params = [
             'tenant_code' => session()->get('TenantCode'),
             'user_id' => Auth::user()['id'],
@@ -76,6 +74,17 @@ class PartnerController extends Controller
             'email' => $request->email,
         ];
 
+
+        // assign user
+        $paramAssignUserToPartner =[
+            'user_id' => Auth::user()['id'],
+            'tenant_code' => session()->get('TenantCode'),
+            'partner_id' => $request->partner_id,
+            'assign_user_id' =>  $request->assign_user_id,
+        ];
+
+
+        $this->asyncAddUserToPartner($paramAssignUserToPartner);
         return self::asyncUpdateParner($params);
     }
 

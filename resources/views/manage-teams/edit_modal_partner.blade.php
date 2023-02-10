@@ -47,7 +47,7 @@
 
                         <label class="form-label mt-4" style="color: black; font-weight:500">User</label>
 
-                        <select class="form-control " name="user_assign_id" id="user_assign_id">
+                        <select class="form-control " name="user_assign_id" id="edituser_assign_id">
 
                             <option value="" selected>Pilih User</option>
 
@@ -61,8 +61,8 @@
 
                     <div class="col-6">
                         <label class="form-label mt-4" style="color: black; font-weight:500">Group</label>
-                        <select class="form-select " name="group_id" id="group_id">
-                            <option value="" id="editGroupName" hidden selected></option>
+                        <select class="form-select " name="group_id" id="editgroup_id">
+                            <option value="" selected>Pilih Group</option>
                             @foreach ($data['partners'] as $item_group)
                             <option value="'{{ $item_group->id }}'">{{ strtolower($item_group->group_name) }}
                             </option>
@@ -84,11 +84,12 @@
                                     document.getElementById('editPartnerName').value,
                                     document.getElementById('editEmail').value,
                                     document.getElementById('editHandphone').value,
-                                    document.getElementById('editGroupName').value,
-                                    document.getElementById('user_assign_id').value,
+                                    document.getElementById('edituser_assign_id').value,
+                                    document.getElementById('editgroup_id').value,
                                 )">
                                 Submit
                             </button>
+
                         </div>
                     </div>
                 </div>
@@ -98,9 +99,9 @@
 </div>
 
 <script>
-    function updatePartner(partnerId, companyName, partnerName, contactName, handphone, email, groupId, assignUserId) {
+    function updatePartner(partnerId, companyName, partnerName,  email, phone, assignUserId, groupId) {
 
-        console.log(partnerId, companyName, partnerName, contactName, handphone, email, assignUserId)
+        console.log(partnerId, companyName, partnerName,  email, phone, assignUserId, groupId)
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: "btn btn-success-cstm mx-2",
@@ -131,13 +132,15 @@
                         type: "PUT",
                         url: "{{ route('partners.update') }}",
                         data: {
+                            partner_id: partnerId,
                             company_name: companyName,
-                            contact_name: picName,
-                            handphone: handphone,
+                            contact_name: partnerName,
+                            handphone: phone,
                             email: email,
-                            group_id: group_id,
+                            group_id: groupId,
                             assign_user_id: assignUserId,
                         },
+
                         success: function(response) {
 
                             const {
@@ -149,9 +152,16 @@
                             console.log(response)
 
                             if (success === true) {
+
                                 setTimeout(function() {
                                     window.location.reload(true);
                                 }, 1000);
+                            }else{
+                                swalWithBootstrapButtons.fire(
+                                    "gagal",
+                                    message,
+                                    "error"
+                                );
                             }
                         }
 
