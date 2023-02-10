@@ -64,7 +64,7 @@
                         <select class="form-select " name="group_id" id="editgroup_id">
                             <option value="" selected>Pilih Group</option>
                             @foreach ($data['partners'] as $item_group)
-                            <option value="'{{ $item_group->id }}'">{{ strtolower($item_group->group_name) }}
+                            <option value="{{ $item_group->id }}">{{ strtolower($item_group->group_name) }}
                             </option>
                             @endforeach
                         </select>
