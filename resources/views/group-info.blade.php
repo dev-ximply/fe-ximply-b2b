@@ -183,9 +183,9 @@
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
                                     First Name</th>
-                                {{-- <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
+                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
-                                    Last Name</th> --}}
+                                    Last Name</th>
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
                                     Role Name</th>
@@ -209,15 +209,15 @@
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             <span>
-                                                {{ $item->full_name }}
+                                                {{ $item->first_name }}
                                             </span>
                                         </td>
-                                        {{-- <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
+                                        <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             <span>
-                                                {{ $group_info->last_name }}
+                                                {{ $item->last_name }}
                                             </span>
-                                        </td> --}}
+                                        </td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             {{ $item->role_name }}</td>

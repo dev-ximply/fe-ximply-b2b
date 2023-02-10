@@ -183,7 +183,7 @@
                                                         data-bs-title="Edit" data-bs-toggle="modal"
                                                         data-id="'{{ $item->id }}'" data-bs-target="#edit_modal_users"
                                                         style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                        onclick="getDataMember('{{   $item->id }}', '{{  $item->first_name  }}',  '{{  $item->last_name }}', '{{   $item->email }}', '{{  $item->employee_id  }}' ,  '{{  $item->group_name  }}', '{{  $item->role_name  }}' )"
+                                                        onclick="getDataMember('{{ $item->id }}', '{{  $item->first_name  }}',  '{{  $item->last_name }}', '{{   $item->email }}', '{{  $item->employee_id  }}' ,  '{{  $item->group_name  }}', '{{  $item->role_name  }}' )"
                                                         >
                                                         View
                                                     </button>

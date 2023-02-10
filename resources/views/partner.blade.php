@@ -404,7 +404,7 @@
                                         <button
                                             class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
                                             data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                            data-id="'{{ $item->id }}'" data-bs-target="#editModalPartner"
+                                            data-id="'{{ $item->id }}'" data-bs-target=""
                                             style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
                                             onclick="">
                                             Delete
