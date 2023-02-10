@@ -59,7 +59,7 @@
                         <label class="form-label mt-4" style="color: black; font-weight:500">Group</label>
                         <select class="form-control " name="group_id" id="group_id">
                             <option value="" selected>Select</option>
-                            @foreach ($data['groups'] as $item_group)
+                            @foreach ($data['partners'] as $item_group)
                                 <option value="{{ $item_group->id }}">{{ strtolower($item_group->group_name) }}
                                 </option>
                             @endforeach
@@ -121,11 +121,11 @@
                     formData.append('email', email);
                     formData.append('group_id', group_id);
 
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
+                    // $.ajaxSetup({
+                    //     headers: {
+                    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    //     }
+                    // });
 
                     $.ajax({
                         url: API_URL + "api/partner/add",

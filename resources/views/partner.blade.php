@@ -45,9 +45,9 @@
 
                                     <option value="" selected>Pilih User</option>
 
-                                    @foreach ($members as $member)
+                                    {{-- @foreach ($members as $member)
                                         <option value="{{ $member['id'] }}">{{ $member['full_name'] }}</option>
-                                    @endforeach
+                                    @endforeach --}}
 
                                 </select>
 
@@ -325,9 +325,13 @@
 
                     <tbody>
 
-                        @if (count($data['partners']) > 0)
+                        @php
+                            var_dump($data['t_partner']);
+                        @endphp
 
-                            @foreach ($data['partners'] as $item)
+                        @if (count($data['t_partner']) > 0)
+
+                            @foreach ($data['t_partner'] as $item)
 
                                 <tr class="">
 
@@ -353,19 +357,23 @@
 
                                     </td>
                                     <td class="text-sm" data-label="Contact Info" style="color: #000000">
-
+                                        {{  $item->group_name  }}
                                         
                                     </td>
                                     <td class="text-sm" data-label="Contact Info" style="color: #000000">
                                         
-                                        {{-- {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
+                                        {{  $item->created_by }}
 
                                     </td>
                                     <td class="text-sm" data-label="Contact Info" style="color: #000000">
                                         
                                         {{-- {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
+                                        {{  $item->created_date  }}
+                                        
 
                                     </td>
+
+                                    
 
 
 
@@ -389,7 +397,7 @@
                                             class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
                                             data-bs-title="View Your Expense Member" data-bs-toggle="modal"
                                             data-bs-target="#editModalPartner"
-                                            onclick="getDataPartner('{{ $item->id }}','{{ $item->company_name }}', '{{ $item->contact_name }}', '{{ $item->email }}', '{{ $item->handphone }}')"
+                                            onclick="getDataPartner('{{ $item->id }}','{{ $item->company_name }}', '{{ $item->contact_name }}', '{{ $item->email }}', '{{ $item->handphone }}', '{{  $item->group_name  }}')"
                                             style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;">
                                             Edit
                                         </button>
@@ -399,7 +407,7 @@
                                             data-id="'{{ $item->id }}'" data-bs-target="#editModalPartner"
                                             style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
                                             onclick="">
-                                            Deactived
+                                            Delete
                                         </button>
 
 
@@ -434,22 +442,25 @@
     </div>
 
        <script>
-        function getDataPartner(partner_id, company_name, contact_name, email, handphone){
-            console.log(partner_id);
+        function getDataPartner(id, company_name, contact_name, email, handphone, group_name){
+            console.log(id);
             console.log(company_name);
             console.log(contact_name);
             console.log(email);
             console.log(handphone);
+            console.log('tes', group_name);
 
-            document.getElementById('pertner_id').value = partner_id;
+            document.getElementById('pertner_id').value = id;
             document.getElementById('editcompanyName').value = company_name;
             document.getElementById('editPartnerName').value = contact_name;
             document.getElementById('editEmail').value = email;
             document.getElementById('editHandphone').value = handphone;
+            document.getElementById('editGroupName').value = group_name;
+            document.getElementById('editGroupName').innerHTML = group_name;
         }
     </script>
 
-    <script>
+    {{-- <script>
         function getDataPartner(partner_id, company_name, contact_name, email, handphone) {
             console.log(partner_id);
             console.log(company_name);
@@ -463,7 +474,7 @@
             document.getElementById('editEmail').value = email;
             document.getElementById('editHandphone').value = handphone;
         }
-    </script>
+    </script> --}}
 
     <script>
         function getData(id) {

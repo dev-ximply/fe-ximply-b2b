@@ -120,7 +120,7 @@
         let employeeId = event.target.querySelector('#edit_employee_code').value;
 
         let departementId = event.target.querySelector("#edit_department_id").value;
-        let roleId = event.target.querySelector("#edit_role_id").value;
+        let roleId = event.target.querySelector("#edit_role_name").value;
   
         // console.log(firstNameId);
         // console.log(lastNameId);

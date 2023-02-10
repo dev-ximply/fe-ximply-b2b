@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Http;
 
 class PartnerController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         // dd(self::asyncGetMembers());
         return view(
             'partner',
@@ -22,16 +23,19 @@ class PartnerController extends Controller
                 'data'  => [
                     'groups' => self::groups(Auth::user()['id']),
                     'partners' => self::partners(Auth::user()['id']),
+                    't_partner' => self::list_partners(Auth::user()['id']),
+                    'a_partner' => self::assign_partner(Auth::user()['id'])
                 ],
-                'members' => self::asyncGetMembers(),
+                // 'members' => self::asyncGetMembers(),
             ]
         );
     }
 
-    public function updatePartner(Request $request){
+    public function updatePartner(Request $request)
+    {
         // dd($request->all());
 
-        $params =[
+        $params = [
             'tenant_code' => session()->get('TenantCode'),
             'user_id' => Auth::user()['id'],
             'partner_id' => $request->partner_id,
@@ -44,10 +48,11 @@ class PartnerController extends Controller
         return self::asyncUpdateParner($params);
     }
 
-    public function updatePartnerAssign(Request $request){
+    public function updatePartnerAssign(Request $request)
+    {
         // dd($request->all());
 
-        $params =[
+        $params = [
             'user_id' => Auth::user()['id'],
             'tenant_code' => session()->get('TenantCode'),
             'assign_user_id' => $request->assign_user_id,
@@ -57,14 +62,15 @@ class PartnerController extends Controller
         return self::asyncUpdatePartnerAssign($params);
     }
 
-    public static function partners($user_id){
+    public static function partners($user_id)
+    {
         $client = new Client();
         $headers = [
             'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json'
         ];
 
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/partner/list/' . Session::get('TenantCode'), $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode') . '?user_id=' . $user_id, $headers);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 
@@ -75,14 +81,54 @@ class PartnerController extends Controller
         return $response->data;
     }
 
-    public static function groups($user_id){
+
+    public static function list_partners($user_id)
+    {
         $client = new Client();
         $headers = [
             'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json'
         ];
 
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode') . '?user_id=' . $user_id, $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/partner/list/' . Session::get('TenantCode') , $headers);
+        $res = $client->sendAsync($request)->wait();
+        $response = json_decode($res->getBody());
+
+        if ($response->success == false) {
+            return [];
+        }
+
+        return $response->data;
+    }
+
+    public static function assign_partner($user_id)
+    {
+        $client = new Client();
+        $headers = [
+            'Authorization' => 'Bearer ' . Session::get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/member/list/' . Session::get('TenantCode') . '?user_id=' .   $user_id, $headers);
+        $res = $client->sendAsync($request)->wait();
+        $response = json_decode($res->getBody());
+
+        if ($response->success == false) {
+            return [];
+        }
+
+        return $response->data;
+    }
+
+    public static function groups($user_id)
+    {
+        $client = new Client();
+        $headers = [
+            'Authorization' => 'Bearer ' . Session::get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/partner/list/' . Session::get('TenantCode') . '?user_id=' . $user_id, $headers);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 
@@ -138,7 +184,7 @@ class PartnerController extends Controller
             'Accept' => 'application/json'
         ];
         // api/group/member/list/{{TenantCode}}?user_id=1000001
-        $url = config('api.base_url') . 'api/group/member/list/'.session()->get('TenantCode').'?user_id='.Auth::user()['id'];
+        $url = config('api.base_url') . 'api/group/member/list/' . session()->get('TenantCode') . '?user_id=' . Auth::user()['id'];
         // dd($url);
         $response = Http::withHeaders($headers)
             // ->asForm()
@@ -151,5 +197,3 @@ class PartnerController extends Controller
         throw new \Exception($response->json()['message']);
     }
 }
-
-

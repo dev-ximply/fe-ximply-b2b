@@ -79,10 +79,10 @@
                                             <div class="input-group">
                                                 <select class="form-select " name="group_role_name" id="group_role_id">
                                                     <option value="" id="group_role_name" hidden selected></option>
-                                                    @foreach ($data['group'] as $item_role)
+                                                    {{-- @foreach ($data['group'] as $item_role)
                                                         <option value="'{{ $item_role->id }}'">{{ $item_role->role_name }}
                                                         </option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                                
                                             </div>
@@ -143,7 +143,7 @@
                     <span>
                         <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Group</p>
                         <h5 class=" mb-0 text-dark font-weight-bolder">
-                            <span>IT Department</span>
+                            <span>{{  $data['group'][0]->group_name  }}</span>
                         </h5>
                     </span>
                 </div>
@@ -151,7 +151,7 @@
                     <span>
                         <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Have Client</p>
                         <h5 class=" mb-0 text-dark font-weight-bolder">
-                            <span>Yes</span>
+                            <span>{{  $data['group'][0]->have_partnership  }}</span>
                         </h5>
                     </span>
                 </div>
@@ -161,14 +161,14 @@
                     <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Budget Total</p>
                     <h5 class=" mb-0 text-dark font-weight-bolder">
                         Rp
-                        <span>{{ $data['group'][0]->limit->remain_limit }}</span>
+                        <span>{{ $data['group'][0]->total_budget }}</span>
                     </h5>
                 </div>
 
                 <div class="col-md text-end">
                     <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Member</p>
                     <h5 class=" mb-0 text-dark font-weight-bolder">
-                        <span>{{ $data['member_list'][0]->count_members }}</span>
+                        <span>{{ $data['group'][0]->count_members }}</span>
                     </h5>
                 </div>
             </div>
@@ -183,9 +183,9 @@
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
                                     First Name</th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
+                                {{-- <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
-                                    Last Name</th>
+                                    Last Name</th> --}}
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
                                     Role Name</th>
@@ -204,32 +204,32 @@
                                     var total = 0;
                                     
                                 @endphp --}}
-                                @foreach ($data['group'] as $group_info)
+                                @foreach ($data['member_list'] as $item)
                                     <tr class="">
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             <span>
-                                                {{ $group_info->first_name }}
+                                                {{ $item->full_name }}
                                             </span>
                                         </td>
-                                        <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
+                                        {{-- <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             <span>
                                                 {{ $group_info->last_name }}
                                             </span>
-                                        </td>
+                                        </td> --}}
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
-                                            {{ $group_info->role_name }}</td>
+                                            {{ $item->role_name }}</td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             -</td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
-                                            {{ $group_info->limit->remain_limit }}</td>
+                                            {{ $item->limit->remain_limit }}</td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
-
+                                            {{  $item->created_date  }}
                                         </td>
                               
                                     </tr>

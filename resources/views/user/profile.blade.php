@@ -32,7 +32,8 @@
                             <div class="row justify-content-center">
                                 <div class="bg-secondary overflow-hidden d-flex align-items-center justify-content-center mb-2 mt-3"
                                     style="border-radius: 50%; width:156px; height:156px">
-                                    <img src="{{ config('storage.base_url') . $data['profile']->profile_picture }}"
+                                    <img 
+                                    src="{{ config('storage.base_url') . $data['profile']->profile_picture }}"
                                         alt="user image" class=""
                                         style="min-width: 155px !important; min-height:155px !important; border-radius:50%"
                                         id="ava-pic-2">

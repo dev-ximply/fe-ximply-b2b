@@ -56,10 +56,7 @@ use App\Http\Controllers\Partner\PartnerController;
 use App\Http\Controllers\Role\PermissionController;
 
 use App\Http\Controllers\Subscription\PaySubscriptionController;
-
-
-
-
+use App\Http\Controllers\Tenant\TenansController;
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
 
@@ -118,6 +115,7 @@ Route::get('/referral-friends', [ListReferralController::class, 'index'])->middl
 
 
 //Dashboard
+
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
@@ -223,35 +221,36 @@ Route::get('/account-settings', function(){
 });
 
 // Tenant
-Route::get('/tenant', function () {
-    return view(
-        'tenant',
-        [
-            'title' => 'Manage Tenant',
-            'section' => 'tenant'
-        ]
-    );
-});
+// Route::get('/tenant', function () {
+//     return view(
+//         'tenant',
+//         [
+//             'title' => 'Manage Tenant',
+//             'section' => 'tenant'
+//         ]
+//     );
+// });
+Route::get('/tenant', [TenansController::class, 'index'])->middleware('auth');
 
 // Tenant
 
-Route::get('/tenant', function () {
+// Route::get('/tenant', function () {
 
-    return view(
+//     return view(
 
-        'tenant',
+//         'tenant',
 
-        [
+//         [
 
-            'title' => 'Manage Tenant',
+//             'title' => 'Manage Tenant',
 
-            'section' => 'tenant'
+//             'section' => 'tenant'
 
-        ]
+//         ]
 
-    );
+//     );
 
-});
+// });
 
 
 

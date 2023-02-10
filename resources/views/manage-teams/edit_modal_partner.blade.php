@@ -54,9 +54,9 @@
 
                                 <option value="" selected>Pilih User</option>
 
-                                @foreach ($members as $member)
+                                {{-- @foreach ($members as $member)
                                     <option value="'{{ $member['id'] }}'">{{ $member['full_name'] }}</option>
-                                @endforeach
+                                @endforeach --}}
 
                             </select>
 
@@ -64,9 +64,9 @@
 
                         <div class="col-6">
                             <label class="form-label mt-4" style="color: black; font-weight:500">Group</label>
-                            <select class="form-control " name="group_id" id="group_id">
-                                <option value="" selected>Select</option>
-                                @foreach ($data['groups'] as $item_group)
+                            <select class="form-select " name="group_id" id="group_id">
+                                <option value=""  id="editGroupName" hidden selected></option>
+                                @foreach ($data['partners'] as $item_group)
                                     <option value="'{{ $item_group->id }}'">{{ strtolower($item_group->group_name) }}
                                     </option>
                                 @endforeach
@@ -100,8 +100,9 @@
         let partnerName = event.target.querySelector("#editPartnerName").value;
         let email = event.target.querySelector("#editEmail").value;
         let phone = event.target.querySelector("#editHandphone").value;
+        let groupName = event.target.querySelector("#editGroupName").value;
 
-        console.log(companyName, partnerName, email, phone)
+        console.log(companyName, partnerName, email, phone, groupName)
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -116,6 +117,7 @@
                 contact_name: partnerName,
                 handphone: phone,
                 email: email,
+                group_name: groupName
             },
             success: function(response) {
 

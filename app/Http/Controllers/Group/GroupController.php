@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
+
 class GroupController extends Controller
 {
     public static function index()
@@ -47,7 +48,11 @@ class GroupController extends Controller
             'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json',
         ];
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode') . '?user_id=' . $user_id, $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode') . '?user_id='  . $user_id, $headers);
+           $res = $client->sendAsync($request)->wait();
+        // $response = Http::get('api/group/list/' . Session::get('TenantCode') , [
+        //     'user_id' => $user_id,
+        // ]);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 
@@ -56,6 +61,12 @@ class GroupController extends Controller
         }
 
         return $response->data;
+
+        // if ($response->successful()) {
+        //     return $response->json();
+        // }
+
+        // return [];
     }
 
     private function asynUpdateGroup($params)

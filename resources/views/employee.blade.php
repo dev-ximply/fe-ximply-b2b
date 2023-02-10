@@ -85,7 +85,7 @@
 
                                 <tr>
                                     <th class="text-sm ps-5" style="font-weight: 600">Name</th>
-                                    <th class="text-sm px-0" style="font-weight: 600">Contact Company</th>
+                                    <th class="text-sm px-0" style="font-weight: 600">Contact Member</th>
                                     <th class="text-sm px-0" style="font-weight: 600">Group</th>
                                     <th class="text-sm px-0" style="font-weight: 600">Role</th>
                                     <th class="text-sm px-0" style="font-weight: 600">Approver</th>
@@ -97,6 +97,10 @@
                             </thead>
 
                             <tbody>
+
+                                @php
+                                    var_dump($data['employee']);
+                                @endphp
 
                                 @foreach ($data['employee'] as $item)
                                     <tr class="">
@@ -145,7 +149,7 @@
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
 
                                             <p class="text-dark" style="font-size: 13px">
-                                                {{-- {{ $item->role_name != '' ? $item->role_name : '-' }} --}}
+                                                {{ $item->limit->auto_approve != '' ? $item->limit->auto_approve : '-' }}
                                             </p>
                                         </td>
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
@@ -169,7 +173,8 @@
                                                         class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
                                                         style="background-color: #85cdfd;width:60px;height:25px;font-size:11px; font-weight:500;"
                                                         data-bs-target="#modalInfoMember" data-bs-toggle="modal"
-                                                        onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')">
+                                                        {{-- onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')" --}}
+                                                        >
                                                         Info
                                                     </button>
                                                 @else
@@ -178,7 +183,8 @@
                                                         data-bs-title="Edit" data-bs-toggle="modal"
                                                         data-id="'{{ $item->id }}'" data-bs-target="#edit_modal_users"
                                                         style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                        onclick="getDataMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}', '{{ $item->group_name }}', '{{ $item->role_name }}')">
+                                                        onclick="getDataMember('{{   $item->id }}', '{{  $item->first_name  }}',  '{{  $item->last_name }}', '{{   $item->email }}', '{{  $item->employee_id  }}' ,  '{{  $item->group_name  }}', '{{  $item->role_name  }}' )"
+                                                        >
                                                         View
                                                     </button>
                                                     <button
@@ -254,16 +260,14 @@
             document.getElementById('info_role_name').value = role_name;
         }
 
-        function getDataMember(id, first_name, last_name, email, group_id, group_name, role_name) {
-
-
+        function getDataMember(id, first_name, last_name, email, employee_id, group_name, role_name) {
 
 
             document.getElementById('user_id').value = id;
             document.getElementById('edit_first_name').value = first_name;
             document.getElementById('edit_last_name').value = last_name;
             document.getElementById('edit_email').value = email;
-            document.getElementById('edit_employee_code').value = group_id;
+            document.getElementById('edit_employee_code').value = employee_id;
             document.getElementById('edit_department_name').innerHTML = group_name;
             document.getElementById('edit_department_name').value = group_name;
             document.getElementById('edit_role_name').innerHTML = role_name;
