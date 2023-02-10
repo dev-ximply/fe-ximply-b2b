@@ -8,10 +8,10 @@
     <script>
         var user_id = $("#user_id").val();
     </script>
+    @include('account-settings.email-settings')
+    @include('account-settings.password-settings')
+    @include('account-settings.phone-settings')
 
-    @include('account.password-modal')
-    @include('account.email-modal')
-    @include('account.phone-modal')
 
     <div class="row">
         <div class="col-12 d-flex justify-content-end">
@@ -23,7 +23,7 @@
             <div class="card" style="border-radius: 5px">
                 <div class="card-body">
                     <div class="col-12">
-                        <span class="text-lg font-weight-bolder text-dark">Profile
+                        <span class="text-lg font-weight-bolder text-dark">Account Settings
                             <p class="text-xs text-dark">Your Account Informations</p>
                         </span>
                     </div>
@@ -32,9 +32,7 @@
                             <div class="row justify-content-center">
                                 <div class="bg-secondary overflow-hidden d-flex align-items-center justify-content-center mb-2 mt-3"
                                     style="border-radius: 50%; width:156px; height:156px">
-                                    <img 
-                                    src="{{ config('storage.base_url') . $data['profile']->profile_picture }}"
-                                        alt="user image" class=""
+                                    <img src="" alt="user image" class=""
                                         style="min-width: 155px !important; min-height:155px !important; border-radius:50%"
                                         id="ava-pic-2">
                                 </div>
@@ -57,100 +55,88 @@
                         <div class="col-md-10">
                             <div class="row mb-2">
                                 <div class="col-md-6 mt-3">
-                                    <label for="" class="text-dark text-xs" style="font-weight:600">First
+                                    <label for="" class="text-dark text-xs" style="font-weight:600">Company
                                         Name</label>
-                                    <input onchange="changeInfoProfile(this.value, 'first_name')" type="text"
-                                        class="form-control text-dark text-capitalize" placeholder="First Name"
-                                        value="{{ $data['profile']->first_name }}">
+                                    <input type="text" class="form-control text-dark text-capitalize"
+                                        placeholder="Company Name" value="">
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <label for="" class="text-dark text-xs" style="font-weight:600">Last
-                                        Name</label>
-                                    <input onchange="changeInfoProfile(this.value, 'last_name')" type="text"
-                                        class="form-control text-dark text-capitalize" placeholder="Last Name"
-                                        value="{{ $data['profile']->last_name }}">
+                                    <label for="" class="text-dark text-xs" style="font-weight:600">Industrial
+                                        Company</label>
+                                    <input type="text" class="form-control text-dark text-capitalize"
+                                        placeholder="Industrial Company" value="">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md">
-                                            <label for="" class="text-dark text-xs" style="font-weight:600">Birthday
-                                                Date</label>
+                                            <label for="" class="text-dark text-xs" style="font-weight:600">Address
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="col-md mb-2">
-                                        <input onchange="changeInfoProfile(this.value, 'birthday_date')" type="date"
-                                            onfocus="(this.type='date')" class="form-control bg-white text-dark"
-                                            placeholder="add your birthday date"
-                                            value="{{ $data['profile']->birthday_date }}">
+                                        <input type="text" class="form-control bg-white text-dark" placeholder="Address"
+                                            value="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md">
                                             <label for="" class="text-dark text-xs text-capitalize"
-                                                style="font-weight:600">Birthday Place</label>
+                                                style="font-weight:600">Admin Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md mb-2">
-                                        <input onchange="changeInfoProfile(this.value, 'birthday_place')" type="text"
-                                            class="form-control bg-white text-dark" placeholder="add your birthday place"
-                                            value="{{ $data['profile']->birthday_place }}">
+                                        <input type="text" class="form-control bg-white text-dark"
+                                            placeholder="Admin Name" value="">
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="row mb-3">
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md">
-                                            <label for="" class="text-dark text-xs"
-                                                style="font-weight:600">Gender</label>
+                                            <label for="" class="text-dark text-xs" style="font-weight:600">Contact
+                                                Company</label>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <select onchange="changeInfoProfile(this.value, 'gender')" class="form-select">
-                                            @if ($data['profile']->gender == 'nan')
-                                                ? <option value='' selected>Choose</option> :
-                                            @endif
-                                            <option value="m" @if ($data['profile']->gender == 'm') ? selected : @endif>
-                                                Male
-                                            </option>
-                                            <option value="f" @if ($data['profile']->gender == 'f') ? selected : @endif>
-                                                Female
-                                            </option>
-                                        </select>
+                                        <input type="text" class="form-control">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-2">
                                     <div class="row ">
                                         <div class="col-md">
-                                            <label for="" class="text-dark text-xs"
-                                                style="font-weight:600">Phone</label>
+                                            <label for="" class="text-dark text-xs" style="font-weight:600">Admin
+                                                Phone</label>
                                         </div>
                                     </div>
                                     <div class="col-md mb-2">
                                         <input onchange="changeInfoProfile(this.value, 'phone')" type="text"
                                             id="handphone" class="form-control bg-white text-dark"
-                                            placeholder="Add your mobile phone number"
-                                            value="{{ $data['profile']->handphone }}" readonly>
+                                            placeholder="Add your mobile phone number" value="" readonly>
                                         <script>
                                             new PhoneInput(document.getElementById('handphone'));
                                         </script>
                                     </div>
+                                    {{-- <div class="col-md-3">
+                                        <button class="btn text-white"
+                                            style="background: #ff720c; width:100%;min-width:auto"
+                                            data-bs-target="#phoneModal" data-bs-toggle="modal">Change Phone</button>
+                                    </div> --}}
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="text-end">
-                                    <button class="btn text-white" style="background: #62ca50">Save</button>
+                                <div class="col-md mb-0">
+                                    <div class="text-end">
+                                        <button class="btn text-white" style="background: #62ca50">Save</button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md mb-2">
-                                    <label for="" class="text-dark text-xs" style="font-weight:600">Group</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ $data['profile_role'][0]->group_name }}" disabled>
+                                    <label for="" class="text-dark text-xs" style="font-weight:600">Role</label>
+                                    <input type="text" class="form-control" disabled>
                                 </div>
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Employee
@@ -161,13 +147,40 @@
                             <div class="row">
                                 <div class="row">
                                     <div class="col-md">
+                                        <label for="" class="text-dark text-xs" style="font-weight:600">Member
+                                            Total</label>
+                                    </div>
+                                </div>
+                                <div class="col-md mb-2">
+                                    <input type="text" class="form-control bg-white text-dark"
+                                        placeholder="Member Total" value="" readonly>
+                                </div>
+                                {{-- <div class="col-md-3 btn-group">
+                                    <button type="button" class="btn text-white dropdown-toggle"
+                                        style="background: #62ca50" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Upgrade Member
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">10 Member</a></li>
+                                        <li><a class="dropdown-item" href="#">30 Member</a></li>
+                                        <li><a class="dropdown-item" href="#">50 Member</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="https://api.whatsapp.com/send?phone=6281388837989&text=Hello%2C%20thank%20you%20for%20contacting%20Ximply.%20We%20will%20reply%20your%20message%20shortly.%20%0A%0AThank%20you"
+                                        class="btn text-white" style="background: #ff720c; width:100%; min-width:auto" ">Custom Request</a>
+                                </div> --}}
+                            </div>
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-md">
                                         <label for="" class="text-dark text-xs"
                                             style="font-weight:600">Email</label>
                                     </div>
                                 </div>
                                 <div class="col-md-9 mb-2">
                                     <input type="email" class="form-control bg-white text-dark"
-                                        placeholder="your email" value="{{ $data['profile']->email }}" readonly>
+                                        placeholder="your email" value="" readonly>
                                 </div>
                                 <div class="col-md-3">
                                     <button class="btn text-white" style="background: #ff720c; width:100%; min-width:auto"
@@ -176,26 +189,26 @@
                             </div>
 
                             {{-- <div class="row ">
-                                <div class="row ">
-                                    <div class="col-md">
-                                        <label for="" class="text-dark text-xs"
-                                            style="font-weight:600">Phone</label>
+                                    <div class="row ">
+                                        <div class="col-md">
+                                            <label for="" class="text-dark text-xs"
+                                                style="font-weight:600">Phone</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-9 mb-2">
-                                    <input onchange="changeInfoProfile(this.value, 'phone')" type="text"
-                                        id="handphone" class="form-control bg-white text-dark"
-                                        placeholder="Add your mobile phone number"
-                                        value="{{ $data['profile']->handphone }}" readonly>
-                                    <script>
-                                        new PhoneInput(document.getElementById('handphone'));
-                                    </script>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn text-white" style="background: #ff720c; width:100%;min-width:auto"
-                                        data-bs-target="#phoneModal" data-bs-toggle="modal">Change Phone</button>
-                                </div>
-                            </div> --}}
+                                    <div class="col-md-9 mb-2">
+                                        <input onchange="changeInfoProfile(this.value, 'phone')" type="text"
+                                            id="handphone" class="form-control bg-white text-dark"
+                                            placeholder="Add your mobile phone number"
+                                            value="" readonly>
+                                        <script>
+                                            new PhoneInput(document.getElementById('handphone'));
+                                        </script>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn text-white" style="background: #ff720c; width:100%;min-width:auto"
+                                            data-bs-target="#phoneModal" data-bs-toggle="modal">Change Phone</button>
+                                    </div>
+                                </div> --}}
                             <div class="row">
                                 <div class="row">
                                     <div class="col-md">
@@ -213,6 +226,9 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- <div class="row">
+                            
+                        </div> --}}
                     </div>
                 </div>
             </div>

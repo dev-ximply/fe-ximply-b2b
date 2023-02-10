@@ -49,7 +49,7 @@
 
     <div class="modal fade" id="edit_modal_budget" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background: #19194B; color:white">
                     <h5 class="modal-title text-white" id="exampleModalLabel">Edit Budget</h5>
@@ -60,26 +60,36 @@
                 <div class="modal-body">
                     <form method="post">
                         @csrf
-                        <input type="text" id="edit_user_id" hidden>
-                        <div class="my-2">
-                            <label for="projectName" class="form-label text-dark" style="font-weight: 600">Name</label>
-                            <input type="text" class="form-control" id="edit_budget_name" disabled>
-                        </div>
-                        <div class="my-2">
-                            <label for="projectName" class="form-label text-dark" style="font-weight: 600">Budget</label>
-                            <input type="text" class="form-control" id="edit_budget_limit_avail" disabled>
+                        <div class="row">
+                            <input type="text" id="edit_user_id" hidden>
+                            <div class="col-md my-2">
+                                <label for="projectName" class="form-label text-dark" style="font-weight: 600">Name</label>
+                                <input type="text" class="form-control" id="edit_budget_name" disabled>
+                            </div>
+                            <div class="col-md my-2">
+                                <label for="projectName" class="form-label text-dark" style="font-weight: 600">Spending Budget Limit</label>
+                                <input type="text" class="form-control" id="edit_budget_limit_avail" disabled>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
-                                <label class="form-label text-dark" style="font-weight: 600">Topup Limit</label>
-                                <input type="number" class="form-control" id="edit_budget_limit" name="edit_budget_limit">
-                            </div>
                             <div class="col-6">
                                 <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
                                 <input type="number" class="form-control" id="edit_approve_limit"
                                     name="edit_approve_limit">
                             </div>
+                      
+                            <div class="col-6"> 
+                                <label class="form-label text-dark" style="font-weight: 600">Period</label>
+                                <input type="text" class="form-control" id="period" name="period">
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-6"> 
+                                <label class="form-label text-dark" style="font-weight: 600">Expire Date</label>
+                                <input type="date" class="form-control" id="period" name="period">
+                            </div>
+                        </div>
+              
                         <div class="d-flex justify-content-end mt-3">
                             <button type="button" name="button" class="btn btn-danger-cstm m-0"
                                 data-bs-dismiss="modal">Cancel</button>
@@ -90,6 +100,12 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
 
     <div class="row mb-4 mt-3 mx-1 justify-content-between">
         <div class="col-md d-sm-flex justify-content-start px-0 mx-0">
@@ -123,6 +139,7 @@
         </div>
     </div>
 
+    
     <div class="row" style="margin-left: -5px;">
         @foreach ($data['members'] as $item)
             <div class="col-md-3">
@@ -143,7 +160,7 @@
                                     <div class="dropdown-menu dropdown-menu-end me-sm-n4 me-n3"
                                         aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" data-bs-toggle="modal"
-                                            data-bs-target="#edit_modal_budget" onclick="getDetailBudget('{{ $item->full_name }}', {{ $item->id }}, {{ $item->limit->remain_limit }}, {{ $item->limit->auto_approve }})">Edit</a>
+                                            data-bs-target="#edit_modal_budget" onclick="getDetailBudget('{{ $item->full_name }}', '{{ $item->id }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}')">Edit</a>
                                         {{-- TEST<a class="dropdown-item" href="javascript:;">Retire</a> --}}
                                     </div>
                                 </div>
@@ -166,6 +183,10 @@
                         <div class="w-100 mt-1">
                             <span class="me-2 font-weight-normal" style="font-size: 0.8em">Auto Approve : Rp
                                 {{ number_format($item->limit->auto_approve) }}</span>
+                        </div>
+                        <div class="w-100 mt-1">
+                            <span class="me-2 font-weight-normal" style="font-size: 0.8em">Created : 
+                        </span>
                         </div>
                         <hr class="horizontal dark">
                         <div class="w-100 mt-1">

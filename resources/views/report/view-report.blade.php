@@ -7,8 +7,8 @@
                 <form action="javascript:void(0)" method="POST" onsubmit="submitReport()">
                     <div class="row">
                         @csrf
-                        <input type="text" id="user_id" value="{{ Auth::user()['id'] }}" hidden>
-                        <input type="text" id="report_id" value="{{ $data['reports']->id }}" hidden>
+                        <input type="text" id="user_id" value="'{{ Auth::user()['id'] }}'" hidden>
+                        <input type="text" id="report_id" value="'{{ $data['reports']->id }}'" hidden>
                         <div class="col-md">
                             <label class="text-xs text-dark" style="font-weight: 500">Email To</label>
                             <input type="email" id="email_to" class="form-control bg-white"

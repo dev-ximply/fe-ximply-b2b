@@ -13,7 +13,7 @@
                     <div class="col-md px-4">
                         <form action="javascript:void(0)" method="POST">
                             @csrf
-                            <input type="text" id="user_id" value="{{ Auth::user()['id'] }}" hidden>
+                            <input type="text" id="user_id" value="'{{ Auth::user()['id'] }}'" hidden>
                             <div class="row">
                                 <div class="col-md-6 d-flex flex-md-row flex-column">
                                     <div class="row">

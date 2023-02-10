@@ -1,11 +1,11 @@
 <!-- Modal Email-->
 <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-        <div class="modal-content modal-md" style="border-radius: 10px !important">
-            <div class="modal-header">
-                <p class="modal-title font-weight-bold text-dark">Change Email</p>
+        <div class="modal-content modal-md" style="border-radius: 16px !important">
+            <div class="modal-header" style="background:#191a4d">
+                <p class="modal-title font-weight-bold text-white">Change Email</p>
                 <button type="button" class="btn-close text-dark text-lg" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" style="width: 30px">&times;</span>
+                    {{-- <span aria-hidden="true" style="width: 30px">&times;</span> --}}
                 </button>
             </div>
             <div class="modal-body">

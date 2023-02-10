@@ -257,10 +257,10 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-
+                        @if (session()->get('is_superadmin') == false)
                         <li class="mb-0">
 
-                            <a class="dropdown-item border-radius-md" href="/tenant">
+                            <a class="dropdown-item border-radius-md" href="/profile">
 
                                 <div class="d-flex flex-column justify-content-center">
 
@@ -269,9 +269,7 @@
                                         <span class="font-weight-bold"><i
 
                                                 class="fa-solid fa-user me-sm-1"></i></i></span><span
-
-                                            class="font-weight-bold"> Corporate Info</span>
-
+                                            class="font-weight-bold">Profile</span>
                                     </h6>
 
                                 </div>
@@ -279,7 +277,19 @@
                             </a>
 
                         </li>
-
+                        @else
+                        <li class="mb-0">
+                            <a class="dropdown-item border-radius-md" href="/tenant">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="text-sm font-weight-normal mb-1">
+                                        <span class="font-weight-bold"><i
+                                                class="fa-solid fa-user me-sm-1"></i></i></span><span
+                                            class="font-weight-bold"> Corporate Info</span>
+                                    </h6>
+                                </div>
+                            </a>
+                        </li>
+                        @endif
                         {{-- <li class="mb-0">
 
                             <a class="dropdown-item border-radius-md" href="/setting">
@@ -395,7 +405,6 @@
                 if (res) {
 
                     var response = res['data'];
-
                     document.getElementById('navbar_fullname').innerHTML = "Welcome, " + response[
 
                         'full_name'];

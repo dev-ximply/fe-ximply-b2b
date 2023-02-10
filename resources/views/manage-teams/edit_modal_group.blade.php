@@ -215,6 +215,12 @@
 
         console.log('submit')
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $.ajax({
                 type: "PUT",
                 url: "{{ route('groups.update') }}",

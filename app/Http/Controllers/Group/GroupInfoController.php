@@ -33,7 +33,7 @@ class GroupInfoController extends Controller
             'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json'
         ];
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/member/list/' . Session::get('TenantCode') . '?user_id=' . $user_id, $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode') . '?user_id=' . $user_id, $headers);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 
@@ -62,7 +62,6 @@ class GroupInfoController extends Controller
 
         return $response->data;
     }
-
     public static function member($user_id)
     {
         $client = new Client();
@@ -70,7 +69,7 @@ class GroupInfoController extends Controller
             'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json'
         ];
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode')  . '?user_id=' . $user_id, $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/member/list/' . Session::get('TenantCode')  . '?user_id=' . $user_id, $headers);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 

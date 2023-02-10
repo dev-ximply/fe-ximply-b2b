@@ -3,46 +3,79 @@
 
 
 @section('container')
+
     @include('manage-teams.add_modal_partner')
+
     @include('manage-teams.edit_modal_partner')
+
 
 
     <div class="modal fade" id="modalAssignPartner" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
         aria-hidden="true">
+
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+
             <div class="modal-content">
+
                 <div class="modal-header" style="background: #19194b">
+
                     <h6 class="font-weight-bolder" style="color: white">Assign Client Vendor</h6>
+
                     <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
+
                     </button>
+
                 </div>
+
                 <div class="modal-body">
+
                     <form action="" onsubmit="handleSubmitAssign(event)">
+
                         @csrf
+
                         <div class="row">
+
                             <div class="col-6">
+
                                 <input type="hidden" id="partner_assign_id">
+
                                 <label class="form-label mt-4" style="color: black; font-weight:500">User</label>
+
                                 <select class="form-control " name="group_id" id="user_assign_id">
+
                                     <option value="" selected>Pilih User</option>
-                                    @foreach ($members as $member)
+
+                                    {{-- @foreach ($members as $member)
                                         <option value="{{ $member['id'] }}">{{ $member['full_name'] }}</option>
-                                    @endforeach
+                                    @endforeach --}}
+
                                 </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="d-flex justify-content-end mt-4">
-                                <div>
-                                    <button class="btn text-white" data-bs-dismiss="modal"
-                                        style="background-color: #D42A34">Cancel</button>
-                                    <button type="submit" class="btn text-white" style="background-color: #62ca50">
-                                        Submit
-                                    </button>
-                                </div>
+
                             </div>
 
                         </div>
+
+                        <div class="row">
+
+                            <div class="d-flex justify-content-end mt-4">
+
+                                <div>
+
+                                    <button class="btn text-white" data-bs-dismiss="modal"
+                                        style="background-color: #D42A34">Cancel</button>
+
+                                    <button type="submit" class="btn text-white" style="background-color: #62ca50">
+
+                                        Submit
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </form>
 
                 </div>
@@ -80,6 +113,7 @@
 
 
         table caption {
+
             font-size: 1.5em;
 
             margin: .5em 0 .75em;
@@ -121,6 +155,8 @@
             text-transform: uppercase;
 
         }
+
+
 
         @media screen and (max-width: 600px) {
 
@@ -254,17 +290,24 @@
 
                             <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
 
-                                Contact Info
+                                Contact Company
 
                             </th>
-                              <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
 
-                                Department
+                            <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+
+                                Group
 
                             </th>
-                             <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+
+                            <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
 
                                 Added By
+
+                            </th>
+                            <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+
+                                Created
 
                             </th>
 
@@ -282,9 +325,13 @@
 
                     <tbody>
 
-                        @if (count($data['partners']) > 0)
+                        @php
+                            var_dump($data['t_partner']);
+                        @endphp
 
-                            @foreach ($data['partners'] as $item)
+                        @if (count($data['t_partner']) > 0)
+
+                            @foreach ($data['t_partner'] as $item)
 
                                 <tr class="">
 
@@ -310,55 +357,59 @@
 
                                     </td>
                                     <td class="text-sm" data-label="Contact Info" style="color: #000000">
-
+                                        {{  $item->group_name  }}
                                         
                                     </td>
                                     <td class="text-sm" data-label="Contact Info" style="color: #000000">
-
                                         
+                                        {{  $item->created_by }}
+
                                     </td>
+                                    <td class="text-sm" data-label="Contact Info" style="color: #000000">
+                                        
+                                        {{-- {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
+                                        {{  $item->created_date  }}
+                                        
+
+                                    </td>
+
+                                    
 
 
 
 
 
                                     <td class="text-sm d-flex justify-content-md-center justify-content-between"
-
                                         data-label="Action">
 
-                                        <button
-
+                                        {{-- <button
                                             class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
-
                                             data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-
                                             data-id="{{ $item->id }}" data-bs-target="#modalAssignPartner"
-
                                             onclick="changeAssign({{ $item->id }})"
-
                                             style="background-color: #62CA50;width:50px;height:25px;font-size:12px; font-weight:500;">
 
                                             Assign
 
-                                        </button>
+                                        </button> --}}
 
-                                         <button
+                                        <button
                                             class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
                                             data-bs-title="View Your Expense Member" data-bs-toggle="modal"
                                             data-bs-target="#editModalPartner"
-                                            onclick="getDataPartner('{{ $item->id }}','{{ $item->company_name }}', '{{ $item->contact_name }}', '{{ $item->email }}', '{{ $item->handphone }}')"
-                                            style="background-color: #ff720c;width:50px;height:25px;font-size:12px; font-weight:500;">
+                                            onclick="getDataPartner('{{ $item->id }}','{{ $item->company_name }}', '{{ $item->contact_name }}', '{{ $item->email }}', '{{ $item->handphone }}', '{{  $item->group_name  }}')"
+                                            style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;">
                                             Edit
                                         </button>
                                         <button
-                                             class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
-                                             data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                             data-id="{{ $item->id }}" data-bs-target="#editModalPartner"
-                                             style="background-color: #E40909;width:50px;height:25px;font-size:12px; font-weight:500;"
-                                             onclick="">
-                                             Delete
+                                            class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
+                                            data-bs-title="View Your Expense Member" data-bs-toggle="modal"
+                                            data-id="'{{ $item->id }}'" data-bs-target="#editModalPartner"
+                                            style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                            onclick="">
+                                            Delete
                                         </button>
-                                
+
 
                                     </td>
 
@@ -391,7 +442,26 @@
     </div>
 
        <script>
-        function getDataPartner(partner_id, company_name, contact_name, email, handphone){
+        function getDataPartner(id, company_name, contact_name, email, handphone, group_name){
+            console.log(id);
+            console.log(company_name);
+            console.log(contact_name);
+            console.log(email);
+            console.log(handphone);
+            console.log('tes', group_name);
+
+            document.getElementById('pertner_id').value = id;
+            document.getElementById('editcompanyName').value = company_name;
+            document.getElementById('editPartnerName').value = contact_name;
+            document.getElementById('editEmail').value = email;
+            document.getElementById('editHandphone').value = handphone;
+            document.getElementById('editGroupName').value = group_name;
+            document.getElementById('editGroupName').innerHTML = group_name;
+        }
+    </script>
+
+    {{-- <script>
+        function getDataPartner(partner_id, company_name, contact_name, email, handphone) {
             console.log(partner_id);
             console.log(company_name);
             console.log(contact_name);
@@ -404,10 +474,9 @@
             document.getElementById('editEmail').value = email;
             document.getElementById('editHandphone').value = handphone;
         }
-    </script>
+    </script> --}}
 
     <script>
-
         function getData(id) {
 
             $.ajax({
@@ -443,24 +512,34 @@
             });
 
         }
-
     </script>
 
     <script>
-
         function changeEmploye(value, companyName, editEmail, editHandphone) {
 
             console.log(value)
 
             document.getElementById('pertner_id').value = value;
 
-            // document.getElementById('editcompanyName').value=value;
+            document.getElementById('editcompanyName').value = value;
 
-            // document.getElementById('editcompanyName').value=companyName;
+            document.getElementById('editcompanyName').value = companyName;
 
-            // document.getElementById('editEmail').value=editEmail;
+            document.getElementById('editEmail').value = editEmail;
 
-            // document.getElementById('editHandphone').value=editHandphone;
+            document.getElementById('editHandphone').value = editHandphone;
+
+        }
+    </script>
+
+
+
+    <script>
+        function changeAssign(partnerId) {
+
+            console.log(partnerId)
+
+            document.getElementById('partner_assign_id').value = partnerId;
 
         }
     </script>
@@ -476,6 +555,8 @@
             document.getElementById('partner_assign_id').value = partnerId;
 
         }
+
+
 
 
 
@@ -520,6 +601,7 @@
                 url: "{{ route('partners.assign.update') }}",
 
                 data: {
+
                     _token: "{{ csrf_token() }}",
 
                     partner_id: partnerId,
@@ -598,8 +680,11 @@
 
 
 
+
+
         }
 
     </script>
+
 @endsection
 
