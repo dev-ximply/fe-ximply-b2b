@@ -72,19 +72,22 @@ class PartnerController extends Controller
             'contact_name' => $request->contact_name,
             'handphone' => $request->handphone,
             'email' => $request->email,
+            'group_id' => $request->group_id,
         ];
-
 
         // assign user
-        $paramAssignUserToPartner =[
-            'user_id' => Auth::user()['id'],
-            'tenant_code' => session()->get('TenantCode'),
-            'partner_id' => $request->partner_id,
-            'assign_user_id' =>  $request->assign_user_id,
-        ];
+        if($request->assign_user_id){
+            $paramAssignUserToPartner =[
+                'user_id' => Auth::user()['id'],
+                'tenant_code' => session()->get('TenantCode'),
+                'partner_id' => $request->partner_id,
+                'assign_user_id' =>  $request->assign_user_id,
+            ];
+
+            $this->asyncAddUserToPartner($paramAssignUserToPartner);
+        }
 
 
-        $this->asyncAddUserToPartner($paramAssignUserToPartner);
         return self::asyncUpdateParner($params);
     }
 

@@ -12,7 +12,8 @@ use Illuminate\Http\Request;
 class GroupInfoController extends Controller
 {
     //
-    public static function index(){
+    public static function index($id){
+
         return view('group-info',
         [
             'title' => 'Group Info',
@@ -20,7 +21,9 @@ class GroupInfoController extends Controller
             'data' => [
                 'group' => self::group_(Auth::user()['id']),
                 'budget' => self::budget(Auth::user()['id']),
-		        'member_list' => self::member(Auth::user()['id']),            ]
+		        'member_list' => self::member(Auth::user()['id'],$id),
+                'group_detail' => self::groupById(Auth::user()['id'],$id)           
+            ]
         ]  
     );
     }
@@ -34,6 +37,23 @@ class GroupInfoController extends Controller
             'Accept' => 'application/json'
         ];
         $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode') . '?user_id=' . $user_id, $headers);
+        $res = $client->sendAsync($request)->wait();
+        $response = json_decode($res->getBody());
+
+        if ($response->success == false) {
+            return [];
+        }
+
+        return $response->data;
+    }
+    public static function groupById($user_id,$id)
+    {
+        $client = new Client();
+        $headers = [
+            'Authorization' => 'Bearer ' . Session::get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode') . '?user_id=' . $user_id .'&group_id=' . $id , $headers);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 
@@ -62,14 +82,14 @@ class GroupInfoController extends Controller
 
         return $response->data;
     }
-    public static function member($user_id)
+    public static function member($user_id,$id)
     {
         $client = new Client();
         $headers = [
             'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json'
         ];
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/member/list/' . Session::get('TenantCode')  . '?user_id=' . $user_id, $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/member/list/' . Session::get('TenantCode')  . '?user_id=' . $user_id.'&group_id=' . $id, $headers);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 
