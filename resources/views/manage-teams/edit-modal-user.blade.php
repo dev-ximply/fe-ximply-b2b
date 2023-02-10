@@ -120,14 +120,14 @@
         let employeeId = event.target.querySelector('#edit_employee_code').value;
 
         let departementId = event.target.querySelector("#edit_department_id").value;
-        let roleId = event.target.querySelector("#edit_role_name").value;
+        let roleId = event.target.querySelector("#edit_role_id").value;
   
-        // console.log(firstNameId);
-        // console.log(lastNameId);
-        // console.log(emailId);
-        // console.log(employeeId);
-        // console.log(departementId);
-        // console.log(roleId);
+        console.log(firstNameId);
+        console.log(lastNameId);
+        console.log(emailId);
+        console.log(employeeId);
+        console.log(departementId);
+        console.log(roleId);
         // console.log('submit')
         const datas = {
                 user_id: userId,

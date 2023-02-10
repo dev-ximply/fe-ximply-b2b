@@ -98,9 +98,9 @@
 
                             <tbody>
 
-                                @php
+                                {{-- @php
                                     var_dump($data['employee']);
-                                @endphp
+                                @endphp --}}
 
                                 @foreach ($data['employee'] as $item)
                                     <tr class="">
@@ -173,7 +173,7 @@
                                                         class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
                                                         style="background-color: #85cdfd;width:60px;height:25px;font-size:11px; font-weight:500;"
                                                         data-bs-target="#modalInfoMember" data-bs-toggle="modal"
-                                                        {{-- onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')" --}}
+                                                        onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')"
                                                         >
                                                         Info
                                                     </button>
