@@ -218,7 +218,7 @@ Route::put('/permissions/role-name', [PermissionController::class, 'changeRoleNa
 // Account Settings
 
 
-Route::get('/account-settings', [SettingsController::class, 'account_settings'])->name('permission')->middleware('auth');
+Route::get('/account-settings', [SettingsController::class, 'account_settings'])->name('account-settings')->middleware('auth');
 
 // Tenant
 // Route::get('/tenant', function () {
