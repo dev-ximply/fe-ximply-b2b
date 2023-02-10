@@ -11,11 +11,12 @@
 
     <div class="d-flex justify-content-between">
 	
-        {{-- {{var_dump(Session::get('TenantCode'))}} --}}
+        <div id="loader"
+        style="display:none; text-align: center; z-index: 5000; position: absolute; width: 100%; top: 40%">
+        <img height="100px" src="{{ asset('img/loader.gif') }}">
+    </div>
 	<div class="mt-2">
-	   <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#add_modal_users"
-
-        <div class="mt-2">
+	   
             <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#add_modal_users"
                 style="background-color: #19194b">
 
@@ -24,6 +25,7 @@
                 <i class="fa-solid fa-user-plus ms-2"></i>
 
             </button>
+      
 
 	</div>
     {{-- {{ dd($data)}} --}}
@@ -173,7 +175,7 @@
                                                         class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
                                                         style="background-color: #85cdfd;width:60px;height:25px;font-size:11px; font-weight:500;"
                                                         data-bs-target="#modalInfoMember" data-bs-toggle="modal"
-                                                        onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')">
+                                                        onclick="getInfoMember('{{ $item->id }}','{{ '$item->first_name' }}', '{{ '$item->last_name' }}', '{{ $item->email }}', '{{ $item->group_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')">
                                                         Info
                                                     </button>
                                                 @else
@@ -182,7 +184,7 @@
                                                         data-bs-title="Edit" data-bs-toggle="modal"
                                                         data-id="'{{ $item->id }}'" data-bs-target="#edit_modal_users"
                                                         style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                        onclick="getDataMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}', '{{ $item->group_name }}', '{{ $item->role_name }}')">
+                                                        onclick="getDataMember('{{ $item->id }}','{{ '$item->first_name' }}', '{{ '$item->last_name' }}', '{{ $item->email }}', '{{ $item->group_id }}', '{{ $item->group_name }}', '{{ $item->role_name }}')">
                                                         View
                                                     </button>
                                                     <button
@@ -190,7 +192,7 @@
                                                         data-bs-title="View Your Expense Member" data-bs-toggle="modal"
                                                         data-id="'{{ $item->id }}'" data-bs-target="#editModalPartner"
                                                         style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                        onclick="">
+                                                        onclick="deactivedMember('{{ $item->id }}')">
                                                         Deactived
                                                     </button>
                                                 @endif
@@ -273,6 +275,77 @@
             document.getElementById('edit_role_name').innerHTML = role_name;
             document.getElementById('edit_role_name').value = role_name;
 
+        }
+        function deactivedMember(id_member){
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success-cstm mx-2",
+                    cancelButton: "btn btn-danger-cstm mx-2",
+                },
+                buttonsStyling: false,
+            });
+
+            swalWithBootstrapButtons
+            .fire({
+                title: "<h5>Are you sure you want to Deactived Member?</h5>",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                reverseButtons: false,
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        url: API_URL + "api/members/"+id_member+"/deactived",
+                        type: 'post',
+                        contentType: false,
+                        processData: false,
+                        beforeSend: function() {
+                            if ($("#loader")) {
+                                $("#loader").show();
+                            }
+                        },
+                        success: function(res) {
+                            if (res['success'] == "true" || res['success'] == true) {
+                                swalWithBootstrapButtons.fire(
+                                    "Success!",
+                                    "Your request success.",
+                                    "success"
+                                );
+                            } else {
+                                // console.log()
+                                swalWithBootstrapButtons.fire(
+                                    "Error!",
+                                    "Your request Failed.",
+                                    "error"
+                                );
+                            }
+                        },
+                        complete: function(data) {
+                            if ($("#loader")) {
+                                $("#loader").hide();
+                            }
+                            // setTimeout(function() {
+                            //     location.reload();
+                            // }, 1000);
+                        }
+                    });
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    swalWithBootstrapButtons.fire(
+                        "Cancelled",
+                        "Your request cancelled :)",
+                        "error"
+                    );
+                }
+            });
         }
     </script>
 

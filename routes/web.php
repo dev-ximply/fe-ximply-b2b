@@ -146,7 +146,7 @@ Route::get('/group', [GroupController::class, 'index'])->middleware('auth');
 
 Route::put('/groups', [GroupController::class, 'updateGroup'])->middleware('auth')->name('groups.update');
 
-Route::get('/group-info', [GroupInfoController::class, 'index'])->middleware('auth')->name('groupInfo');
+Route::get('/group-info/{id}', [GroupInfoController::class, 'index'])->middleware('auth')->name('groupInfo');
 
 Route::get('/partner', [PartnerController::class, 'index'])->middleware('auth');
 
@@ -214,13 +214,9 @@ Route::put('/permissions/role-name', [PermissionController::class, 'changeRoleNa
 
 
 // Account Settings
-Route::get('/account-settings', function(){
-    return view('account-settings',
-    [
-        'title' => 'Account Settings',
-        'section' => 'account_settings'
-    ]);
-});
+
+
+Route::get('/account-settings', [SettingsController::class, 'account_settings'])->name('permission')->middleware('auth');
 
 // Tenant
 Route::get('/tenant', function () {

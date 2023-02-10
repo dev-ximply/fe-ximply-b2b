@@ -11,8 +11,10 @@
     @include('account-settings.email-settings')
     @include('account-settings.password-settings')
     @include('account-settings.phone-settings')
-
-
+    <div id="loader"
+        style="display:none; text-align: center; z-index: 5000; position: absolute; width: 100%; top: 40%">
+        <img height="100px" src="{{ asset('img/loader.gif') }}">
+    </div>
     <div class="row">
         <div class="col-12 d-flex justify-content-end">
             <button onclick="history.back()" class="btn  btn-sm  text-white" style="background-color: #191a4d"
@@ -32,7 +34,10 @@
                             <div class="row justify-content-center">
                                 <div class="bg-secondary overflow-hidden d-flex align-items-center justify-content-center mb-2 mt-3"
                                     style="border-radius: 50%; width:156px; height:156px">
-                                    <img src="" alt="user image" class=""
+                                    <?php 
+                                        $logo = $data['tenant']->company_logo ?? "";
+                                    ?>
+                                    <img src="{{ config('storage.base_url').$logo }} " alt="user image" class=""
                                         style="min-width: 155px !important; min-height:155px !important; border-radius:50%"
                                         id="ava-pic-2">
                                 </div>
@@ -52,19 +57,21 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col-md-10">
                             <div class="row mb-2">
                                 <div class="col-md-6 mt-3">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Company
-                                        Name</label>
+                                        Name
+                                    </label>
                                     <input type="text" class="form-control text-dark text-capitalize"
-                                        placeholder="Company Name" value="">
+                                        placeholder="Company Name" id="company_name" value="{{$data['tenant']->company_name}}">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Industrial
                                         Company</label>
                                     <input type="text" class="form-control text-dark text-capitalize"
-                                        placeholder="Industrial Company" value="">
+                                        placeholder="Industrial Company" id="industrial_name" value="{{$data['tenant']->industry}}">
                                 </div>
                             </div>
                             <div class="row">
@@ -77,24 +84,9 @@
                                     </div>
                                     <div class="col-md mb-2">
                                         <input type="text" class="form-control bg-white text-dark" placeholder="Address"
-                                            value="">
+                                            value="{{$data['tenant']->country}}" id="address">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md">
-                                            <label for="" class="text-dark text-xs text-capitalize"
-                                                style="font-weight:600">Admin Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md mb-2">
-                                        <input type="text" class="form-control bg-white text-dark"
-                                            placeholder="Admin Name" value="">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md">
@@ -103,9 +95,45 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <input type="text" class="form-control">
+                                         <?php 
+                                            $contact = $data['tenant']->contant_company ?? ""
+                                        ?>
+                                        <input type="text" value="{{ $contact }}" id="contact_company" class="form-control">
                                     </div>
                                 </div>
+                            
+                            </div>
+                            <input type="hidden" id="id_user" value="{{  Auth::user()['id']  }}">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <label for="" class="text-dark text-xs text-capitalize"
+                                                style="font-weight:600">Firstname</label>
+                                        </div>
+                                    </div>
+                                 
+                                    <div class="col-md mb-2">
+                                        <input type="text" class="form-control bg-white text-dark"
+                                            placeholder="Firstname Admin" id="firstname" value="{{$data['user']->first_name}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <label for="" class="text-dark text-xs text-capitalize"
+                                                style="font-weight:600">Lastname</label>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md mb-2">
+                                        <input type="text" class="form-control bg-white text-dark"
+                                            placeholder="Lastname Admin" id="lastname" value="{{$data['user']->last_name}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                
                                 <div class="col-md-6 mb-2">
                                     <div class="row ">
                                         <div class="col-md">
@@ -116,27 +144,26 @@
                                     <div class="col-md mb-2">
                                         <input onchange="changeInfoProfile(this.value, 'phone')" type="text"
                                             id="handphone" class="form-control bg-white text-dark"
-                                            placeholder="Add your mobile phone number" value="" readonly>
+                                            placeholder="Add your mobile phone number"  value="{{$data['user']->handphone}}" readonly>
                                         <script>
                                             new PhoneInput(document.getElementById('handphone'));
                                         </script>
                                     </div>
-                                    {{-- <div class="col-md-3">
-                                        <button class="btn text-white"
-                                            style="background: #ff720c; width:100%;min-width:auto"
-                                            data-bs-target="#phoneModal" data-bs-toggle="modal">Change Phone</button>
-                                    </div> --}}
+                                 
                                 </div>
+                               
+                            </div>
+                            <div class="row">
                                 <div class="col-md mb-0">
                                     <div class="text-end">
-                                        <button class="btn text-white" style="background: #62ca50">Save</button>
+                                        <button type="submit" onclick="changeAccount()" class="btn text-white" style="background: #62ca50">Save</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Role</label>
-                                    <input type="text" class="form-control" disabled>
+                                    <input type="text" class="form-control" value="{{$data['user']->role->define_role_name}}" disabled>
                                 </div>
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Employee
@@ -152,24 +179,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md mb-2">
-                                    <input type="text" class="form-control bg-white text-dark"
-                                        placeholder="Member Total" value="" readonly>
+                                    <input type="text" class="form-control "
+                                        placeholder="Member Total" value="{{$data['member']->remainder_user}}" disabled>
                                 </div>
-                                {{-- <div class="col-md-3 btn-group">
-                                    <button type="button" class="btn text-white dropdown-toggle"
-                                        style="background: #62ca50" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Upgrade Member
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">10 Member</a></li>
-                                        <li><a class="dropdown-item" href="#">30 Member</a></li>
-                                        <li><a class="dropdown-item" href="#">50 Member</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3">
-                                    <a href="https://api.whatsapp.com/send?phone=6281388837989&text=Hello%2C%20thank%20you%20for%20contacting%20Ximply.%20We%20will%20reply%20your%20message%20shortly.%20%0A%0AThank%20you"
-                                        class="btn text-white" style="background: #ff720c; width:100%; min-width:auto" ">Custom Request</a>
-                                </div> --}}
+                             
                             </div>
                             <div class="row">
                                 <div class="row">
@@ -180,7 +193,7 @@
                                 </div>
                                 <div class="col-md-9 mb-2">
                                     <input type="email" class="form-control bg-white text-dark"
-                                        placeholder="your email" value="" readonly>
+                                        placeholder="your email" value="{{$data['user']->email}}" disabled>
                                 </div>
                                 <div class="col-md-3">
                                     <button class="btn text-white" style="background: #ff720c; width:100%; min-width:auto"
@@ -188,27 +201,6 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="row ">
-                                    <div class="row ">
-                                        <div class="col-md">
-                                            <label for="" class="text-dark text-xs"
-                                                style="font-weight:600">Phone</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9 mb-2">
-                                        <input onchange="changeInfoProfile(this.value, 'phone')" type="text"
-                                            id="handphone" class="form-control bg-white text-dark"
-                                            placeholder="Add your mobile phone number"
-                                            value="" readonly>
-                                        <script>
-                                            new PhoneInput(document.getElementById('handphone'));
-                                        </script>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <button class="btn text-white" style="background: #ff720c; width:100%;min-width:auto"
-                                            data-bs-target="#phoneModal" data-bs-toggle="modal">Change Phone</button>
-                                    </div>
-                                </div> --}}
                             <div class="row">
                                 <div class="row">
                                     <div class="col-md">
@@ -218,7 +210,7 @@
                                 </div>
                                 <div class="col-md-9 mb-2">
                                     <input type="password" class="form-control bg-white text-dark" placeholder=""
-                                        value="john@email.com" readonly>
+                                        value="john@email.com" disabled>
                                 </div>
                                 <div class="col-md-3">
                                     <button class="btn text-white w-100" style="background: #ff720c; font-size:11px"
@@ -226,9 +218,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="row">
-                            
-                        </div> --}}
+
                     </div>
                 </div>
             </div>
@@ -353,7 +343,7 @@
                     contentType: false,
                     processData: false,
                     beforeSend: function() {
-                        $("#main-loader").show();
+                        $("#loader").show();
                     },
                     success: function(res) {
                         if (res['success'] == true) {
@@ -371,7 +361,7 @@
                         }
                     },
                     complete: function(data) {
-                        $("#main-loader").hide();
+                        $("#loader").hide();
                         if (data.status != 200) {
                             Swal.fire(
                                 "something wrong",
@@ -382,6 +372,156 @@
                     }
                 });
             }
+        }
+        function changeAccount(){
+            const company = document.getElementById('company_name').value;
+            const industrial_name = document.getElementById('industrial_name').value;
+            const address = document.getElementById('address').value;
+            const firstname = document.getElementById('firstname').value;
+            const lastname = document.getElementById('lastname').value;
+            const contact_company = document.getElementById('contact_company').value;
+            const admin_phone = document.getElementById('handphone').value;
+            const id_user = document.getElementById('id_user').value;
+            const tenant = TENANT_CODE;
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success-cstm mx-2",
+                    cancelButton: "btn btn-danger-cstm mx-2",
+                },
+                buttonsStyling: false,
+            });
+            swalWithBootstrapButtons
+            .fire({
+                title: "<h5>Are you sure you want to process?</h5>",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                reverseButtons: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    var formData = new FormData();
+
+                    formData.append('tenant_code', tenant);
+                    formData.append('user_id', id_user);
+                    formData.append('company_name', company);
+                    formData.append('industry', industrial_name);
+
+                    $.ajax({
+                        url: API_URL + "api/tenant/info/update",
+                        type: 'post',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        beforeSend: function() {
+                            if ($("#loader")) {
+                                $("#loader").show();
+                            }
+                        },
+                        success: function(res) {
+                            return res['success'];
+                        },
+                        error: function(xhr, status, error) {
+                                var errorMessage = xhr.status + ': ' + xhr.statusText;
+                                console.log(errorMessage);
+                                return errorMessage
+                         }
+                        
+                    });
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    swalWithBootstrapButtons.fire(
+                        "Cancelled",
+                        "Your request cancelled :)",
+                        "error"
+                    );
+                }
+            })
+            .then((res) => {
+                console.log(id_user);
+                var formDataProfile = new FormData();
+
+                formDataProfile.append('user_id', id_user);
+                formDataProfile.append('first_name', firstname);
+                formDataProfile.append('last_name', lastname);
+
+                $.ajax({
+                        url: API_URL + "api/user/profile/update",
+                        type: 'post',
+                        data: formDataProfile,
+                        contentType: false,
+                        processData: false,
+                        success: function(res) {
+                            if (res['success'] == "true" || res['success'] == true) {
+                                swalWithBootstrapButtons.fire(
+                                    "Success!",
+                                    "Your request success.",
+                                    "success"
+                                );
+                                
+                                if ($("#loader")) {
+                                    $("#loader").hide();
+                                }
+
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1000);
+                            } else {
+                                swalWithBootstrapButtons.fire(
+                                    "Error!",
+                                    "Your request Failed",
+                                    "error"
+                                );
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                                var errorMessage = xhr.status + ': ' + xhr.statusText;
+                                console.log(errorMessage);
+                                return errorMessage
+                         }
+                    });
+            });
+            // .then((rest) => {
+            //     var formDatahandphone = new FormData();
+
+            //     formDatahandphone.append('user_id', id_user);
+            //     formDatahandphone.append('new_handphone', admin_phone);
+
+            //     $.ajax({
+            //             url: API_URL + "api/user/handphone/change",
+            //             type: 'post',
+            //             data: formDatahandphone,
+            //             contentType: false,
+            //             processData: false,
+            //             success: function(res) {
+            //                 if (res['success'] == "true" || res['success'] == true) {
+            //                     swalWithBootstrapButtons.fire(
+            //                         "Success!",
+            //                         "Your request success.",
+            //                         "success"
+            //                     );
+                                
+
+            //                     setTimeout(function() {
+            //                         location.reload();
+            //                     }, 1500);
+            //                 } else {
+            //                     swalWithBootstrapButtons.fire(
+            //                         "Error!",
+            //                         "Your request Failed",
+            //                         "error"
+            //                     );
+            //                 }
+            //             },
+            //             error: function(xhr, status, error) {
+            //                     var errorMessage = xhr.status + ': ' + xhr.statusText;
+            //                     console.log(errorMessage);
+            //                     return errorMessage
+            //              }
+            //         });
+            // })
         }
     </script>
 @endsection
