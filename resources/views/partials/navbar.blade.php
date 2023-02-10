@@ -386,9 +386,7 @@
 
             type: "GET",
 
-            url: API_URL + "api/user/profile/info?user_id=" + document.getElementById(
-
-                'navbar_uid').value,
+            url: API_URL + "api/user/profile/info?user_id=" + document.getElementById('navbar_uid').value,
 
             success: function(res) {
 

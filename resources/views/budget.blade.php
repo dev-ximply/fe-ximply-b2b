@@ -61,24 +61,22 @@
                     <form method="post">
                         @csrf
                         <input type="text" id="edit_user_id" hidden>
-                        <div class="my-2">
+                        <div class="col-6">
                             <label for="projectName" class="form-label text-dark" style="font-weight: 600">Name</label>
                             <input type="text" class="form-control" id="edit_budget_name" disabled>
                         </div>
-                        <div class="my-2">
-                            <label for="projectName" class="form-label text-dark" style="font-weight: 600">Budget</label>
+                        <div class="col-6">
+                            <label for="projectName" class="form-label text-dark" style="font-weight: 600">Spending Budget Limit</label>
                             <input type="text" class="form-control" id="edit_budget_limit_avail" disabled>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <label class="form-label text-dark" style="font-weight: 600">Topup Limit</label>
-                                <input type="number" class="form-control" id="edit_budget_limit" name="edit_budget_limit">
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
-                                <input type="number" class="form-control" id="edit_approve_limit"
-                                    name="edit_approve_limit">
-                            </div>
+                        <div class="col-6">
+                            <label class="form-label text-dark" style="font-weight: 600">Topup Limit</label>
+                            <input type="number" class="form-control" id="edit_budget_limit" name="edit_budget_limit">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
+                            <input type="number" class="form-control" id="edit_approve_limit"
+                                name="edit_approve_limit">
                         </div>
                         <div class="d-flex justify-content-end mt-3">
                             <button type="button" name="button" class="btn btn-danger-cstm m-0"
