@@ -43,16 +43,15 @@
 
                         <label class="form-label mt-4" style="color: black; font-weight:500">User</label>
 
-                        {{-- <select class="form-control " name="user_assign_id" id="user_assign_id"> --}}
-                        <select class="form-control " name="user_assign_id" id="">
+                            <select class="form-control " name="user_assign_id" id="user_assign_id">
 
-                            <option value="" selected>Pilih User</option>
+                                <option value="" selected>Pilih User</option>
 
-                            {{-- @foreach ($members as $member)
-                                <option value="'{{ $member['id'] }}'">{{ $member['full_name'] }}</option>
-                            @endforeach --}}
+                                @foreach ($data['a_partner'] as $member)
+                                <option value="{{ $member->id }}">{{ $member->full_name }}</option>
+                                @endforeach
 
-                        </select>
+                            </select>
 
                     </div>
                     <div class="col-6">
@@ -60,8 +59,8 @@
                         <select class="form-control " name="group_id" id="group_id">
                             <option value="" selected>Select</option>
                             @foreach ($data['partners'] as $item_group)
-                                <option value="{{ $item_group->id }}">{{ strtolower($item_group->group_name) }}
-                                </option>
+                            <option value="{{ $item_group->id }}">{{ strtolower($item_group->group_name) }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -71,8 +70,16 @@
                         <div>
                             <button class="btn text-white" data-bs-dismiss="modal"
                                 style="background-color: #D42A34">Cancel</button>
-                            <button class="btn text-white" style="background-color: #62ca50"
-                                onclick="addPartner('{{ Auth::user()['id'] }}', document.getElementById('companyName').value, document.getElementById('picName').value, document.getElementById('email').value, document.getElementById('handphone').value, document.getElementById('group_id').value)">Submit</button>
+                            <button class="btn text-white" style="background-color: #62ca50" onclick="addPartner('{{ Auth::user()['id'] }}',
+                                document.getElementById('companyName').value,
+                                document.getElementById('picName').value,
+                                document.getElementById('email').value,
+                                document.getElementById('handphone').value,
+                                document.getElementById('group_id').value,
+                                document.getElementById('user_assign_id').value,
+                                )">
+                                Submit
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -82,7 +89,7 @@
 </div>
 
 <script>
-    function addPartner(userId, companyName, picName, email, handphone, group_id) {
+    function addPartner(userId, companyName, picName, email, handphone, group_id, userAssignId) {
 
         console.log(userId);
         console.log(companyName);
@@ -90,6 +97,7 @@
         console.log(handphone);
         console.log(email);
         console.log(group_id);
+        console.log(userAssignId);
 
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -111,59 +119,39 @@
             .then((result) => {
                 if (result.isConfirmed) {
 
-                    var formData = new FormData();
-
-                    formData.append('tenant_code', TENANT_CODE);
-                    formData.append('user_id', userId);
-                    formData.append('company_name', companyName);
-                    formData.append('contact_name', picName);
-                    formData.append('handphone', handphone);
-                    formData.append('email', email);
-                    formData.append('group_id', group_id);
-
-                    // $.ajaxSetup({
-                    //     headers: {
-                    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    //     }
-                    // });
-
-                    $.ajax({
-                        url: API_URL + "api/partner/add",
-                        type: 'post',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        beforeSend: function() {
-                            if ($("#loader")) {
-                                $("#loader").show();
-                            }
-                        },
-                        success: function(res) {
-                            if (res['success'] == "true" || res['success'] == true) {
-                                swalWithBootstrapButtons.fire(
-                                    "Success!",
-                                    "Your request success.",
-                                    "success"
-                                );
-                                
-                                if ($("#loader")) {
-                                    $("#loader").hide();
-                                }
-
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 1000);
-                            } else {
-                                swalWithBootstrapButtons.fire(
-                                    "Error!",
-                                    "Your request can't processed.<br>" + res['message'],
-                                    "error"
-                                );
-                            }
-                        },
-                        complete: function(data) {
-
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('parners.store') }}",
+                        data: {
+                            company_name: companyName,
+                            contact_name: picName,
+                            handphone: handphone,
+                            email: email,
+                            group_id: group_id,
+                            assign_user_id: userAssignId,
+                        },
+                        success: function(response) {
+
+                            const {
+                                success,
+                                status,
+                                message
+                            } = response;
+
+                            console.log(response)
+
+                            if (success === true) {
+                                setTimeout(function() {
+                                    window.location.reload(true);
+                                }, 1000);
+                            }
+                        }
+
                     });
 
                 } else if (result.dismiss === Swal.DismissReason.cancel) {

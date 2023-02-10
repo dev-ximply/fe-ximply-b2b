@@ -45,9 +45,9 @@
 
                                     <option value="" selected>Pilih User</option>
 
-                                    {{-- @foreach ($members as $member)
-                                        <option value="{{ $member['id'] }}">{{ $member['full_name'] }}</option>
-                                    @endforeach --}}
+                                    @foreach ($data['a_partner'] as $member)
+                                        <option value="{{ $member->id }}">{{ $member->full_name }}</option>
+                                    @endforeach
 
                                 </select>
 
@@ -325,10 +325,6 @@
 
                     <tbody>
 
-                        @php
-                            var_dump($data['t_partner']);
-                        @endphp
-
                         @if (count($data['t_partner']) > 0)
 
                             @foreach ($data['t_partner'] as $item)
@@ -358,22 +354,22 @@
                                     </td>
                                     <td class="text-sm" data-label="Contact Info" style="color: #000000">
                                         {{  $item->group_name  }}
-                                        
+
                                     </td>
                                     <td class="text-sm" data-label="Contact Info" style="color: #000000">
-                                        
+
                                         {{  $item->created_by }}
 
                                     </td>
                                     <td class="text-sm" data-label="Contact Info" style="color: #000000">
-                                        
+
                                         {{-- {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
                                         {{  $item->created_date  }}
-                                        
+
 
                                     </td>
 
-                                    
+
 
 
 
@@ -394,6 +390,7 @@
                                         </button> --}}
 
                                         <button
+                                            type="button"
                                             class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
                                             data-bs-title="View Your Expense Member" data-bs-toggle="modal"
                                             data-bs-target="#editModalPartner"
