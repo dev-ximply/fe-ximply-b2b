@@ -74,7 +74,6 @@
             @endif
 
 
-
             @if (session()->get('approval_expense') == 1 &&
 
                     session()->get('approval_topup') == 1 &&
@@ -110,33 +109,6 @@
 
 
             @if (session()->get('is_superadmin') == false)
-<<<<<<< HEAD
-                <li class="nav-item">
-                    <a class="nav-link @if ($section == 'expense') active @endif" href="/expense">
-                        <div
-                            class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'expense' ? 'bg-orange' : 'bg-purple' }}">
-                            <i class="fa-sharp fa-solid fa-basket-shopping {{ $section == 'expense' ? 'text-white' : 'text-white' }}"
-                                style="font-size:15px"></i>
-                        </div>
-                        <span
-                            class="nav-link-text ms-1 {{ $section == 'expense' ? 'text-orange' : 'text-white' }}">Expenses</span>
-                    </a>
-                </li>
-            @endif
-
-            @if (session()->get('approval_expense') == 1)
-                <li class="nav-item">
-                    <a class="nav-link @if ($section == 'approval') active @endif" href="/approval">
-                        <div
-                            class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'approval' ? 'bg-orange' : 'bg-purple' }}">
-                            <i class="fa-solid fa-handshake {{ $section == 'approval' ? 'text-white' : 'text-white' }}"
-                                style="font-size:15px"></i>
-                        </div>
-                        <span
-                            class="nav-link-text ms-1 {{ $section == 'approval' ? 'text-orange' : 'text-white' }}">Approval</span>
-                    </a>
-                </li>
-=======
 
                 <li class="nav-item">
 
@@ -160,7 +132,6 @@
 
                 </li>
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
             @endif
 
 
@@ -227,15 +198,6 @@
                         <ul class="nav ms-4 ps-3">
 
                             <li class="nav-item ">
-<<<<<<< HEAD
-                                @if (session()->get('is_superadmin') == true)
-                                    <a class="nav-link @if ($section == 'group') active @endif "
-                                        href="/group">
-                                        <span class="sidenav-mini-icon text-white"> O </span>
-                                        <span class="nav-link-text ms-1  text-white">Group</span>
-                                    </a>
-                                @endif
-=======
 
                                 @if (session()->get('is_superadmin') == true)
 
@@ -251,17 +213,12 @@
 
                                 @endif
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                 <a class="nav-link @if ($section == 'employee') active @endif" href="/employee">
 
                                     <span class="sidenav-mini-icon text-white"> O </span>
-<<<<<<< HEAD
-                                    <span class="nav-link-text ms-1 text-white">Member</span>
-=======
 
                                     <span class="nav-link-text ms-1 text-white">Member</span>
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                 </a>
                                 <a class="nav-link @if ($section == 'partner') active @endif " href="/partner">
 
@@ -280,14 +237,10 @@
 
             @endif
 
-<<<<<<< HEAD
-            @if (session()->get('manage_budget') == 1 || session()->get('approval_topup') == 1)
-=======
 
 
             @if (session()->get('manage_budget') == 1 || session()->get('approval_topup') == 1)
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                 <li class="nav-item">
 
                     <a data-bs-toggle="collapse" href="#ecommerceExamples"
@@ -319,22 +272,6 @@
                         <ul class="nav ms-4 ps-3">
 
                             <li class="nav-item ">
-<<<<<<< HEAD
-                                @if (session()->get('manage_budget') == 1)
-                                    <a class="nav-link @if ($section == 'budget') active @endif"
-                                        href="/budget">
-                                        <span class="sidenav-mini-icon text-white"> O </span>
-                                        <span class="nav-link-text ms-1 text-white">Budget</span>
-                                    </a>
-                                @endif
-                                @if (session()->get('approval_topup') == 1)
-                                    <a class="nav-link @if ($section == 'top_up_approval') active @endif "
-                                        href="/spend/request">
-                                        <span class="sidenav-mini-icon text-white"> O </span>
-                                        <span class="nav-link-text ms-1  text-white">Approval Top Up</span>
-                                    </a>
-                                @endif
-=======
 
                                 @if (session()->get('manage_budget') == 1 ||  (session()->get('approval_topup') == 1))
 
@@ -364,7 +301,6 @@
 
                                 @endif
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                             </li>
 
                         </ul>
@@ -375,21 +311,6 @@
 
             @endif
 
-<<<<<<< HEAD
-            @if (session()->get('is_superadmin') == true)
-                <li class="nav-item">
-                    <a class="nav-link @if ($section == 'card') active @endif" href="/card">
-                        <div
-                            class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'card' ? 'bg-orange' : 'bg-purple' }}">
-                            <i class="fa-solid fa-credit-card {{ $section == 'card' ? 'text-white' : 'text-white' }}"
-                                style="font-size:15px"></i>
-                        </div>
-                        <span
-                            class="nav-link-text ms-1 {{ $section == 'card' ? 'text-orange' : 'text-white' }}">Card</span>
-                    </a>
-                </li>
-            @endif
-=======
 
 
             @if (session()->get('is_superadmin') == true)
@@ -419,7 +340,6 @@
             @endif
 
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
             @if (session()->get('is_superadmin') == false)
 
@@ -495,13 +415,9 @@
                                 <a class="nav-link @if ($section == 'account_settings') active @endif " href="/account-settings">
 
                                     <span class="sidenav-mini-icon text-white"> O </span>
-<<<<<<< HEAD
-                                    <span class="nav-link-text ms-1  text-white">Corporate Info</span>
-=======
 
                                     <span class="nav-link-text ms-1  text-white">Account Settings</span>
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                 </a>
 
 
@@ -555,9 +471,4 @@
         </div>
 
     </div>
-<<<<<<< HEAD
 </aside>
-=======
-</aside>
-65bcdccaebb3
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
