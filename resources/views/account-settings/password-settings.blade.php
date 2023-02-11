@@ -29,19 +29,11 @@
 <div class="modal fade" id="change-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-<<<<<<< HEAD
-        <div class="modal-content" style="border-radius: 5px">
-            <div class="modal-header">
-                <h6 class="modal-title fs-6 ms-3 text-dark">Change Password</h6>
-                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fa-solid fa-xmark"></i>
-=======
         <div class="modal-content" style="border-radius: 16px">
             <div class="modal-header" style="background: #191a4d">
                 <h6 class="modal-title fs-6 ms-3 text-white">Change Password</h6>
                 <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                     {{-- <i class="fa-solid fa-xmark"></i> --}}
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                 </button>
             </div>
             <form action="javascript:void(0)" method="POST" onsubmit="changePassword()">
