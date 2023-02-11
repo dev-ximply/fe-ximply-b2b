@@ -90,10 +90,10 @@
                             <label for="" style="color: black">Client</label>
                             <div class="mb-3">
                                 <select name="" id="" class="form-select" name="topupClient"
-                                    id="topupClient">
-                                    <option value="" selected>Select</option>
+                                    >
+                                    <option value="" selected id="topupClient">Select</option>
                                     @foreach ($data['client'] as $item)
-                                        <option value="">
+                                        <option value="{{ $item->company_name }}">
                                             {{ $item->company_name }}
                                         </option>
                                     @endforeach
@@ -115,7 +115,7 @@
                                 <select class="form-control " name="topupPurpose" id="topupPurpose">
                                     <option value="" selected>Select</option>
                                     @foreach ($data['purpose'] as $item)
-                                        <option value="">
+                                        <option value="{{ $item->purpose }}">
                                             {{ $item->purpose }}
                                         </option>
                                     @endforeach
@@ -129,7 +129,7 @@
                             <div class="d-flex text-center justify-content-end">
                                 <div>
                                     <button type="button" class="btn  btn-round me-1 mt-4 mb-0 text-white topUp"
-                                        onclick="topupRequest('{{ Auth::user()['id'] }}', document.getElementById('topupAmount').value, document.getElementById('topupClient').value, document.getElementById('topupPurpose').value, document.getElementById('topupNote').value)"
+                                        onclick="topupRequest('{{ Auth::user()['id'] }}')"
                                         style="background-color: #62ca50">Top Up</button>
                                     <button type="button" class="btn btn-danger btn-round text-white  ms-1 mt-4 mb-0"
                                         data-bs-dismiss="modal" style="background-color: #D42A34">Cancel</button>
@@ -144,12 +144,17 @@
 </div>
 
 <script>
-    function topupRequest(userId, amount, client, purpose, note) {
-
-        // console.log(userId);
-        // console.log(amount);
-        // console.log(purpose);
-        // console.log(note);
+    function topupRequest(userId ) {
+        const amount = document.getElementById('topupAmount').value; 
+        const client = document.getElementById('topupClient').value;
+        const purpose = document.getElementById('topupPurpose').value;
+        const note = document.getElementById('topupNote').value;
+        
+        console.log(userId);
+        console.log(amount);
+        console.log(client);
+        console.log(purpose);
+        console.log(note);
 
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -173,7 +178,7 @@
 
                     var formData = new FormData();
 
-                    // formData.append('tenant_code', TENANT_CODE);
+                    formData.append('tenant_code', TENANT_CODE);
                     formData.append('user_id', userId);
                     formData.append('amount', amount);
                     formData.append('client_id', client);

@@ -177,6 +177,7 @@
                                         <a class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#edit_modal_budget" onclick="getDetailBudget('{{ $item->full_name }}', '{{ $item->id }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}')">Edit</a>
                                         {{-- TEST<a class="dropdown-item" href="javascript:;">Retire</a> --}}
+                                        <a href="" class="dropdown-item">Delete</a>
                                     </div>
                                 </div>
                             </div>

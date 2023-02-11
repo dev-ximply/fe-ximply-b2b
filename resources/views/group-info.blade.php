@@ -226,7 +226,7 @@
                                             -</td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
-                                            {{ $member->limit->remain_limit }}</td>
+                                             {{ number_format($member->limit->remain_limit) }}</td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             {{ $member->created_date }}

@@ -245,7 +245,7 @@
                                         </span>
                                     </td>
 
-                                    <td class="text-sm d-flex justify-content-md-center justify-content-between"
+                                    <td class="align-middle text-sm d-flex justify-content-md-center justify-content-between pb-4"
                                         data-label="Action">
 
                                         {{-- <button onclick=""
@@ -260,7 +260,7 @@
 
                                         </button> --}}
 
-					 <div>
+                                        <div class="">
                                             <a href="/group-info/{{ $item->id }}"
                                                 class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
                                                 data-bs-title="View Your Expense Member"

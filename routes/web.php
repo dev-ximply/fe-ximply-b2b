@@ -35,7 +35,7 @@ use App\Http\Controllers\Payment\PostPaymentController;
 use App\Http\Controllers\Reports\ViewReportsController;
 
 use App\Http\Controllers\Account\ListReferralController;
-
+use App\Http\Controllers\Activity\ActivityController;
 use App\Http\Controllers\Members\MemberExpenseController;
 
 use App\Http\Controllers\Payment\CancelPaymentController;
@@ -256,15 +256,7 @@ Route::get('/tenant', [TenansController::class, 'index'])->middleware('auth');
 
 // Activity
 
-Route::get('/activity', function () {
-
-    return view('activity.activity', [
-
-        'title' => 'Activity', 'section' => 'activity'
-
-    ]);
-
-})->middleware('auth');
+Route::get('/activity', [ActivityController::class, 'index'])->middleware('auth');
 
 
 

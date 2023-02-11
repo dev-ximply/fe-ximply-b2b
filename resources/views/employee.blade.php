@@ -155,18 +155,15 @@
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
 
                                             <p class="text-dark" style="font-size: 13px">
-                                                {{ $item->limit->auto_approve != '' ? $item->limit->auto_approve : '-' }}
+                                                {{ $item->approver != '' ? $item->approver: '-' }}
                                             </p>
                                         </td>
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
                                             <p class="text-dark" style="font-size: 13px">
-                                                {{-- {{   }} --}}
-                                                -
+                                                {{  $item->created_date }}
+                                                
                                             </p>
-                                            <span class="text-xs">
-                                                {{-- {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
-                                                {{-- 2023-02-06 --}}
-                                            </span>
+                                 
                                         </td>
                               
 
@@ -280,6 +277,7 @@
             document.getElementById('edit_role_name').value = role_name;
 
         }
+        
         function deactivedMember(id_member){
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {

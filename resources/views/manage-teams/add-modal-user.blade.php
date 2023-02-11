@@ -117,6 +117,8 @@
 
                     var formNewMember = new FormData();
 
+                    console.log('tes', formNewMember);
+
                     formNewMember.append('tenant_code', tenant_code);
                     formNewMember.append('user_id', user_id);
                     formNewMember.append('email', email);
