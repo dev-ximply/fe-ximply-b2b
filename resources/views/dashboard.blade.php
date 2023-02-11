@@ -424,8 +424,6 @@
                                             class="form-control text-bold d-flex justify-content-center"
                                             id="filter_button">
 
-                                            {{-- F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R --}}
-
                                             <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
 
                                         </button>
@@ -433,132 +431,8 @@
                                     </div>
 
                                 </div>
-<<<<<<< HEAD
-                                <div class="d-flex flex-lg-row flex-column ms-auto">
-                                    <div class="me-2" style="width: 100%; max-width:155px">
-                                        <div class="input-group">
-                                            <span for=""
-                                                class="input-group-text z-index-1 font-weight-bold text-dark px-1"
-                                                id="basic-addon1"
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
-                                            <input type="date" class="form-control px-1" id="filter_start_date"
-                                                name="filter_start_date"
-                                                value='{{ isset($_GET['filter_start_date']) ? $_GET['filter_start_date'] : '' }}'
-                                                style="font-size:10px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
-                                        </div>
-                                    </div>
-                                    <div class="me-2" style="width: 100%; max-width:155px">
-                                        <div class="input-group">
-                                            <span for="" class="input-group-text z-index-1 font-weight-bold"
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
-                                            <input type="date" class="form-control px-1" id="filter_end_date"
-                                                name="filter_end_date"
-                                                value='{{ isset($_GET['filter_end_date']) ? $_GET['filter_end_date'] : '' }}'
-                                                style="font-size:10px; height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
-                                        </div>
-                                    </div>
-                                    <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
-                                        <select name="filter_member" id="filter_member" class="form-select text-dark"
-                                            style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
-                                            <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
-                                                Member</option>
-                                        </select>
-                                    </div>
-                                    <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
-                                        <select name="filter_expense_type" id="filter_expense_type"
-                                            class="form-select text-dark"
-                                            style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
-                                            <option value="" class="text-dark px-1" selected>Expense Type</option>
-                                        </select>
-                                    </div>
-                                    <div class=" mb-2 ms-auto " style="width: 100%; max-width:65px">
-                                        <button type="submit" value="submit"
-                                            style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
-                                            class="form-control text-bold d-flex justify-content-center"
-                                            id="filter_button">
-                                            {{-- F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R --}}
-                                            <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                {{-- <div class="row flex-md-row flex-column ms-auto">
-=======
 
-                                {{-- <div class="row flex-md-row flex-column ms-auto">
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
-                                    <div class="col-md">
-
-                                        <div class="input-group">
-
-                                            <span for=""
-
-                                                class="input-group-text z-index-1 font-weight-bold text-dark"
-
-                                                id="basic-addon1"
-
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
-
-                                            <input type="date" class="form-control px-2 text-dark"
-
-                                                id="filter_start_date" name="filter_start_date"
-
-                                                style="font-size:11px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md">
-
-                                        <div class="input-group">
-
-                                            <span for="" class="input-group-text z-index-1 font-weight-bold"
-
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
-
-                                            <input type="date" class="form-control px-2" id="filter_end_date"
-
-                                                name="filter_end_date"
-
-                                                style="font-size:11px; height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md mb-2" style="height:15px;">
-
-                                        <select name="filter_expense_type" id="filter_expense_type"
-
-                                            class="form-select text-dark"
-
-                                            style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
-
-                                            <option value="" class="text-dark" selected>Expense Type</option>
-
-                                        </select>
-
-                                    </div>
-
-                                    <div class="col-md mb-2">
-
-                                        <button type="submit" value="submit"
-
-                                            style="line-height:10px; height:25px; font-size:9px"
-
-                                            class="form-control text-bold" id="filter_button">
-
-                                            F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R</button>
-
-                                    </div>
-<<<<<<< HEAD
-                                </div> --}}
-=======
-
-                                </div> --}}
-
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                             </div>
 
                         </form>
@@ -812,7 +686,8 @@
                                                 </td>
 
 
-                                                <td><span class="fw-bold">{{ $recentExpenses->category_name }}</span><br><span
+                                                <td><span
+                                                        class="fw-bold">{{ $recentExpenses->category_name }}</span><br><span
                                                         style="font-size:10px">{{ $recentExpenses->merchant }}</span></td>
 
                                                 <td class="fw-bold">Rp
@@ -892,13 +767,15 @@
                         $('#ex1').zoom();
 
                     } else {
-<<<<<<< HEAD
-                        Swal.fire('failed<br>Please contact ximply support');
-=======
+                        <<
+                        << << < HEAD
+                        Swal.fire('failed<br>Please contact ximply support'); ===
+                        === =
 
                         Swal.fire('failed<br>Please contact ximply support');
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
+                        >>>
+                        >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
                     }
 
                 },
@@ -906,13 +783,15 @@
                 complete: function(data) {
 
                     if (data.status != 200) {
-<<<<<<< HEAD
-                        Swal.fire('failed<br>Please contact ximply support');
-=======
+                        <<
+                        << << < HEAD
+                        Swal.fire('failed<br>Please contact ximply support'); ===
+                        === =
 
                         Swal.fire('failed<br>Please contact ximply support');
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
+                        >>>
+                        >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
                     }
 
                 }
@@ -970,14 +849,17 @@
                 swalWithBootstrapButtons
 
                     .fire({
-<<<<<<< HEAD
+                        <<
+                        << << < HEAD
                         title: "<h5>are you sure want to process?</h5>",
-=======
+                        ===
+                        === =
 
                         title: "<h5>are you sure want to process?</h5>",
 
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
+                        >>>
+                        >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
 
                         icon: "warning",
 
@@ -1086,14 +968,15 @@
 
                 FilterStartDate = urlParams.get('filter_start_date');
 
-                FilterEndDate = urlParams.get('filter_end_date');
-<<<<<<< HEAD
-                FilterMember = urlParams.get('filter_member');
-=======
+                FilterEndDate = urlParams.get('filter_end_date'); <<
+                << << < HEAD
+                FilterMember = urlParams.get('filter_member'); ===
+                === =
 
                 FilterMember = urlParams.get('filter_member');
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
+                >>>
+                >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
             }
 
         }
@@ -1121,16 +1004,18 @@
                 "?expense_type=" + FilterExpenseType +
 
                 "&start_date=" + FilterStartDate +
-<<<<<<< HEAD
-                "&end_date=" + FilterEndDate +
+                <<
+                << << < HEAD "&end_date=" + FilterEndDate +
                 "&member_id=" + FilterMember,
-=======
+            ===
+            === =
 
-                "&end_date=" + FilterEndDate +
+            "&end_date=" + FilterEndDate +
 
-                "&member_id=" + FilterMember,
+            "&member_id=" + FilterMember,
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
+            >>>
+            >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
             success: function(res) {
 
                 var time = [0];
@@ -1492,13 +1377,16 @@
                                     dataLabels: {
 
                                         enabled: true,
-<<<<<<< HEAD
+                                        <<
+                                        << << < HEAD
                                         distance: 35,
-=======
+                                        ===
+                                        === =
 
                                         distance: 35,
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
+                                        >>>
+                                        >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
                                         style: {
 
                                             color: 'white'
@@ -1633,8 +1521,8 @@
 
                             var CategoryName = obj.category_name;
 
-                            $("#filter_expense_type").append('<option value="' + CategoryName +
-                                '"' + (CategoryName == params.filter_expense_type ? 'selected' :
+                            $("#filter_expense_type").append('<option value="' + CategoryId +
+                                '"' + (CategoryId == params.filter_expense_type ? 'selected' :
                                     '') + '>' + CategoryName + '</option>');
                         }
 
