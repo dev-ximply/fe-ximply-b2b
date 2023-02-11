@@ -3,11 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background: #19194b">
-<<<<<<< HEAD
-                <h6 class="font-weight-bolder text-white" style="font-weight: 600">Edit Member</h6>
-=======
                 <h6 class="font-weight-bolder text-white" style="font-weight: 600">View Member</h6>
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                 <button type="button" class="btn-close  text-white" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>

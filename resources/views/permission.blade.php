@@ -57,11 +57,7 @@
             <h5 class="text-dark">Role Permission</h5>
 
             <p class="text-sm text-dark">Choose the permission your Company needs.</p>
-<<<<<<< HEAD
-
-=======
             
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
         </div>
 
         <div class="card-body pt-0">
@@ -156,13 +152,7 @@
                                                                 <tr>
 
                                                                     <th class="text-center text-dark">
-<<<<<<< HEAD
-
-                                                                        <p class="mb-0 text-dark">Manage Spend</p>
-
-=======
                                                                         <p class="mb-0 text-dark">Manage Budget</p>
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                                     </th>
 
                                                                     <th class="text-center text-dark">
@@ -184,25 +174,11 @@
                                                                     </th>
 
                                                                     {{-- <th class="text-center text-dark">
-<<<<<<< HEAD
-
-                                                                        <p class="mb-0 text-dark">Approval PreBudget</p>
-
-                                                                    </th> --}}
-
-                                                                    {{-- <th class="text-center text-dark">
-
-                                                                        <p class="mb-0 text-dark">Manage Tenant</p>
-
-                                                                    </th> --}}
-
-=======
                                                                         <p class="mb-0 text-dark">Approval PreBudget</p>
                                                                     </th> --}}
                                                                     {{-- <th class="text-center text-dark">
                                                                         <p class="mb-0 text-dark">Manage Tenant</p>
                                                                     </th> --}}
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                                 </tr>
 
                                                             </thead>
@@ -276,10 +252,6 @@
                                                                     </td>
 
                                                                     {{-- <td>
-<<<<<<< HEAD
-
-=======
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                                         <div
 
                                                                             class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
@@ -291,16 +263,8 @@
                                                                                 {{ $permission['permission'][0]['approval_prebudget'] ? 'checked' : '' }}>
 
                                                                         </div>
-<<<<<<< HEAD
-
-                                                                    </td> --}}
-
-                                                                    {{-- <td>
-
-=======
                                                                     </td> --}}
                                                                     {{-- <td>
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                                         <div
 
                                                                             class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
@@ -408,23 +372,6 @@
                     if (result.isConfirmed) {
 
                         console.log('update')
-<<<<<<< HEAD
-
-                        $.ajaxSetup({
-
-                            headers: {
-
-                                "Authorization": "Bearer " + AUTH_TOKEN,
-
-                                "Accept": "application/json",
-
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-                            }
-
-                        });
-
-=======
                         $.ajaxSetup({
                             headers: {
                                 "Authorization": "Bearer " + AUTH_TOKEN,
@@ -432,7 +379,6 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             }
                         });
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                         $.ajax({
 
                             type: "PUT",
@@ -516,23 +462,6 @@
         function changeRoleName(value, roleId) {
 
             console.log(value);
-<<<<<<< HEAD
-
-            $.ajaxSetup({
-
-                headers: {
-
-                    "Authorization": "Bearer " + AUTH_TOKEN,
-
-                    "Accept": "application/json",
-
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-                }
-
-            });
-
-=======
             $.ajaxSetup({
                 headers: {
                     "Authorization": "Bearer " + AUTH_TOKEN,
@@ -540,7 +469,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
             $.ajax({
 
                 type: "PUT",
@@ -554,11 +482,6 @@
                     role_id: roleId,
 
                 },
-<<<<<<< HEAD
-
-                success: function(response) {
-=======
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
                 success: function(response) {
                     const {

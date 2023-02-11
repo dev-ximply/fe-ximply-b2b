@@ -359,13 +359,9 @@
             top: 0;
 
             right: 0;
-<<<<<<< HEAD
-            /* background: url(icon.png); */
-=======
 
             /* background: url(icon.png); */
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
         }
 
 
@@ -411,42 +407,6 @@
                             class="text-md font-weight-bolder text-dark fs-5">{{ number_format($data['limit']['remain_limit'], 2) }}</span>
                     </div>
                 </div>
-<<<<<<< HEAD
-            </div>
-            <div class="col-md dropdown text-end">
-                <button class="btn text-white" type="button" id="dropDownExpense" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" style="background-color: #191a4d">New Expense</button>
-                <ul class="dropdown-menu" aria-labelledby="dropDownExpense">
-                    <li>
-                        <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal"
-                            data-bs-target="#manualForm" onclick="handlingModalForm(false)">
-                            <span class="" style="background: #191a4d;border-radius:50%;">
-                                <div class="d-flex align-items-center" id="ava-upload-button-1">
-                                    <span class="overflow-hidden d-flex align-items-center justify-content-center"
-                                        style="border-radius: 50%;background: #191a4d; width:20px; height:20px">
-                                        <i class="fa-solid fa-pen-to-square text-white p-1" style=""></i>
-                                    </span>
-                                    &nbsp;<span id="ava-pic-1" class="text-dark">Manual Form</span>
-                                </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal"
-                            data-bs-target="#manualForm" onclick="handlingModalForm(true)">
-                            <span class="" style="background: #191a4d;border-radius:50%;">
-                                <div class="d-flex align-items-center" id="ava-upload-button-2">
-                                    <span class="overflow-hidden d-flex align-items-center justify-content-center"
-                                        style="border-radius: 50%;background: #191a4d; width:20px; height:20px">
-                                        <i class="fa-solid fa-receipt text-white "></i>
-                                    </span>
-                                    &nbsp;<span id="ava-pic-2" class="text-dark">Scan Receipt</span>
-                                </div>
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-=======
 
             </div>
             <div class="col-md dropdown text-end">
@@ -482,7 +442,6 @@
                 </ul>
 
             </div>
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
         </div>
     @endif
 
@@ -526,53 +485,6 @@
                     </div>
 
                 </div>
-<<<<<<< HEAD
-                <div class="table-responsive">
-                    <table class="table table-borderless text-dark" border="1">
-                        <thead>
-                            <tr>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Date Receipts
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Status
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Purpose
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Merchant
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Amount
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Expense
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (count($data['expenses']) != 0)
-                                @foreach ($data['expenses'] as $item)
-                                    @php
-                                        $i = 1;
-                                    @endphp
-                                    <tr class="align-middle">
-                                        <td colspan="7" style="color: #000000;font-weight:500;font-size:12px;"
-                                            class="text-md-start text-end ps-md-4 text-break text-wrap">
-                                            {{-- <span
-                                                class="px-md-1 text-break text-wrap text-dark"> --}}
-                                            {{ $item->long_date }}
-                                            {{-- </span> --}}
-                                        </td>
-=======
 
                 <div class="table-responsive">
 
@@ -663,41 +575,11 @@
 
                                         </td>
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                     </tr>
 
                                     @foreach ($item->expenses as $expense)
 
                                         <tr class="">
-<<<<<<< HEAD
-                                            <td>{{ '#' . $i++ }}</td>
-                                            <td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center"
-                                                data-label="Status" style="color: #000000;">
-                                                @if ($expense->status == 'approved')
-                                                    <span class="badge badge-xs d-flex justify-content-center"
-                                                        style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">
-                                                        {{ $expense->status }}
-                                                    </span>
-                                                @elseif($expense->status == 'pending')
-                                                    <span class="badge badge-xs d-flex justify-content-center"
-                                                        style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">
-                                                        {{ $expense->status }}
-                                                    </span>
-                                                @elseif($expense->status == 'rejected')
-                                                    <span class="badge badge-xs d-flex justify-content-center"
-                                                        style=" background:#E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">
-                                                        {{ $expense->status }}
-                                                    </span>
-                                                @else
-                                                    <span class="badge badge-xs d-flex justify-content-center"
-                                                        style=" background:gray; color:gray; padding:5px; border-radius:5px; width:55px">
-                                                        {{ $expense->status }}
-                                                    </span>
-                                                @endif
-                                            </td>
-                                            <td class="text-md-start ps-md-4 text-end text-break text-wrap"
-                                                data-label="Purpose" style="color: #000000">
-=======
 
                                             <td>{{ '#' . $i++ }}</td>
 
@@ -753,33 +635,22 @@
 
                                                 data-label="Purpose" style="color: #000000">
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                 {{ $expense->purpose }}
 
                                             </td>
-<<<<<<< HEAD
-                                            <td class="text-break text-wrap text-md-start text-end ps-md-4"
-                                                data-label="Merchant" style="color: #000000">
-=======
 
                                             <td class="text-break text-wrap text-md-start text-end ps-md-4"
 
                                                 data-label="Merchant" style="color: #000000">
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                 {{ $expense->merchant }}
 
                                             </td>
-<<<<<<< HEAD
-                                            <td class="text-break text-wrap ps-md-4 text-md-start text-end"
-                                                data-label="Total Amount" style="color: #000000">
-=======
 
                                             <td class="text-break text-wrap ps-md-4 text-md-start text-end"
 
                                                 data-label="Total Amount" style="color: #000000">
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                 <span class="">
 
                                                     {{ number_format($expense->total_amount, 2) }}
@@ -787,26 +658,17 @@
                                                 </span>
 
                                             </td>
-<<<<<<< HEAD
-                                            <td class="text-break text-wrap ps-md-4 text-md-start text-end"
-                                                data-label="Expense" style="color: #000000">
-=======
 
                                             <td class="text-break text-wrap ps-md-4 text-md-start text-end"
 
                                                 data-label="Expense" style="color: #000000">
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                 {{ $expense->category }}
 
                                             </td>
-<<<<<<< HEAD
-                                            <td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between"
-=======
 
                                             <td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between"
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                 data-label="Action">
 
                                                 <button onclick="getExpenseData('{{ $expense->id }}'')"
@@ -814,13 +676,9 @@
                                                     class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
 
                                                     data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"
-<<<<<<< HEAD
-                                                    style="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">
-=======
 
                                                     style="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                     View</button>
 
                                             </td>
@@ -830,27 +688,6 @@
                                     @endforeach
 
                                 @endforeach
-<<<<<<< HEAD
-                            @else
-                                <tr>
-                                    <td colspan="7">
-                                        <div class="row justify-content-center h-100 align-items-center">
-                                            <div class="d-flex align-items-center justify-content-center flex-column py-5">
-                                                <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid"
-                                                    alt="" style="width: 100px">
-                                                <h6 class="font-weight-bold text-dark py-0">You don't have expense</h6>
-                                                <span class="text-xs" style="text-align: center">Scan your recepit or
-                                                    create new
-                                                    expense form the button
-                                                    above</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endif
-                        </tbody>
-                    </table>
-=======
 
                             @else
 
@@ -888,44 +725,11 @@
 
                     </table>
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                 </div>
 
             </div>
 
         </div>
-<<<<<<< HEAD
-    </div>
-
-    <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    "Authorization": "Bearer " + AUTH_TOKEN,
-                    "Accept": "application/json"
-                }
-            });
-
-            $.ajax({
-                type: "GET",
-                url: API_URL + "api/category/list/main?user_id=" + USR_ID,
-                success: function(res) {
-                    if (res) {
-                        var response = res['data'];
-                        for (const obj of response) {
-                            var CategoryId = obj.category_name;
-                            var CategoryName = obj.category_name;
-                            $("#list_category").append('<option value="' + CategoryName +
-                                '">' + CategoryName + '</option>');
-                        }
-                    } else {
-                        $("#list_category").empty();
-                    }
-                }
-            });
-        });
-
-=======
 
     </div>
 
@@ -1115,7 +919,6 @@
 
 
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
         function getExpenseData(expense_id) {
 
             $.ajaxSetup({

@@ -257,13 +257,6 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-<<<<<<< HEAD
-
-                        <li class="mb-0">
-
-                            <a class="dropdown-item border-radius-md" href="/tenant">
-
-=======
                         @if (session()->get('is_superadmin') == false)
                         <li class="mb-0">
 
@@ -287,7 +280,6 @@
                         @else
                         <li class="mb-0">
                             <a class="dropdown-item border-radius-md" href="/tenant">
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                 <div class="d-flex flex-column justify-content-center">
 
                                     <h6 class="text-sm font-weight-normal mb-1">
@@ -295,13 +287,7 @@
                                         <span class="font-weight-bold"><i
 
                                                 class="fa-solid fa-user me-sm-1"></i></i></span><span
-<<<<<<< HEAD
-
                                             class="font-weight-bold"> Corporate Info</span>
-
-=======
-                                            class="font-weight-bold"> Corporate Info</span>
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                     </h6>
 
                                 </div>
@@ -309,11 +295,7 @@
                             </a>
 
                         </li>
-<<<<<<< HEAD
-
-=======
                         @endif
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                         {{-- <li class="mb-0">
 
                             <a class="dropdown-item border-radius-md" href="/setting">
@@ -420,13 +402,9 @@
 
             type: "GET",
 
-<<<<<<< HEAD
-            url: API_URL + "api/user/profile/info?user_id=" + document.getElementById('navbar_uid').value,
-=======
             url: API_URL + "api/user/profile/info?user_id=" + document.getElementById(
 
                 'navbar_uid').value,
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
             success: function(res) {
 

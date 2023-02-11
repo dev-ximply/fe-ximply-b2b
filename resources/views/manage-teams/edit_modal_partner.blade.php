@@ -3,10 +3,6 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background: #19194b">
-<<<<<<< HEAD
-                {{-- <h5 class="modal-title" id="exampleModalLabel">Add Department</h5> --}}
-=======
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                 <h6 class="font-weight-bolder" style="color: white">Edit Client Vendor</h6>
                 <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
                 </button>
@@ -20,21 +16,12 @@
                             <input name="editcompanyName" class="form-control" type="text" id="editcompanyName"
                                 required="required">
                         </div>
-<<<<<<< HEAD
-                        <div class="col-6">
-                            <label class="form-label" style="color: black; font-weight:500">Contact Name</label>
-                            <div class="input-group">
-                                <input name="editPartnerName" class="form-control" type="text" id="editPartnerName"
-                                    required="required">
-                            </div>
-=======
                     </div>
                     <div class="col-6">
                         <label class="form-label" style="color: black; font-weight:500">Contact Name</label>
                         <div class="input-group">
                             <input name="editPartnerName" class="form-control" type="text" id="editPartnerName"
                                 required="required">
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                         </div>
                     </div>
                 </div>

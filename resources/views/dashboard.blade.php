@@ -767,15 +767,7 @@
                         $('#ex1').zoom();
 
                     } else {
-                        <<
-                        << << < HEAD
-                        Swal.fire('failed<br>Please contact ximply support'); ===
-                        === =
-
                         Swal.fire('failed<br>Please contact ximply support');
-
-                        >>>
-                        >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
                     }
 
                 },
@@ -783,15 +775,7 @@
                 complete: function(data) {
 
                     if (data.status != 200) {
-                        <<
-                        << << < HEAD
-                        Swal.fire('failed<br>Please contact ximply support'); ===
-                        === =
-
                         Swal.fire('failed<br>Please contact ximply support');
-
-                        >>>
-                        >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
                     }
 
                 }
@@ -849,18 +833,7 @@
                 swalWithBootstrapButtons
 
                     .fire({
-                        <<
-                        << << < HEAD
                         title: "<h5>are you sure want to process?</h5>",
-                        ===
-                        === =
-
-                        title: "<h5>are you sure want to process?</h5>",
-
-
-                        >>>
-                        >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
-
                         icon: "warning",
 
                         showCancelButton: true,
@@ -968,15 +941,8 @@
 
                 FilterStartDate = urlParams.get('filter_start_date');
 
-                FilterEndDate = urlParams.get('filter_end_date'); <<
-                << << < HEAD
-                FilterMember = urlParams.get('filter_member'); ===
-                === =
-
+                FilterEndDate = urlParams.get('filter_end_date');
                 FilterMember = urlParams.get('filter_member');
-
-                >>>
-                >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
             }
 
         }
@@ -1004,11 +970,6 @@
                 "?expense_type=" + FilterExpenseType +
 
                 "&start_date=" + FilterStartDate +
-                <<
-                << << < HEAD "&end_date=" + FilterEndDate +
-                "&member_id=" + FilterMember,
-            ===
-            === =
 
             "&end_date=" + FilterEndDate +
 
@@ -1377,16 +1338,9 @@
                                     dataLabels: {
 
                                         enabled: true,
-                                        <<
-                                        << << < HEAD
-                                        distance: 35,
-                                        ===
-                                        === =
 
                                         distance: 35,
-
-                                        >>>
-                                        >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
+                                        
                                         style: {
 
                                             color: 'white'
