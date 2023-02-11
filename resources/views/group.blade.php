@@ -195,9 +195,13 @@
                                 </th>
 
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+<<<<<<< HEAD
 
                                     Have Client Vendor
 
+=======
+                                    Have Client Vendor
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                 </th>
 
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
@@ -205,7 +209,11 @@
                                     Member
 
                                 </th>
+<<<<<<< HEAD
                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+=======
+                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                     Created
                                 </th>
 
@@ -226,15 +234,23 @@
                                 <tr class="">
 
                                     <td class="text-sm" data-label="Group Name" style="color: #000000">
+<<<<<<< HEAD
 
                                         {{ $item->group_name }}
+=======
+                                        {{ $item->group_name }} <br>
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
                                     </td>
 
                                     <td class="text-sm" data-label="Have Partner" style="color: #000000">
+<<<<<<< HEAD
 
                                         {{ ($item->have_partnership == '1' ? 'yes' : 'no') }}
 
+=======
+                                        {{ $item->have_partnership == '1' ? 'yes' : 'no' }}
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                     </td>
 
                                     <td class="text-sm" data-label="Member" style="color: #000000">
@@ -243,6 +259,7 @@
 
                                             {{ $item->count_members }} members
 
+<<<<<<< HEAD
                                         </span>
 
                                     </td>
@@ -251,8 +268,23 @@
                                        
                                            {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }}
                                      
+=======
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
+                                        </span>
+
+                                    </td>
+<<<<<<< HEAD
+=======
+                                    <td>
+                                        <span class="text-dark" style="font-size: 15px">
+
+                                            {{-- {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
+                                            {{ $item->created_date }} <br>
+                                            {{ $item->created_time }}
+
                                         </span>
                                     </td>
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
                                     <td class="text-sm d-flex justify-content-md-center justify-content-between"
 
@@ -271,14 +303,21 @@
                                         </button> --}}
 
 					 <div>
+<<<<<<< HEAD
                                             <a href="/group-info"
                                                 class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
                                                 data-bs-title="View Your Expense Member"      
+=======
+                                            <a href="/group-info/{{ $item->id }}"
+                                                class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
+                                                data-bs-title="View Your Expense Member"
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                 style="background-color: #85CDFD;width:50px;height:25px;font-size:12px; font-weight:500;">
                                                 Info
                                             </a>
                                         </div>
 
+<<<<<<< HEAD
                                     	<div class="me-2">
                                         <button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
 
@@ -289,11 +328,25 @@
                                             Edit
 
                                         </button>
+=======
+                                        <div class="me-2">
+                                            <button
+                                                class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
+                                                data-bs-title="View Your Expense Member" data-bs-toggle="modal"
+                                                data-id="{{ $item->id }}" data-bs-target="#editModalGroup"
+                                                style="background-color: #ff720c;width:50px;height:25px;font-size:12px; font-weight:500;"
+                                                onclick="getDataGroup('{{ $item->id }}', '{{ $item->group_name }}', '{{ $item->have_partnership }}')">
+
+                                                Edit
+
+                                            </button>
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                         </div>
                                         <div class="me-2">
                                             <button
                                                 class="btn text-white d-flex justify-content-center me-2 align-items-center text-capitalize btn-update"
                                                 data-bs-title="View Your Expense Member" data-bs-toggle="modal"
+<<<<<<< HEAD
                                                 data-id="{{ $item->id }}" data-bs-target="#editModalPartner"
                                                 style="background-color: #E40909;width:50px;height:25px;font-size:12px; font-weight:500;"
                                                 onclick="">
@@ -303,6 +356,14 @@
 
 
 
+=======
+                                                data-id="'{{ $item->id }}'" data-bs-target="#deleteGroup"
+                                                style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                onclick="deleteGroup({{ $item->id }})">
+                                                Delete
+                                            </button>
+                                        </div>
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                     </td>
 
                                 </tr>
@@ -327,6 +388,7 @@
 
 
 
+<<<<<<< HEAD
     <script>
 
         function changeGroup(value){
@@ -356,6 +418,56 @@
 	
   </script>
 
+=======
+    <script>
+        function changeGroup(value) {
+
+            console.log(value)
+
+            document.getElementById('group_id').value = value;
+
+        }
+    </script>
+
+    <script>
+        function deleteGroup() {
+
+            $(".deleteRecord").click(function() {
+                var id = $(this).data("id");
+                var token = $("meta[name='csrf-token']").attr("content");
+
+                $.ajax({
+                    url: "users/" + id,
+                    type: 'DELETE',
+                    data: {
+                        "id": id,
+                        "_token": token,
+                    },
+                    success: function() {
+                        console.log("it Works");
+                    }
+                });
+
+            });
+
+        }
+
+        function getDataGroup(group_id, group_name, have_partnership) {
+            console.log('success', group_name);
+            console.log('success', have_partnership);
+
+            document.getElementById('group_id').value = group_id;
+            document.getElementById('groupName').value = group_name;
+            if (have_partnership == 1) {
+                document.getElementById('IsHaveClient').checked = true;
+            } else {
+                document.getElementById('IsHaveClient').checked = false;
+            }
+
+        }
+    </script>
+
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
     <script>
 
         function getData(id) {

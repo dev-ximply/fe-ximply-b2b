@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
+
 class GroupController extends Controller
 {
     public static function index()
@@ -21,6 +22,7 @@ class GroupController extends Controller
                 'section' => 'group',
                 'data' => [
                     'groups' => self::groups(Auth::user()['id']),
+                    'groups_info' => self::groups_info(Auth::user()['id'])
                 ],
             ]
         );
@@ -43,10 +45,14 @@ class GroupController extends Controller
     {
         $client = new Client();
         $headers = [
-            'Authorization' => 'Bearer '.Session::get('AuthToken'),
+            'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json',
         ];
-        $request = new Psr7Request('GET', config('api.base_url').'api/group/list/'.Session::get('TenantCode').'?user_id='.$user_id, $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode') . '?user_id='  . $user_id, $headers);
+           $res = $client->sendAsync($request)->wait();
+        // $response = Http::get('api/group/list/' . Session::get('TenantCode') , [
+        //     'user_id' => $user_id,
+        // ]);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 
@@ -55,16 +61,22 @@ class GroupController extends Controller
         }
 
         return $response->data;
+
+        // if ($response->successful()) {
+        //     return $response->json();
+        // }
+
+        // return [];
     }
 
     private function asynUpdateGroup($params)
     {
         $headers = [
-            'Authorization' => 'Bearer '.session()->get('AuthToken'),
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
             'Accept' => 'application/json',
         ];
 
-        $url = config('api.base_url').'api/group/edit';
+        $url = config('api.base_url') . 'api/group/edit';
         $response = Http::withHeaders($headers)
             ->asForm()
             ->post($url, $params);
@@ -74,5 +86,24 @@ class GroupController extends Controller
         }
 
         throw new \Exception($response->json()['message']);
+    }
+
+
+    public static function groups_info($user_id)
+    {
+        $client = new Client();
+        $headers = [
+            'Authorization' => 'Bearer ' . Session::get('AuthToken'),
+            'Accept' => 'application/json',
+        ];
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/member/list/' . Session::get('TenantCode') . '?user_id=' . $user_id, $headers);
+        $res = $client->sendAsync($request)->wait();
+        $response = json_decode($res->getBody());
+
+        if ($response->success == false) {
+            return [];
+        }
+
+        return $response->data;
     }
 }

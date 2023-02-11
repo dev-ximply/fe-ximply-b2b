@@ -53,7 +53,11 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background: #19194b">
+<<<<<<< HEAD
                 <h6 class="font-weight-bolder text-white" style="font-weight: 600">Info Member</h6>
+=======
+                <h6 class="font-weight-bolder text-white" style="font-weight: 600">View Member</h6>
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                 <button type="button" class="btn-close  text-white" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
@@ -86,7 +90,11 @@
                             </div>
                             <div class="col-6">
                                 <label class="form-label mt-2" style="color: black; font-weight:500">Employee
+<<<<<<< HEAD
                                     Code</label>
+=======
+                                    Id</label>
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                 <div class="input-group">
                                     <input id="info_employee_code" placeholder="Employee Code" name="info_employee_code"
                                         class="form-control" type="text">
@@ -95,9 +103,16 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
+<<<<<<< HEAD
                                 <label class="form-label mt-2" style="color: black; font-weight:500">Department</label>
                                 <div class="">
                                    <input type="text" class="form-control" id="info_department">
+=======
+                                <label class="form-label mt-2" style="color: black; font-weight:500">Group</label>
+                                <div class="">
+                                   <input type="text" class="form-control" id="info_department">
+                    
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                 </div>
                             </div>
                             <div class="col-6">
@@ -107,6 +122,10 @@
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
+=======
+       
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                     </div>
                 </div>
             </div>
@@ -117,7 +136,11 @@
 <script src="{{ asset('js/plugins/choices.min.js') }}"></script>
 <script src="{{ asset('js/plugins/flatpickr.min.js') }}"></script>
 
+<<<<<<< HEAD
 <script>
+=======
+{{-- <script>
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
     //send invitation
     function sendInvitation(user_id, email, first_name, last_name, group_id, role_id) {
         var tenant_code = TENANT_CODE;
@@ -212,7 +235,11 @@
                 }
             });
     }
+<<<<<<< HEAD
 </script>
+=======
+</script> --}}
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
 <script>
     function getMultiple(data) {

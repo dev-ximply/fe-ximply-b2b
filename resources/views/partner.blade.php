@@ -4,6 +4,7 @@
 
 @section('container')
 
+<<<<<<< HEAD
     @include('manage-teams.add_modal_partner')
 
     @include('manage-teams.edit_modal_partner')
@@ -75,14 +76,87 @@
                                     </button>
 
                                 </div>
+=======
+@include('manage-teams.add_modal_partner')
+
+@include('manage-teams.edit_modal_partner')
+
+
+
+<div class="modal fade" id="modalAssignPartner" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header" style="background: #19194b">
+
+                <h6 class="font-weight-bolder" style="color: white">Assign Client Vendor</h6>
+
+                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <form action="" onsubmit="handleSubmitAssign(event)">
+
+                    @csrf
+
+                    <div class="row">
+
+                        <div class="col-6">
+
+                            <input type="hidden" id="partner_assign_id">
+
+                            <label class="form-label mt-4" style="color: black; font-weight:500">User</label>
+
+                            <select class="form-control " name="group_id" id="user_assign_id">
+
+                                <option value="" selected>Pilih User</option>
+
+                                @foreach ($data['a_partner'] as $member)
+                                <option value="{{ $member->id }}">{{ $member->full_name }}</option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="d-flex justify-content-end mt-4">
+
+                            <div>
+
+                                <button class="btn text-white" data-bs-dismiss="modal"
+                                    style="background-color: #D42A34">Cancel</button>
+
+                                <button type="submit" class="btn text-white" style="background-color: #62ca50">
+
+                                    Submit
+
+                                </button>
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
                             </div>
 
                         </div>
 
+<<<<<<< HEAD
                     </form>
 
                 </div>
+=======
+                    </div>
+
+                </form>
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
             </div>
 
@@ -90,6 +164,7 @@
 
     </div>
 
+<<<<<<< HEAD
 
 
     <style>
@@ -111,16 +186,123 @@
             width: 100%;
 
             table-layout: fixed;
+=======
+</div>
+
+
+
+<style>
+    /* table */
+
+    table {
+
+        /* border: 1px solid #ccc; */
+
+        border-radius: 5px;
+
+        border-collapse: collapse;
+
+        margin: 0;
+
+        padding: 0;
+
+        width: 100%;
+
+        table-layout: fixed;
+
+    }
+
+
+
+    table caption {
+
+        font-size: 1.5em;
+
+        margin: .5em 0 .75em;
+
+    }
+
+
+
+    table tr {
+
+        background-color: #ffffff;
+
+        border: 1px solid #ddd;
+
+        padding: .35em;
+
+    }
+
+
+
+    table th,
+
+    table td {
+
+        padding: .625em;
+
+        text-align: center;
+
+    }
+
+
+
+    table th {
+
+        font-size: .85em;
+
+        letter-spacing: .1em;
+
+        text-transform: uppercase;
+
+    }
+
+
+
+    @media screen and (max-width: 600px) {
+
+        table {
+
+            border: 0;
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
         }
 
 
 
         table caption {
+<<<<<<< HEAD
 
             font-size: 1.5em;
 
             margin: .5em 0 .75em;
+=======
+
+            font-size: 1.3em;
+
+        }
+
+
+
+        table thead {
+
+            border: none;
+
+            clip: rect(0 0 0 0);
+
+            height: 1px;
+
+            margin: -1px;
+
+            overflow: hidden;
+
+            padding: 0;
+
+            position: absolute;
+
+            width: 1px;
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
         }
 
@@ -128,16 +310,25 @@
 
         table tr {
 
+<<<<<<< HEAD
             background-color: #ffffff;
 
             border: 1px solid #ddd;
 
             padding: .35em;
+=======
+            /* border-bottom: 3px solid #ddd; */
+
+            display: block;
+
+            margin-bottom: .625em;
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
         }
 
 
 
+<<<<<<< HEAD
         table th,
 
         table td {
@@ -145,16 +336,37 @@
             padding: .625em;
 
             text-align: center;
+=======
+        table td {
+
+            /* border-bottom: 1px solid #ddd; */
+
+            display: block;
+
+            font-size: .8em;
+
+            text-align: right;
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
         }
 
 
 
+<<<<<<< HEAD
         table th {
 
             font-size: .85em;
 
             letter-spacing: .1em;
+=======
+        table td::before {
+
+            content: attr(data-label);
+
+            float: left;
+
+            font-weight: bold;
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
             text-transform: uppercase;
 
@@ -162,6 +374,7 @@
 
 
 
+<<<<<<< HEAD
         @media screen and (max-width: 600px) {
 
             table {
@@ -425,13 +638,309 @@
                 </table>
 
             </div>
+=======
+        table td:last-child {
+
+            border-bottom: 0;
+
+        }
+
+    }
+</style>
+
+
+
+<div class="row">
+
+    <div>
+
+        <button class="btn  text-md text-white @if ($section == 'add user') active @endif" data-bs-toggle="modal"
+            data-bs-target="#addModalPartner" style="background-color: #19194b">Add Client Vendor
+
+            <i class="fa-solid fa-user-plus ms-2" style="font-size: 1em"></i>
+
+        </button>
+
+    </div>
+
+</div>
+
+<div class="col-12">
+
+    <div class="card" style="border-radius: 5px">
+
+        <div class="table-responsive">
+
+            <table class="table  text-dark">
+
+                <thead>
+
+                    <tr>
+
+                        <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">Company Name
+
+                        </th>
+
+                        <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+
+                            Contact Name
+
+                        </th>
+
+                        <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+
+                            Contact Company
+
+                        </th>
+
+                        <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+
+                            Group
+
+                        </th>
+
+                        <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+
+                            Added By
+
+                        </th>
+                        <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+
+                            Created
+
+                        </th>
+
+
+
+                        <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+
+                            Action
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @if (count($data['t_partner']) > 0)
+
+                    @foreach ($data['t_partner'] as $item)
+
+                    <tr class="">
+
+                        <td class="text-sm" data-label="Company Name" style="color: #000000">
+
+                            {{ $item->company_name }}
+
+                        </td>
+
+                        <td class="text-sm" data-label="Contact Name" style="color: #000000">
+
+                            {{ $item->contact_name }}
+
+                        </td>
+
+                        <td class="text-sm" data-label="Contact Info" style="color: #000000">
+
+                            {{ $item->email }}
+
+                            <br>
+
+                            {{ $item->handphone }}
+
+                        </td>
+                        <td class="text-sm" data-label="Contact Info" style="color: #000000">
+                            {{ $item->group_name }}
+
+                        </td>
+                        <td class="text-sm" data-label="Contact Info" style="color: #000000">
+
+                            {{ $item->created_by }}
+
+                        </td>
+                        <td class="text-sm" data-label="Contact Info" style="color: #000000">
+
+                            {{-- {{ Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
+                            {{ $item->created_date }}
+
+
+                        </td>
+
+
+
+
+
+
+
+                        <td class="text-sm d-flex justify-content-md-center justify-content-between"
+                            data-label="Action">
+
+                            {{-- <button
+                                class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
+                                data-bs-title="View Your Expense Member" data-bs-toggle="modal"
+                                data-id="{{ $item->id }}" data-bs-target="#modalAssignPartner"
+                                onclick="changeAssign({{ $item->id }})"
+                                style="background-color: #62CA50;width:50px;height:25px;font-size:12px; font-weight:500;">
+
+                                Assign
+
+                            </button> --}}
+
+                            <button type="button"
+                                class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
+                                data-bs-title="View Your Expense Member" data-bs-toggle="modal"
+                                data-bs-target="#editModalPartner"
+                                onclick="getDataPartner('{{ $item->id }}','{{ $item->company_name }}', '{{ $item->contact_name }}', '{{ $item->email }}', '{{ $item->handphone }}', '{{  $item->group_name  }}')"
+                                style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;">
+                                Edit
+                            </button>
+                            <button
+                                class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
+                                data-bs-title="View Your Expense Member" data-id="'{{ $item->id }}'"
+                                onclick="deletePartner('{{ $item->id }}')"
+                                style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                onclick="">
+                                Delete
+                            </button>
+
+
+                        </td>
+
+                    </tr>
+
+                    @endforeach
+
+                    @else
+
+                    <tr>
+
+                        <td colspan="4" style="font-size: 12px">
+
+                            data empty
+
+                        </td>
+
+                    </tr>
+
+                    @endif
+
+                </tbody>
+
+            </table>
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
         </div>
 
     </div>
+<<<<<<< HEAD
 
        <script>
         function getDataPartner(partner_id, company_name, contact_name, email, handphone){
+=======
+
+</div>
+
+<script>
+    function getDataPartner(id, company_name, contact_name, email, handphone, group_name){
+            console.log(id);
+            console.log(company_name);
+            console.log(contact_name);
+            console.log(email);
+            console.log(handphone);
+            console.log('tes', group_name);
+
+            document.getElementById('pertner_id').value = id;
+            document.getElementById('editcompanyName').value = company_name;
+            document.getElementById('editPartnerName').value = contact_name;
+            document.getElementById('editEmail').value = email;
+            document.getElementById('editHandphone').value = handphone;
+            document.getElementById('editGroupName').value = group_name;
+            document.getElementById('editGroupName').innerHTML = group_name;
+        }
+</script>
+
+<script>
+    function deletePartner(parnerId){
+
+        console.log(parnerId)
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success-cstm mx-2",
+                cancelButton: "btn btn-danger-cstm mx-2",
+            },
+            buttonsStyling: false,
+        });
+
+        swalWithBootstrapButtons
+            .fire({
+                title: "<h5>Are you sure you want to process?</h5>",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                reverseButtons: false,
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    //delete parner
+                    console.log(parnerId)
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ route('partners.delete') }}",
+                        data: {
+                            partner_id: parnerId,
+                        },
+                        success: function(response) {
+
+                            const {
+                                success,
+                                status,
+                                message
+                            } = response;
+
+                            console.log(response)
+
+                            if (status === true) {
+
+                                setTimeout(function() {
+                                    window.location.reload(true);
+                                }, 1000);
+                            }else{
+                                swalWithBootstrapButtons.fire(
+                                    "gagal",
+                                    message,
+                                    "error"
+                                );
+                            }
+                        }
+
+                    });
+
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+
+                    swalWithBootstrapButtons.fire(
+                        "Cancelled",
+                        "Your request cancelled :)",
+                        "error"
+                    );
+                }
+            });
+    }
+
+</script>
+
+{{-- <script>
+    function getDataPartner(partner_id, company_name, contact_name, email, handphone) {
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
             console.log(partner_id);
             console.log(company_name);
             console.log(contact_name);
@@ -444,11 +953,18 @@
             document.getElementById('editEmail').value = email;
             document.getElementById('editHandphone').value = handphone;
         }
+<<<<<<< HEAD
     </script>
 
     <script>
 
         function getData(id) {
+=======
+</script> --}}
+
+<script>
+    function getData(id) {
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
             $.ajax({
 
@@ -483,17 +999,25 @@
             });
 
         }
+<<<<<<< HEAD
 
     </script>
 
     <script>
 
         function changeEmploye(value, companyName, editEmail, editHandphone) {
+=======
+</script>
+
+<script>
+    function changeEmploye(value, companyName, editEmail, editHandphone) {
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
             console.log(value)
 
             document.getElementById('pertner_id').value = value;
 
+<<<<<<< HEAD
             // document.getElementById('editcompanyName').value=value;
 
             // document.getElementById('editcompanyName').value=companyName;
@@ -511,6 +1035,35 @@
     <script>
 
         function changeAssign(partnerId) {
+=======
+            document.getElementById('editcompanyName').value = value;
+
+            document.getElementById('editcompanyName').value = companyName;
+
+            document.getElementById('editEmail').value = editEmail;
+
+            document.getElementById('editHandphone').value = editHandphone;
+
+        }
+</script>
+
+
+
+<script>
+    function changeAssign(partnerId) {
+
+            console.log(partnerId)
+
+            document.getElementById('partner_assign_id').value = partnerId;
+
+        }
+</script>
+
+
+
+<script>
+    function changeAssign(partnerId) {
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
             console.log(partnerId)
 
@@ -520,6 +1073,11 @@
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
         function handleSubmitAssign(event) {
 
             event.preventDefault();
@@ -589,7 +1147,10 @@
                     console.log(response)
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                     if (success === true) {
 
                         swalWithBootstrapButtons
@@ -604,7 +1165,10 @@
 
                             );
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
                         setTimeout(function() {
 
@@ -646,7 +1210,11 @@
 
         }
 
+<<<<<<< HEAD
     </script>
+=======
+</script>
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
 @endsection
 

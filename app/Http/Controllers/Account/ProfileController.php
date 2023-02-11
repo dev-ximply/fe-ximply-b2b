@@ -21,6 +21,7 @@ class ProfileController extends Controller
                 'section' => 'profile',
                 'data' => [
                     'profile' => self::get_profile(Auth::user()['id']),
+                    'profile_role' => self::get_dep(Auth::user()['id'])
                     // 'referral' => self::get_referral(Auth::user()['id'])
                 ]
             ]
@@ -34,6 +35,24 @@ class ProfileController extends Controller
             'Accept' => 'application/json'
           ];
         $request = new Psr7Request('GET', config('api.base_url').'api/user/profile/info?user_id='.$user_id, $headers);
+        $res = $client->sendAsync($request)->wait();
+        $response = json_decode($res->getBody());
+        
+        if($response->success==false){
+            return [];
+        }
+
+        return $response->data;
+    }
+
+    public static function get_dep($user_id){
+        $client = new Client();
+        $headers = [
+            'Authorization' => 'Bearer '.Session::get('AuthToken'),
+            'Accept' => 'application/json'
+          ];
+        $request = new Psr7Request('GET', config('api.base_url').'api/group/member/list/'.  Session::get('TenantCode') . '?user_id='  . $user_id, $headers);
+        // $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode') . '?user_id=' . $user_id, $headers);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
         
