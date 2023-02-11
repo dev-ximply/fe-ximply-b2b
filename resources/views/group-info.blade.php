@@ -16,7 +16,6 @@
             <button class="btn text-white" style="background: #191a4b" onclick="history.back()">Back</button>
         </div>
 
-
         {{-- modal edit group info --}}
         {{-- <div class="modal fade" id="edit_group_info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -327,9 +326,9 @@
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
                                     First Name</th>
-                                {{-- <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
+                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
-                                    Last Name</th> --}}
+                                    Last Name</th>
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
                                     Role Name</th>
@@ -356,12 +355,12 @@
                                                 {{ $member->first_name }}
                                             </span>
                                         </td>
-                                        {{-- <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
+                                        <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             <span>
                                                 {{ $member->last_name }}
                                             </span>
-                                        </td> --}}
+                                        </td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             {{ $member->role_name }}</td>
@@ -373,7 +372,7 @@
                                             {{ $member->limit->remain_limit }}</td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
-                                            {{ $member->limit->created_date }}
+                                            {{ $member->created_date }}
                                         </td>
                               
                                     </tr>

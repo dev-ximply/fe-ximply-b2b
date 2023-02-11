@@ -59,13 +59,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        {{-- <div class="col-6">
+                        <div class="col-6">
                             <label class="form-label text-dark" style="font-weight: 600">Frequency</label>
                             <select class="form-control" name="frequency">
                                 <option value="onetime">Onetime</option>
                                 <option value="monthly">Monthly</option>
                             </select>
-                        </div> --}}
+                        </div>
                         <div class="col-6">
                             <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
                             <input type="text" class="form-control" id="auto_approve_limit" name="auto_approve_limit"
@@ -74,22 +74,24 @@
                                 new NumericInput(document.getElementById('auto_approve_limit'), 'en-CA');
                             </script>
                         </div>
-<<<<<<< HEAD
                         {{-- <div class="col-6">
-=======
-                        <div class="col-6">
                             <label class="form-label text-dark" style="font-weight: 600">Period</label>
                             <input type="text" class="form-control" id="period" name="period">
-                        </div>
+                            <select name="frequency" id="frequency" class="form-select">
+                                <option value="">Select</option>
+                                <option value="">One Time</option>
+                                <option value="">Monthly</option>
+                          
+                            </select>
+                        </div> --}}
 
                     </div>
                     <div class="row">
                         <div class="col-6">
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                             <label class="form-label text-dark" style="font-weight: 600">Expire Date</label>
                             <input class="form-control datetimepicker" type="text" name="expire_date" id="expire_date"
                                 value="{{ old('expire_date') }}" placeholder="Please select date" data-input>
-                        </div> --}}
+                        </div>
                     </div>
                     {{-- <div class="row">
                         <div class="col-md">

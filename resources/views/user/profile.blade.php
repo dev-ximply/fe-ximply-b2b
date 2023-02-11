@@ -150,7 +150,8 @@
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Group</label>
                                     <input type="text" class="form-control"
-                                        value="{{ $data['profile_role'][0]->group_name }}" disabled>
+                                        value="{{ $data['profile_role'][0]->group_name }}" disabled
+                                        >
                                 </div>
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Employee

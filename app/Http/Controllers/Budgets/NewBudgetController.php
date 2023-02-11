@@ -54,6 +54,7 @@ class NewBudgetController extends Controller
         $auto_approve_limit = $request['auto_approve_limit'];
         $now = date("Y-m-d");
         $expire_date = date("Y-m-d", strtotime("+1 month", strtotime($now)));
+        $frequency = $request['frequency'];
         // $expire_date = $request['expire_date'];
 
         $client = new Client();
@@ -86,6 +87,10 @@ class NewBudgetController extends Controller
                 [
                     'name' => 'expire_date',
                     'contents' => $expire_date
+                ],
+                [
+                    'name' => 'frequency',
+                    'contents' => $frequency    
                 ]
             ]
         ];

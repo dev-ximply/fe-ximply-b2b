@@ -9,29 +9,6 @@
     @include('manage-teams.edit-modal-user')
     @include('manage-teams.info-member')
 
-<<<<<<< HEAD
-
-
-    <div class="d-flex justify-content-between">
-	
-
-	<div class="mt-2">
-	   <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#add_modal_users"
-
-            style="background-color: #19194b">
-
-            <span>Add Member</span>&nbsp;
-
-            <i class="fa-solid fa-user-plus ms-2"></i>
-
-          </button>
-
-	</div>
-
-        <div class="d-flex justify-content-end flex-column text-end mb-2">
-          <h6 class="text-dark fs-6">Total Member</h6>
-          <p class="text-dark font-weight-bold fs-5">{{ count($data['employee']) }} <span style="font-weight:400; font-size:14px">Members</span></p>
-=======
     <div class="d-flex justify-content-between">
 	
         <div id="loader"
@@ -57,7 +34,6 @@
             <h6 class="text-dark fs-6">Total Member</h6>
             <p class="text-dark font-weight-bold fs-5">{{ count($data['employee']) }} <span
                     style="font-weight:400; font-size:14px">Members</span></p>
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
         </div>
 
 
@@ -149,6 +125,7 @@
                             <tbody>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 @foreach ($data['employee'] as $item)
 
                                     <tr class="align-middle">
@@ -157,8 +134,11 @@
 
 =======
                                 @php
+=======
+                                {{-- @php
+>>>>>>> 33878eac353eadb7599dc60590a563a6c40bd331
                                     var_dump($data['employee']);
-                                @endphp
+                                @endphp --}}
 
                                 @foreach ($data['employee'] as $item)
                                     <tr class="">
@@ -292,7 +272,8 @@
                                                         class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
                                                         style="background-color: #85cdfd;width:60px;height:25px;font-size:11px; font-weight:500;"
                                                         data-bs-target="#modalInfoMember" data-bs-toggle="modal"
-                                                        onclick="getInfoMember('{{ $item->id }}','{{ '$item->first_name' }}', '{{ '$item->last_name' }}', '{{ $item->email }}', '{{ $item->group_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')">
+                                                        onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')"
+                                                        >
                                                         Info
                                                     </button>
                                                 @else
@@ -301,7 +282,8 @@
                                                         data-bs-title="Edit" data-bs-toggle="modal"
                                                         data-id="'{{ $item->id }}'" data-bs-target="#edit_modal_users"
                                                         style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                        onclick="getDataMember('{{ $item->id }}','{{ '$item->first_name' }}', '{{ '$item->last_name' }}', '{{ $item->email }}', '{{ $item->group_id }}', '{{ $item->group_name }}', '{{ $item->role_name }}')">
+                                                        onclick="getDataMember('{{ $item->id }}', '{{  $item->first_name  }}',  '{{  $item->last_name }}', '{{   $item->email }}', '{{  $item->employee_id  }}' ,  '{{  $item->group_name  }}', '{{  $item->role_name  }}' )"
+                                                        >
                                                         View
                                                     </button>
                                                     <button

@@ -87,11 +87,38 @@
                                     new NumericInput(document.getElementById('topupAmount'), 'en-CA');
                                 </script>
                             </div>
+                            <label for="" style="color: black">Client</label>
+                            <div class="mb-3">
+                                <select name="" id="" class="form-select" name="topupClient"
+                                    id="topupClient">
+                                    <option value="" selected>Select</option>
+                                    @foreach ($data['client'] as $item)
+                                        <option value="">
+                                            {{ $item->company_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                            </div>
                             <label style="color: #000000">Purpose</label>
                             <div class="mb-3 w-100">
-                                <select class="w-100 text-capitalize form-select" name="topupPurpose" id="topupPurpose"
+                                {{-- <select class="w-100 text-capitalize form-select" name="topupPurpose" id="topupPurpose"
                                     required>
+                                    <option value="" selected id="topupPurpose">Select</option>
+                                    @foreach ($data['purpose'] as $item)
+                                        <option value="{{  $item->purpose  }}">
+
+                                        </option>
+                                    @endforeach
+                                </select> --}}
+
+                                <select class="form-control " name="topupPurpose" id="topupPurpose">
                                     <option value="" selected>Select</option>
+                                    @foreach ($data['purpose'] as $item)
+                                        <option value="">
+                                            {{ $item->purpose }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <label style="color: #000000">Note</label>
@@ -102,7 +129,7 @@
                             <div class="d-flex text-center justify-content-end">
                                 <div>
                                     <button type="button" class="btn  btn-round me-1 mt-4 mb-0 text-white topUp"
-                                        onclick="topupRequest({{ Auth::user()['id'] }}, document.getElementById('topupAmount').value, document.getElementById('topupPurpose').value, document.getElementById('topupNote').value)"
+                                        onclick="topupRequest('{{ Auth::user()['id'] }}', document.getElementById('topupAmount').value, document.getElementById('topupClient').value, document.getElementById('topupPurpose').value, document.getElementById('topupNote').value)"
                                         style="background-color: #62ca50">Top Up</button>
                                     <button type="button" class="btn btn-danger btn-round text-white  ms-1 mt-4 mb-0"
                                         data-bs-dismiss="modal" style="background-color: #D42A34">Cancel</button>
@@ -117,7 +144,7 @@
 </div>
 
 <script>
-    function topupRequest(userId, amount, purpose, note) {
+    function topupRequest(userId, amount, client, purpose, note) {
 
         // console.log(userId);
         // console.log(amount);
@@ -146,9 +173,10 @@
 
                     var formData = new FormData();
 
-                    formData.append('tenant_code', TENANT_CODE);
+                    // formData.append('tenant_code', TENANT_CODE);
                     formData.append('user_id', userId);
                     formData.append('amount', amount);
+                    formData.append('client_id', client);
                     formData.append('purpose', purpose);
                     formData.append('note', note);
 
@@ -208,7 +236,7 @@
     $(document).ready(function() {
         $.ajax({
             type: "GET",
-            url: API_URL + "api/purpose/list/index?user_id=" + {{ Auth::user()['id'] }},
+            url: API_URL + "api/purpose/list/index?user_id=" + '{{ Auth::user()['id'] }}',
             success: function(res) {
                 if (res) {
                     var response = res['data'];
