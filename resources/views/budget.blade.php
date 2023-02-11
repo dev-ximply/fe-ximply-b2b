@@ -116,12 +116,6 @@
         </div>
     </div>
 
-
-
-
-
-
-
     <div class="row mb-4 mt-3 mx-1 justify-content-between">
         <div class="col-md d-sm-flex justify-content-start px-0 mx-0">
             <div class="d-flex me-2">
@@ -176,8 +170,12 @@
                                         aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#edit_modal_budget" onclick="getDetailBudget('{{ $item->full_name }}', '{{ $item->id }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}')">Edit</a>
+<<<<<<< HEAD
                                         {{-- TEST<a class="dropdown-item" href="javascript:;">Retire</a> --}}
                                         <a href="" class="dropdown-item">Delete</a>
+=======
+                                        <a class="dropdown-item" href="javascript:;">Delete</a>
+>>>>>>> 0b595dffcfc59cb05da391b3b51e1e94450e2b83
                                     </div>
                                 </div>
                             </div>

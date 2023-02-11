@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ asset('css/core-style.css') }}">
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.0.9') }}" rel="stylesheet" />
-    <script src="{{ asset('js/plugins/jquery-3.6.1.min.js') }}"></script>    
+    <script src="{{ asset('js/plugins/jquery-3.6.1.min.js') }}"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
@@ -70,26 +70,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-2">
+                        {{-- <div class="d-flex col-md-7 flex-row"> --}}
+                        {{-- <div class="col-md me-4 mb-2 w-100">
+                                <select name="filter_member" id="filter_member" class="form-select text-dark"
+                                    style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
+                                    <option value="" class="text-dark px-1" selected>
+                                        Your Data</option>
+                                </select>
+                            </div> --}}
+                        <div class="col-md mb-2 w-100">
                             <select name="filter_expense_type" id="filter_expense_type" class="form-select text-dark"
                                 style="font-size:11px;line-height:16px !important;border-radius:5px !important">
                                 <option value="" class="text-dark" selected>Expense Type</option>
                             </select>
                         </div>
-                        {{-- <div class="col-md-1 mb-2 d-flex" style="">
-                            <button type="submit" value="submit" style="line-height:16px; font-size:10px"
-                                class="form-control text-bold" id="filter_button">
-                                F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R</button>
-                        </div> --}}
+                        {{-- </div>                         --}}
                         <div class="col-md mb-2">
                             <button type="submit" value="submit"
                                 style="line-height:16px;  font-size:11px;background:#19194b;color:white"
-                                class="form-control text-bold d-flex justify-content-center"
-                                id="filter_button">
-                                {{-- F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R --}}
+                                class="form-control text-bold d-flex justify-content-center" id="filter_button">
                                 <span>FILTER&nbsp;&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
                             </button>
-                        </div>  
+                        </div>
                     </div>
                 </form>
                 <div class="row">
@@ -130,43 +132,12 @@
 <script src="{{ asset('js/plugins/smooth-scrollbar.min.js') }}"></script>
 
 <script>
-    // jQuery(function($) {
-    //     var from = $("#filter_start_date")
-    //         .datepicker({
-    //             dateFormat: "yy-mm-dd",
-    //             changeMonth: true
-    //         })
-    //         .on("change", function() {
-    //             to.datepicker("option", "minDate", getDate(this));
-    //         }),
-    //         to = $("#filter_end_date").datepicker({
-    //             dateFormat: "yy-mm-dd",
-    //             changeMonth: true
-    //         })
-    //         .on("change", function() {
-    //             from.datepicker("option", "maxDate", getDate(this));
-    //         });
-
-    //     function getDate(element) {
-    //         var date;
-    //         var dateFormat = "yy-mm-dd";
-    //         try {
-    //             date = $.datepicker.parseDate(dateFormat, element.value);
-    //         } catch (error) {
-    //             date = null;
-    //         }
-
-    //         return date;
-    //     }
-    // });
-</script>
-
-<script>
     const API_URL = document.getElementById('api_endpoint').value;
 
     var FilterExpenseType = "";
     var FilterStartDate = "";
     var FilterEndDate = "";
+    var FilterMember = "";
 
     if (window.location.search) {
         const queryString = window.location.search;
@@ -175,6 +146,7 @@
             FilterExpenseType = urlParams.get('filter_expense_type');
             FilterStartDate = urlParams.get('filter_start_date');
             FilterEndDate = urlParams.get('filter_end_date');
+            FilterMember = urlParams.get('filter_member');
         }
     }
 
@@ -453,8 +425,9 @@
                     for (const obj of response) {
                         var CategoryId = obj.id;
                         var CategoryName = obj.category_name;
-                        $("#filter_expense_type").append('<option value="' + CategoryName +
-                            '">' + CategoryName + '</option>');
+                        $("#filter_expense_type").append('<option value="' + CategoryId +
+                            '"' + (CategoryId == params.filter_expense_type ? 'selected' :
+                                '') + '>' + CategoryName + '</option>');
                     }
                 } else {
                     $("#filter_expense_type").empty();
@@ -462,4 +435,34 @@
             }
         });
     });
+
+    // $(document).ready(function() {
+    //         $.ajaxSetup({
+    //             headers: {
+    //                 "Authorization": "Bearer " + AUTH_TOKEN,
+    //                 "Accept": "application/json"
+    //             }
+    //         });
+
+    //         $.ajax({
+    //             type: "GET",
+    //             url: API_URL + "api/spend/list/assigned/" + TENANT_CODE +
+    //                 "?user_id=" + document.getElementById(
+    //                     'user_id').value,
+    //             success: function(res) {
+    //                 if (res) {
+    //                     var response = res['data'];
+    //                     for (const obj of response) {
+    //                         var uid = obj.id;
+    //                         var uname = obj.full_name;
+    //                         $("#filter_member").append('<option value="' + uid +
+    //                             '"' + (uid == params.filter_member ? 'selected' :
+    //                                 '') + '>' + uname + '</option>');
+    //                     }
+    //                 } else {
+    //                     $("#filter_member").empty();
+    //                 }
+    //             }
+    //         });
+    //     });
 </script>

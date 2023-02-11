@@ -211,6 +211,7 @@
 
         var formDataExpense = new FormData();
 
+
         formDataExpense.append('tenant_code', TENANT_CODE);
         formDataExpense.append('user_id', user_id);
         formDataExpense.append('category', category);
@@ -229,6 +230,8 @@
         if (fileAdditional.length > 0) {
             formDataExpense.append('file_additional', fileAdditional[0]);
         }
+
+        // new
 
         // console.log(formDataExpense);
 

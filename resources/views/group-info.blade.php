@@ -213,7 +213,7 @@
                                             </span>
                                         </td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
-                                            style="color: #000000">
+                                         ``            style="color: #000000">
                                             <span>
                                                 {{ $member->last_name }}
                                             </span>

@@ -74,7 +74,6 @@
             @endif
 
 
-
             @if (session()->get('approval_expense') == 1 &&
 
                     session()->get('approval_topup') == 1 &&
@@ -221,7 +220,6 @@
                                     <span class="nav-link-text ms-1 text-white">Member</span>
 
                                 </a>
-
                                 <a class="nav-link @if ($section == 'partner') active @endif " href="/partner">
 
                                     <span class="sidenav-mini-icon text-white"> O </span>
@@ -229,7 +227,6 @@
                                     <span class="nav-link-text ms-1  text-white">Client/Vendor</span>
 
                                 </a>
-
                             </li>
 
                         </ul>
@@ -475,4 +472,3 @@
 
     </div>
 </aside>
-65bcdccaebb3

@@ -8,7 +8,6 @@
     @include('expenses.new-expense')
 
     @include('budget.modal-top-up-approval')
-
     <div class="modal" tabindex="-1" id="modalExpenses">
 
         <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -349,10 +348,6 @@
 
                                         <span style="font-size: 16px;color:black;font-weight:400">Expenses</span>
 
-                                        {{-- <span style="font-size: 16px;color:black;font-weight:700">
-
-                                            {{ number_format($data['limit']['used_limit'], 2) }}</span> --}}
-
                                     </div>
 
                                 </div>
@@ -399,9 +394,7 @@
                                             style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
 
                                             <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
-
-                                                Member</option>
-
+                                                Your Data</option>
                                         </select>
 
                                     </div>
@@ -425,8 +418,6 @@
                                             class="form-control text-bold d-flex justify-content-center"
                                             id="filter_button">
 
-                                            {{-- F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R --}}
-
                                             <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
 
                                         </button>
@@ -435,75 +426,6 @@
 
                                 </div>
 
-                                {{-- <div class="row flex-md-row flex-column ms-auto">
-
-                                    <div class="col-md">
-
-                                        <div class="input-group">
-
-                                            <span for=""
-
-                                                class="input-group-text z-index-1 font-weight-bold text-dark"
-
-                                                id="basic-addon1"
-
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
-
-                                            <input type="date" class="form-control px-2 text-dark"
-
-                                                id="filter_start_date" name="filter_start_date"
-
-                                                style="font-size:11px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md">
-
-                                        <div class="input-group">
-
-                                            <span for="" class="input-group-text z-index-1 font-weight-bold"
-
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
-
-                                            <input type="date" class="form-control px-2" id="filter_end_date"
-
-                                                name="filter_end_date"
-
-                                                style="font-size:11px; height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md mb-2" style="height:15px;">
-
-                                        <select name="filter_expense_type" id="filter_expense_type"
-
-                                            class="form-select text-dark"
-
-                                            style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
-
-                                            <option value="" class="text-dark" selected>Expense Type</option>
-
-                                        </select>
-
-                                    </div>
-
-                                    <div class="col-md mb-2">
-
-                                        <button type="submit" value="submit"
-
-                                            style="line-height:10px; height:25px; font-size:9px"
-
-                                            class="form-control text-bold" id="filter_button">
-
-                                            F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R</button>
-
-                                    </div>
-
-                                </div> --}}
 
                             </div>
 
@@ -758,7 +680,8 @@
                                                 </td>
 
 
-                                                <td><span class="fw-bold">{{ $recentExpenses->category_name }}</span><br><span
+                                                <td><span
+                                                        class="fw-bold">{{ $recentExpenses->category_name }}</span><br><span
                                                         style="font-size:10px">{{ $recentExpenses->merchant }}</span></td>
 
                                                 <td class="fw-bold">Rp
@@ -778,7 +701,6 @@
                     </div>
 
                 </div>
-
             </div>
 
         </div>
@@ -839,9 +761,7 @@
                         $('#ex1').zoom();
 
                     } else {
-
                         Swal.fire('failed<br>Please contact ximply support');
-
                     }
 
                 },
@@ -849,9 +769,7 @@
                 complete: function(data) {
 
                     if (data.status != 200) {
-
                         Swal.fire('failed<br>Please contact ximply support');
-
                     }
 
                 }
@@ -909,11 +827,7 @@
                 swalWithBootstrapButtons
 
                     .fire({
-
                         title: "<h5>are you sure want to process?</h5>",
-
-
-
                         icon: "warning",
 
                         showCancelButton: true,
@@ -1003,6 +917,7 @@
         var FilterStartDate = "";
 
         var FilterEndDate = "";
+        var FilterMember = "";
 
         var FilterMember = "";
 
@@ -1023,7 +938,6 @@
                 FilterEndDate = urlParams.get('filter_end_date');
 
                 FilterMember = urlParams.get('filter_member');
-
             }
 
         }
@@ -1052,9 +966,9 @@
 
                 "&start_date=" + FilterStartDate +
 
-                "&end_date=" + FilterEndDate +
+            "&end_date=" + FilterEndDate +
 
-                "&member_id=" + FilterMember,
+            "&member_id=" + FilterMember,
 
             success: function(res) {
 
@@ -1554,8 +1468,8 @@
 
                             var CategoryName = obj.category_name;
 
-                            $("#filter_expense_type").append('<option value="' + CategoryName +
-                                '"' + (CategoryName == params.filter_expense_type ? 'selected' :
+                            $("#filter_expense_type").append('<option value="' + CategoryId +
+                                '"' + (CategoryId == params.filter_expense_type ? 'selected' :
                                     '') + '>' + CategoryName + '</option>');
                         }
 
@@ -1571,61 +1485,34 @@
 
         });
 
-
-
         $(document).ready(function() {
-
             $.ajaxSetup({
-
                 headers: {
-
                     "Authorization": "Bearer " + AUTH_TOKEN,
-
                     "Accept": "application/json"
-
                 }
-
             });
 
-
-
             $.ajax({
-
                 type: "GET",
-
                 url: API_URL + "api/spend/list/assigned/" + TENANT_CODE +
-
                     "?user_id=" + document.getElementById(
-
                         'user_id').value,
-
                 success: function(res) {
-
                     if (res) {
-
                         var response = res['data'];
-
                         for (const obj of response) {
-
                             var uid = obj.id;
-
                             var uname = obj.full_name;
-
                             $("#filter_member").append('<option value="' + uid +
                                 '"' + (uid == params.filter_member ? 'selected' :
                                     '') + '>' + uname + '</option>');
                         }
-
                     } else {
-
                         $("#filter_member").empty();
-
                     }
-
                 }
-
             });
-
         });
     </script>
 @endsection

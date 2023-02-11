@@ -3,6 +3,7 @@
 
 
 @section('container')
+
     @include('manage-teams.add_modal_group')
 
     @include('manage-teams.edit_modal_group')
@@ -10,6 +11,7 @@
     {{-- @include('manage-teams.view_modal_members') --}}
 
     <style>
+
         table {
 
             border-radius: 5px;
@@ -157,6 +159,7 @@
             }
 
         }
+
     </style>
 
     <div class="row justify-content-center">
@@ -164,6 +167,7 @@
         <div class="">
 
             <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#addModalGroup"
+
                 style="background-color: #19194b">
 
                 <span>Add Group</span>&nbsp;
@@ -204,6 +208,7 @@
                                 </th>
 
                                 <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+
                                     Action
 
                                 </th>
@@ -215,6 +220,7 @@
                         <tbody>
 
                             @foreach ($data['groups'] as $item)
+
                                 <tr class="">
 
                                     <td class="text-sm" data-label="Group Name" style="color: #000000">
@@ -294,6 +300,7 @@
                                     </td>
 
                                 </tr>
+
                             @endforeach
 
                         </tbody>
@@ -363,6 +370,7 @@
     </script>
 
     <script>
+
         function getData(id) {
 
             $.ajax({
@@ -396,5 +404,8 @@
             });
 
         }
+
     </script>
+
 @endsection
+

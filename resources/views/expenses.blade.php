@@ -1008,6 +1008,13 @@
 
     <!-- side voucher-->
 
+<<<<<<< HEAD
+    <script>
+        function handleChangeStatus(event) {
+            event.submit();
+        }
+    </script>
+=======
 
 
     <script>
@@ -1020,5 +1027,6 @@
 
     </script>
 
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 @endsection
 

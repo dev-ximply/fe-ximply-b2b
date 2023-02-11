@@ -58,6 +58,9 @@ use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\Subscription\PaySubscriptionController;
 use App\Http\Controllers\Tenant\TenansController;
 
+
+
+
 Route::get('/', [LoginController::class, 'index'])->name('login');
 
 Route::get('/sign-in', [LoginController::class, 'index'])->name('login');
@@ -115,7 +118,6 @@ Route::get('/referral-friends', [ListReferralController::class, 'index'])->middl
 
 
 //Dashboard
-
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
@@ -181,6 +183,8 @@ Route::get('/spend/request', [TopUpApprovalController::class, 'index'])->middlew
 // Approve
 
 Route::post('/approves', [TopUpApprovalController::class, 'approve'])->middleware('auth')->name('approves.action');
+
+
 
 
 
@@ -251,6 +255,8 @@ Route::get('/tenant', [TenansController::class, 'index'])->middleware('auth');
 //     );
 
 // });
+
+
 
 
 
