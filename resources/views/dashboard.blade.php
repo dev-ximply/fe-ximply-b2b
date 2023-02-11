@@ -974,9 +974,7 @@
             "&end_date=" + FilterEndDate +
 
             "&member_id=" + FilterMember,
-
-            >>>
-            >>> > 573 a3f5f6b65b0a4f844edc5634624112d65920c
+            
             success: function(res) {
 
                 var time = [0];
@@ -1340,7 +1338,7 @@
                                         enabled: true,
 
                                         distance: 35,
-                                        
+
                                         style: {
 
                                             color: 'white'
