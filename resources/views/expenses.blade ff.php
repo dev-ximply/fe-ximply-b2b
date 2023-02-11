@@ -663,7 +663,7 @@
 
                                                 data-label="Expense" style="color: #000000">
 
-                                                {{ $expense->category_name }}
+                                                {{ $expense->category }}
 
                                             </td>
 
@@ -671,7 +671,7 @@
 
                                                 data-label="Action">
 
-                                                <button onclick="getExpenseData('{{ $expense->id }}' )"
+                                                <button onclick="getExpenseData('{{ $expense->id }}'')"
 
                                                     class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
 
@@ -733,6 +733,135 @@
 
     </div>
 
+    @if (count($data['expenses']) != 0)
+        <div class="row mt-4 position-relative">
+            <div class="col-12">
+                <div class="card" style="border-radius: 5px">
+                    <div class="table-responsive">
+                        <table class="table table-borderless text-dark" border="1">
+                            <thead>
+                                <tr>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">Date Receipts
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">Status
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">Purpose
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">
+                                        Merchant
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">
+                                        Amount
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">
+                                        Expense
+                                    </th>
+                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                        style="color: #000000; ">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach ($data['expenses'] as $item)
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    <tr class="align-middle">
+                                        <td colspan="7" style="color: #000000;font-weight:500;font-size:12px;"
+                                            class="text-md-start text-end ps-md-4 text-break text-wrap">
+                                            {{-- <span
+                                                class="px-md-1 text-break text-wrap text-dark"> --}}
+                                            {{ $item->long_date }}
+                                            {{-- </span> --}}
+                                        </td>
+                                    </tr>
+                                    @foreach ($item->expenses as $expense)
+                                        <tr class="">
+                                            <td>{{ '#' . $i++ }}</td>
+                                            <td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center"
+                                                data-label="Status" style="color: #000000;">
+                                                @if ($expense->status == 'approved')
+                                                    <span class="badge badge-xs d-flex justify-content-center"
+                                                        style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">
+                                                        {{ $expense->status }}
+                                                    </span>
+                                                @elseif($expense->status == 'pending')
+                                                    <span class="badge badge-xs d-flex justify-content-center"
+                                                        style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">
+                                                        {{ $expense->status }}
+                                                    </span>
+                                                @elseif($expense->status == 'rejected')
+                                                    <span class="badge badge-xs d-flex justify-content-center"
+                                                        style=" background:#E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">
+                                                        {{ $expense->status }}
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-xs d-flex justify-content-center"
+                                                        style=" background:gray; color:gray; padding:5px; border-radius:5px; width:55px">
+                                                        {{ $expense->status }}
+                                                    </span>
+                                                @endif
+                                            </td>
+                                            <td class="text-md-start ps-md-4 text-end text-break text-wrap"
+                                                data-label="Purpose" style="color: #000000">
+                                                {{ $expense->purpose }}
+                                            </td>
+                                            <td class="text-break text-wrap text-md-start text-end ps-md-4"
+                                                data-label="Merchant" style="color: #000000">
+                                                {{ $expense->merchant }}
+                                            </td>
+                                            <td class="text-break text-wrap ps-md-4 text-md-start text-end"
+                                                data-label="Total Amount" style="color: #000000">
+                                                <span class="">
+                                                    {{ number_format($expense->total_amount, 2) }}
+                                                </span>
+                                            </td>
+                                            <td class="text-break text-wrap ps-md-4 text-md-start text-end"
+                                                data-label="Expense" style="color: #000000">
+                                                {{ $expense->category }}
+                                            </td>
+                                            <td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between"
+                                                data-label="Action">
+                                                <button onclick="getExpenseData({{ $expense->id }})"
+                                                    class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
+                                                    data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"
+                                                    style="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">
+                                                    View</button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="row justify-content-center h-100 align-items-center">
+                                            <div class="d-flex align-items-center justify-content-center flex-column py-5">
+                                                <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid"
+                                                    alt="" style="width: 100px">
+                                                <h6 class="font-weight-bold text-dark py-0">You don't have expense</h6>
+                                                <span class="text-xs" style="text-align: center">Scan your recepit or
+                                                    create new
+                                                    expense form the button
+                                                    above</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
 
@@ -1008,10 +1137,25 @@
 
     <!-- side voucher-->
 
+<<<<<<< HEAD
     <script>
         function handleChangeStatus(event) {
             event.submit();
         }
     </script>
+=======
+
+
+    <script>
+
+        function handleChangeStatus(event) {
+
+            event.submit();
+
+        }
+
+    </script>
+
+>>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 @endsection
 
