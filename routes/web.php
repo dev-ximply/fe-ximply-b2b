@@ -50,18 +50,10 @@ use App\Http\Controllers\Budgets\TopUpApprovalController;
 
 use App\Http\Controllers\Group\GroupController;
 use App\Http\Controllers\Group\GroupInfoController;
-<<<<<<< HEAD
-use App\Http\Controllers\Partner\PartnerController;
-
-use App\Http\Controllers\Role\PermissionController;
-
-use App\Http\Controllers\Subscription\PaySubscriptionController;
-=======
 use App\Http\Controllers\Members\MemberInfoController;
 use App\Http\Controllers\Partner\PartnerController;
 
 use App\Http\Controllers\Role\PermissionController;
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
 use App\Http\Controllers\Subscription\PaySubscriptionController;
 use App\Http\Controllers\Tenant\TenansController;
@@ -127,10 +119,6 @@ Route::get('/referral-friends', [ListReferralController::class, 'index'])->middl
 
 //Dashboard
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
@@ -151,26 +139,13 @@ Route::get('/employee', [MembersController::class, 'index'])->middleware('auth')
 
 Route::put('/employees', [MembersController::class, 'updateEmployee'])->middleware('auth')->name('employees.update');
 
-<<<<<<< HEAD
-=======
 // Route::get('/info-member', [MemberInfoController::class, 'index'])->middleware('auth');
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
 
 Route::get('/group', [GroupController::class, 'index'])->middleware('auth');
 
 Route::put('/groups', [GroupController::class, 'updateGroup'])->middleware('auth')->name('groups.update');
 
-<<<<<<< HEAD
-Route::get('/group-info', [GroupInfoController::class, 'index'])->middleware('auth')->name('groupInfo');
-
-
-
-Route::get('/partner', [PartnerController::class, 'index'])->middleware('auth');
-
-Route::put('/partners', [PartnerController::class, 'updatePartner'])->middleware('auth')->name('partners.update');
-
-=======
 Route::get('/group-info/{id}', [GroupInfoController::class, 'index'])->middleware('auth')->name('groupInfo');
 
 Route::get('/partner', [PartnerController::class, 'index'])->middleware('auth');
@@ -181,7 +156,6 @@ Route::put('/partners', [PartnerController::class, 'updatePartner'])->middleware
 
 Route::delete('/partners', [PartnerController::class, 'deletePartner'])->middleware('auth')->name('partners.delete');
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 Route::put('/partners/assign', [PartnerController::class, 'updatePartnerAssign'])->middleware('auth')->name('partners.assign.update');
 
 
@@ -208,13 +182,9 @@ Route::get('/spend/request', [TopUpApprovalController::class, 'index'])->middlew
 
 // Approve
 
-<<<<<<< HEAD
-Route::post('/approves', [TopUpApprovalController::class, 'upprove'])->middleware('auth')->name('approves.action');
-=======
 Route::post('/approves', [TopUpApprovalController::class, 'approve'])->middleware('auth')->name('approves.action');
 
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
 
 
@@ -250,35 +220,6 @@ Route::put('/permissions/role-name', [PermissionController::class, 'changeRoleNa
 
 
 // Account Settings
-<<<<<<< HEAD
-Route::get('/account-settings', function(){
-    return view('account-settings',
-    [
-        'title' => 'Account Settings',
-        'section' => 'account_settings'
-    ]);
-});
-
-// Tenant
-
-Route::get('/tenant', function () {
-
-    return view(
-
-        'tenant',
-
-        [
-
-            'title' => 'Manage Tenant',
-
-            'section' => 'tenant'
-
-        ]
-
-    );
-
-});
-=======
 
 
 Route::get('/account-settings', [SettingsController::class, 'account_settings'])->name('account-settings')->middleware('auth');
@@ -316,7 +257,6 @@ Route::get('/tenant', [TenansController::class, 'index'])->middleware('auth');
 // });
 
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 
 
 

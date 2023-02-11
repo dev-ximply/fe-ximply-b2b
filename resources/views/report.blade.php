@@ -422,11 +422,7 @@
                                                             {{-- <li><a  href="{{ config('api.base_url') . 'api/report/export/pdf/' . $item->id }}"
                                                                     download class="text-dark text-start px-3" >Export
                                                                     PDF</a></li> --}}
-<<<<<<< HEAD
-                                                            <li> <a href="{{ config('api.base_url') . 'api/report/export/excel/' . $item->id }}"
-=======
                                                             <li> <a href="'{{ config('api.base_url') . 'api/report/export/excel/' . $item->id }}'"
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
                                                                     download class="text-dark text-start px-3">Export
                                                                     Excel</a></li>
                                                             <li> <a href="'{{ env('API_URL') . 'api/report/export/csv/' . $item->id }}'"
