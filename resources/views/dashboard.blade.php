@@ -348,10 +348,6 @@
 
                                         <span style="font-size: 16px;color:black;font-weight:400">Expenses</span>
 
-                                        {{-- <span style="font-size: 16px;color:black;font-weight:700">
-
-                                            {{ number_format($data['limit']['used_limit'], 2) }}</span> --}}
-
                                     </div>
 
                                 </div>
@@ -398,9 +394,7 @@
                                             style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
 
                                             <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
-
-                                                Member</option>
-
+                                                Your Data</option>
                                         </select>
 
                                     </div>
@@ -942,6 +936,7 @@
                 FilterStartDate = urlParams.get('filter_start_date');
 
                 FilterEndDate = urlParams.get('filter_end_date');
+
                 FilterMember = urlParams.get('filter_member');
             }
 
@@ -974,7 +969,7 @@
             "&end_date=" + FilterEndDate +
 
             "&member_id=" + FilterMember,
-            
+
             success: function(res) {
 
                 var time = [0];
@@ -1481,63 +1476,6 @@
                     } else {
 
                         $("#filter_expense_type").empty();
-
-                    }
-
-                }
-
-            });
-
-        });
-
-
-
-        $(document).ready(function() {
-
-            $.ajaxSetup({
-
-                headers: {
-
-                    "Authorization": "Bearer " + AUTH_TOKEN,
-
-                    "Accept": "application/json"
-
-                }
-
-            });
-
-
-
-            $.ajax({
-
-                type: "GET",
-
-                url: API_URL + "api/spend/list/assigned/" + TENANT_CODE +
-
-                    "?user_id=" + document.getElementById(
-
-                        'user_id').value,
-
-                success: function(res) {
-
-                    if (res) {
-
-                        var response = res['data'];
-
-                        for (const obj of response) {
-
-                            var uid = obj.id;
-
-                            var uname = obj.full_name;
-
-                            $("#filter_member").append('<option value="' + uid +
-                                '"' + (uid == params.filter_member ? 'selected' :
-                                    '') + '>' + uname + '</option>');
-                        }
-
-                    } else {
-
-                        $("#filter_member").empty();
 
                     }
 
