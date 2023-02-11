@@ -211,6 +211,7 @@
 
         var formDataExpense = new FormData();
 
+
         formDataExpense.append('tenant_code', TENANT_CODE);
         formDataExpense.append('user_id', user_id);
         formDataExpense.append('category', category);
@@ -221,11 +222,7 @@
         formDataExpense.append('merchant', merchant);
         formDataExpense.append('location', location);
         formDataExpense.append('total_amount', total_amount);
-<<<<<<< HEAD
-
-=======
         console.log(formDataExpense);
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
         if (fileReceipt.length > 0) {
             formDataExpense.append('file_receipt', fileReceipt[0]);
         }
@@ -233,6 +230,8 @@
         if (fileAdditional.length > 0) {
             formDataExpense.append('file_additional', fileAdditional[0]);
         }
+
+        // new
 
         // console.log(formDataExpense);
 

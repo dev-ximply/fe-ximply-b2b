@@ -93,10 +93,7 @@
 <script>
     //send invitation
     function sendInvitation(user_id, email, first_name, last_name, group_id, role_id) {
-<<<<<<< HEAD
-=======
         console.log(user_id);
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
         var tenant_code = TENANT_CODE;
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
