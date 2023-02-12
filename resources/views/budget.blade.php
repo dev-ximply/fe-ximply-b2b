@@ -47,29 +47,7 @@
             border-radius: 15px;
         }
     </style>
-
-
-    @if (session()->get('is_superadmin') != 1)
-        <div class="row justify-content-center mb-4">
-            <div class="col-md d-flex  justify-content-center">
-                <div class="col-md d-flex align-items-center">
-                    {{-- <div class="col-md-7 me-3">
-                        <label for="" class="text-dark">Input your budget</label>
-                        <div class="form-group d-flex">
-                            <input type="text" placeholder="Set your budget" class="form-control" style="height: 42px">
-                            <button class="btn text-white ms-3" style="background: #62ca50">Submit</button>
-                        </div>
-                    </div> --}}
-                </div>
-                <div class="col-md text-end">
-                    <div class="form-group">
-                        <label for="" class="text-dark">Your budget</label>
-                        <p class="text-dark" style="font-size:20px; font-weight: 800">Rp. 100.000.000</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
+    
     <div class="row mb-4 mt-3 mx-1 justify-content-between">
         <div class="col-md d-sm-flex justify-content-start px-0 mx-0">
             <div class="d-flex me-2">
