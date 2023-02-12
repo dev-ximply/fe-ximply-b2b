@@ -36,7 +36,7 @@
 
                         <h5>
 
-                            {{  $data['tenant']->company_name  }}
+                            PT Aplikasi Lintas Bangsa
 
                         </h5>
 
