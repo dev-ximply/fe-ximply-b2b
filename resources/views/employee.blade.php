@@ -188,9 +188,9 @@
                                                         View
                                                     </button>
 
-                                                    {{-- @if ($item->is_active == 0)
+                                                    @if ($item->is_activate == 0)
                                                         inactive
-                                                    @else --}}
+                                                    @else
                                                         <button
                                                             class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
                                                             data-bs-title="View Your Expense Member" data-bs-toggle="modal"
@@ -200,7 +200,7 @@
                                                             onclick="deactivedMember('{{ $item->id }}')">
                                                             Deactived
                                                         </button>
-                                                    {{-- @endif --}}
+                                                    @endif
 
                                                 @endif
 
