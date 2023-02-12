@@ -88,7 +88,7 @@ class MembersController extends Controller
             'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json'
         ];
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/member/list/' . Session::get('TenantCode') . '?user_id=' . $user_id, $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/member/list/' . Session::get('TenantCode') . '?user_id=' . Auth::user()['id'], $headers);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 
