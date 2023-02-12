@@ -173,7 +173,7 @@
                             $("#main-loader").hide();
                             if (data.status != 200) {
                                 Swal.fire(
-                                    "opps",
+                                    "opps!",
                                     data.message,
                                     "error"
                                 );

@@ -179,18 +179,18 @@
                                                         Info
                                                     </button>
                                                 @else
-                                                    <button
-                                                        class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
-                                                        data-bs-title="Edit" data-bs-toggle="modal"
-                                                        data-id="'{{ $item->id }}'" data-bs-target="#edit_modal_users"
-                                                        style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                        onclick="getDataMember('{{ $item->id }}', '{{ $item->first_name }}',  '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->employee_id }}' ,  '{{ $item->group_name }}', '{{ $item->role_name }}' )">
-                                                        View
-                                                    </button>
-
                                                     @if ($item->is_activate == 0)
                                                         inactive
                                                     @else
+                                                        <button
+                                                            class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
+                                                            data-bs-title="Edit" data-bs-toggle="modal"
+                                                            data-id="'{{ $item->id }}'"
+                                                            data-bs-target="#edit_modal_users"
+                                                            style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                            onclick="getDataMember('{{ $item->id }}', '{{ $item->first_name }}',  '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->employee_id }}' ,  '{{ $item->group_name }}', '{{ $item->role_name }}' )">
+                                                            View
+                                                        </button>
                                                         <button
                                                             class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
                                                             data-bs-title="View Your Expense Member" data-bs-toggle="modal"
@@ -201,7 +201,6 @@
                                                             Deactived
                                                         </button>
                                                     @endif
-
                                                 @endif
 
                                             </div>
