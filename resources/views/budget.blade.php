@@ -49,7 +49,7 @@
     </style>
 
 
-    @if (session()->get('is_superadmin') == 1)
+    {{-- @if (session()->get('is_superadmin') == 1)
         <div class="row justify-content-center mb-4">
             <div class="col-md d-flex  justify-content-center">
                 <div class="col-md d-flex align-items-center">
@@ -71,7 +71,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    @endif --}}
     <div class="row mb-4 mt-3 mx-1 justify-content-between">
         <div class="col-md d-sm-flex justify-content-start px-0 mx-0">
             <div class="d-flex me-2">
