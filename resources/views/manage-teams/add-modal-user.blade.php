@@ -129,8 +129,8 @@
                         formNewMember.append('role_id', role_id);
                     }
 
- 
-     
+
+
 
                     $.ajaxSetup({
                         headers: {
@@ -173,8 +173,8 @@
                             $("#main-loader").hide();
                             if (data.status != 200) {
                                 Swal.fire(
-                                    "something wrong",
-                                    "please contact Beazy support!",
+                                    "opps",
+                                    data.message,
                                     "error"
                                 );
                             }
