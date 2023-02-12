@@ -225,21 +225,21 @@
                                             style="color: #000000">
                                             <ul>
 
-                                                <li>Policies : {{ $member->permission->policies == 0 ? 'No' : 'Yes' }}</li>
+                                                {{-- <li>Policies : {{ $member->permission->policies == 0 ? 'No' : 'Yes' }}</li> --}}
                                                 <li>Approval Top Up :
                                                     {{ $member->permission->approval_topup == 0 ? 'No' : 'Yes' }}</li>
                                                 <li>Approval Expense :
                                                     {{ $member->permission->approval_expense == 0 ? 'No' : 'Yes' }}</li>
-                                                <li>Approval Pre Budget :
-                                                    {{ $member->permission->approval_prebudget == 0 ? 'No' : 'Yes' }}</li>
+                                                {{-- <li>Approval Pre Budget :
+                                                    {{ $member->permission->approval_prebudget == 0 ? 'No' : 'Yes' }}</li> --}}
                                                 <li>Manage User :
                                                     {{ $member->permission->manage_user == 0 ? 'No' : 'Yes' }}</li>
                                                 <li>Manage Budget :
                                                     {{ $member->permission->manage_budget == 0 ? 'No' : 'Yes' }}</li>
-                                                <li>Manage Tenant :
+                                                {{-- <li>Manage Tenant :
                                                     {{ $member->permission->manage_tenant == 0 ? 'No' : 'Yes' }}</li>
                                                 <li>Manage Cards :
-                                                    {{ $member->permission->manage_cards == 0 ? 'No' : 'Yes' }}</li>
+                                                    {{ $member->permission->manage_cards == 0 ? 'No' : 'Yes' }}</li> --}}
                                             </ul>
                                         </td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
