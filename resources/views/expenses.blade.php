@@ -836,9 +836,9 @@
 
                         document.getElementById('detail_location').value = response['location'];
 
-                        document.getElementById('detail_category').value = response['category'];
+                        document.getElementById('detail_category').value = response['category_name'];
 
-                        document.getElementById('detail_sub_category').value = response['sub_category'];
+                        document.getElementById('detail_sub_category').value = response['sub_category_name'];
 
                         document.getElementById('detail_partner').value = response['client_name'];
 
@@ -1008,13 +1008,6 @@
 
     <!-- side voucher-->
 
-<<<<<<< HEAD
-    <script>
-        function handleChangeStatus(event) {
-            event.submit();
-        }
-    </script>
-=======
 
 
     <script>
@@ -1027,6 +1020,5 @@
 
     </script>
 
->>>>>>> 573a3f5f6b65b0a4f844edc5634624112d65920c
 @endsection
 

@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
+    @include('budget.edit-budget')
     <style>
         .slider-wrapper {
             width: 100%;
@@ -47,75 +48,30 @@
         }
     </style>
 
-    <div class="modal fade" id="edit_modal_budget" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="background: #19194B; color:white">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">Edit Budget</h5>
-                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
-                        {{-- <span aria-hidden="true">×</span> --}}
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post">
-                        @csrf
-                        <div class="row">
-                            <input type="text" id="edit_user_id" hidden>
-                            <div class="col-md my-2">
-                                <label for="projectName" class="form-label text-dark" style="font-weight: 600">Name</label>
-                                <input type="text" class="form-control" id="edit_budget_name" disabled>
-                            </div>
-                            <div class="col-md my-2">
-                                <label for="projectName" class="form-label text-dark" style="font-weight: 600">Spending Budget Limit</label>
-                                <input type="text" class="form-control" id="edit_budget_limit_avail" disabled>
-                            </div>
-                        </div>
-                        <div class="row">
-                            {{-- <div class="col-6">
-                                <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
-                                <input type="number" class="form-control" id="edit_approve_limit"
-                                    name="edit_approve_limit">
-                            </div> --}}
 
-                            <div class="col-6">
-                                <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
-                                <input type="text" class="form-control" id="auto_approve_limit" name="auto_approve_limit"
-                                    value="{{ old('auto_approve_limit') }}">
-                                <script>
-                                    new NumericInput(document.getElementById('edit_approve_limit'), 'en-CA');
-                                </script>
-                            </div>
-                      
-                            <div class="col-6"> 
-                                <label class="form-label text-dark" style="font-weight: 600">Period</label>
-                                <div class="col-6">
-              
-                                    <select class="form-control" name="frequency">
-                                        <option value="onetime">Onetime</option>
-                                        <option value="monthly">Monthly</option>
-                                    </select>
-                                </div>
-                            </div>
+    @if (session()->get('is_superadmin') == 1)
+        <div class="row justify-content-center mb-4">
+            <div class="col-md d-flex  justify-content-center">
+                <div class="col-md d-flex align-items-center">
+                    <div class="col-md-7 me-3">
+                        <label for="" class="text-dark">Input your budget</label>
+                        <div class="form-group d-flex">
+                            <input type="text" placeholder="Set your budget" class="form-control" style="height: 42px">
+                            <button class="btn text-white ms-3" style="background: #62ca50">Submit</button>
                         </div>
-                        <div class="row">
-                            <div class="col-6"> 
-                                <label class="form-label text-dark" style="font-weight: 600">Expire Date</label>
-                                <input type="date" class="form-control" id="period" name="period">
-                            </div>
-                        </div>
-              
-                        <div class="d-flex justify-content-end mt-3">
-                            <button type="button" name="button" class="btn btn-danger-cstm m-0"
-                                data-bs-dismiss="modal">Cancel</button>
-                            <input type="button" onclick="postEditBudget()" name="button" value="Submit" class="btn btn-success-cstm m-0 ms-2">
-                        </div>
-                    </form>
+                    </div>
+
+                </div>
+                <div class="col-md text-end">
+
+                    <div class="form-group">
+                        <label for="" class="text-dark">Your budget</label>
+                        <p class="text-dark" style="font-size:20px; font-weight: 800">Rp. 100.000.000</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    @endif
     <div class="row mb-4 mt-3 mx-1 justify-content-between">
         <div class="col-md d-sm-flex justify-content-start px-0 mx-0">
             <div class="d-flex me-2">
@@ -124,18 +80,8 @@
                     <span>
                         New Budget
                     </span>
-                    {{-- &nbsp;
-                    <i class="fas fa-plus text-md"></i> --}}
                 </a>
             </div>
-            {{-- @if (Auth::user()->account_detail()['role_level'] != 0)
-                <div class="d-flex me-2">
-                    <a href="/spend/request" class="btn btn-outline-dark btn-icon text-xs d-flex align-items-center">
-                        Top Up Requested
-                         &nbsp;<i class="fa-solid fa-circle-exclamation text-md text-warning"></i>
-                    </a>
-                </div>
-            @endif --}}
         </div>
         <div class="col-md text-md-end text-start mt-2 px-0 mx-0">
             @if (session()->get('is_superadmin') == false)
@@ -148,7 +94,7 @@
         </div>
     </div>
 
-    
+
     <div class="row" style="margin-left: -5px;">
         @foreach ($data['members'] as $item)
             <div class="col-md-3">
@@ -168,14 +114,13 @@
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-end me-sm-n4 me-n3"
                                         aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" data-bs-toggle="modal"
-                                            data-bs-target="#edit_modal_budget" onclick="getDetailBudget('{{ $item->full_name }}', '{{ $item->id }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}')">Edit</a>
-<<<<<<< HEAD
-                                        {{-- TEST<a class="dropdown-item" href="javascript:;">Retire</a> --}}
-                                        <a href="" class="dropdown-item">Delete</a>
-=======
-                                        <a class="dropdown-item" href="javascript:;">Delete</a>
->>>>>>> 0b595dffcfc59cb05da391b3b51e1e94450e2b83
+                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit_modal_budget"
+                                            onclick="getDetailBudgets('{{ $item->id }}', '{{ $item->full_name }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}', '{{ $item->limit->expire_date }}' )">Edit</a>
+                                        <a class="dropdown-item">
+                                            <span onclick="deleteBudget('{{ $item->limit->spend_id }}')">
+                                               Delete
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -199,8 +144,9 @@
                                 {{ number_format($item->limit->auto_approve) }}</span>
                         </div>
                         <div class="w-100 mt-1">
-                            <span class="me-2 font-weight-normal" style="font-size: 0.8em">Created : 
-                        </span>
+                            <span class="me-2 font-weight-normal" style="font-size: 0.8em">Created :
+                                {{ $item->limit->created_date }}
+                            </span>
                         </div>
                         <hr class="horizontal dark">
                         <div class="w-100 mt-1">
@@ -208,19 +154,8 @@
                                 <span class="me-2 text-sm font-weight-normal">Used : Rp
                                     {{ number_format($item->limit->used_limit) }}
                                 </span>
-                                {{-- TEST<span
-                                    class="ms-auto text-sm font-weight-normal">{{ number_format($item->limit->budget_spending) }}
-                                    %</span> --}}
                             </div>
                         </div>
-                        {{-- <div class="row mt-2">
-                            <div class="col text-end">
-                                <h6 class="text-sm mb-0">
-                                    {{ $item->limit->expire_date }}
-                                </h6>
-                                <p class="text-secondary text-sm font-weight-normal mb-0">Expired Date</p>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -228,16 +163,26 @@
     </div>
 
     <script>
+        function getDetailBudgets(id, full_name, remain_limit, auto_approve, expire_date) {
 
-        function getDetailBudget($uname, $uid, $limit, $auto_approve) {
-            document.getElementById('edit_budget_name').value = $uname;
-            document.getElementById('edit_user_id').value = $uid;
-            document.getElementById('edit_budget_limit_avail').value = $limit;
-            document.getElementById('edit_budget_limit').value = 0;
-            document.getElementById('edit_approve_limit').value = $auto_approve;
+            document.getElementById('edit_user_id').value = id;
+            document.getElementById('edit_budget_name').value = full_name;
+            document.getElementById('edit_budget_limit_avail').value = remain_limit;
+            document.getElementById('auto_approve_edit').value = auto_approve;
+            document.getElementById('expire_date').value = expire_date;
+            console.log(auto_approve);
+
         }
+    </script>
 
-        function postEditBudget() {
+    <script>
+        function deleteBudget(spendId) {
+
+            var tenant = TENANT_CODE;
+            var userId = USR_ID;
+
+            console.log(spendId);
+
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success-cstm mx-2",
@@ -245,9 +190,10 @@
                 },
                 buttonsStyling: false,
             });
+
             swalWithBootstrapButtons
                 .fire({
-                    title: "<h5>are you sure you want to process?</h5>",
+                    title: "<h5>Are you sure you want to process?</h5>",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonText: "Yes",
@@ -256,55 +202,52 @@
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        var formData = new FormData();
-                        formData.append('tenant_code', TENANT_CODE);
-                        formData.append('user_id', USR_ID);
-                        formData.append('assign_user_id', document.getElementById('edit_user_id').value);
-                        formData.append('limit', document.getElementById('edit_budget_limit').value);
-                        formData.append('auto_approve_limit', document.getElementById('edit_approve_limit').value);
-
+                        //delete parner
+                        console.log(spendId);
                         $.ajaxSetup({
                             headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             }
                         });
-
                         $.ajax({
-                            url: API_URL + "api/spend/member/assign",
-                            type: 'post',
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            beforeSend: function() {
-                                if ($("#loader")) {
-                                    $("#loader").show();
-                                }
+                            type: "DELETE",
+                            url: API_URL + "api/spends/" + spendId,
+                     
+                            // url: "{{ route('partners.delete') }}",
+                            data: {
+                                spend_id: spendId,
+                                user_id:userId,
+                                tenant_code:tenant
                             },
-                            success: function(res) {
-                                if (res['success'] == "true" || res['success'] == true) {
-                                    swalWithBootstrapButtons.fire(
-                                        "Success!",
-                                        "Your request success.",
-                                        "success"
-                                    );
+                            success: function(response) {
+
+                                const {
+                                    success,
+                                    status,
+                                    message
+                                } = response;
+
+                                console.log(response)
+
+                                if (status === true) {
+
+                                    setTimeout(function() {
+                                        window.location.reload(true);
+                                    }, 1000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
-                                        "Error!",
-                                        "Your request can't processed.",
-                                        "error"
+                                        "Succees",
+                                        message,
+                                        "Error"
                                     );
                                 }
-                            },
-                            complete: function(data) {
-                                if ($("#loader")) {
-                                    $("#loader").hide();
-                                }
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 1000);
                             }
+
                         });
+
+
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
+
                         swalWithBootstrapButtons.fire(
                             "Cancelled",
                             "Your request cancelled :)",
@@ -313,37 +256,8 @@
                     }
                 });
         }
-
-        $(".responsive").slick({
-            prevArrow: $(".prev"),
-            nextArrow: $(".next"),
-            infinite: false,
-            speed: 300,
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: false
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
     </script>
+
+
+
 @endsection

@@ -3,7 +3,6 @@
 
 
 @section('container')
-
     @include('manage-teams.add_modal_group')
 
     @include('manage-teams.edit_modal_group')
@@ -11,7 +10,6 @@
     {{-- @include('manage-teams.view_modal_members') --}}
 
     <style>
-
         table {
 
             border-radius: 5px;
@@ -159,7 +157,6 @@
             }
 
         }
-
     </style>
 
     <div class="row justify-content-center">
@@ -167,7 +164,6 @@
         <div class="">
 
             <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#addModalGroup"
-
                 style="background-color: #19194b">
 
                 <span>Add Group</span>&nbsp;
@@ -220,7 +216,6 @@
                         <tbody>
 
                             @foreach ($data['groups'] as $item)
-
                                 <tr class="">
 
                                     <td class="text-sm" data-label="Group Name" style="color: #000000">
@@ -291,16 +286,15 @@
                                             <button
                                                 class="btn text-white d-flex justify-content-center me-2 align-items-center text-capitalize btn-update"
                                                 data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                                data-id="'{{ $item->id }}'" data-bs-target="#deleteGroup"
+                                                data-id="{{ $item->id }}" data-bs-target="#deleteGroup"
                                                 style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                onclick="deleteGroup({{ $item->id }})">
+                                                onclick="deleteGroups('{{ $item->id }}')">
                                                 Delete
                                             </button>
                                         </div>
                                     </td>
 
                                 </tr>
-
                             @endforeach
 
                         </tbody>
@@ -320,6 +314,21 @@
     </div>
 
 
+    <script>
+        function getDataGroup(group_id, group_name, have_partnership) {
+            console.log('success', group_name);
+            console.log('success', have_partnership);
+
+            document.getElementById('group_id').value = group_id;
+            document.getElementById('groupName').value = group_name;
+            if (have_partnership == 1) {
+                document.getElementById('IsHaveClient').checked = true;
+            } else {
+                document.getElementById('IsHaveClient').checked = false;
+            }
+
+        }
+    </script>
 
     <script>
         function changeGroup(value) {
@@ -331,7 +340,90 @@
         }
     </script>
 
+
     <script>
+        function deleteGroups(id) {
+
+            var tenant = TENANT_CODE;
+            var userId = USR_ID;
+
+            console.log(userId);
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success-cstm mx-2",
+                    cancelButton: "btn btn-danger-cstm mx-2",
+                },
+                buttonsStyling: false,
+            });
+
+            swalWithBootstrapButtons
+                .fire({
+                    title: "<h5>Are you sure you want to process?</h5>",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    reverseButtons: false,
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            type: "POST",
+                            url: API_URL + "api/group/delete",
+
+                            // url: "{{ route('partners.delete') }}",
+                            data: {
+                                group_id: id,
+                                user_id: userId,
+                                tenant_code: tenant
+                            },
+                            success: function(response) {
+
+                                const {
+                                    success,
+                                    status,
+                                    message
+                                } = response;
+
+                                console.log(response)
+
+                                if (status === true) {
+
+                                    setTimeout(function() {
+                                        window.location.reload(true);
+                                    }, 1000);
+                                } else {
+                                    swalWithBootstrapButtons.fire(
+                                        "gagal",
+                                        message,
+                                        "error"
+                                    );
+                                }
+                            }
+
+                        });
+
+
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+
+                        swalWithBootstrapButtons.fire(
+                            "Cancelled",
+                            "Your request cancelled :)",
+                            "error"
+                        );
+                    }
+                });
+        }
+    </script>
+
+    {{-- <script>
         function deleteGroup() {
 
             $(".deleteRecord").click(function() {
@@ -354,23 +446,10 @@
 
         }
 
-        function getDataGroup(group_id, group_name, have_partnership) {
-            console.log('success', group_name);
-            console.log('success', have_partnership);
 
-            document.getElementById('group_id').value = group_id;
-            document.getElementById('groupName').value = group_name;
-            if (have_partnership == 1) {
-                document.getElementById('IsHaveClient').checked = true;
-            } else {
-                document.getElementById('IsHaveClient').checked = false;
-            }
-
-        }
-    </script>
+    </script> --}}
 
     <script>
-
         function getData(id) {
 
             $.ajax({
@@ -404,8 +483,5 @@
             });
 
         }
-
     </script>
-
 @endsection
-

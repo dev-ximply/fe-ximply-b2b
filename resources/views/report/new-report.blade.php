@@ -217,7 +217,7 @@
                     for (const obj of response) {
                         var CategoryId = obj.id;
                         var CategoryName = obj.category_name;
-                        $("#category").append('<option value="' + CategoryName +
+                        $("#category").append('<option value="' + CategoryId +
                             '">' + CategoryName + '</option>');
                     }
                 } else {

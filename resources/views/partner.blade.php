@@ -394,7 +394,7 @@
                                         </button>
                                         <button
                                             class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
-                                            data-bs-title="View Your Expense Member" data-id="'{{ $item->id }}'"
+                                            data-bs-title="View Your Expense Member" data-id="{{ $item->id }}"
                                             onclick="deletePartner('{{ $item->id }}')"
                                             style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
                                             onclick="">
@@ -450,6 +450,9 @@
     <script>
         function deletePartner(parnerId) {
 
+            var tenant = TENANT_CODE;
+            var userId = USR_ID;
+
             console.log(parnerId)
 
             const swalWithBootstrapButtons = Swal.mixin({
@@ -479,10 +482,14 @@
                             }
                         });
                         $.ajax({
-                            type: "DELETE",
-                            url: "{{ route('partners.delete') }}",
+                            type: "POST",
+                            url: API_URL + "api/partner/delete",
+                     
+                            // url: "{{ route('partners.delete') }}",
                             data: {
                                 partner_id: parnerId,
+                                user_id:userId,
+                                tenant_code:tenant
                             },
                             success: function(response) {
 

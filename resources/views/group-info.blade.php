@@ -29,8 +29,8 @@
 
 
 
-        <div class="modal fade" id="edit_group_info" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+        <div class="modal fade" id="edit_group_info" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header" style="background: #19194b">
@@ -42,7 +42,7 @@
                         <div class="card-text mt-4" id="basic-info">
                             <div class="card-body pt-0">
                                 <form onsubmit="">
-                                   
+
                                     <div class="row">
                                         {{-- <input type="hidden" id="user_id"> --}}
                                         <div class="col-6">
@@ -81,7 +81,7 @@
                                                         </option> --}}
                                                     @endforeach
                                                 </select>
-                                               
+
                                             </div>
                                         </div>
                                     </div>
@@ -100,11 +100,11 @@
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <label class="form-label mt-2"
-                                                style="color: black; font-weight:500">Budget Limit</label>
+                                            <label class="form-label mt-2" style="color: black; font-weight:500">Budget
+                                                Limit</label>
                                             <div class="">
                                                 <input id="edit_budget_limit" placeholder="Employee Code"
-                                                name="edit_budget_limit" class="form-control" type="text">
+                                                    name="edit_budget_limit" class="form-control" type="text">
                                             </div>
                                         </div>
                                         {{-- <div class="col-6">
@@ -136,14 +136,14 @@
 
 
 
-        
+
         <div class="col-md mb-3">
             <div class="d-flex justify-content-between mb-3">
                 <div class="col-md-8 mb-3">
                     <span>
                         <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Group</p>
                         <h5 class=" mb-0 text-dark font-weight-bolder">
-                            <span> {{ $data['group_detail']->group_name}} </span>
+                            <span> {{ $data['group_detail']->group_name }} </span>
                         </h5>
                     </span>
                 </div>
@@ -151,7 +151,7 @@
                     <span>
                         <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Have Client</p>
                         <h5 class=" mb-0 text-dark font-weight-bolder">
-                            <span>{{  $data['group'][0]->have_partnership  }}</span>
+                            <span>{{ $data['group'][0]->have_partnership }}</span>
                         </h5>
                     </span>
                 </div>
@@ -161,14 +161,14 @@
                     <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Budget Total</p>
                     <h5 class=" mb-0 text-dark font-weight-bolder">
                         Rp
-                        <span> {{  number_format($data['group_detail']->total_budget,0,',','.')}} </span>
+                        <span> {{ number_format($data['group_detail']->total_budget, 0, ',', '.') }} </span>
                     </h5>
                 </div>
 
                 <div class="col-md text-end">
                     <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Member</p>
                     <h5 class=" mb-0 text-dark font-weight-bolder">
-                        <span> {{ $data['group_detail']->count_members}} </span>
+                        <span> {{ $data['group_detail']->count_members }} </span>
                     </h5>
                 </div>
             </div>
@@ -212,8 +212,8 @@
                                                 {{ $member->first_name }}
                                             </span>
                                         </td>
-                                        <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
-                                         ``            style="color: #000000">
+                                        <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4" ``
+                                            style="color: #000000">
                                             <span>
                                                 {{ $member->last_name }}
                                             </span>
@@ -223,15 +223,26 @@
                                             {{ $member->role_name }}</td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
-                                            -</td>
+                                            <ul>
+                                                
+                                                <li>Policies : {{   $member->permission->policies  }}</li>
+                                                <li>Approval Top Up : {{   $member->permission->approval_topup  }}</li>
+                                                <li>Approval Expense : {{   $member->permission->approval_expense  }}</li>
+                                                <li>Approval Pre Budget : {{   $member->permission->approval_prebudget  }}</li>
+                                                <li>Manage User : {{   $member->permission->manage_user  }}</li>
+                                                <li>Manage Budget : {{   $member->permission->manage_budget  }}</li>
+                                                <li>Manage Tenant : {{   $member->permission->manage_tenant  }}</li>
+                                                <li>Manage Cards : {{   $member->permission->manage_cards  }}</li>
+                                            </ul>
+                                        </td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
-                                             {{ number_format($member->limit->remain_limit) }}</td>
+                                            {{ number_format($member->limit->remain_limit) }}</td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             {{ $member->created_date }}
                                         </td>
-                              
+
                                     </tr>
                                 @endforeach
                             </tbody>
