@@ -10,13 +10,13 @@
     @include('manage-teams.info-member')
 
     <div class="d-flex justify-content-between">
-	
+
         <div id="loader"
-        style="display:none; text-align: center; z-index: 5000; position: absolute; width: 100%; top: 40%">
-        <img height="100px" src="{{ asset('img/loader.gif') }}">
-    </div>
-	<div class="mt-2">
-	   
+            style="display:none; text-align: center; z-index: 5000; position: absolute; width: 100%; top: 40%">
+            <img height="100px" src="{{ asset('img/loader.gif') }}">
+        </div>
+        <div class="mt-2">
+
             <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#add_modal_users"
                 style="background-color: #19194b">
 
@@ -25,10 +25,10 @@
                 <i class="fa-solid fa-user-plus ms-2"></i>
 
             </button>
-      
 
-	</div>
-    {{-- {{ dd($data)}} --}}
+
+        </div>
+        {{-- {{ dd($data)}} --}}
 
         <div class="d-flex justify-content-end flex-column text-end mb-2">
             <h6 class="text-dark fs-6">Total Member</h6>
@@ -50,9 +50,7 @@
                     <div class="col-md-4 mt-2 d-flex align-items-end">
 
                         <input type="search" name="" id="" placeholder="Search..."
-
                             class="form-control text-dark"
-
                             style="font-size:11px;line-height:16px !important;border-radius:5px !important">
 
                     </div>
@@ -107,9 +105,8 @@
                             <tbody>
 
                                 @foreach ($data['employee'] as $item)
-
                                     <tr class="align-middle">
-					
+
                                         <td class="text-xs font-weight-bold text-capitalize ps-5 pb-0 pt-3">
                                             <p class="text-dark" style="font-size: 13px">
 
@@ -156,18 +153,18 @@
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
 
                                             <p class="text-dark" style="font-size: 13px">
-                                                {{ $item->approver != '' ? $item->approver: '-' }}
+                                                {{ $item->approver != '' ? $item->approver : '-' }}
                                             </p>
 
                                         </td>
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
                                             <p class="text-dark" style="font-size: 13px">
-                                                {{  $item->created_date }}
-                                                
+                                                {{ $item->created_date }}
+
                                             </p>
-                                 
+
                                         </td>
-                              
+
 
 
                                         <td class="text-xs font-weight-bold">
@@ -178,8 +175,7 @@
                                                         class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
                                                         style="background-color: #85cdfd;width:60px;height:25px;font-size:11px; font-weight:500;"
                                                         data-bs-target="#modalInfoMember" data-bs-toggle="modal"
-                                                        onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')"
-                                                        >
+                                                        onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->group_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')">
                                                         Info
                                                     </button>
                                                 @else
@@ -188,18 +184,24 @@
                                                         data-bs-title="Edit" data-bs-toggle="modal"
                                                         data-id="'{{ $item->id }}'" data-bs-target="#edit_modal_users"
                                                         style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                        onclick="getDataMember('{{ $item->id }}', '{{  $item->first_name  }}',  '{{  $item->last_name }}', '{{   $item->email }}', '{{  $item->employee_id  }}' ,  '{{  $item->group_name  }}', '{{  $item->role_name  }}' )"
-                                                        >
+                                                        onclick="getDataMember('{{ $item->id }}', '{{ $item->first_name }}',  '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->employee_id }}' ,  '{{ $item->group_name }}', '{{ $item->role_name }}' )">
                                                         View
                                                     </button>
-                                                    <button
-                                                        class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
-                                                        data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                                        data-id="'{{ $item->id }}'" data-bs-target="#editModalPartner"
-                                                        style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                        onclick="deactivedMember('{{ $item->id }}')">
-                                                        Deactived
-                                                    </button>
+
+                                                    @if ($item->is_active == 0)
+                                                        inactive
+                                                    @else
+                                                        <button
+                                                            class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
+                                                            data-bs-title="View Your Expense Member" data-bs-toggle="modal"
+                                                            data-id="'{{ $item->id }}'"
+                                                            data-bs-target="#editModalPartner"
+                                                            style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                            onclick="deactivedMember('{{ $item->id }}')">
+                                                            Deactived
+                                                        </button>
+                                                    @endif
+                                                    
                                                 @endif
 
                                             </div>
@@ -207,7 +209,6 @@
                                         </td>
 
                                     </tr>
-
                                 @endforeach
 
                             </tbody>
@@ -221,9 +222,7 @@
             </div>
 
         </div>
-
     @else
-
         <div class="row justify-content-center h-100 align-items-center">
 
             <div class="d-flex align-items-center justify-content-center flex-column py-5">
@@ -237,7 +236,6 @@
             </div>
 
         </div>
-
     @endif
 
 
@@ -283,8 +281,8 @@
             document.getElementById('edit_role_name').value = role_name;
 
         }
-        
-        function deactivedMember(id_member){
+
+        function deactivedMember(id_member) {
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success-cstm mx-2",
@@ -294,68 +292,67 @@
             });
 
             swalWithBootstrapButtons
-            .fire({
-                title: "<h5>Are you sure you want to Deactived Member?</h5>",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Yes",
-                cancelButtonText: "No",
-                reverseButtons: false,
-            })
-            .then((result) => {
-                if (result.isConfirmed) {
+                .fire({
+                    title: "<h5>Are you sure you want to Deactived Member?</h5>",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    reverseButtons: false,
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
 
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
 
-                    $.ajax({
-                        url: API_URL + "api/members/"+id_member+"/deactived",
-                        type: 'post',
-                        contentType: false,
-                        processData: false,
-                        beforeSend: function() {
-                            if ($("#loader")) {
-                                $("#loader").show();
+                        $.ajax({
+                            url: API_URL + "api/members/" + id_member + "/deactived",
+                            type: 'post',
+                            contentType: false,
+                            processData: false,
+                            beforeSend: function() {
+                                if ($("#loader")) {
+                                    $("#loader").show();
+                                }
+                            },
+                            success: function(res) {
+                                if (res['success'] == "true" || res['success'] == true) {
+                                    swalWithBootstrapButtons.fire(
+                                        "Success!",
+                                        "Your request success.",
+                                        "success"
+                                    );
+                                } else {
+                                    // console.log()
+                                    swalWithBootstrapButtons.fire(
+                                        "Error!",
+                                        "Your request Failed.",
+                                        "error"
+                                    );
+                                }
+                            },
+                            complete: function(data) {
+                                if ($("#loader")) {
+                                    $("#loader").hide();
+                                }
+                                // setTimeout(function() {
+                                //     location.reload();
+                                // }, 1000);
                             }
-                        },
-                        success: function(res) {
-                            if (res['success'] == "true" || res['success'] == true) {
-                                swalWithBootstrapButtons.fire(
-                                    "Success!",
-                                    "Your request success.",
-                                    "success"
-                                );
-                            } else {
-                                // console.log()
-                                swalWithBootstrapButtons.fire(
-                                    "Error!",
-                                    "Your request Failed.",
-                                    "error"
-                                );
-                            }
-                        },
-                        complete: function(data) {
-                            if ($("#loader")) {
-                                $("#loader").hide();
-                            }
-                            // setTimeout(function() {
-                            //     location.reload();
-                            // }, 1000);
-                        }
-                    });
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    swalWithBootstrapButtons.fire(
-                        "Cancelled",
-                        "Your request cancelled :)",
-                        "error"
-                    );
-                }
-            });
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        swalWithBootstrapButtons.fire(
+                            "Cancelled",
+                            "Your request cancelled :)",
+                            "error"
+                        );
+                    }
+                });
         }
     </script>
 
 @endsection
-
