@@ -95,7 +95,6 @@ class MembersController extends Controller
         if ($response->success == false) {
             return [];
         }
-
         return $response->data;
     }
 
