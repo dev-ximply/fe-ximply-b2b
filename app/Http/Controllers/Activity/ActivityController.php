@@ -27,6 +27,8 @@ class ActivityController extends Controller
         );
     }
 
+    
+
     public static function list($user_id)
     {
         $client = new Client();
