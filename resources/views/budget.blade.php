@@ -47,6 +47,7 @@
             border-radius: 15px;
         }
     </style>
+<<<<<<< HEAD
 
 
     {{-- @if (session()->get('is_superadmin') == 1)
@@ -72,6 +73,9 @@
             </div>
         </div>
     @endif --}}
+=======
+    
+>>>>>>> d2f0c4e2631bc980ee9ce6e652f54af4f890bed6
     <div class="row mb-4 mt-3 mx-1 justify-content-between">
         <div class="col-md d-sm-flex justify-content-start px-0 mx-0">
             <div class="d-flex me-2">
@@ -118,7 +122,11 @@
                                             onclick="getDetailBudgets('{{ $item->id }}', '{{ $item->full_name }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}', '{{ $item->limit->expire_date }}' )">Edit</a>
                                         <a class="dropdown-item">
                                             <span onclick="deleteBudget('{{ $item->limit->spend_id }}')">
+<<<<<<< HEAD
                                                Delete
+=======
+                                                Delete
+>>>>>>> d2f0c4e2631bc980ee9ce6e652f54af4f890bed6
                                             </span>
                                         </a>
                                     </div>
@@ -212,12 +220,21 @@
                         $.ajax({
                             type: "DELETE",
                             url: API_URL + "api/spends/" + spendId,
+<<<<<<< HEAD
                      
                             // url: "{{ route('partners.delete') }}",
                             data: {
                                 spend_id: spendId,
                                 user_id:userId,
                                 tenant_code:tenant
+=======
+
+                            // url: "{{ route('partners.delete') }}",
+                            data: {
+                                spend_id: spendId,
+                                user_id: userId,
+                                tenant_code: tenant
+>>>>>>> d2f0c4e2631bc980ee9ce6e652f54af4f890bed6
                             },
                             success: function(response) {
 

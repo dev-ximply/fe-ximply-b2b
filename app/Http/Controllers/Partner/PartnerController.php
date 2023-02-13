@@ -48,15 +48,14 @@ class PartnerController extends Controller
             $newPartner = $this->asyncAddPartner($paramAddPartner);
 
             // assign user
-            $paramAssignUserToPartner =[
+            $paramAssignUserToPartner = [
                 'user_id' => Auth::user()['id'],
                 'tenant_code' => session()->get('TenantCode'),
                 'partner_id' => $newPartner['data']['id'],
                 'assign_user_id' =>  $request->assign_user_id,
             ];
 
-           return $this->asyncAddUserToPartner($paramAssignUserToPartner);
-
+            return $this->asyncAddUserToPartner($paramAssignUserToPartner);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
@@ -76,8 +75,8 @@ class PartnerController extends Controller
         ];
 
         // assign user
-        if($request->assign_user_id){
-            $paramAssignUserToPartner =[
+        if ($request->assign_user_id) {
+            $paramAssignUserToPartner = [
                 'user_id' => Auth::user()['id'],
                 'tenant_code' => session()->get('TenantCode'),
                 'partner_id' => $request->partner_id,
@@ -91,9 +90,10 @@ class PartnerController extends Controller
         return self::asyncUpdateParner($params);
     }
 
-    public function deletePartner(Request $request){
+    public function deletePartner(Request $request)
+    {
         // asyncDeletePartner
-        $params =[
+        $params = [
             'tenant_code' => session()->get('TenantCode'),
             'user_id' => Auth::user()['id'],
             'partner_id' => $request->partner_id
