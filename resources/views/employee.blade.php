@@ -104,18 +104,9 @@
 
                             <tbody>
 
-<<<<<<< HEAD
-                                {{-- @php
-                                    var_dump($data['employee']);
-                                @endphp --}}
-
-                                @foreach ($data['employee'] as $item)
-                                    <tr class="">
-=======
                                 @foreach ($data['employee'] as $item)
                                     <tr class="align-middle">
 
->>>>>>> d2f0c4e2631bc980ee9ce6e652f54af4f890bed6
                                         <td class="text-xs font-weight-bold text-capitalize ps-5 pb-0 pt-3">
                                             <p class="text-dark" style="font-size: 13px">
 
@@ -169,14 +160,6 @@
                                                 {{ $item->created_date }}
 
                                             </p>
-<<<<<<< HEAD
-                                            <span class="text-xs">
-                                                {{-- {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
-                                                
-                                            </span>
-=======
-
->>>>>>> d2f0c4e2631bc980ee9ce6e652f54af4f890bed6
                                         </td>
 
 
@@ -294,12 +277,8 @@
             document.getElementById('edit_role_name').value = role_name;
 
         }
-<<<<<<< HEAD
-        function deactivedMember(id_member){
-=======
 
         function deactivedMember(id_member) {
->>>>>>> d2f0c4e2631bc980ee9ce6e652f54af4f890bed6
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success-cstm mx-2",
@@ -356,9 +335,9 @@
                                 if ($("#loader")) {
                                     $("#loader").hide();
                                 }
-                                // setTimeout(function() {
-                                //     location.reload();
-                                // }, 1000);
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1000);
                             }
                         });
                     } else if (result.dismiss === Swal.DismissReason.cancel) {

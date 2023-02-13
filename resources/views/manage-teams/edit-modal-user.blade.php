@@ -167,11 +167,11 @@
                     message
                 } = response;
 
-                // if (success === true) {
-                //     setTimeout(function() {
-                //         window.location.reload(true);
-                //     }, 1000);
-                // }
+                if (success === true) {
+                    setTimeout(function() {
+                        window.location.reload(true);
+                    }, 1000);
+                }
             }
 
         });
