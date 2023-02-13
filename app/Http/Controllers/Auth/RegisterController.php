@@ -27,6 +27,7 @@ class RegisterController extends Controller
 
     public static function register_action(Request $request)
     {
+        $tenant_token = $request->input('tenant_token');
         $first_name = $request->input('firstname');
         $last_name = $request->input('lastname');
         $handphone = $request->input('handphone');
@@ -37,7 +38,7 @@ class RegisterController extends Controller
         if(isset($request['referral_code'])){
             $referral_code = $request->input('referral_code');
         }
-        $register = self::register_post($first_name, $last_name, $handphone, $email, $password, $password_confirmation, $referral_code);
+        $register = self::register_post($tenant_token, $first_name, $last_name, $handphone, $email, $password, $password_confirmation, $referral_code);
 
         if($register->success == false){
             $request->session();
@@ -47,12 +48,16 @@ class RegisterController extends Controller
         return redirect("/sign-in")->with('success', 'Register success, please check your email to confirm you account');
     }
 
-    public static function register_post($first_name, $last_name, $handphone, $email, $password, $password_confirmation, $referral_code)
+    public static function register_post($tenant_token, $first_name, $last_name, $handphone, $email, $password, $password_confirmation, $referral_code)
     {
         $client = new Client();        
 
         $options = [
             'multipart' => [
+                [
+                    'name' => 'tenant_token',
+                    'contents' => $tenant_token
+                ],
                 [
                     'name' => 'first_name',
                     'contents' => $first_name
