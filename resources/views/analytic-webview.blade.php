@@ -40,6 +40,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="{{ asset('js/env-javascript.js') }}"></script>
 </head>
 
 <body>
@@ -123,7 +124,7 @@
     </div>
 </body>
 
-<input type="text" value="{{ config('api.base_url') }}" id="api_endpoint" hidden>
+{{-- <input type="text" value="{{ config('api.base_url') }}" id="api_endpoint" hidden> --}}
 
 </html>
 <script src="{{ asset('js/core/popper.min.js') }}"></script>
@@ -132,7 +133,8 @@
 <script src="{{ asset('js/plugins/smooth-scrollbar.min.js') }}"></script>
 
 <script>
-    const API_URL = document.getElementById('api_endpoint').value;
+    
+    // const API_URL = document.getElementById('api_endpoint').value;
 
     var FilterExpenseType = "";
     var FilterStartDate = "";
@@ -148,7 +150,7 @@
             FilterEndDate = urlParams.get('filter_end_date');
             FilterMember = urlParams.get('filter_member');
         }
-    }
+    }    
 
     $.ajaxSetup({
         headers: {
@@ -277,7 +279,7 @@
         },
         complete: function(data) {
             if (data.status != 200) {
-                Swal.fire('failed<br>Please contact ximply support');
+                // Swal.fire('failed<br>Please contact ximply support');
             }
         }
     });
@@ -403,10 +405,12 @@
         },
         complete: function(data) {
             if (data.status != 200) {
-                Swal.fire('failed<br>Please contact ximply support');
+                // Swal.fire('failed<br>Please contact ximply support');
             }
         }
     });
+
+    const params = getQueryParams();
 
     $(document).ready(function() {
         $.ajaxSetup({
