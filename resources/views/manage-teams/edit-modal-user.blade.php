@@ -14,7 +14,7 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                {{-- <input type="hidden" id="user_id"> --}}
+                                <input type="hidden" id="user_id">
                                 <div class="col-6">
                                     <label class="form-label" style="color: black; font-weight:500">Firstname</label>
                                     <div class="input-group">
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <input type="hidden" name="test" id="user_id">
+                                {{-- <input type="hidden" name="test" id="user_id"> --}}
                                 <div class="col-6">
                                     <label class="form-label mt-2"
                                         style="color: black; font-weight:500">Group</label>
@@ -167,11 +167,11 @@
                     message
                 } = response;
 
-                if (success === true) {
-                    setTimeout(function() {
-                        window.location.reload(true);
-                    }, 1000);
-                }
+                // if (success === true) {
+                //     setTimeout(function() {
+                //         window.location.reload(true);
+                //     }, 1000);
+                // }
             }
 
         });

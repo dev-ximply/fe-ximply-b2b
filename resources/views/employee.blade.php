@@ -149,20 +149,17 @@
                                             </p>
 
                                         </td>
-
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
 
                                             <p class="text-dark" style="font-size: 13px">
                                                 {{ $item->approver != '' ? $item->approver : '-' }}
                                             </p>
-
                                         </td>
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
                                             <p class="text-dark" style="font-size: 13px">
                                                 {{ $item->created_date }}
 
                                             </p>
-
                                         </td>
 
 

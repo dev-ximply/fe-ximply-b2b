@@ -46,7 +46,7 @@ class ExpensesController extends Controller
             $params['status'] = $statusType;
         }
 
-        $url = config('api.base_url') . 'api/expense/list/nested';
+        $url = config('api.base_url') . 'api/expense/list/nested?user_id=';
         $response = Http::withHeaders($headers)
             ->asForm()
             ->get($url, $params);
