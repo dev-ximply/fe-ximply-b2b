@@ -7,8 +7,8 @@
                 <form action="javascript:void(0)" method="POST" onsubmit="submitReport()">
                     <div class="row">
                         @csrf
-                        <input type="text" id="user_id" value="'{{ Auth::user()['id'] }}'" hidden>
-                        <input type="text" id="report_id" value="'{{ $data['reports']->id }}'" hidden>
+                        <input type="text" id="user_id" value="{{ Auth::user()['id'] }}" hidden>
+                        <input type="text" id="report_id" value="{{ $data['reports']->id }}" hidden>
                         <div class="col-md">
                             <label class="text-xs text-dark" style="font-weight: 500">Email To</label>
                             <input type="email" id="email_to" class="form-control bg-white"
@@ -96,7 +96,7 @@
                                     </td>
                                     <td class="text-xs font-weight-bold  pt-3 pb-0">
                                         <div class="d-flex align-items-center text-break text-wrap text-capitalize">
-                                            <p class="text-xs text-dark">{{ $item->category }}</p>
+                                            <p class="text-xs text-dark">{{ $item->category_name }}</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -177,18 +177,18 @@
                                         "your request success.",
                                         "success"
                                     );
-                                    setTimeout(function() {
-                                        window.location.reload(true);
-                                    }, 1000);
+                                    // setTimeout(function() {
+                                    //     window.location.reload(true);
+                                    // }, 1000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
                                         "Error!",
                                         res['message'],
                                         "error"
                                     );
-                                    setTimeout(function() {
-                                        window.location.reload(true);
-                                    }, 1000);
+                                    // setTimeout(function() {
+                                    //     window.location.reload(true);
+                                    // }, 1000);
                                 }
                             },
                             complete: function(data) {

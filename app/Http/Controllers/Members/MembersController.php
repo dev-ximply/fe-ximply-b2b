@@ -23,7 +23,7 @@ class MembersController extends Controller
                 'data' => [
                     'employee' => self::list(Auth::user()['id']),
                     'list_department' => self::list_department(Auth::user()['id']),
-                    'list_role' => self::list_role(Auth::user()['id']),
+                    'list_role' => self::list_role(),
                     'have_member' => self::have_member(Auth::user()['id'])
                 ],
                 
@@ -146,14 +146,14 @@ class MembersController extends Controller
         return $response->data;
     }
 
-    public static function list_role($user_id)
+    public static function list_role()
     {
         $client = new Client();
         $headers = [
             'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json'
         ];
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/role/list/' . Session::get('TenantCode'), $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/roles/' . Session::get('TenantCode'), $headers);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 

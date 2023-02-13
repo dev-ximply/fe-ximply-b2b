@@ -1,7 +1,7 @@
 <div class="modal fade" id="newReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content" >
+        <div class="modal-content">
             <div class="modal-header px-4" style="background:#19194b;">
                 <h6 class="modal-title fs-6 text-white" id="staticBackdropLabel">New Report</h6>
                 <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
@@ -130,7 +130,7 @@
 
                         var formDataReport = new FormData();
 
-                        formDataReport.append('user_id', user_id);
+                        formDataReport.append('user_id', USR_ID);
 
                         if (report_title != "") {
                             formDataReport.append('report_title', report_title);
@@ -164,13 +164,13 @@
                             success: function(res) {
                                 if (res['success'] == true) {
                                     swalWithBootstrapButtons.fire(
-                                        "Success!",
+                                        "success!",
                                         "Your request success.",
                                         "success"
                                     );
                                 } else {
                                     swalWithBootstrapButtons.fire(
-                                        "Error!",
+                                        "error!",
                                         res['message'],
                                         "error"
                                     );
@@ -209,8 +209,7 @@
         });
         $.ajax({
             type: "GET",
-            url: API_URL + "api/category/list/main?user_id=" + document.getElementById(
-                'user_id').value,
+            url: API_URL + "api/category/list/main?user_id=" + USR_ID,
             success: function(res) {
                 if (res) {
                     var response = res['data'];
@@ -233,13 +232,14 @@
                 var date_start = $('#date_start').val();
                 var date_end = $('#date_end').val();
                 urlSearch = API_URL + "api/expense/list/basic?user_id=" +
-                    $('#user_id').val() +
+                    USR_ID;
+                     +
                     "&date_start=" + date_start +
                     "&date_end=" + date_end;
                 if ($('#category').val() != "") {
                     var category = $('#category').val();
                     urlSearch = API_URL + "api/expense/list/basic?user_id=" +
-                        $('#user_id').val() +
+                        USR_ID +
                         "&category=" + category +
                         "&date_start=" + date_start +
                         "&date_end=" + date_end;
@@ -250,13 +250,13 @@
             $('#category').on('change', function() {
                 var category = $('#category').val();
                 urlSearch = API_URL + "api/expense/list/basic?user_id=" +
-                    $('#user_id').val() +
+                    USR_ID +
                     "&category=" + category;
                 if ($('#date_start').val() != "" && $('#date_end').val() != "") {
                     var date_start = $('#date_start').val();
                     var date_end = $('#date_end').val();
                     urlSearch = API_URL + "api/expense/list/basic?user_id=" +
-                        $('#user_id').val() +
+                        USR_ID +
                         "&category=" + category +
                         "&date_start=" + date_start +
                         "&date_end=" + date_end;
@@ -281,6 +281,7 @@
                     },
                     success: function(res) {
                         if (res) {
+                            console.log(res);
                             var response = res['data'];
                             var tableOut = "";
                             var totalAmount = 0;
@@ -289,19 +290,17 @@
                                 tableOut +=
                                     '<tr><td class="font-weight-bold pt-3">';
                                 tableOut +=
-                                    '<p class="text-sm text-dark">' + obj.date +
-                                    ', ' + obj
-                                    .time + '</p></td>';
+                                    '<p class="text-sm text-dark">' + obj.receipt_date + '</p></td>';
                                 tableOut +=
                                     '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
                                     obj.merchant + '</p></td>';
                                 tableOut +=
                                     '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
-                                    obj.category + '</p></td>';
+                                    obj.category_name + '</p></td>';
                                 tableOut +=
                                     '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
                                     Intl.NumberFormat().format(obj.total_amount) +
-                                    '</p></td></tr>';                                
+                                    '</p></td></tr>';
                             }
                             $("#tableBody").append(tableOut);
                             $("#totalAmount").html(Intl.NumberFormat().format(

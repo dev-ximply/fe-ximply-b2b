@@ -40,6 +40,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="{{ asset('js/env-javascript.js') }}"></script>
 </head>
 
 <body>
@@ -56,7 +57,7 @@
                                         id="basic-addon1"
                                         style="border-right: 1px solid #adadadad; font-size:11px;height:35px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
                                     <input type="date" class="form-control px-2 text-dark" id="filter_start_date"
-                                        name="filter_start_date"
+                                        name="filter_start_date" value="{{ isset($_GET['filter_start_date']) ? $_GET['filter_start_date'] : '' }}"
                                         style="font-size:11px;height:35px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
                                 </div>
                             </div>
@@ -65,7 +66,7 @@
                                     <span for="" class="input-group-text z-index-1 font-weight-bold text-dark"
                                         style="border-right: 1px solid #adadadad; font-size:11px;height:35px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
                                     <input type="date" class="form-control px-2 text-dark" id="filter_end_date"
-                                        name="filter_end_date"
+                                        name="filter_end_date" value="{{ isset($_GET['filter_end_date']) ? $_GET['filter_end_date'] : '' }}"
                                         style="font-size:11px;height:35px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
                                 </div>
                             </div>
@@ -130,7 +131,7 @@
     </div>
 </body>
 
-<input type="text" value="{{ config('api.base_url') }}" id="api_endpoint" hidden>
+{{-- <input type="text" value="{{ config('api.base_url') }}" id="api_endpoint" hidden> --}}
 
 </html>
 <script src="{{ asset('js/core/popper.min.js') }}"></script>
@@ -139,7 +140,8 @@
 <script src="{{ asset('js/plugins/smooth-scrollbar.min.js') }}"></script>
 
 <script>
-    const API_URL = document.getElementById('api_endpoint').value;
+    
+    // const API_URL = document.getElementById('api_endpoint').value;
 
     var FilterExpenseType = "";
     var FilterStartDate = "";
@@ -155,7 +157,7 @@
             FilterEndDate = urlParams.get('filter_end_date');
             FilterMember = urlParams.get('filter_member');
         }
-    }
+    }    
 
     $.ajaxSetup({
         headers: {
@@ -284,7 +286,7 @@
         },
         complete: function(data) {
             if (data.status != 200) {
-                Swal.fire('failed<br>Please contact ximply support');
+                // Swal.fire('failed<br>Please contact ximply support');
             }
         }
     });
@@ -410,10 +412,12 @@
         },
         complete: function(data) {
             if (data.status != 200) {
-                Swal.fire('failed<br>Please contact ximply support');
+                // Swal.fire('failed<br>Please contact ximply support');
             }
         }
     });
+
+    const params = getQueryParams();
 
     $(document).ready(function() {
         $.ajaxSetup({
