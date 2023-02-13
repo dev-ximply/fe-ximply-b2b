@@ -47,35 +47,7 @@
             border-radius: 15px;
         }
     </style>
-<<<<<<< HEAD
-
-
-    {{-- @if (session()->get('is_superadmin') == 1)
-        <div class="row justify-content-center mb-4">
-            <div class="col-md d-flex  justify-content-center">
-                <div class="col-md d-flex align-items-center">
-                    <div class="col-md-7 me-3">
-                        <label for="" class="text-dark">Input your budget</label>
-                        <div class="form-group d-flex">
-                            <input type="text" placeholder="Set your budget" class="form-control" style="height: 42px">
-                            <button class="btn text-white ms-3" style="background: #62ca50">Submit</button>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md text-end">
-
-                    <div class="form-group">
-                        <label for="" class="text-dark">Your budget</label>
-                        <p class="text-dark" style="font-size:20px; font-weight: 800">Rp. 100.000.000</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif --}}
-=======
     
->>>>>>> d2f0c4e2631bc980ee9ce6e652f54af4f890bed6
     <div class="row mb-4 mt-3 mx-1 justify-content-between">
         <div class="col-md d-sm-flex justify-content-start px-0 mx-0">
             <div class="d-flex me-2">
@@ -119,14 +91,10 @@
                                     <div class="dropdown-menu dropdown-menu-end me-sm-n4 me-n3"
                                         aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit_modal_budget"
-                                            onclick="getDetailBudgets('{{ $item->id }}', '{{ $item->full_name }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}', '{{ $item->limit->expire_date }}' )">Edit</a>
+                                            onclick="getDetailBudgets('{{ $item->id }}', '{{ $item->full_name }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}', '{{ $item->limit->expire_date }}')">Edit</a>
                                         <a class="dropdown-item">
                                             <span onclick="deleteBudget('{{ $item->limit->spend_id }}')">
-<<<<<<< HEAD
-                                               Delete
-=======
                                                 Delete
->>>>>>> d2f0c4e2631bc980ee9ce6e652f54af4f890bed6
                                             </span>
                                         </a>
                                     </div>
@@ -178,6 +146,7 @@
             document.getElementById('edit_budget_limit_avail').value = remain_limit;
             document.getElementById('auto_approve_edit').value = auto_approve;
             document.getElementById('expire_date').value = expire_date;
+            // document.getElementById('used_limit').value = used_limit;
             console.log(auto_approve);
 
         }
@@ -220,21 +189,12 @@
                         $.ajax({
                             type: "DELETE",
                             url: API_URL + "api/spends/" + spendId,
-<<<<<<< HEAD
-                     
-                            // url: "{{ route('partners.delete') }}",
-                            data: {
-                                spend_id: spendId,
-                                user_id:userId,
-                                tenant_code:tenant
-=======
 
                             // url: "{{ route('partners.delete') }}",
                             data: {
                                 spend_id: spendId,
                                 user_id: userId,
                                 tenant_code: tenant
->>>>>>> d2f0c4e2631bc980ee9ce6e652f54af4f890bed6
                             },
                             success: function(response) {
 
@@ -247,7 +207,6 @@
                                 console.log(response)
 
                                 if (status === true) {
-
                                     setTimeout(function() {
                                         window.location.reload(true);
                                     }, 1000);
@@ -257,8 +216,13 @@
                                         message,
                                         "Error"
                                     );
+                                    setTimeout(function() {
+                                        window.location.reload(true);
+                                    }, 1000);
                                 }
-                            }
+                               
+                            },
+                        
 
                         });
 

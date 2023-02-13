@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-6">
                             <label class="form-label text-dark" style="font-weight: 600">Spending Budget Limit </label>
-                            <input type="text" class="form-control" id="limit" name="limit"
+                            <input type="text" class="form-control number-separator" id="limit" name="limit"
                                 value="{{ old('limit') }}">
                             <script>
                                 new NumericInput(document.getElementById('limit'), 'en-CA');
@@ -68,8 +68,8 @@
                         </div>
                         <div class="col-6">
                             <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
-                            <input type="text" class="form-control" id="auto_approve_limit" name="auto_approve_limit"
-                                value="{{ old('auto_approve_limit') }}">
+                            <input type="text" class="form-control number-separator"  id="auto_approve_limit"
+                                name="auto_approve_limit" value="{{ old('auto_approve_limit') }}">
                             <script>
                                 new NumericInput(document.getElementById('auto_approve_limit'), 'en-CA');
                             </script>
@@ -115,6 +115,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        easyNumberSeparator({
+            selector: '.number-separator',
+            separator: ',',
+            decimalSeparator: '.',
+            resultInput: '#result_input',
+        })
+    </script>
+
     <script src="{{ asset('js/plugins/choices.min.js') }}"></script>
     <script src="{{ asset('js/plugins/flatpickr.min.js') }}"></script>
     <script>

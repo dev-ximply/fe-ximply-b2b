@@ -159,6 +159,11 @@
                 departement_id: departementId,
                 role_id: roleId,
             },
+            beforeSend: function() {
+                if ($("#loader")) {
+                    $("#loader").show();
+                }
+            },
             success: function(response) {
                 console.log(response);
                 const {
@@ -166,8 +171,11 @@
                     status,
                     message
                 } = response;
-
+                if ($("#loader")) {
+                    $("#loader").hide();
+                }
                 if (success === true) {
+                    
                     setTimeout(function() {
                         window.location.reload(true);
                     }, 1000);

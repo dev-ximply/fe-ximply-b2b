@@ -1,6 +1,5 @@
 <style>
-    /the container must be positioned relative:/
-    .autocomplete {
+    /the container must be positioned relative:/ .autocomplete {
         position: relative;
         display: flex;
     }
@@ -29,8 +28,7 @@
         border-bottom: none;
         border-top: none;
         z-index: 99;
-        /position the autocomplete items to be the same width as the container:/
-        top: 100%;
+        /position the autocomplete items to be the same width as the container: / top: 100%;
         left: 0;
         right: 0;
     }
@@ -42,13 +40,11 @@
         border-bottom: 1px solid #d4d4d4;
     }
 
-    /when hovering an item:/
-    .autocomplete-items div:hover {
+    /when hovering an item:/ .autocomplete-items div:hover {
         background-color: #e9e9e9;
     }
 
-    /when navigating through the items using the arrow keys:/
-    .autocomplete-active {
+    /when navigating through the items using the arrow keys:/ .autocomplete-active {
         background-color: DodgerBlue !important;
         color: #ffffff;
     }
@@ -81,7 +77,7 @@
                             <label style="color: #000000">Amount</label>
                             <div class="input-group mb-3 autocomplete">
                                 <span class="input-group-text border" id="basic-addon1">Rp</span>
-                                <input type="text" class="form-control px-2" placeholder="0" aria-label="Username"
+                                <input type="text" class="form-control px-2 number-separator" placeholder="0" aria-label="Username"
                                     aria-describedby="basic-addon1" id="topupAmount" required>
                                 <script>
                                     new NumericInput(document.getElementById('topupAmount'), 'en-CA');
@@ -89,8 +85,7 @@
                             </div>
                             <label for="" style="color: black">Client</label>
                             <div class="mb-3">
-                                <select name="" id="" class="form-select" name="topupClient"
-                                    >
+                                <select name="" id="" class="form-select" name="topupClient">
                                     <option value="" selected id="topupClient">Select</option>
                                     @foreach ($data['client'] as $item)
                                         <option value="{{ $item->company_name }}">
@@ -144,12 +139,21 @@
 </div>
 
 <script>
-    function topupRequest(userId ) {
-        const amount = document.getElementById('topupAmount').value; 
+    easyNumberSeparator({
+        selector: '.number-separator',
+        separator: ',',
+        decimalSeparator: '.',
+        resultInput: '#result_input',
+    })
+</script>
+
+<script>
+    function topupRequest(userId) {
+        const amount = document.getElementById('topupAmount').value;
         const client = document.getElementById('topupClient').value;
         const purpose = document.getElementById('topupPurpose').value;
         const note = document.getElementById('topupNote').value;
-        
+
         console.log(userId);
         console.log(amount);
         console.log(client);
@@ -259,81 +263,81 @@
         });
     });
 
-    function autocomplete(inp, arr) {
-        var currentFocus;
-        inp.addEventListener("input", function(e) {
-            var a, b, i, val = this.value;
-            closeAllLists();
-            if (!val) {
-                return false;
-            }
-            currentFocus = -1;
-            a = document.createElement("DIV");
-            a.setAttribute("id", this.id + "autocomplete-list");
-            a.setAttribute("class", "autocomplete-items");
-            this.parentNode.appendChild(a);
-            for (i = 0; i < arr.length; i++) {
-                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                    b = document.createElement("DIV");
-                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                    b.innerHTML += arr[i].substr(val.length);
-                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-                    b.addEventListener("click", function(e) {
-                        inp.value = this.getElementsByTagName("input")[0].value;
-                        closeAllLists();
-                    });
-                    a.appendChild(b);
-                }
-            }
-        });
+    // function autocomplete(inp, arr) {
+    //     var currentFocus;
+    //     inp.addEventListener("input", function(e) {
+    //         var a, b, i, val = this.value;
+    //         closeAllLists();
+    //         if (!val) {
+    //             return false;
+    //         }
+    //         currentFocus = -1;
+    //         a = document.createElement("DIV");
+    //         a.setAttribute("id", this.id + "autocomplete-list");
+    //         a.setAttribute("class", "autocomplete-items");
+    //         this.parentNode.appendChild(a);
+    //         for (i = 0; i < arr.length; i++) {
+    //             if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+    //                 b = document.createElement("DIV");
+    //                 b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+    //                 b.innerHTML += arr[i].substr(val.length);
+    //                 b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+    //                 b.addEventListener("click", function(e) {
+    //                     inp.value = this.getElementsByTagName("input")[0].value;
+    //                     closeAllLists();
+    //                 });
+    //                 a.appendChild(b);
+    //             }
+    //         }
+    //     });
 
-        /execute a function presses a key on the keyboard:/
-        inp.addEventListener("keydown", function(e) {
-            var x = document.getElementById(this.id + "autocomplete-list");
-            if (x) x = x.getElementsByTagName("div");
-            if (e.keyCode == 40) {
-                currentFocus++;
-                addActive(x);
-            } else if (e.keyCode == 38) {
-                currentFocus--;
-                addActive(x);
-            } else if (e.keyCode == 13) {
-                e.preventDefault();
-                if (currentFocus > -1) {
-                    if (x) x[currentFocus].click();
-                }
-            }
-        });
+    //     /execute a function presses a key on the keyboard:/
+    //     inp.addEventListener("keydown", function(e) {
+    //         var x = document.getElementById(this.id + "autocomplete-list");
+    //         if (x) x = x.getElementsByTagName("div");
+    //         if (e.keyCode == 40) {
+    //             currentFocus++;
+    //             addActive(x);
+    //         } else if (e.keyCode == 38) {
+    //             currentFocus--;
+    //             addActive(x);
+    //         } else if (e.keyCode == 13) {
+    //             e.preventDefault();
+    //             if (currentFocus > -1) {
+    //                 if (x) x[currentFocus].click();
+    //             }
+    //         }
+    //     });
 
-        function addActive(x) {
-            if (!x) return false;
-            removeActive(x);
-            if (currentFocus >= x.length) currentFocus = 0;
-            if (currentFocus < 0) currentFocus = (x.length - 1);
-            x[currentFocus].classList.add("autocomplete-active");
-        }
+    //     function addActive(x) {
+    //         if (!x) return false;
+    //         removeActive(x);
+    //         if (currentFocus >= x.length) currentFocus = 0;
+    //         if (currentFocus < 0) currentFocus = (x.length - 1);
+    //         x[currentFocus].classList.add("autocomplete-active");
+    //     }
 
-        function removeActive(x) {
-            for (var i = 0; i < x.length; i++) {
-                x[i].classList.remove("autocomplete-active");
-            }
-        }
+    //     function removeActive(x) {
+    //         for (var i = 0; i < x.length; i++) {
+    //             x[i].classList.remove("autocomplete-active");
+    //         }
+    //     }
 
-        function closeAllLists(elmnt) {
-            var x = document.getElementsByClassName("autocomplete-items");
-            for (var i = 0; i < x.length; i++) {
-                if (elmnt != x[i] && elmnt != inp) {
-                    x[i].parentNode.removeChild(x[i]);
-                }
-            }
-        }
-        document.addEventListener("click", function(e) {
-            closeAllLists(e.target);
-        });
-    }
-    /An array containing all the country names in the world:/
-    var countries = ["100000", "200000", "300000", "400000", "500000", "600000", "700000", "800000", "900000",
-        "1000000"
-    ];
-    autocomplete(document.getElementById("topupAmount"), countries);
+    //     function closeAllLists(elmnt) {
+    //         var x = document.getElementsByClassName("autocomplete-items");
+    //         for (var i = 0; i < x.length; i++) {
+    //             if (elmnt != x[i] && elmnt != inp) {
+    //                 x[i].parentNode.removeChild(x[i]);
+    //             }
+    //         }
+    //     }
+    //     document.addEventListener("click", function(e) {
+    //         closeAllLists(e.target);
+    //     });
+    // }
+    // /An array containing all the country names in the world:/
+    // var countries = ["100000", "200000", "300000", "400000", "500000", "600000", "700000", "800000", "900000",
+    //     "1000000"
+    // ];
+    // autocomplete(document.getElementById("topupAmount"), countries);
 </script>

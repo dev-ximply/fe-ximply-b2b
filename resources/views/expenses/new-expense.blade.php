@@ -90,7 +90,7 @@
                                         <label for="" class="text-dark" style="font-weight:500">Total
                                             Amount</label>
                                         <input type="text" name="total_amount" id="total_amount"
-                                            class="form-control" placeholder="Amount" step="1.0" required>
+                                            class="form-control number-separator" placeholder="Amount" step="1.0" required>
                                         <script>
                                             new NumericInput(document.getElementById('total_amount'), 'en-CA');
                                         </script>
@@ -193,6 +193,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    easyNumberSeparator({
+      selector: '.number-separator',
+      separator: ',',
+      decimalSeparator: '.',
+      resultInput: '#result_input',
+    })
+  </script>
+
 <script>
     // new expense
     function NewExpenses() {

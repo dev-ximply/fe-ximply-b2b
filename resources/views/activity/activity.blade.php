@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="row">
-        <div class="col-md-6 mx-auto">
+        <div class="col-md mx-auto">
             <div class="m-auto d-flex justify-content-end">
                 <button onclick="history.back()" class="btn  btn-sm ms-auto text-white "
                     type="button" style="background: #191a4b">back</button>

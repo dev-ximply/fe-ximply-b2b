@@ -151,7 +151,7 @@
                     <span>
                         <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Have Client</p>
                         <h5 class=" mb-0 text-dark font-weight-bolder">
-                            <span>{{ $data['group'][0]->have_partnership }}</span>
+                            <span>{{ $data['group'][0]->have_partnership == 0 ? 'No' : 'Yes' }}</span>
                         </h5>
                     </span>
                 </div>

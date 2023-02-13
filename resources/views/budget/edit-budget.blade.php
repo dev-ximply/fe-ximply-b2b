@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label class="form-label text-dark" style="font-weight: 600">Topup Budget Limit</label>
-                            <input type="text" class="form-control" id="edit_budget_limit_avail_topup"
+                            <input type="text" class="form-control number-separator" id="edit_budget_limit_avail_topup"
                                 name="edit_budget_limit_avail_topup" value="0">
                             <script>
                                 new NumericInput(document.getElementById('edit_budget_limit_avail_topup'), 'en-CA');
@@ -38,7 +38,7 @@
 
                         <div class="col-md-6">
                             <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
-                            <input type="text" class="form-control" id="auto_approve_edit" name="auto_approve_edit" value="0">
+                            <input type="text" class="form-control number-separator" id="auto_approve_edit" name="auto_approve_edit" value="0">
                             <script>
                                 new NumericInput(document.getElementById('auto_approve_edit'), 'en-CA');
                             </script>
@@ -59,6 +59,13 @@
                             <input type="date" class="form-control" id="expire_date" name="expire_date"
                                 value="{{ old('expire_date') }}">
                         </div>
+                        {{-- @if (session()->get('is_superadmin') == false)
+                        <div class="col-6">
+                            <label class="form-label text-dark" style="font-weight: 600">Used Limit</label>
+                            <input type="text" id="used_limit" class="form-control" name="used_limit" value="0">
+                        </div>
+                            
+                        @endif --}}
                     </div>
 
 
@@ -73,6 +80,16 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    easyNumberSeparator({
+        selector: '.number-separator',
+        separator: ',',
+        decimalSeparator: '.',
+        resultInput: '#result_input',
+    })
+</script>
 
 <script>
     function postEditBudget(id) {
@@ -109,6 +126,7 @@
                     formData.append('auto_approve_limit', document.getElementById('auto_approve_edit').value);
                     formData.append('expire_date', document.getElementById('expire_date').value);
                     formData.append('frequency', document.getElementById('edit_frequency').value);
+                    // formData.append('used_limit', document.getElementById('used_limit').value);
 
 
 
@@ -151,14 +169,14 @@
                                 );
                             }
                         },
-                        complete: function(data) {
-                            if ($("#loader")) {
-                                $("#loader").hide();
-                            }
-                            // setTimeout(function() {
-                            //     location.reload();
-                            // }, 1000);
-                        }
+                        // complete: function(data) {
+                        //     if ($("#loader")) {
+                        //         $("#loader").hide();
+                        //     }
+                        //     setTimeout(function() {
+                        //         location.reload();
+                        //     }, 1000);
+                        // }
                     });
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     swalWithBootstrapButtons.fire(

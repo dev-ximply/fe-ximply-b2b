@@ -49,8 +49,8 @@
                                 <div class="col-6">
                                     <label class="form-label mt-2" style="color: black; font-weight:500">Group</label>
                                     <div class="">
-                                        <select class="form-control " name="department_id" id="department_id">
-                                            <option value="" selected>Select</option>
+                                        <select class="form-control " name="department_id" id="department_id" required>
+                                            <option value="" selected >Select</option>
                                             @foreach ($data['list_department'] as $item_departement)
                                                 <option value="{{ $item_departement->id }}">
                                                     {{ $item_departement->group_name }}
@@ -82,10 +82,10 @@
 
                                     @if (session()->get('is_superadmin') == true)
                                         <button type="sumbit" class="btn text-white" style="background-color: #62ca50"
-                                            onclick="sendInvitation('{{ Auth::user()['id'] }}', document.getElementById('email').value, document.getElementById('first_name').value, document.getElementById('last_name').value, document.getElementById('department_id').value)">Submit</button>
+                                            onclick="sendInvitation('{{ Auth::user()['id'] }}', document.getElementById('email').value, document.getElementById('first_name').value, document.getElementById('last_name').value,  document.getElementById('role_id').value, document.getElementById('department_id').value)">Submit</button>
                                     @else
                                         <button type="sumbit" class="btn text-white" style="background-color: #62ca50"
-                                            onclick="sendInvitation('{{ Auth::user()['id'] }}', document.getElementById('email').value, document.getElementById('first_name').value, document.getElementById('last_name').value)">Submit</button>
+                                            onclick="sendInvitation('{{ Auth::user()['id'] }}', document.getElementById('email').value, document.getElementById('first_name').value, document.getElementById('last_name').value, document.getElementById('role_id').value)">Submit</button>
                                     @endif
 
                                 </div>
@@ -128,7 +128,10 @@
 
                     var formNewMember = new FormData();
 
-                    console.log('tes', formNewMember);
+                    // for (const value of formNewMember.values()) {
+                    //     console.log(value);
+                    // },
+
 
                     formNewMember.append('tenant_code', tenant_code);
                     formNewMember.append('user_id', user_id);
@@ -141,6 +144,8 @@
                     if (group_id != "" || group_id != null) {
                         formNewMember.append('group_id', group_id);
                     }
+
+
 
 
 

@@ -37,6 +37,10 @@
     <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.0.9') }}" rel="stylesheet" />
     <script src="{{ asset('js/plugins/jquery-3.6.1.min.js') }}"></script>
 
+     {{-- Separator NUmber --}}
+     <script src="{{ asset('js/separator/easy-number-separator.js') }}"></script>
+     {{-- Separator --}}
+
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -59,6 +63,7 @@
 
     {{-- GLOBAL VARIABEL --}}
     <script src="{{ asset('js/env-javascript.js') }}"></script>
+
 </head>
 
 <body class="g-sidenav-show bg-gray-100" onload="startFCM()">
@@ -96,6 +101,11 @@
         </div>
     </main>
     @include('partials.rightside')
+
+
+
+
+
 
     <!-- JS Table -->
     <script src="{{ asset('js/table/main.js') }}"></script>
@@ -195,4 +205,5 @@
     }
 </script>
 @stack('jsBottom')
+
 </html>

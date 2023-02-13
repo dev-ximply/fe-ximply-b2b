@@ -15,7 +15,6 @@
 
 
     <style>
-
         ::-ms-scrollbar {
 
             width: 12px;
@@ -395,7 +394,6 @@
             cursor: url(grabbed.cur), default;
 
         }
-
     </style>
 
     @if (session()->get('is_superadmin') == false)
@@ -473,9 +471,16 @@
                                         </select>
                                     </div>
                                     <div class="col-md mt-2">
-                                        <button type="submit" style="line-height:10px; height:25px; font-size:9px"
+                                        {{-- <button type="submit" style="line-height:10px; height:25px; font-size:9px"
                                             class="form-control text-bold" id="filter_button">
                                             F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R
+                                        </button> --}}
+                                        <button type="submit" value="submit"
+                                            style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
+                                            class="form-control text-bold d-flex justify-content-center" id="filter_button">
+
+                                            <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
+
                                         </button>
                                     </div>
                                 </div>
@@ -494,25 +499,21 @@
 
                             <tr>
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-
                                     style="color: #000000; ">Date Receipts
 
                                 </th>
 
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-
                                     style="color: #000000; ">Status
 
                                 </th>
 
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-
                                     style="color: #000000; ">Purpose
 
                                 </th>
 
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-
                                     style="color: #000000; ">
 
                                     Merchant
@@ -520,7 +521,6 @@
                                 </th>
 
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-
                                     style="color: #000000; ">
 
                                     Amount
@@ -528,7 +528,6 @@
                                 </th>
 
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-
                                     style="color: #000000; ">
 
                                     Expense
@@ -536,7 +535,6 @@
                                 </th>
 
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-
                                     style="color: #000000; ">
 
                                     Action
@@ -550,19 +548,16 @@
                         <tbody>
 
                             @if (count($data['expenses']) != 0)
-
                                 @foreach ($data['expenses'] as $item)
-
                                     @php
-
+                                        
                                         $i = 1;
-
+                                        
                                     @endphp
 
                                     <tr class="align-middle">
 
                                         <td colspan="7" style="color: #000000;font-weight:500;font-size:12px;"
-
                                             class="text-md-start text-end ps-md-4 text-break text-wrap">
 
                                             {{-- <span
@@ -578,61 +573,46 @@
                                     </tr>
 
                                     @foreach ($item->expenses as $expense)
-
                                         <tr class="">
 
                                             <td>{{ '#' . $i++ }}</td>
 
                                             <td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center"
-
                                                 data-label="Status" style="color: #000000;">
 
                                                 @if ($expense->status == 'approved')
-
                                                     <span class="badge badge-xs d-flex justify-content-center"
-
                                                         style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">
 
                                                         {{ $expense->status }}
 
                                                     </span>
-
                                                 @elseif($expense->status == 'pending')
-
                                                     <span class="badge badge-xs d-flex justify-content-center"
-
                                                         style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">
 
                                                         {{ $expense->status }}
 
                                                     </span>
-
                                                 @elseif($expense->status == 'rejected')
-
                                                     <span class="badge badge-xs d-flex justify-content-center"
-
                                                         style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">
 
                                                         {{ $expense->status }}
 
                                                     </span>
-
                                                 @else
-
                                                     <span class="badge badge-xs d-flex justify-content-center"
-
                                                         style=" background:gray; color:gray; padding:5px; border-radius:5px; width:55px">
 
                                                         {{ $expense->status }}
 
                                                     </span>
-
                                                 @endif
 
                                             </td>
 
                                             <td class="text-md-start ps-md-4 text-end text-break text-wrap"
-
                                                 data-label="Purpose" style="color: #000000">
 
                                                 {{ $expense->purpose }}
@@ -640,7 +620,6 @@
                                             </td>
 
                                             <td class="text-break text-wrap text-md-start text-end ps-md-4"
-
                                                 data-label="Merchant" style="color: #000000">
 
                                                 {{ $expense->merchant }}
@@ -648,7 +627,6 @@
                                             </td>
 
                                             <td class="text-break text-wrap ps-md-4 text-md-start text-end"
-
                                                 data-label="Total Amount" style="color: #000000">
 
                                                 <span class="">
@@ -660,7 +638,6 @@
                                             </td>
 
                                             <td class="text-break text-wrap ps-md-4 text-md-start text-end"
-
                                                 data-label="Expense" style="color: #000000">
 
                                                 {{ $expense->category_name }}
@@ -668,15 +645,11 @@
                                             </td>
 
                                             <td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between"
-
                                                 data-label="Action">
 
                                                 <button onclick="getExpenseData('{{ $expense->id }}' )"
-
                                                     class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
-
                                                     data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"
-
                                                     style="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">
 
                                                     View</button>
@@ -684,13 +657,9 @@
                                             </td>
 
                                         </tr>
-
                                     @endforeach
-
                                 @endforeach
-
                             @else
-
                                 <tr>
 
                                     <td colspan="7">
@@ -699,13 +668,13 @@
 
                                             <div class="d-flex align-items-center justify-content-center flex-column py-5">
 
-                                                <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid" alt=""
-
-                                                    style="width: 100px">
+                                                <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid"
+                                                    alt="" style="width: 100px">
 
                                                 <h6 class="font-weight-bold text-dark py-0">You don't have expense</h6>
 
-                                                <span class="text-xs" style="text-align: center">Scan your recepit or create new
+                                                <span class="text-xs" style="text-align: center">Scan your recepit or
+                                                    create new
 
                                                     expense form the button
 
@@ -718,7 +687,6 @@
                                     </td>
 
                                 </tr>
-
                             @endif
 
                         </tbody>
@@ -735,7 +703,6 @@
 
 
     <script>
-
         $(document).ready(function() {
 
             $.ajaxSetup({
@@ -977,7 +944,6 @@
             });
 
         }
-
     </script>
 
 
@@ -985,7 +951,6 @@
     <!-- side voucher-->
 
     <script>
-
         function openNav() {
 
             document.getElementById("mySidebar").style.width = "250px";
@@ -1003,7 +968,6 @@
             document.getElementById("btnSide").style.marginRight = '0';
 
         }
-
     </script>
 
     <!-- side voucher-->
@@ -1014,4 +978,3 @@
         }
     </script>
 @endsection
-
