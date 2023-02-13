@@ -51,12 +51,21 @@ class MembersController extends Controller
             'assign_user_id' => $request->user_id,
         ];
 
+        $paramsProfile = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'user_id' => $request->user_id,
+        ];
+
         // $paramsEmail = [
         //     'user_id' => $userId,
         //     'email' => $emailId,
         // ];
 
         try {
+
+          
             if ($request->departement_id) {
 
                 self::updateDepartement($paramsDepartements);
@@ -66,6 +75,12 @@ class MembersController extends Controller
 
                 self::updateRole($paramsRole);
             }
+
+            if ($request->first_name || $request->last_name){
+                self::updateProfile($paramsProfile);
+            }
+            
+
             // if($emailId){
             //     self::updateEmail($paramsEmail);
             // }
@@ -191,6 +206,26 @@ class MembersController extends Controller
         }
 
         throw new \Exception($response->json()['message']);
+    }
+
+    public static function updateProfile($params){
+
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $url = config('api.base_url') . 'api/user/profile/update';
+        $response = Http::withHeaders($headers)
+            ->asForm()
+            ->post($url, $params);
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        throw new \Exception($response->json()['message']);
+
     }
 
     public static function have_member($user_id)
