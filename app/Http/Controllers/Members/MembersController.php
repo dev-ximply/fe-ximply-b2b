@@ -35,7 +35,7 @@ class MembersController extends Controller
     {
         $tenantCode = session()->get('TenantCode');
         $userId = Auth::user()['id'];
-        $emailId = Auth::user()['id'];
+        // $emailId = Auth::user()['id'];
         // update departement
         $paramsDepartements = [
             'tenant_code' => $tenantCode,
@@ -51,12 +51,21 @@ class MembersController extends Controller
             'assign_user_id' => $request->user_id,
         ];
 
-        // $paramsEmail = [
-        //     'user_id' => $userId,
-        //     'email' => $emailId,
-        // ];
+        $paramsUpdateProfile = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'employee_id'=>$request->employee_id
+        ];
 
         try {
+
+            // self::asyncUpdateProfile($paramsUpdateProfile);
+
+            if($request->user_id){
+                self::asyncUpdateProfile($paramsUpdateProfile);
+            }
+
             if ($request->departement_id) {
 
                 self::updateDepartement($paramsDepartements);
@@ -96,6 +105,24 @@ class MembersController extends Controller
             return [];
         }
         return $response->data;
+    }
+
+    public function asyncUpdateProfile($params){
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $url = config('api.base_url') . 'api/user/profile/update';
+        $response = Http::withHeaders($headers)
+            ->asForm()
+            ->post($url, $params);
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        throw new \Exception($response->json()['message']);
     }
 
     public static function list_department($user_id)
@@ -173,25 +200,25 @@ class MembersController extends Controller
 
         throw new \Exception($response->json()['message']);
     }
-    public function updateEmail($params)
-    {
+    // public function updateEmail($params)
+    // {
 
-        $headers = [
-            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
-            'Accept' => 'application/json'
-        ];
+    //     $headers = [
+    //         'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+    //         'Accept' => 'application/json'
+    //     ];
 
-        $url = config('api.base_url') . 'api/user/email/change';
-        $response = Http::withHeaders($headers)
-            ->asForm()
-            ->post($url, $params);
+    //     $url = config('api.base_url') . 'api/user/email/change';
+    //     $response = Http::withHeaders($headers)
+    //         ->asForm()
+    //         ->post($url, $params);
 
-        if ($response->successful()) {
-            return $response->json();
-        }
+    //     if ($response->successful()) {
+    //         return $response->json();
+    //     }
 
-        throw new \Exception($response->json()['message']);
-    }
+    //     throw new \Exception($response->json()['message']);
+    // }
 
     public static function have_member($user_id)
     {

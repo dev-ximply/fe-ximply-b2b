@@ -354,17 +354,17 @@
 
                 </li>
 
-                {{-- <li class="nav-item ms-2 no position-relative" style="margin-top: 4px">
+                <li class="nav-item ms-3 no position-relative" style="margin-top: 4px">
 
                     <a href="/activity" class="nav-link text-body p-0 ">
 
-                        <i class="fa-solid fa-clock-rotate-left" data-bs-toggle="tooltip"
+                        <i class="fa-solid fa-clock-rotate-left fa-xl" data-bs-toggle="tooltip"
 
                             data-bs-title="Latest Activity"></i>
 
                     </a>
 
-                </li> --}}
+                </li>
 
             </ul>
 
