@@ -109,7 +109,7 @@
                                     <div class="row">
                                         <div class="col-md">
                                             <label for="" class="text-dark text-xs text-capitalize"
-                                                style="font-weight:600">Firstname</label>
+                                                style="font-weight:600">First Name</label>
                                         </div>
                                     </div>
                                  
@@ -122,7 +122,7 @@
                                     <div class="row">
                                         <div class="col-md">
                                             <label for="" class="text-dark text-xs text-capitalize"
-                                                style="font-weight:600">Lastname</label>
+                                                style="font-weight:600">Last Name</label>
                                         </div>
                                     </div>
                                 

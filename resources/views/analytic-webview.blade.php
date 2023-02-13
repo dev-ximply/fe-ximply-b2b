@@ -87,10 +87,17 @@
                         </div>
                         {{-- </div>                         --}}
                         <div class="col-md mb-2">
-                            <button type="submit" value="submit"
+                            {{-- <button type="submit" value="submit"
                                 style="line-height:16px;  font-size:11px;background:#19194b;color:white"
                                 class="form-control text-bold d-flex justify-content-center" id="filter_button">
                                 <span>FILTER&nbsp;&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
+                            </button> --}}
+                            <button type="submit" value="submit"
+                                style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
+                                class="form-control text-bold d-flex justify-content-center" id="filter_button">
+
+                                <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
+
                             </button>
                         </div>
                     </div>

@@ -397,7 +397,7 @@
 
 
         #element {
-            
+
             box-sizing: border-box;
         }
 
@@ -487,7 +487,7 @@
     </div>
 
     <div class="content" style="background: rgb(251, 250, 250);" id="element">
-        <div class="row justify-content-center min-vh-100 h-100 py-3" >
+        <div class="row justify-content-center min-vh-100 h-100 py-3">
             <input type="text" id="user_id" value="{{ Auth::user()['id'] }}" hidden>
             <div class="d-flex justify-content-between text-end">
                 {{-- <div class=" btn d-flex align-items-center justify-content-center text-dark p-0"
@@ -531,14 +531,21 @@
                         </select>
                     </div>
                     <div class="col-md-2 mb-2 d-flex" style="">
-                        <button type="submit" value="submit" style="line-height:16px; font-size:10px"
+                        {{-- <button type="submit" value="submit" style="line-height:16px; font-size:10px"
                             class="form-control text-bold" id="filter_button">
-                            F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R</button>
+                            F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R</button> --}}
+                        <button type="submit" value="submit"
+                            style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
+                            class="form-control text-bold d-flex justify-content-center" id="filter_button">
+
+                            <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
+
+                        </button>
                     </div>
-       
+
                 </div>
             </form>
-            <div class="row justify-content-center" >
+            <div class="row justify-content-center">
 
                 <div class="" style="border-radius: 5px">
                     <div class="card-body">
@@ -778,14 +785,14 @@
                     if (document.exitFullscreen) {
                         document.exitFullscreen();
 
-                    }else if (document.requestFullscreen){
+                    } else if (document.requestFullscreen) {
                         document.requestFullscreen();
 
-                    }else if (document.webkitRequestFullscreen){
+                    } else if (document.webkitRequestFullscreen) {
                         document.webkitRequestFullscreen();
-                    }else if (document.mozRequestFullScreen){
+                    } else if (document.mozRequestFullScreen) {
                         document.mozRequestFullScreen();
-                    }else if (document.mozCancelFullScreen) {
+                    } else if (document.mozCancelFullScreen) {
                         /* Firefox */
                         document.mozCancelFullScreen();
 
@@ -794,14 +801,14 @@
                         document.webkitExitFullscreen();
 
 
-                    } else if (document.msRequestFullscreen){
+                    } else if (document.msRequestFullscreen) {
                         document.msRequestFullscreen();
-                    }else if (document.msExitFullscreen) {
+                    } else if (document.msExitFullscreen) {
                         /* IE/Edge */
                         document.msExitFullscreen();
 
                     }
-                    
+
                     $(this).attr('data-fullscreen', '');
                     $(this).attr('value', 'Full Screen');
                 } else {

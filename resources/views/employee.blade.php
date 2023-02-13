@@ -335,9 +335,9 @@
                                 if ($("#loader")) {
                                     $("#loader").hide();
                                 }
-                                // setTimeout(function() {
-                                //     location.reload();
-                                // }, 1000);
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1000);
                             }
                         });
                     } else if (result.dismiss === Swal.DismissReason.cancel) {

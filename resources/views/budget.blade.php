@@ -91,7 +91,7 @@
                                     <div class="dropdown-menu dropdown-menu-end me-sm-n4 me-n3"
                                         aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit_modal_budget"
-                                            onclick="getDetailBudgets('{{ $item->id }}', '{{ $item->full_name }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}', '{{ $item->limit->expire_date }}' )">Edit</a>
+                                            onclick="getDetailBudgets('{{ $item->id }}', '{{ $item->full_name }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}', '{{ $item->limit->expire_date }}')">Edit</a>
                                         <a class="dropdown-item">
                                             <span onclick="deleteBudget('{{ $item->limit->spend_id }}')">
                                                 Delete
@@ -146,6 +146,7 @@
             document.getElementById('edit_budget_limit_avail').value = remain_limit;
             document.getElementById('auto_approve_edit').value = auto_approve;
             document.getElementById('expire_date').value = expire_date;
+            // document.getElementById('used_limit').value = used_limit;
             console.log(auto_approve);
 
         }
@@ -206,7 +207,6 @@
                                 console.log(response)
 
                                 if (status === true) {
-
                                     setTimeout(function() {
                                         window.location.reload(true);
                                     }, 1000);
@@ -216,8 +216,13 @@
                                         message,
                                         "Error"
                                     );
+                                    setTimeout(function() {
+                                        window.location.reload(true);
+                                    }, 1000);
                                 }
-                            }
+                               
+                            },
+                        
 
                         });
 

@@ -151,7 +151,7 @@
                     <span>
                         <p class="mb-0 text-xs text-uppercase font-weight-bold text-dark">Have Client</p>
                         <h5 class=" mb-0 text-dark font-weight-bolder">
-                            <span>{{ $data['group'][0]->have_partnership }}</span>
+                            <span>{{ $data['group'][0]->have_partnership == 0 ? 'No' : 'Yes' }}</span>
                         </h5>
                     </span>
                 </div>
@@ -224,17 +224,6 @@
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             <ul>
-<<<<<<< HEAD
-                                                
-                                                <li>Policies : {{   $member->permission->policies  }}</li>
-                                                <li>Approval Top Up : {{   $member->permission->approval_topup  }}</li>
-                                                <li>Approval Expense : {{   $member->permission->approval_expense  }}</li>
-                                                <li>Approval Pre Budget : {{   $member->permission->approval_prebudget  }}</li>
-                                                <li>Manage User : {{   $member->permission->manage_user  }}</li>
-                                                <li>Manage Budget : {{   $member->permission->manage_budget  }}</li>
-                                                <li>Manage Tenant : {{   $member->permission->manage_tenant  }}</li>
-                                                <li>Manage Cards : {{   $member->permission->manage_cards  }}</li>
-=======
 
                                                 {{-- <li>Policies : {{ $member->permission->policies == 0 ? 'No' : 'Yes' }}</li> --}}
                                                 <li>Approval Top Up :
@@ -251,7 +240,6 @@
                                                     {{ $member->permission->manage_tenant == 0 ? 'No' : 'Yes' }}</li>
                                                 <li>Manage Cards :
                                                     {{ $member->permission->manage_cards == 0 ? 'No' : 'Yes' }}</li> --}}
->>>>>>> d2f0c4e2631bc980ee9ce6e652f54af4f890bed6
                                             </ul>
                                         </td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
