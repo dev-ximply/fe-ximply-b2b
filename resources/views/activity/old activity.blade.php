@@ -1,9 +1,6 @@
 @extends('layouts.main')
 
 @section('container')
-@php
-    dd($data);
-@endphp
     <div class="row">
         <div class="col-md-6 mx-auto">
             <div class="m-auto d-flex justify-content-end">
