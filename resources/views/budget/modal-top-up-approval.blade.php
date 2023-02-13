@@ -1,5 +1,5 @@
 <style>
-    /*the container must be positioned relative:*/
+    /the container must be positioned relative:/
     .autocomplete {
         position: relative;
         display: flex;
@@ -29,7 +29,7 @@
         border-bottom: none;
         border-top: none;
         z-index: 99;
-        /*position the autocomplete items to be the same width as the container:*/
+        /position the autocomplete items to be the same width as the container:/
         top: 100%;
         left: 0;
         right: 0;
@@ -42,12 +42,12 @@
         border-bottom: 1px solid #d4d4d4;
     }
 
-    /*when hovering an item:*/
+    /when hovering an item:/
     .autocomplete-items div:hover {
         background-color: #e9e9e9;
     }
 
-    /*when navigating through the items using the arrow keys:*/
+    /when navigating through the items using the arrow keys:/
     .autocomplete-active {
         background-color: DodgerBlue !important;
         color: #ffffff;
@@ -287,7 +287,7 @@
             }
         });
 
-        /*execute a function presses a key on the keyboard:*/
+        /execute a function presses a key on the keyboard:/
         inp.addEventListener("keydown", function(e) {
             var x = document.getElementById(this.id + "autocomplete-list");
             if (x) x = x.getElementsByTagName("div");
@@ -331,7 +331,7 @@
             closeAllLists(e.target);
         });
     }
-    /*An array containing all the country names in the world:*/
+    /An array containing all the country names in the world:/
     var countries = ["100000", "200000", "300000", "400000", "500000", "600000", "700000", "800000", "900000",
         "1000000"
     ];

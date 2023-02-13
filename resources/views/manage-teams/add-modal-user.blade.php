@@ -176,7 +176,7 @@
                             if (data.status != 200) {
                                 Swal.fire(
                                     "something wrong",
-                                    "please contact Beazy support!",
+                                    "Email has already used. Please contact Beazy support!",
                                     "error"
                                 );
                             }

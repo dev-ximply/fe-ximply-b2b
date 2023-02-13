@@ -1,5 +1,6 @@
 // const API_URL = "https://dev.api.business.ximply.io/";
 // const STORAGE_URL = "https://dev.api.business.ximply.io/";
+
 const API_URL = "http://127.0.0.1:8000/";
 const STORAGE_URL = "http://127.0.0.1:8000/";
 
@@ -13,8 +14,7 @@ function getQueryParams() {
             .replace(/&/g, '","')
             .replace(/=/g, '":"') +
             '"}'
-        ) :
-        {};
+        ) : {};
 }
 
 function NumericInput(inp, locale) {

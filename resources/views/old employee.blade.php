@@ -50,7 +50,9 @@
                     <div class="col-md-4 mt-2 d-flex align-items-end">
 
                         <input type="search" name="" id="" placeholder="Search..."
+
                             class="form-control text-dark"
+
                             style="font-size:11px;line-height:16px !important;border-radius:5px !important">
 
                     </div>
@@ -104,12 +106,10 @@
 
                             <tbody>
 
-                                {{-- @php
-                                    var_dump($data['employee']);
-                                @endphp --}}
-
                                 @foreach ($data['employee'] as $item)
-                                    <tr class="">
+
+                                    <tr class="align-middle">
+					
                                         <td class="text-xs font-weight-bold text-capitalize ps-5 pb-0 pt-3">
                                             <p class="text-dark" style="font-size: 13px">
 
@@ -152,20 +152,22 @@
                                             </p>
 
                                         </td>
+
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
 
                                             <p class="text-dark" style="font-size: 13px">
-                                                {{ $item->approver != '' ? $item->approver: '-' }}
+                                                {{ $item->limit->auto_approve != '' ? $item->limit->auto_approve : '-' }}
                                             </p>
+
                                         </td>
                                         <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
                                             <p class="text-dark" style="font-size: 13px">
-                                                {{  $item->created_date }}
-                                                
+                                                {{-- {{   }} --}}
+                                                -
                                             </p>
                                             <span class="text-xs">
                                                 {{-- {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
-                                                
+                                                {{-- 2023-02-06 --}}
                                             </span>
                                         </td>
                               
@@ -208,6 +210,7 @@
                                         </td>
 
                                     </tr>
+
                                 @endforeach
 
                             </tbody>
@@ -221,7 +224,9 @@
             </div>
 
         </div>
+
     @else
+
         <div class="row justify-content-center h-100 align-items-center">
 
             <div class="d-flex align-items-center justify-content-center flex-column py-5">
@@ -235,6 +240,7 @@
             </div>
 
         </div>
+
     @endif
 
 
@@ -354,3 +360,4 @@
     </script>
 
 @endsection
+

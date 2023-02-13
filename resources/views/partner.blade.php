@@ -448,12 +448,12 @@
     </script>
 
     <script>
-        function deletePartner(parnerId) {
+        function deletePartner(id) {
 
             var tenant = TENANT_CODE;
             var userId = USR_ID;
 
-            console.log(parnerId)
+            console.log(id);
 
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -475,7 +475,7 @@
                 .then((result) => {
                     if (result.isConfirmed) {
                         //delete parner
-                        console.log(parnerId)
+                        console.log(id)
                         $.ajaxSetup({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -487,9 +487,9 @@
                      
                             // url: "{{ route('partners.delete') }}",
                             data: {
-                                partner_id: parnerId,
                                 user_id:userId,
-                                tenant_code:tenant
+                                tenant_code:tenant,
+                                partner_id: id,
                             },
                             success: function(response) {
 
@@ -499,7 +499,9 @@
                                     message
                                 } = response;
 
-                                console.log(response)
+                                console.log(response);
+
+
 
                                 if (status === true) {
 

@@ -104,7 +104,7 @@
 
                         <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
 
-                            <div class="icon icon-shape  shadow text-center border-radius-md"
+                            {{-- <div class="icon icon-shape  shadow text-center border-radius-md"
                                 style="min-height: 65px; max-height: 65px; min-width: 80px; max-width: 80px;background-color:#19194b">
 
                                 <i class="ni ni-bag-17 text-lg opacity-10" aria-hidden="true"></i>
@@ -115,6 +115,9 @@
 
                                 </div>
 
+                            </div> --}}
+                            <div>
+                                <img src="{{  asset('img/icons/dashboard/new-expenses.png')  }}" alt="" class="" style="width:85px">
                             </div>
 
                         </div>
@@ -127,7 +130,7 @@
 
                         <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
 
-                            <div class="icon icon-shape shadow text-center border-radius-md"
+                            {{-- <div class="icon icon-shape shadow text-center border-radius-md"
                                 style="min-height: 65px; max-height: 65px; min-width: 80px; max-width: 80px;background-color:#19194b">
 
                                 <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
@@ -138,6 +141,9 @@
 
                                 </div>
 
+                            </div> --}}
+                            <div>
+                                <img src="{{  asset('img/icons/dashboard/top-up.png')  }}" alt="" class="" style="width:85px">
                             </div>
 
                         </div>
@@ -337,11 +343,14 @@
 
                                 <div class="d-flex flex-row">
 
-                                    <div class="icon icon-shape  shadow text-center border-radius-md"
+                                    {{-- <div class="icon icon-shape  shadow text-center border-radius-md"
                                         style="background: #19194b">
 
                                         <i class="fas fa-shopping-cart text-lg opacity-10" aria-hidden="true"></i>
 
+                                    </div> --}}
+                                    <div>
+                                        <img src="{{  asset('img/icons/dashboard/expenses.png')  }}" alt="" class="" style="width:80px">
                                     </div>
 
                                     <div class="d-flex flex-column ms-2">
@@ -352,67 +361,68 @@
 
                                 </div>
 
-                                <div class="d-flex flex-lg-row flex-column ms-auto">
+                                <div class="d-flex flex-column ms-auto">
+                                    <div class="d-flex">
+                                        <div class="me-2 mb-2" style="width: 100%; max-width:155px">
 
-                                    <div class="me-2" style="width: 100%; max-width:155px">
+                                            <div class="input-group">
 
-                                        <div class="input-group">
+                                                <span for=""
+                                                    class="input-group-text z-index-1 font-weight-bold text-dark px-1"
+                                                    id="basic-addon1"
+                                                    style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
 
-                                            <span for=""
-                                                class="input-group-text z-index-1 font-weight-bold text-dark px-1"
-                                                id="basic-addon1"
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
+                                                <input type="date" class="form-control px-1" id="filter_start_date"
+                                                    name="filter_start_date"
+                                                    value='{{ isset($_GET['filter_start_date']) ? $_GET['filter_start_date'] : '' }}'
+                                                    style="font-size:10px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
 
-                                            <input type="date" class="form-control px-1" id="filter_start_date"
-                                                name="filter_start_date"
-                                                value='{{ isset($_GET['filter_start_date']) ? $_GET['filter_start_date'] : '' }}'
-                                                style="font-size:10px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="me-2" style="width: 100%; max-width:155px">
-
-                                        <div class="input-group">
-
-                                            <span for="" class="input-group-text z-index-1 font-weight-bold"
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
-
-                                            <input type="date" class="form-control px-1" id="filter_end_date"
-                                                name="filter_end_date"
-                                                value='{{ isset($_GET['filter_end_date']) ? $_GET['filter_end_date'] : '' }}'
-                                                style="font-size:10px; height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
+                                            </div>
 
                                         </div>
 
+                                        <div class="me-2 mb-2" style="width: 100%; max-width:155px">
+
+                                            <div class="input-group">
+
+                                                <span for="" class="input-group-text z-index-1 font-weight-bold"
+                                                    style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
+
+                                                <input type="date" class="form-control px-1" id="filter_end_date"
+                                                    name="filter_end_date"
+                                                    value='{{ isset($_GET['filter_end_date']) ? $_GET['filter_end_date'] : '' }}'
+                                                    style="font-size:10px; height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
+
+                                            </div>
+
+                                        </div>
                                     </div>
+                                    <div class="d-flex">
+                                        <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
 
-                                    <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
+                                            <select name="filter_member" id="filter_member" class="form-select text-dark"
+                                                style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
 
-                                        <select name="filter_member" id="filter_member" class="form-select text-dark"
-                                            style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
+                                                <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
+                                                    Your Data</option>
+                                            </select>
 
-                                            <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
-                                                Your Data</option>
-                                        </select>
+                                        </div>
 
+                                        <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
+
+                                            <select name="filter_expense_type" id="filter_expense_type"
+                                                class="form-select text-dark"
+                                                style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
+
+                                                <option value="" class="text-dark px-1" selected>Expense Type
+                                                </option>
+
+                                            </select>
+
+                                        </div>
                                     </div>
-
-                                    <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
-
-                                        <select name="filter_expense_type" id="filter_expense_type"
-                                            class="form-select text-dark"
-                                            style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
-
-                                            <option value="" class="text-dark px-1" selected>Expense Type</option>
-
-                                        </select>
-
-                                    </div>
-
-                                    <div class=" mb-2 ms-auto " style="width: 100%; max-width:65px">
-
+                                    <div class="d-flex justify-content-end ms-auto me-2" style="width: 100%; max-width:65px">
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
                                             class="form-control text-bold d-flex justify-content-center"
@@ -421,8 +431,13 @@
                                             <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
 
                                         </button>
-
                                     </div>
+
+
+
+
+
+                               
 
                                 </div>
 
@@ -488,7 +503,7 @@
 
                                 <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
 
-                                    <div class="icon icon-shape  shadow text-center border-radius-md"
+                                    {{-- <div class="icon icon-shape  shadow text-center border-radius-md"
                                         style="min-height: 60px; max-height: 60px; min-width: 80px; max-width: 80px;background-color:#19194b">
 
                                         <i class="ni ni-bag-17 text-lg opacity-10" aria-hidden="true"></i>
@@ -499,6 +514,9 @@
 
                                         </div>
 
+                                    </div> --}}
+                                    <div>
+                                        <img src="{{  asset('img/icons/dashboard/new-expenses.png')  }}" alt="" class="" style="width:85px">
                                     </div>
 
                                 </div>
@@ -509,7 +527,7 @@
 
                                 <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
 
-                                    <div class="icon icon-shape shadow text-center border-radius-md"
+                                    {{-- <div class="icon icon-shape shadow text-center border-radius-md"
                                         style="min-height: 60px; max-height: 60px; min-width: 80px; max-width: 80px;background-color:#19194b">
 
                                         <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
@@ -520,6 +538,9 @@
 
                                         </div>
 
+                                    </div> --}}
+                                    <div>
+                                        <img src="{{  asset('img/icons/dashboard/top-up.png')  }}" alt="" class="" style="width:85px">
                                     </div>
 
                                 </div>
@@ -966,9 +987,9 @@
 
                 "&start_date=" + FilterStartDate +
 
-            "&end_date=" + FilterEndDate +
+                "&end_date=" + FilterEndDate +
 
-            "&member_id=" + FilterMember,
+                "&member_id=" + FilterMember,
 
             success: function(res) {
 
