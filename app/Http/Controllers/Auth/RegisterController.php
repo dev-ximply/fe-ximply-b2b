@@ -62,7 +62,7 @@ class RegisterController extends Controller
                     'name' => 'first_name',
                     'contents' => $first_name
                 ],
-                [
+                [   
                     'name' => 'last_name',
                     'contents' => $last_name
                 ],
@@ -85,41 +85,7 @@ class RegisterController extends Controller
             ]
         ];
 
-        if($referral_code != false){
-            $options = [
-                'multipart' => [
-                    [
-                        'name' => 'first_name',
-                        'contents' => $first_name
-                    ],
-                    [
-                        'name' => 'last_name',
-                        'contents' => $last_name
-                    ],
-                    [
-                        'name' => 'handphone',
-                        'contents' => $handphone
-                    ],
-                    [
-                        'name' => 'email',
-                        'contents' => $email
-                    ],
-                    [
-                        'name' => 'password',
-                        'contents' => $password
-                    ],
-                    [
-                        'name' => 'password_confirmation',
-                        'contents' => $password_confirmation
-                    ],
-                    [
-                        'name' => 'referral_code',
-                        'contents' => $referral_code
-                    ]
-                ]
-            ];
-        }
-
+        
         $request = new Psr7Request('POST', config('api.base_url') . 'api/auth/register');
         $res = $client->sendAsync($request, $options)->wait();
         $response = json_decode($res->getBody());
