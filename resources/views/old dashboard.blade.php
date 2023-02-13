@@ -12,7 +12,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                     <div class="d-flex py-2 justify-content-center align-items-center flex-column text-center">
                         <a class="new_expense text-white bg-gradient-primary px-3 py-1 rounded mb-2" href="#"
                             data-bs-toggle="modal" data-bs-target="#manualForm" onclick="handlingModalForm(false)"
@@ -241,11 +240,7 @@
                                             <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
                                         </button>
                                     </div>
-
-
-                               
                                 </div>
-
                             </div>
                         </form>
                         <div class="chart">
@@ -256,7 +251,7 @@
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="coloumn__expense__category ">
+                    <div class="coloumn__expense__category">
                         <p style="font-size: 16px;color:black;font-weight:500">Expense Category</p>
                         <div class="chart" id="myContainer">
                             <figure class="highcharts-figure " style="margin-top:-15px">
@@ -428,22 +423,20 @@
                         var response = res['data'];
                         document.getElementById('detail_receipt_file').src = STORAGE_URL + response[
                             'receipt_picture_directory'];
-
                         document.getElementById('detail_date').value = response['receipt_date'];
                         document.getElementById('detail_merchant').value = response['merchant'];
                         document.getElementById('detail_total_amount').value = response['total_amount']
                             .toLocaleString();
                         document.getElementById('detail_location').value = response['location'];
                         document.getElementById('detail_category').value = response['category'];
-
                         $('#ex1').zoom();
                     } else {
-                        Swal.fire('failed<br>Please contact ximply support');
+                        Swal.fire('failed<br>please contact ximply support');
                     }
                 },
                 complete: function(data) {
                     if (data.status != 200) {
-                        Swal.fire('failed<br>Please contact ximply support');
+                        Swal.fire('failed<br>please contact ximply support');
                     }
                 }
             });
@@ -543,7 +536,7 @@
         });
         $.ajax({
             type: "GET",
-            url: API_URL + "api/analytics/series/" + document.getElementById('user_id').value +
+            url: API_URL + "api/analytics/series/" + USR_ID +
                 "?expense_type=" + FilterExpenseType +
                 "&start_date=" + FilterStartDate +
                 "&end_date=" + FilterEndDate +
@@ -562,7 +555,7 @@
                         i++;
                     }
                 } else {
-                    // Swal.fire('failed<br>Please contact Beazy support');
+                    // Swal.fire('failed<br>please contact ximply support');
                 }
 
                 Highcharts.setOptions({
@@ -647,7 +640,7 @@
             },
             complete: function(data) {
                 if (data.status != 200) {
-                    Swal.fire('failed<br>Please contact Beazy support');
+                    Swal.fire('failed<br>please contact ximply support');
                 }
             }
         });
@@ -661,7 +654,7 @@
         });
         $.ajax({
             type: "GET",
-            url: API_URL + "api/analytics/pie/" + document.getElementById('user_id').value +
+            url: API_URL + "api/analytics/pie/" + USR_ID +
                 "?expense_type=" + FilterExpenseType +
                 "&start_date=" + FilterStartDate +
                 "&end_date=" + FilterEndDate,
