@@ -186,13 +186,8 @@
                             $("#main-loader").hide();
                             if (data.status != 200) {
                                 Swal.fire(
-<<<<<<< HEAD
-                                    "something wrong",
-                                    "Email has already used. Please contact Beazy support!",
-=======
                                     "opps!",
                                     data.message,
->>>>>>> d2f0c4e2631bc980ee9ce6e652f54af4f890bed6
                                     "error"
                                 );
                             }
