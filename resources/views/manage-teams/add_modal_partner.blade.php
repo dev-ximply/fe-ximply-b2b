@@ -90,7 +90,8 @@
 
 <script>
     function addPartner(userId, companyName, picName, email, handphone, group_id, userAssignId) {
-
+        var tenantCode = TENANT_CODE;
+        var userid = USR_ID;
         console.log(userId);
         console.log(companyName);
         console.log(picName);
@@ -126,8 +127,11 @@
                     });
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('parners.store') }}",
+                        url: API_URL + "api/partner/add",
+                        // url: "{{ route('parners.store') }}",
                         data: {
+                            user_id:userid,
+                            tenant_code:tenantCode,
                             company_name: companyName,
                             contact_name: picName,
                             handphone: handphone,
