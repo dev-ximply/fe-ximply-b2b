@@ -63,7 +63,8 @@
                                 </div>
                             </div> --}}
                             <div>
-                                <img src="{{  asset('img/icons/dashboard/new-expenses.png')  }}" alt="" class="" style="width:85px">
+                                <img src="{{ asset('img/icons/dashboard/new-expenses.png') }}" alt="" class=""
+                                    style="width:85px">
                             </div>
                         </div>
                     </a>
@@ -78,7 +79,8 @@
                                 </div>
                             </div> --}}
                             <div>
-                                <img src="{{  asset('img/icons/dashboard/top-up.png')  }}" alt="" class="" style="width:85px">
+                                <img src="{{ asset('img/icons/dashboard/top-up.png') }}" alt="" class=""
+                                    style="width:85px">
                             </div>
                         </div>
                     </a>
@@ -98,9 +100,15 @@
         </div>
         {{-- end quick access --}}
 
+        <form action="">
+
+            <input type="text" class="text-dark" id="fullname_uid" value="{{ Auth::user()['id'] }}" hidden>
+
+        </form>
+
         {{-- end card --}}
-        <div class="col-md-8 mb-3">
-            <div class="row mb-3">
+        <div class="col-md-8 mb-0">
+            <div class="row mb-1">
                 <div class="col-md-5 mt-3">
                     <div class="coloumn__card">
                         <label class="d-flex justify-content-end" style="color: #ffffff">
@@ -113,8 +121,8 @@
                         <span class="text-white">Balance <p class="text-white">
                                 {{ number_format($data['limit']['remain_limit'], 2) }}</p></span>
                         <div class="d-flex justify-content-between text-white">
-                            <p class="text-white">Jack</p>
-                            <p class="text-white">03/23</p>
+                            <p class="text-white" id="fullName"></p>
+                            {{-- <p class="text-white">03/23</p> --}}
                         </div>
                     </div>
                 </div>
@@ -122,7 +130,7 @@
                 <div class="col-md pt-0 mt-3">
                     <div class="row justify-content-between">
                         <div class="col-md column_info text-center">
-                            <div class="column_content_info card">
+                            <div class="column_content_info card" style="">
                                 <span class="title__amount" style="font-weight: 600;">Remain Budget <p>(Remain Expense)
                                     </p>
                                 </span>
@@ -159,19 +167,19 @@
                         </div>
                     </div>
 
-                    <div class="row justify-content-center mx-auto">
+                    {{-- <div class="row justify-content-center mx-auto">
                         <div class="col-md progress-wrapper bg-white  rounded pb-2">
                             <div class="progress-info">
                                 <div class="progress-percentage">
-                                    {{-- <span class="text-xs font-weight-bold text-dark">60%</span> --}}
+                                    <span class="text-xs font-weight-bold text-dark">60%</span>
                                 </div>
                             </div>
                             <div class="progress">
-                                {{-- <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                    aria-valuemax="100" style="width: 60%; background:#19194b"></div> --}}
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                    aria-valuemax="100" style="width: 60%; background:#19194b"></div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="row flex-column">
@@ -185,7 +193,8 @@
                                         <i class="fas fa-shopping-cart text-lg opacity-10" aria-hidden="true"></i>
                                     </div> --}}
                                     <div>
-                                        <img src="{{  asset('img/icons/dashboard/expenses.png')  }}" alt="" class="" style="width:80px">
+                                        <img src="{{ asset('img/icons/dashboard/expenses.png') }}" alt=""
+                                            class="" style="width:80px">
                                     </div>
                                     <div class="d-flex flex-column ms-2">
                                         <span style="font-size: 16px;color:black;font-weight:400">Expenses</span>
@@ -233,7 +242,8 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-end ms-auto me-2" style="width: 100%; max-width:65px">
+                                    <div class="d-flex justify-content-end ms-auto me-2"
+                                        style="width: 100%; max-width:65px">
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
                                             class="form-control text-bold d-flex justify-content-center"
@@ -243,7 +253,7 @@
                                     </div>
 
 
-                               
+
                                 </div>
 
                             </div>
@@ -285,7 +295,8 @@
                                         </div>
                                     </div> --}}
                                     <div>
-                                        <img src="{{  asset('img/icons/dashboard/new-expenses.png')  }}" alt="" class="" style="width:85px">
+                                        <img src="{{ asset('img/icons/dashboard/new-expenses.png') }}" alt=""
+                                            class="" style="width:85px">
                                     </div>
                                 </div>
                             </a>
@@ -299,7 +310,8 @@
                                         </div>
                                     </div> --}}
                                     <div>
-                                        <img src="{{  asset('img/icons/dashboard/top-up.png')  }}" alt="" class="" style="width:85px">
+                                        <img src="{{ asset('img/icons/dashboard/top-up.png') }}" alt=""
+                                            class="" style="width:85px">
                                     </div>
                                 </div>
                             </a>
@@ -410,6 +422,39 @@
             </div>
         </div>
     </div>
+
+
+    {{-- get ful-name card --}}
+
+    <script>
+        $(document).ready(function() {
+
+
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": "Bearer " + AUTH_TOKEN,
+                    "Accept": "application/json"
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: API_URL + "api/user/profile/info?user_id=" + document.getElementById(
+                    'fullname_uid').value,
+                success: function(res) {
+                    if (res) {
+                        var response = res['data'];
+
+                        console.log(res);
+
+                        document.getElementById('fullName').innerHTML = response[
+                            'full_name'];
+                    }
+                }
+            });
+        });
+    </script>
+
 
     {{-- OCR --}}
     <script>
