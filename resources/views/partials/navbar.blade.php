@@ -659,29 +659,6 @@
 
 
 
-{{-- get group --}}
-{{-- <script>
-    $(document).ready(function(){
-        var tenant = TENANT_CODE;
-        var user_id = USR_ID;
-        $.ajaxSetup({
-            headers:{
-                "Authorization": "Bearer " + AUTH_TOKEN,
-                "Accept": "application/json"
-            }
-        });
-        $.ajax({
-           type:"GET",
-           url: API_URL + "api/spend/list/assigned/" + tenant + '?user_id=' + document.getElementById('navbar_uid').value,
-           success:function(res){
-            if(res){
-                var response = res['data'];
-                document.getElementById('groupName').innerHTML = response['group_name'];
-            }
-           }
-        });
-    });
-</script> --}}
 <script>
     $(document).ready(function() {
 

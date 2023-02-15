@@ -122,7 +122,6 @@
                                 {{ number_format($data['limit']['remain_limit'], 2) }}</p></span>
                         <div class="d-flex justify-content-between text-white">
                             <p class="text-white" id="fullName"></p>
-                            {{-- <p class="text-white">03/23</p> --}}
                         </div>
                     </div>
                 </div>
