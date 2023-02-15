@@ -286,7 +286,8 @@
                             var tableOut = "";
                             var totalAmount = 0;
                             for (const obj of response) {
-                                totalAmount = totalAmount + obj.total_amount;
+                                totalAmount = totalAmount +  parseFloat(obj.total_amount);
+                                console.log(totalAmount);
                                 tableOut +=
                                     '<tr><td class="font-weight-bold pt-3">';
                                 tableOut +=
@@ -303,11 +304,12 @@
                                     '</p></td></tr>';
                             }
                             $("#tableBody").append(tableOut);
-                            $("#totalAmount").html(Intl.NumberFormat().format(
-                                totalAmount));
+                            $("#totalAmount").html(Intl.NumberFormat().format(totalAmount)
+                                );
                         } else {
                             $("#tableBody").empty();
                         }
+                       
                     },
                     complete: function(data) {
                         $("#main-loader").hide();
