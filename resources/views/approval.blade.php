@@ -16,12 +16,14 @@
                     </p>
                 </div>
                 <div class="col-md text-md-end text-start mt-2 px-0 mx-0">
-                    <p class="mb-0 text-xs text-uppercase font-weight-bolder" style="color:black">Remain Budget</p>
-                    <h5 class=" mb-0  font-weight-bolder" style="color:black">
-                        Rp <span>
-                            {{ $data['limit'] != null ? number_format($data['limit']['remain_limit'], 2) : '0' }}
-                        </span>
-                    </h5>
+                    @if (session()->get('is_superadmin') == false)
+                        <p class="mb-0 text-xs text-uppercase font-weight-bolder" style="color:black">Remain Budget</p>
+                        <h5 class=" mb-0  font-weight-bolder" style="color:black">
+                            Rp <span>
+                                {{ $data['limit'] != null ? number_format($data['limit']['remain_limit'], 2) : '0' }}
+                            </span>
+                        </h5>
+                    @endif
                 </div>
             </div>
             <div class="card" style="border-radius: 5px">
@@ -57,8 +59,7 @@
                                         </button> --}}
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
-                                            class="form-control text-bold d-flex justify-content-center"
-                                            id="filter_button">
+                                            class="form-control text-bold d-flex justify-content-center" id="filter_button">
 
                                             <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
 
