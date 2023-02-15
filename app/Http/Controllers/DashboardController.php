@@ -134,7 +134,7 @@ class DashboardController extends Controller
             'Accept' => 'application/json'
         ];
 
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/partner/list/' . Session::get('TenantCode')  , $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/partner/list/' . Session::get('TenantCode') .'?user_id=' . $user_id, $headers);
 
         try {
             $res = $client->sendAsync($request)->wait();
