@@ -764,7 +764,7 @@ $(document).ready(function() {
 
                 }
                 
-                if(res.data.is_active == true){
+                if(res.data.change_password == true){
                     $("#staticBackdrop").modal('show');
                     $('#your-modal-form').on('submit', function(e) {
                         e.preventDefault();
@@ -785,9 +785,14 @@ $(document).ready(function() {
                                             success change your password
                                         </div>`)
                                         setTimeout(function() {
-                                            $("#staticBackdrop").modal('hide');
-                                            $("#setPin").modal('show');
-                                            createPin();
+                                            if(res.data.have_access_pin == false){
+                                                $("#staticBackdrop").modal('hide');
+                                                $("#setPin").modal('show');
+                                                createPin();
+                                            }else{
+                                                window.location.reload(true);
+                                            }
+                                           
                                         }, 1500);
                                     }{
                                         $('#alertModal').html(`<div class="alert alert-danger"   role="alert">
@@ -804,9 +809,8 @@ $(document).ready(function() {
                         });
                 }
 
-                if(res.data.have_access_pin == true && res.data.is_active == false){
+                if(res.data.have_access_pin == false && res.data.change_password == false){
                     $("#setPin").modal('show');
-                   
                 }
                  function createPin(){
                     const form = document.getElementById('set_new_pin');
