@@ -32,7 +32,7 @@
 <!-- Modal -->
 <div class="modal fade text-dark" id="manualForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl text-dark">
+    <div class="modal-dialog modal-dialog-centered modal-lg text-dark">
         <div class="modal-content">
             <div class="modal-header px-4" style="background: #19194b">
                 <h6 class="modal-title fs-6 text-white" id="staticBackdropLabel">New Expense</h6>

@@ -107,8 +107,8 @@
         </form>
 
         {{-- end card --}}
-        <div class="col-md-8 mb-3">
-            <div class="row mb-3">
+        <div class="col-md-8 mb-0">
+            <div class="row mb-1">
                 <div class="col-md-5 mt-3">
                     <div class="coloumn__card">
                         <label class="d-flex justify-content-end" style="color: #ffffff">
@@ -122,7 +122,6 @@
                                 {{ number_format($data['limit']['remain_limit'], 2) }}</p></span>
                         <div class="d-flex justify-content-between text-white">
                             <p class="text-white" id="fullName"></p>
-                            <p class="text-white">03/23</p>
                         </div>
                     </div>
                 </div>
@@ -130,7 +129,7 @@
                 <div class="col-md pt-0 mt-3">
                     <div class="row justify-content-between">
                         <div class="col-md column_info text-center">
-                            <div class="column_content_info card">
+                            <div class="column_content_info card" style="">
                                 <span class="title__amount" style="font-weight: 600;">Remain Budget <p>(Remain Expense)
                                     </p>
                                 </span>
@@ -167,19 +166,19 @@
                         </div>
                     </div>
 
-                    <div class="row justify-content-center mx-auto">
+                    {{-- <div class="row justify-content-center mx-auto">
                         <div class="col-md progress-wrapper bg-white  rounded pb-2">
                             <div class="progress-info">
                                 <div class="progress-percentage">
-                                    {{-- <span class="text-xs font-weight-bold text-dark">60%</span> --}}
+                                    <span class="text-xs font-weight-bold text-dark">60%</span>
                                 </div>
                             </div>
                             <div class="progress">
-                                {{-- <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                    aria-valuemax="100" style="width: 60%; background:#19194b"></div> --}}
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                    aria-valuemax="100" style="width: 60%; background:#19194b"></div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="row flex-column">

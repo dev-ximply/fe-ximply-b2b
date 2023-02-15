@@ -157,11 +157,14 @@
 
                 <li class="nav-item ms-4">
 
-                    <span class="d-sm-inline d-none text-lg font-weight-normal" style="color: black">
+                    <div class="d-sm-inline d-none text-lg font-weight-normal" style="color: black">
 
-                        <span id="navbar_fullname" class="text-capitalize"></span>
+                        <span id="navbar_fullname" class="text-capitalize" style="font-size: 16px"></span>
 
-                    </span>
+                    </div>
+                    <div>
+                        <span id="group_Name" class="text-capitalize" style="font-weight:500;font-size:13px"></span>
+                    </div>
 
                 </li>
 
@@ -654,6 +657,36 @@
 
 <input type="text" id="have_member" hidden>
 
+
+
+<script>
+    $(document).ready(function() {
+
+
+        $.ajaxSetup({
+            headers: {
+                "Authorization": "Bearer " + AUTH_TOKEN,
+                "Accept": "application/json"
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: API_URL + "api/member/list/" +  TENANT_CODE + '?user_id=' + document.getElementById(
+                'navbar_uid').value,
+            success: function(res) {
+                if (res) {
+                    var response = res['data'];
+
+                    console.log(response);
+
+                    document.getElementById('group_Name').innerHTML = response[0][
+                        'group_name'];
+                }
+            }
+        });
+    });
+</script>
 
 <script>
   

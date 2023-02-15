@@ -20,7 +20,7 @@
                         <div class="col-md my-2">
                             <label for="projectName" class="form-label text-dark" style="font-weight: 600">Spending
                                 Budget Limit</label>
-                            <input type="text" class="form-control" id="edit_budget_limit_avail" disabled>
+                            <input type="text" class="form-control number_separator" id="edit_budget_limit_avail" disabled>
                             <script>
                                 new NumericInput(document.getElementById('edit_budget_limit_avail'), 'en-CA');
                             </script>
@@ -29,16 +29,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label class="form-label text-dark" style="font-weight: 600">Topup Budget Limit</label>
-                            <input type="text" class="form-control number-separator" id="edit_budget_limit_avail_topup"
-                                name="edit_budget_limit_avail_topup" value="0">
+                            <input type="text" class="form-control number-separator number_separator"
+                                id="edit_budget_limit_avail_topup" name="edit_budget_limit_avail_topup" value="0">
                             <script>
                                 new NumericInput(document.getElementById('edit_budget_limit_avail_topup'), 'en-CA');
                             </script>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
-                            <input type="text" class="form-control number-separator" id="auto_approve_edit" name="auto_approve_edit" value="0">
+                            <label class="form-label text-dark " style="font-weight: 600">Auto Approve Amount</label>
+                            <input type="text" class="form-control number-separator number_separator" id="auto_approve_edit"
+                                name="auto_approve_edit" value="0">
                             <script>
                                 new NumericInput(document.getElementById('auto_approve_edit'), 'en-CA');
                             </script>
@@ -83,6 +84,35 @@
 
 
 <script>
+    $("input.number_separator").each((i, ele) => {
+        let clone = $(ele).clone(false)
+        clone.attr("type", "text")
+        let ele1 = $(ele)
+        clone.val(Number(ele1.val()).toLocaleString("en-CA"))
+        $(ele).after(clone)
+        $(ele).hide()
+        clone.mouseenter(() => {
+
+            ele1.show()
+            clone.hide()
+        })
+        setInterval(() => {
+            let newv = Number(ele1.val()).toLocaleString("en-CA")
+            if (clone.val() != newv) {
+                clone.val(newv)
+            }
+        }, 10)
+
+        $(ele).mouseleave(() => {
+            $(clone).show()
+            $(ele1).hide()
+        })
+
+
+    })
+</script>
+
+<script>
     easyNumberSeparator({
         selector: '.number-separator',
         separator: ',',
@@ -118,7 +148,7 @@
 
                     var formData = new FormData();
 
-                    
+
                     formData.append('user_id', user_id);
                     formData.append('tenant_code', tenant);
                     formData.append('assign_user_id', document.getElementById('edit_user_id').value);
@@ -142,7 +172,7 @@
                     });
 
                     $.ajax({
-                        // url: "{{  route('add_spend')  }}",
+                        // url: "{{ route('add_spend') }}",
                         url: API_URL + 'api/spend/member/assign',
                         type: 'post',
                         data: formData,
@@ -169,14 +199,14 @@
                                 );
                             }
                         },
-                        // complete: function(data) {
-                        //     if ($("#loader")) {
-                        //         $("#loader").hide();
-                        //     }
-                        //     setTimeout(function() {
-                        //         location.reload();
-                        //     }, 1000);
-                        // }
+                        complete: function(data) {
+                            if ($("#loader")) {
+                                $("#loader").hide();
+                            }
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        }
                     });
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     swalWithBootstrapButtons.fire(

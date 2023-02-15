@@ -25,15 +25,16 @@
                         <div class="card-body pb-3">
                             <form role="form text-left" onsubmit="handleSubmitApprove(event)">
                                 <input type="hidden" id="topUpId">
-                                <label>Topup Request</label>
+                                <label class="text-dark">Topup Request</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" id="topupAmount" disabled
-                                        style="font-weight: bold">
+                                    <input type="text" class=" number_separator w-100 px-2" id="topupAmount" disabled
+                                        style="font-weight: bold; border-radius:10px; height:45px; border:1px solid black">
                                 </div>
-                                <label>Topup Approve</label>
+                                <label class="text-dark">Topup Approve</label>
                                 <div class="input-group mb-3">
-                                    <input type="number" class="form-control" id="topupAmountApprove"
-                                        style="color: #3A8DDA; font-weight: bold">
+                                    <input type="text" class=" number_separator number-separator w-100 px-2" id="topupAmountApprove"
+                                        style="color: #3A8DDA; font-weight: bold; border-radius:10px; height:45px; border:1px solid black">
+
                                 </div>
                                 <div class="d-flex flex-row justify-content-between">
                                     <button type="submit" class="btn btn-sm btn-rounded mt-2 mb-0 text-white"
@@ -82,13 +83,21 @@
                                 <div class="row">
                                     <div class="col-md mt-2">
                                         <select name="statusType" id="status"
-                                            class="rounded border border-secondary text-secondary"
+                                            class="rounded border border-secondary text-secondary mb-4"
                                             style="font-size:12px; height: 25px; width: 150px">
                                             <option value="">Status</option>
-                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "pending" ? 'selected' : '') }} value="pending">Pending</option>
-                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "rejected" ? 'selected' : '') }} value="rejected">Rejected</option>
-                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "approved" ? 'selected' : '') }} value="approved">Approved</option>
-                                            <option {{ (isset($_GET['statusType']) && $_GET['statusType'] == "done" ? 'selected' : '') }} value="done">Done</option>
+                                            <option class=""
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
+                                                value="pending">Pending</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'rejected' ? 'selected' : '' }}
+                                                value="rejected">Rejected</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'approved' ? 'selected' : '' }}
+                                                value="approved">Approved</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
+                                                value="done">Done</option>
                                         </select>
                                     </div>
                                     <div class="col-md mt-2">
@@ -98,8 +107,7 @@
                                         </button> --}}
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
-                                            class="form-control text-bold d-flex justify-content-center"
-                                            id="filter_button">
+                                            class="form-control text-bold d-flex justify-content-center" id="filter_button">
 
                                             <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
 
@@ -113,7 +121,7 @@
                 <div class="col-md px-2">
                     <div class="card-text pb-0">
                         <div class="table-responsive">
-                            <table class="table table-flush">
+                            <table class="table table-flush" id="table11">
                                 <thead class="thead-light">
                                     <tr>
                                         <th
@@ -174,7 +182,8 @@
                                                 </td>
                                                 <td class="align-middle text-start text-xs text-dark">
                                                     <div class="" style="max-width: 300px">
-                                                        <div><span>Purpose : </span><span class="font-weight-bold text-wrap"
+                                                        <div><span>Purpose : </span><span
+                                                                class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">
                                                                 {{-- {{ $item['purpose'] }} --}}
                                                                 Award & Recognition
@@ -187,13 +196,13 @@
                                                 </td>
                                                 <td class="align-middle text-center text-xs d-flex justify-content-center">
                                                     @if ($approval['status'] == 'pending')
-                                                        <span class="badge badge-xs d-flex justify-content-center"
+                                                        <span class="badge badge-xs d-flex justify-content-center mb-4"
                                                             style="border:1px solid #FFCF23; color:#FFCF23; width: 60px; margin-top:20px">pending</span>
                                                     @elseif ($approval['status'] == 'approved')
-                                                        <span class="badge badge-xs d-flex justify-content-center"
+                                                        <span class="badge badge-xs d-flex justify-content-center mb-4"
                                                             style="border: 1px solid #50B720; color:#50B720; width: 60px; margin-top:20px">approved</span>
                                                     @elseif ($approval['status'] == 'rejected')
-                                                        <span class="badge badge-xs d-flex justify-content-center"
+                                                        <span class="badge badge-xs d-flex justify-content-center mb-4"
                                                             style="border:1px solid #E40909; color:#E40909; width: 60px; margin-top:20px">rejected</span>
                                                     @else
                                                         <span class="badge badge-secondary badge-xs">unknown</span>
@@ -245,9 +254,12 @@
                                         <tr class="text-center">
                                             <td colspan="6">
                                                 <div class="row justify-content-center h-100 align-items-center">
-                                                    <div class="d-flex align-items-center justify-content-center flex-column py-5">
-                                                        <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid" alt="" style="width: 100px">
-                                                        <h6 class="font-weight-bold text-dark py-0">no have topup request</h6>
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-center flex-column py-5">
+                                                        <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid"
+                                                            alt="" style="width: 100px">
+                                                        <h6 class="font-weight-bold text-dark py-0">no have topup request
+                                                        </h6>
                                                     </div>
                                                 </div>
                                             </td>
@@ -263,6 +275,37 @@
     </div>
 
     <script src="{{ asset('js/plugins/datatables.js') }}"></script>
+
+
+    {{-- number separator --}}
+    <script>
+        $("input.number_separator").each((i, ele) => {
+            let clone = $(ele).clone(false)
+            clone.attr("type", "text")
+            let ele1 = $(ele)
+            clone.val(Number(ele1.val()).toLocaleString("en-CA"))
+            $(ele).after(clone)
+            $(ele).hide()
+            clone.mouseenter(() => {
+
+                ele1.show()
+                clone.hide()
+            })
+            setInterval(() => {
+                let newv = Number(ele1.val()).toLocaleString("en-CA")
+                if (clone.val() != newv) {
+                    clone.val(newv)
+                }
+            }, 10)
+
+            $(ele).mouseleave(() => {
+                $(clone).show()
+                $(ele1).hide()
+            })
+
+
+        })
+    </script>
 
     <script>
         function getDetail(element) {
@@ -413,6 +456,43 @@
             });
         }
     </script>
+
+{{-- <script>
+    $(document).ready(function() {
+        $("#status").on("change", function() {
+            var country = $('#status').find("option:selected").val();
+            // var age = $('#ddlAge').find("option:selected").val();
+            SearchData(country)
+        });
+    });
+
+    function SearchData(country) {
+        if (country.toUpperCase() == 'STATUS') {
+            $('#table11 tbody tr').show();
+        } else {
+            $('#table11 tbody tr:has(td)').each(function() {
+                var rowCountry = $.trim($(this).find('td:eq(1)').text());
+                // var rowAge = $.trim($(this).find('td:eq(2)').text());
+                if (country.toUpperCase() != '' ) {
+                    if (rowCountry.toUpperCase() == country.toUpperCase()) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                } else if ($(this).find('td:eq(1)').text() != '' || $(this).find('td:eq(1)').text() != '') {
+                    if (country != '' ) {
+                        if (rowCountry.toUpperCase() == country.toUpperCase()) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    }
+                }
+
+            });
+        }
+    }
+</script> --}}
 
     <script>
         function handleChangeStatus(event) {
