@@ -37,9 +37,9 @@
     <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.0.9') }}" rel="stylesheet" />
     <script src="{{ asset('js/plugins/jquery-3.6.1.min.js') }}"></script>
 
-     {{-- Separator NUmber --}}
-     <script src="{{ asset('js/separator/easy-number-separator.js') }}"></script>
-     {{-- Separator --}}
+    {{-- Separator NUmber --}}
+    <script src="{{ asset('js/separator/easy-number-separator.js') }}"></script>
+    {{-- Separator --}}
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -72,16 +72,22 @@
         <input type="text" id="usr_id" value="{{ Auth::user()['id'] }}" hidden>
         <input type="text" id="AuthToken" value="{{ Session::get('AuthToken') }}" hidden>
         <input type="text" id="TenantCode" value="{{ Session::get('TenantCode') }}" hidden>
+        <input type="text" id="config_api_url" value="{{ config('api.base_url') }}" hidden>
+        <input type="text" id="config_storage_url" value="{{ config('storage.base_url') }}" hidden>
         <script>
             const USR_ID = document.getElementById('usr_id').value;
             const AUTH_TOKEN = document.getElementById('AuthToken').value;
             const TENANT_CODE = document.getElementById('TenantCode').value;
+            const API_URL = document.getElementById('config_api_url').value;
+            const STORAGE_URL = document.getElementById('config_storage_url').value;
         </script>
     @else
         <script>
             const USR_ID = "";
             const AUTH_TOKEN = "";
             const TENANT_CODE = "";
+            const API_URL = "";
+            const STORAGE_URL = "";
         </script>
     @endif
 
