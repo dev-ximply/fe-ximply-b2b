@@ -159,7 +159,7 @@
         }
     </script>
     <script>
-        function getInfoMember(role_id, first_name, last_name, email, employee_id, group_name, role_name) {
+        function getInfoMember(id, first_name, last_name, email, employee_id, group_name, role_name) {
             document.getElementById('info_role_id');
             document.getElementById('info_first_name').value = first_name;
             document.getElementById('info_last_name').value = last_name;
@@ -170,7 +170,7 @@
         }
 
         function getDataMember(id, first_name, last_name, email, employee_id, group_name, role_name) {
-            document.getElementById('user_id').value = id;
+            document.getElementById('edit_user_id').value = id;
             document.getElementById('edit_first_name').value = first_name;
             document.getElementById('edit_last_name').value = last_name;
             document.getElementById('edit_email').value = email;
@@ -218,14 +218,14 @@
                             success: function(res) {
                                 if (res['success'] == "true" || res['success'] == true) {
                                     swalWithBootstrapButtons.fire(
-                                        "Success!",
-                                        "Your request success.",
+                                        "success!",
+                                        "your request success.",
                                         "success"
                                     );
                                 } else {
                                     swalWithBootstrapButtons.fire(
-                                        "Error!",
-                                        "Your request Failed.",
+                                        "error!",
+                                        "your request failed.",
                                         "error"
                                     );
                                 }
@@ -241,8 +241,8 @@
                         });
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
                         swalWithBootstrapButtons.fire(
-                            "Cancelled",
-                            "Your request cancelled :)",
+                            "cancelled",
+                            "your request cancelled :)",
                             "error"
                         );
                     }

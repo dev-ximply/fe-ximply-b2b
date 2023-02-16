@@ -1,23 +1,13 @@
 {{-- 
-
 <style>
-
     @media only screen and(max-width:600px){
-
         .upgradePro{
-
             position: absolute;
-
             top: 0;
-
             right: 40px;
-
             margin-top: -1px;
-
         }
-
     }
-
 </style> --}}
 <style>
      #password-strength-status {
@@ -28,23 +18,19 @@
             margin-bottom: 10px;
             font-size: 10px;
         }
-
         .medium-password {
             background-color: #b7d60a;
             border: #bbb418 1px solid;
         }
-
         .weak-password {
             background-color: #ce1d14;
             border: #aa4502 1px solid;
             margin-bottom: 10px;
         }
-
         .strong-password {
             background-color: #12cc1a;
             border: #0fa015 1px solid;
             margin-bottom: 10px;
-
         }
         .input-groups{
             display: flex;
@@ -63,16 +49,13 @@
             font-family: helvetica;
             text-align: center;
         }
-
         .pin-code {
             padding: 0;
             margin: 0 auto;
             display: flex;
             justify-content: center;
        
-
         }
-
         .pin-code input {
             border: none;
             text-align: center;
@@ -82,9 +65,6 @@
             background-color: #F3F3F3;
             margin-right: 5px;
         }
-
-
-
         .pin-code input:focus {
             border: 1px solid #573D8B;
             outline: none;
@@ -95,9 +75,7 @@
             display: flex;
             justify-content: center;
        
-
         }
-
         .check-pin-code input {
             border: none;
             text-align: center;
@@ -107,377 +85,193 @@
             background-color: #F3F3F3;
             margin-right: 5px;
         }
-
-
-
         .check-pin-code input:focus {
             border: 1px solid #573D8B;
             outline: none;
         }
-
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
-
 </style>
-
 <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-3 top-1 px-0  shadow-none border-radius-xl"
-
     id="navbarBlur" data-scroll="true" style="z-index: 1;">
-
     <form action="">
-
         <input type="text" class="text-dark" id="navbar_uid" value="{{ Auth::user()['id'] }}" hidden>
-
     </form>
-
     <div class="container-fluid py-1 ">
-
         <nav aria-label="breadcrumb">
-
             <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
-
                 <a href="javascript:;" class="nav-link text-body p-0">
-
                     <div class="sidenav-toggler-inner">
-
                         <i class="sidenav-toggler-line"></i>
-
                         <i class="sidenav-toggler-line"></i>
-
                         <i class="sidenav-toggler-line"></i>
-
                     </div>
-
                 </a>
-
             </div>
-
             <div class="d-xl-none d-flex align-items-center">
-
                 <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-
                     <div class="sidenav-toggler-inner">
-
                         <i class="sidenav-toggler-line"></i>
-
                         <i class="sidenav-toggler-line"></i>
-
                         <i class="sidenav-toggler-line"></i>
-
                     </div>
-
                 </a>
-
             </div>
-
         </nav>
-
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-
             <ul class="navbar-nav justify-content-center me-auto">
-
                 <li class="nav-item ms-4">
-
                     <div class="d-sm-inline d-none text-lg font-weight-normal" style="color: black">
-
                         <span id="navbar_fullname" class="text-capitalize" style="font-size: 16px"></span>
-
                     </div>
                     <div>
                         <span id="group_Name" class="text-capitalize" style="font-weight:500;font-size:13px"></span>
                     </div>
-
                 </li>
-
             </ul>
-
-
-
             <div id="show_hide_subs" style="display: none">
-
                 <div class="d-md-block d-none ">
-
                     <button class="btn"
-
                         style="padding: 5px 10px 5px 10px; border: 1px solid #ff720c; margin-top:6px;"
-
                         onclick="location.href = 'payment/subscription'"><span
-
                             style="color: black">Upgrade&nbsp;Pro</span></button>
-
                 </div>
-
-
-
                 <div class="d-md-none d-block position-absolute">
-
                     <button class="btn"
-
                         style="padding: 5px 10px 5px 10px; border: 1px solid #ff720c; margin-right:160px; margin-top:-16px; top:0;right:0"
-
                         onclick="location.href = 'payment/subscription'"><span
-
                             style="color: black">Upgrade&nbsp;Pro</span></button>
-
                 </div>
-
             </div>
-
-
-
             <ul class="navbar-nav justify-content-end">
-
                 <style>
-
                     .notif-badge {
-
                         font-size: 10px;
-
                         position: absolute;
-
                         padding: 1px 6px;
-
                         top: -8px;
-
                         right: -3px;
-
                         border-radius: 50%;
-
                         background: red;
-
                         color: white;
-
                     }
-
-
-
                     @media only screen and (max-width:768px) {
-
                         .notif-badge {
-
                             font-size: 10px;
-
                             position: absolute;
-
                             padding: 1px 6px;
-
                             top: -8px;
-
                             right: 53px;
-
                             border-radius: 50%;
-
                             background: red;
-
                             color: white;
-
                         }
-
                     }
-
                 </style>
-
                 <li class="nav-item dropdown pe-2 d-flex align-items-center ms-2">
-
                     {{-- <a href="javascript:;" class="nav-link text-body p-0 mb-1" id="dropdownMenuButton"
-
                         data-bs-toggle="dropdown" aria-expanded="false">
-
                         <span class="notif-badge">2</span>
-
                         <i class="fa fa-bell cursor-pointer "></i>
-
                     </a> --}}
-
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-
                         <li class="mb-2">
-
                             <a class="dropdown-item border-radius-md" href="javascript:;">
-
                                 <div class="d-flex py-1">
-
                                     <div class="my-auto">
-
-
-
                                     </div>
-
                                     <div class="d-flex flex-column justify-content-center">
-
-
-
                                     </div>
-
                                 </div>
-
                             </a>
-
                         </li>
-
                         <li class="mb-2">
-
                             <a class="dropdown-item border-radius-md" href="javascript:;">
-
                                 <div class="d-flex py-1">
-
                                     <div class="my-auto">
-
-
-
                                     </div>
-
                                     <div class="d-flex flex-column justify-content-center">
-
-
-
                                     </div>
-
                                 </div>
-
                             </a>
-
                         </li>
-
                     </ul>
-
                 </li>
-
                 <li class="nav-item dropdown d-flex align-items-center">
-
                     <a href="javascript:;" class="nav-link text-body p-0 d-flex flex-row mb-2 ms-2"
-
                         id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-
                         &nbsp;
-
                         <img id="navbar_profilepict" src="{{ asset('img/team-2.jpg') }}" alt=""
-
                             class="img-fluid"
-
                             style="width: 2em; height: 2em; border-radius:50%; border: 1px solid grey">
-
                     </a>
-
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                         @if (session()->get('is_superadmin') == false)
                         <li class="mb-0">
-
                             <a class="dropdown-item border-radius-md" href="/profile">
-
                                 <div class="d-flex flex-column justify-content-center">
-
                                     <h6 class="text-sm font-weight-normal mb-1">
-
                                         <span class="font-weight-bold"><i
-
                                                 class="fa-solid fa-user me-sm-1"></i></i></span><span
                                             class="font-weight-bold">Profile</span>
                                     </h6>
-
                                 </div>
-
                             </a>
-
                         </li>
                         @else
                         <li class="mb-0">
                             <a class="dropdown-item border-radius-md" href="/tenant">
                                 <div class="d-flex flex-column justify-content-center">
-
                                     <h6 class="text-sm font-weight-normal mb-1">
-
                                         <span class="font-weight-bold"><i
-
                                                 class="fa-solid fa-user me-sm-1"></i></i></span><span
                                             class="font-weight-bold"> Corporate Info</span>
                                     </h6>
-
                                 </div>
-
                             </a>
-
                         </li>
                         @endif
                         {{-- <li class="mb-0">
-
                             <a class="dropdown-item border-radius-md" href="/setting">
-
                                 <div class="d-flex flex-column justify-content-center">
-
                                     <h6 class="text-sm font-weight-normal mb-1">
-
                                         <span class="font-weight-bold"><i
-
                                                 class="fa-solid fa-cog me-sm-1"></i></i></span><span
-
                                             class="font-weight-bold"> Setting</span>
-
                                     </h6>
-
                                 </div>
-
                             </a>
-
                         </li> --}}
-
                         <li class="mb-0">
-
                             <a class="dropdown-item border-radius-md" href="{{ route('logout_action') }}"
-
                                 onclick="event.preventDefault();
-
                                           document.getElementById('logout-form').submit();">
-
                                 <div class="d-flex flex-column justify-content-center">
-
                                     <h6 class="text-sm font-weight-normal mb-1">
-
                                         <span class="font-weight-bold"><i
-
                                                 class="fa-solid fa-right-from-bracket me-sm-1"></i></span><span
-
                                             class="font-weight-bold"> Logout</span>
-
                                     </h6>
-
                                 </div>
-
                             </a>
-
                             <form id="logout-form" action="{{ route('logout_action') }}" method="POST" class="d-none">
-
                                 @csrf
-
                             </form>
-
                         </li>
-
                     </ul>
-
                 </li>
-
                 <li class="nav-item ms-3 no position-relative" style="margin-top: 4px">
-
                     <a href="/activity" class="nav-link text-body p-0 ">
-
                         <i class="fa-solid fa-clock-rotate-left fa-xl" data-bs-toggle="tooltip"
-
                             data-bs-title="Latest Activity"></i>
-
                     </a>
-
                 </li>
-
             </ul>
-
         </div>
-
     </div>
-
 </nav>
     {{-- Modal New Password --}}
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -486,7 +280,6 @@
             <div class="modal-content" style="border-radius:5px">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: black;font-weight:600">Set New Password</h1>
-
                 </div>
                 <div id="loader_nav"
                     style="display:none; text-align: center; z-index: 5000; position: absolute; width: 100%; top: 40%">
@@ -541,7 +334,6 @@
                             var show_eye = document.getElementById(idEye);
                             show_eye.classList.toggle('fa-eye-slash')
                             show_eye.classList.toggle('fa-eye')
-
                             if(show_eye.classList.contains("fa-eye-slash")) return x.setAttribute("type", "text")
                             
                             x.setAttribute("type", "password")
@@ -579,7 +371,6 @@
                                     }
                                 }
                             });
-
                         </script>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
@@ -605,7 +396,6 @@
                     <h3 class="modal-title fs-5" id="staticBackdropLabel" style="color: black;font-weight:600">Set
                         New
                         Pin</h3>
-
                 </div>
                 <div id="alertModalPin"></div>
                 <div class="modal-body">
@@ -686,7 +476,6 @@
                       " data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><font style="font-size:40px; color:black">×</font></span>
                         </button>
-
                 </div>
                 <div class="modal-body">
                     <form id='set_check_pin'>
@@ -753,26 +542,16 @@
         </div>
     </div>
     {{-- Modal check Pin --}}
-
-
-
 <input type="text" id="have_manager" hidden>
-
 <input type="text" id="have_member" hidden>
-
-
-
 <script>
     $(document).ready(function() {
-
-
         $.ajaxSetup({
             headers: {
                 "Authorization": "Bearer " + AUTH_TOKEN,
                 "Accept": "application/json"
             }
         });
-
         $.ajax({
             type: "GET",
             url: API_URL + "api/member/list/" +  TENANT_CODE + '?user_id=' + document.getElementById(
@@ -780,9 +559,7 @@
             success: function(res) {
                 if (res) {
                     var response = res['data'];
-
                     console.log(response);
-
                     document.getElementById('group_Name').innerHTML = response[0][
                         'group_name'];
                 }
@@ -790,7 +567,6 @@
         });
     });
 </script>
-
 <script>
 $(document).ready(function(){
     const getDataCheck = async function(userId, pin) {
@@ -798,7 +574,6 @@ $(document).ready(function(){
                 var formData = new FormData();
                 formData.append('user_id', userId);
                 formData.append('access_pin', pin);
-
                 const response = await fetch(API_URL + "api/user/pin/use", {
                     method: 'POST',
                     headers: {
@@ -845,7 +620,6 @@ $(document).ready(function(){
                                 window.location.reload(true);
                             },1500)
                         }
-
                     }).catch((error) => {
                         console.log(error); // menampilkan pesan error jika Promise gagal
                     });
@@ -861,52 +635,28 @@ $(document).ready(function(){
 $(document).ready(function() {
     
     $.ajaxSetup({
-
         headers: {
-
             "Authorization": "Bearer " + AUTH_TOKEN,
-
             "Accept": "application/json"
-
         }
-
     });
-
     $.ajax({
-
         type: "GET",
-
         url: API_URL + "api/user/profile/info?user_id=" + document.getElementById(
-
             'navbar_uid').value,
-
         success: function(res) {
             console.log(res);
-
             if (res) {
-
                 var response = res['data'];
-
                 document.getElementById('navbar_fullname').innerHTML = "Welcome, " + response[
-
                     'full_name'];
-
                 document.getElementById('navbar_profilepict').src = STORAGE_URL + response[
-
                     'profile_picture'];
-
                 document.getElementById('have_manager').value = response['have_manager'];
-
                 document.getElementById('have_member').value = response['have_member'];
-
                 $subscription_type = response['subscription_type'];
-
-
-
                 if($subscription_type == "trial"){
-
                     document.getElementById('show_hide_subs').style.display = "block";
-
                 }
                 
                 if(res.data.change_password == true){
@@ -953,7 +703,6 @@ $(document).ready(function() {
                         });
                         });
                 }
-
                 if(res.data.have_access_pin == false && res.data.change_password == false){
                     $("#setPin").modal('show');
                 }
@@ -964,7 +713,6 @@ $(document).ready(function() {
                     console.log(token,user_id);
                     form.addEventListener('submit', function(event) {
                         event.preventDefault();
-                        console.log("asd");
                         const pin = $('input[name^=pin]').map(function(idx, elem) {
                             return $(elem).val();
                         }).get().join('');
@@ -1016,20 +764,11 @@ $(document).ready(function() {
                     });
                 }
                 
-
-
             } else {
-
                 document.getElementById('navbar_fullname').innerHTML = "not login!";
-
                 document.getElementById('navbar_profilepict').src = 'img/team-2.png';
-
             }
-
         }
-
     });
-
 });
-
 </script>

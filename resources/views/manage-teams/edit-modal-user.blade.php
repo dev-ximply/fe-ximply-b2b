@@ -14,7 +14,7 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <input type="hidden" id="user_id">
+                                <input type="hidden" id="edit_user_id">
                                 <div class="col-6">
                                     <label class="form-label" style="color: black; font-weight:500">Firstname</label>
                                     <div class="input-group">
@@ -42,8 +42,8 @@
                                     <label class="form-label mt-2" style="color: black; font-weight:500">Employee
                                         Id</label>
                                     <div class="input-group">
-                                        <input id="edit_employee_id" placeholder="Employee Code"
-                                            name="edit_employee_id" class="form-control" type="text">
+                                        <input id="edit_employee_id" placeholder="Employee Code" name="edit_employee_id"
+                                            class="form-control" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
 <script>
     function updateEmploye(e, id) {
         e.preventDefault();
-        let userId = e.target.querySelector("#user_id").value;
+        let userId = e.target.querySelector("#edit_user_id").value;
         let firstNameId = e.target.querySelector('#edit_first_name').value;
         let lastNameId = e.target.querySelector('#edit_last_name').value;
         let emailId = e.target.querySelector("#edit_email").value;
@@ -116,16 +116,16 @@
         // console.log(departementId);
         // console.log(roleId);
         // console.log('submit')
-        // const datas = {
-        //     user_id: userId,
-        //     first_name: firstNameId,
-        //     last_name: lastNameId,
-        //     email: emailId,
-        //     employee_id: employeeId,
-        //     departement_id: departementId,
-        //     role_id: roleId,
-        // };
-        // console.log(datas);
+        const datas = {
+            user_id: userId,
+            first_name: firstNameId,
+            last_name: lastNameId,
+            email: emailId,
+            employee_id: employeeId,
+            departement_id: departementId,
+            role_id: roleId,
+        };
+        console.log(datas);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -159,9 +159,9 @@
                     $("#loader").hide();
                 }
                 if (success === true) {
-                    setTimeout(function() {
-                        window.location.reload(true);
-                    }, 1000);
+                    // setTimeout(function() {
+                    //     window.location.reload(true);
+                    // }, 1000);
                 }
             }
         });
