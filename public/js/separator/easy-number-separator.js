@@ -65,11 +65,4 @@ function easyNumberSeparator(config) {
             listenFields()
         }
     });
-
-
-    // document.addEventListener("DOMNodeInserted", function (e) {
-    //   if ((e.target).classList.contains(obj.selector.replace('.', ''))) {
-    //     listenFields()
-    //   }
-    // });
 }
