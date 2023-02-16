@@ -73,8 +73,8 @@
                             </div>
                             <label for="" style="color: black">Client</label>
                             <div class="mb-3">
-                                <select name="" id="" class="form-select" name="topupClient">
-                                    <option value="" selected id="topupClient">Select</option>
+                                <select id="topupClient" class="form-select" name="topupClient" required>
+                                    <option value="" selected>Select</option>
                                     @foreach ($data['client'] as $item)
                                         <option value="{{ $item->company_name }}">
                                             {{ $item->company_name }}
@@ -95,7 +95,7 @@
                                     @endforeach
                                 </select> --}}
 
-                                <select class="form-control " name="topupPurpose" id="topupPurpose">
+                                <select class="form-control " name="topupPurpose" id="topupPurpose" required>
                                     <option value="" selected>Select</option>
                                     @foreach ($data['purpose'] as $item)
                                         <option value="{{ $item->purpose }}">
@@ -137,25 +137,19 @@
 
 <script>
     function topupRequest(userId) {
+       
         const amount = document.getElementById('topupAmount').value;
         const client = document.getElementById('topupClient').value;
         const purpose = document.getElementById('topupPurpose').value;
-        const note = document.getElementById('topupNote').value;
-
-        console.log(userId);
-        console.log(amount);
+        const note = document.getElementById('topupNote').value;      
         console.log(client);
-        console.log(purpose);
-        console.log(note);
-
         const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: "btn btn-success-cstm mx-2",
-                cancelButton: "btn btn-danger-cstm mx-2",
-            },
-            buttonsStyling: false,
-        });
-
+                customClass: {
+                    confirmButton: "btn btn-success-cstm mx-2",
+                    cancelButton: "btn btn-danger-cstm mx-2",
+                },
+                buttonsStyling: false,
+            });
         swalWithBootstrapButtons
             .fire({
                 title: "<h5>Are you sure you want to process?</h5>",
@@ -167,57 +161,64 @@
             })
             .then((result) => {
                 if (result.isConfirmed) {
-
-                    var formData = new FormData();
-
-                    formData.append('tenant_code', TENANT_CODE);
-                    formData.append('user_id', userId);
-                    formData.append('amount', amount);
-                    formData.append('client_id', client);
-                    formData.append('purpose', purpose);
-                    formData.append('note', note);
-
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
+                    let check = checkPin("#topUp",function(){
+                        TopUp();
                     });
+                    function TopUp(){
+                        console.log("isi");
+                        var formData = new FormData();
+                        formData.append('tenant_code', TENANT_CODE);
+                        formData.append('user_id', userId);
+                        formData.append('amount', amount);
+                        formData.append('client_id', client);
+                        formData.append('purpose', purpose);
+                        formData.append('note', note);
 
-                    $.ajax({
-                        url: API_URL + "api/topup/request",
-                        type: 'post',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        beforeSend: function() {
-                            if ($("#loader")) {
-                                $("#loader").show();
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             }
-                        },
-                        success: function(res) {
-                            if (res['success'] == "true" || res['success'] == true) {
-                                swalWithBootstrapButtons.fire(
-                                    "success!",
-                                    "Your request success.",
-                                    "success"
-                                );
-                            } else {
-                                swalWithBootstrapButtons.fire(
-                                    "sorry!",
-                                    "system is busy, please contact ximply",
-                                    "error"
-                                );
+                        });
+
+                        $.ajax({
+                            url: API_URL + "api/topup/request",
+                            type: 'post',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            beforeSend: function() {
+                                if ($("#loader")) {
+                                    $("#loader").show();
+                                }
+                            },
+                            success: function(res) {
+                                console.log(res);
+                                if (res['success'] == "true" || res['success'] == true) {
+                                    swalWithBootstrapButtons.fire(
+                                        "success!",
+                                        "Your request success.",
+                                        "success"
+                                    );
+                                } else {
+                                    swalWithBootstrapButtons.fire(
+                                        "sorry!",
+                                        "system is busy, please contact ximply",
+                                        "error"
+                                    );
+                                }
+                            },
+                            complete: function(data) {
+                                if ($("#loader")) {
+                                    $("#loader").hide();
+                                }
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1000);
                             }
-                        },
-                        complete: function(data) {
-                            if ($("#loader")) {
-                                $("#loader").hide();
-                            }
-                            setTimeout(function() {
-                                location.reload();
-                            }, 1000);
-                        }
-                    });
+                        });
+                    }
+                    
+                    
 
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
 

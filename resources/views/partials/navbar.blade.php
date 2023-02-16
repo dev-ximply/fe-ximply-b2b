@@ -89,7 +89,31 @@
             border: 1px solid #573D8B;
             outline: none;
         }
+        .check-pin-code {
+            padding: 0;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+       
 
+        }
+
+        .check-pin-code input {
+            border: none;
+            text-align: center;
+            width: 48px;
+            height: 48px;
+            font-size: 25px;
+            background-color: #F3F3F3;
+            margin-right: 5px;
+        }
+
+
+
+        .check-pin-code input:focus {
+            border: 1px solid #573D8B;
+            outline: none;
+        }
 
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -568,88 +592,167 @@
     </div>
     {{-- Modal New Password --}}
     {{-- Modal New Pin --}}
-    <div class="modal fade" id="setPin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="width: 400px">
-        <div class="modal-content" style="border-radius:5px">
-            <div id="loader_nav"
-                style="display:none; text-align: center; z-index: 5000; position: absolute; width: 100%; top: 40%">
-                <img height="100px" src="{{ asset('img/loader.gif') }}">
-            </div>
-          
-            <div class="modal-header d-flex justify-content-center">
+    <div class="modal fade" id="setPin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="width: 400px">
+            <div class="modal-content" style="border-radius:5px">
+                <div id="loader_nav"
+                    style="display:none; text-align: center; z-index: 5000; position: absolute; width: 100%; top: 40%">
+                    <img height="100px" src="{{ asset('img/loader.gif') }}">
+                </div>
             
-                <h3 class="modal-title fs-5" id="staticBackdropLabel" style="color: black;font-weight:600">Set
-                    New
-                    Pin</h3>
+                <div class="modal-header d-flex justify-content-center">
+                
+                    <h3 class="modal-title fs-5" id="staticBackdropLabel" style="color: black;font-weight:600">Set
+                        New
+                        Pin</h3>
 
-            </div>
-            <div id="alertModalPin"></div>
-            <div class="modal-body">
-                <form id='set_new_pin'>
-                    <div class="row">
-                        <div class="input-group mb-3">
-                            <div class="pin-code">
-                                <input class="setInput" name="pin[]" type="number" maxlength="1" autofocus>
-                                <input class="setInput" name="pin[]" type="number" maxlength="1" required>
-                                <input class="setInput" name="pin[]" type="number" maxlength="1" required>
-                                <input class="setInput" name="pin[]" type="number" maxlength="1" required>
-                                <input class="setInput" name="pin[]" type="number" maxlength="1" required>
-                                <input class="setInput" name="pin[]" type="number" maxlength="1" required>
+                </div>
+                <div id="alertModalPin"></div>
+                <div class="modal-body">
+                    <form id='set_new_pin'>
+                        <div class="row">
+                            <div class="input-group mb-3">
+                                <div class="pin-code">
+                                    <input class="setInput" name="pin[]" type="number" maxlength="1" autofocus>
+                                    <input class="setInput" name="pin[]" type="number" maxlength="1" required>
+                                    <input class="setInput" name="pin[]" type="number" maxlength="1" required>
+                                    <input class="setInput" name="pin[]" type="number" maxlength="1" required>
+                                    <input class="setInput" name="pin[]" type="number" maxlength="1" required>
+                                    <input class="setInput" name="pin[]" type="number" maxlength="1" required>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                {{-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cance</button> --}}
+                                <button type="submit" class="btn text-white " style="width:314px; background: #191a4b">Submit</button>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            {{-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cance</button> --}}
-                            <button type="submit" class="btn text-white " style="width:314px; background: #191a4b">Submit</button>
-                        </div>
-                    </div>
-                </form>
-                <script>
-                    //var pinContainer = document.getElementsByClassName("pin-code")[0];
-                    var pinContainer = document.querySelector(".pin-code");
-                    console.log('There is ' + pinContainer.length + ' Pin Container on the page.');
-            
-                    pinContainer.addEventListener('keyup', function(event) {
-                        var target = event.srcElement;
-            
-                        var maxLength = parseInt(target.attributes["maxlength"].value, 10);
-                        var myLength = target.value.length;
-            
-                        if (myLength >= maxLength) {
-                            var next = target;
-                            while (next = next.nextElementSibling) {
-                                if (next == null) break;
-                                if (next.tagName.toLowerCase() == "input") {
-                                    next.focus();
-                                    break;
-                                }
-                            }
-                        }
-            
-                        if (myLength === 0) {
-                            var next = target;
-                            while (next = next.previousElementSibling) {
-                                if (next == null) break;
-                                if (next.tagName.toLowerCase() == "input") {
-                                    next.focus();
-                                    break;
-                                }
-                            }
-                        }
-                    }, false);
-            
-                    pinContainer.addEventListener('keydown', function(event) {
-                        var target = event.srcElement;
-                        target.value = "";
-                    }, false);
+                    </form>
+                    <script>
+                        //var pinContainer = document.getElementsByClassName("pin-code")[0];
+                        var pinContainer = document.querySelector(".pin-code");
+                        console.log('There is ' + pinContainer.length + ' Pin Container on the page.');
                 
-                </script>
+                        pinContainer.addEventListener('keyup', function(event) {
+                            var target = event.srcElement;
+                
+                            var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+                            var myLength = target.value.length;
+                
+                            if (myLength >= maxLength) {
+                                var next = target;
+                                while (next = next.nextElementSibling) {
+                                    if (next == null) break;
+                                    if (next.tagName.toLowerCase() == "input") {
+                                        next.focus();
+                                        break;
+                                    }
+                                }
+                            }
+                
+                            if (myLength === 0) {
+                                var next = target;
+                                while (next = next.previousElementSibling) {
+                                    if (next == null) break;
+                                    if (next.tagName.toLowerCase() == "input") {
+                                        next.focus();
+                                        break;
+                                    }
+                                }
+                            }
+                        }, false);
+                
+                        pinContainer.addEventListener('keydown', function(event) {
+                            var target = event.srcElement;
+                            target.value = "";
+                        }, false);
+                    
+                    </script>
+                </div>
+                
             </div>
-            
         </div>
     </div>
-</div>
-{{-- Modal new Pin --}}
+    {{-- Modal new Pin --}}
+    {{-- Modal Check Pin Pin --}}
+    <div class="modal fade" id="checkPin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="width: 400px">
+            <div class="modal-content" style="border-radius:5px">
+                <div class="modal-header d-flex justify-content-center">
+                
+                    <h3 class="modal-title fs-5" style="color: black;font-weight:600">Check
+                        Pin</h3>
+                          <button type="button" class="btn-close  text-white" style="margin-top: -50px;
+                          margin-right: 20px;
+                      " data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><font style="font-size:40px; color:black">×</font></span>
+                        </button>
+
+                </div>
+                <div class="modal-body">
+                    <form id='set_check_pin'>
+                        <div class="row">
+                            <div class="input-group mb-3">
+                                <div class="check-pin-code">
+                                    <input class="setInput" name="pinCheck[]" type="number" maxlength="1" autofocus>
+                                    <input class="setInput" name="pinCheck[]" type="number" maxlength="1" required>
+                                    <input class="setInput" name="pinCheck[]" type="number" maxlength="1" required>
+                                    <input class="setInput" name="pinCheck[]" type="number" maxlength="1" required>
+                                    <input class="setInput" name="pinCheck[]" type="number" maxlength="1" required>
+                                    <input class="setInput" name="pinCheck[]" type="number" maxlength="1" required>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                {{-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cance</button> --}}
+                                <button type="submit" class="btn text-white " style="width:314px; background: #191a4b">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    <script>
+                        //var pinContainer = document.getElementsByClassName("pin-code")[0];
+                        var pinContainer = document.querySelector(".check-pin-code");
+                        console.log('There is ' + pinContainer.length + ' Pin Container on the page.');
+                
+                        pinContainer.addEventListener('keyup', function(event) {
+                            var target = event.srcElement;
+                
+                            var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+                            var myLength = target.value.length;
+                
+                            if (myLength >= maxLength) {
+                                var next = target;
+                                while (next = next.nextElementSibling) {
+                                    if (next == null) break;
+                                    if (next.tagName.toLowerCase() == "input") {
+                                        next.focus();
+                                        break;
+                                    }
+                                }
+                            }
+                
+                            if (myLength === 0) {
+                                var next = target;
+                                while (next = next.previousElementSibling) {
+                                    if (next == null) break;
+                                    if (next.tagName.toLowerCase() == "input") {
+                                        next.focus();
+                                        break;
+                                    }
+                                }
+                            }
+                        }, false);
+                
+                        pinContainer.addEventListener('keydown', function(event) {
+                            var target = event.srcElement;
+                            target.value = "";
+                        }, false);
+                    
+                    </script>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    {{-- Modal check Pin --}}
 
 
 
@@ -689,7 +792,72 @@
 </script>
 
 <script>
-  
+$(document).ready(function(){
+    const getDataCheck = async function(userId, pin) {
+            try {
+                var formData = new FormData();
+                formData.append('user_id', userId);
+                formData.append('access_pin', pin);
+
+                const response = await fetch(API_URL + "api/user/pin/use", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + AUTH_TOKEN
+                    },
+                    body: formData,
+                });
+                console.log(response);
+                const data = await response.json();
+                return await data;
+            } catch (error) {
+                console.log('Error:', error);
+                throw error;
+            }
+        }
+        window.checkPin = async function(idPopup, callback) {
+            try {
+                if(idPopup != ""){
+                    $(`${idPopup}`).modal('hide');
+                }
+                $("#checkPin").modal('show');
+                const user_id = document.getElementById('navbar_uid').value;
+                const form = document.getElementById('set_check_pin');
+                form.addEventListener('submit',  function(event) {
+                    event.preventDefault();
+                    const pin = $('input[name^=pinCheck]').map(function(idx, elem) {
+                        return $(elem).val();
+                    }).get().join('');
+                    const data =  getDataCheck(user_id,pin);
+                    data.then((response) => {
+                        console.log(response); // menampilkan "Data berhasil diambil!"
+                        if(response['status'] == 200 || response['success'] == true || response.is_correct == true){
+                            $("#checkPin").modal('hide');      
+                            callback();     
+                        }else{
+                            Swal.fire(
+                                "FAIlED!",
+                                response['message'],
+                                "error"
+                            )
+                            $("#checkPin").modal('hide');
+                            setTimeout(function() {
+                                window.location.reload(true);
+                            },1500)
+                        }
+
+                    }).catch((error) => {
+                        console.log(error); // menampilkan pesan error jika Promise gagal
+                    });
+                });
+                
+                // lakukan sesuatu dengan data di sini
+            } catch (error) {
+                console.error('Error:', error);
+                // lakukan sesuatu dengan error di sini
+            }
+        };
+})
 $(document).ready(function() {
     
     $.ajaxSetup({
@@ -804,11 +972,10 @@ $(document).ready(function() {
                         console.log(pin);
                             async function getData() {
                                 try {
-                                    const response = await await fetch(API_URL + "api/user/pin/create", {
+                                    const response =  await fetch(API_URL + "api/user/pin/create", {
                                         method: 'POST',
                                         headers: {
                                             'Accept': 'application/json',
-                                            'Content-Type': 'application/json',
                                             'Authorization': 'Bearer ' + token
                                         },
                                         body: `{
