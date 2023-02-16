@@ -644,10 +644,9 @@
                         }
                     }).catch((error) => {
                         console.log(
-                        error); // menampilkan pesan error jika Promise gagal
+                            error); // menampilkan pesan error jika Promise gagal
                     });
                 });
-
                 // lakukan sesuatu dengan data di sini
             } catch (error) {
                 console.error('Error:', error);
@@ -709,7 +708,7 @@
                                                     .modal('hide');
                                                 $("#setPin").modal(
                                                     'show');
-                                                createPin();
+                                                // createPin();
                                             } else {
                                                 window.location.reload(
                                                     true);
@@ -734,62 +733,153 @@
                         $("#setPin").modal('show');
                     }
 
-                    function createPin() {
-                        const form = document.getElementById('set_new_pin');
-                        const token = AUTH_TOKEN;
-                        const user_id = document.getElementById('navbar_uid').value;
-                        form.addEventListener('submit', function(event) {
-                            event.preventDefault();
-                            const pin = $('input[name^=pin]').map(function(idx, elem) {
-                                return $(elem).val();
-                            }).get().join('');
-                            const dataPin = pin;
-                            console.log(pin);
-                            async function getData() {
-                                    try {
-                                        const response = await fetch(API_URL +
-                                            "api/user/pin/create", {
-                                                method: 'POST',
-                                                headers: {
-                                                    'Accept': 'application/json',
-                                                    'Authorization': 'Bearer ' + token
-                                                },
-                                                body: `{
-                                            "user_id": "${user_id}",
-                                            "new_access_pin": ${dataPin},
-                                            "confirm_access_pin": ${dataPin}
-                                        }`,
-                                            });
-                                        const data = await response.json();
-                                        return data;
-                                    } catch (error) {
-                                        console.error('Error:', error);
-                                        throw error;
-                                    }
+                    $("#set_new_pin").submit(function(event) {
+                        alert("Handler for .submit() called.");
+                        event.preventDefault();
+
+                        const pin = $('input[name^=pin]').map(function(idx, elem) {
+                            return $(elem).val();
+                        }).get().join('');
+                        const dataPin = pin;
+                        console.log(pin);
+
+                        $.ajax({
+                            type: "POST",
+                            url: API_URL + "api/user/pin/create",
+                            headers: {
+                                'Accept': 'application/json',
+                                'Authorization': 'Bearer ' +
+                                    AUTH_TOKEN
+                            },
+                            data: {
+                                user_id: USR_ID,
+                                new_access_pin: dataPin,
+                                confirm_access_pin: dataPin
+                            },
+                            success: function(response) {
+
+                                const {
+                                    success,
+                                    status,
+                                    message
+                                } = response;
+
+                                console.log(response)
+
+                                if (success === true) {
+                                    setTimeout(function() {
+                                        window.location.reload(true);
+                                    }, 1000);
                                 }
-                                (async function() {
-                                    try {
-                                        const data = await getData();
-                                        if (data.status == 200) {
-                                            $('#alertModalPin').html(`<div class="alert alert-success"   role="alert">
-                                        congratulations, your pin has been created
-                                    </div>`)
-                                            setTimeout(function() {
-                                                window.location.reload(true);
-                                            },1500)
-                                        } {
-                                            $('#alertModalPin').html(`<div class="alert alert-danger"   role="alert">
-                                       ${data.message}
-                                    </div>`)
-                                        }
-                                        // lakukan sesuatu dengan data di sini
-                                    } catch (error) {
-                                        console.error('Error:', error);
-                                        // lakukan sesuatu dengan error di sini
-                                    }
-                                })();
+                            }
+
                         });
-                    }
+
+                        // async function getData() {
+                        //         try {
+                        //             const response = await fetch(API_URL +
+                        //                 "api/user/pin/create", {
+                        //                     method: 'POST',
+                        //                     headers: {
+                        //                         'Accept': 'application/json',
+                        //                         'Authorization': 'Bearer ' +
+                        //                             AUTH_TOKEN
+                        //                     },
+                        //                     body: {
+                        //                         "user_id": USR_ID,
+                        //                         "new_access_pin": dataPin,
+                        //                         "confirm_access_pin": dataPin
+                        //                     },
+                        //                 });
+                        //             const data = await response.json();
+                        //             return data;
+                        //         } catch (error) {
+                        //             console.error('Error:', error);
+                        //             throw error;
+                        //         }
+                        //     }
+                        //     (async function() {
+                        //         try {
+                        //             const data = await getData();
+                        //             if (data.status == 200) {
+                        //                 $('#alertModalPin').html(`<div class="alert alert-success"   role="alert">
+                        //                   congratulations, your pin has been created
+                        //               </div>`)
+                        //                 setTimeout(function() {
+                        //                     window.location.reload(
+                        //                         true);
+                        //                 }, 1500)
+                        //             } {
+                        //                 $('#alertModalPin').html(`<div class="alert alert-danger"   role="alert">
+                        //                  ${data.message}
+                        //               </div>`)
+                        //             }
+                        //             // lakukan sesuatu dengan data di sini
+                        //         } catch (error) {
+                        //             console.error('Error:', error);
+                        //             // lakukan sesuatu dengan error di sini
+                        //         }
+                        //     })();
+
+                    });
+
+                    // function createPin() {
+                    //     const form = document.getElementById('set_new_pin');
+                    //     const user_id = document.getElementById('navbar_uid').value;
+                    //     form.addEventListener('submit', function(event) {
+                    //         event.preventDefault();
+                    //         // const pin = $('input[name^=pin]').map(function(idx, elem) {
+                    //         //     return $(elem).val();
+                    //         // }).get().join('');
+                    //         // const dataPin = pin;
+                    //         // console.log(pin);
+                    //         // async function getData() {
+                    //         //         try {
+                    //         //             const response = await fetch(API_URL +
+                    //         //                 "api/user/pin/create", {
+                    //         //                     method: 'POST',
+                    //         //                     headers: {
+                    //         //                         'Accept': 'application/json',
+                    //         //                         'Authorization': 'Bearer ' +
+                    //         //                             AUTH_TOKEN
+                    //         //                     },
+                    //         //                     body: `{
+                    //         //                                 "user_id": "${user_id}",
+                    //         //                                 "new_access_pin": "${dataPin}",
+                    //         //                                 "confirm_access_pin": "${dataPin}"
+                    //         //                             }`,
+                    //         //                 });
+                    //         //             const data = await response.json();
+                    //         //             return data;
+                    //         //         } catch (error) {
+                    //         //             console.error('Error:', error);
+                    //         //             throw error;
+                    //         //         }
+                    //         //     }
+                    //         //     (async function() {
+                    //         //         try {
+                    //         //             const data = await getData();
+                    //         //             if (data.status == 200) {
+                    //         //                 $('#alertModalPin').html(`<div class="alert alert-success"   role="alert">
+                    //         //             congratulations, your pin has been created
+                    //         //         </div>`)
+                    //         //                 setTimeout(function() {
+                    //         //                     window.location.reload(
+                    //         //                     true);
+                    //         //                 }, 1500)
+                    //         //             } {
+                    //         //                 $('#alertModalPin').html(`<div class="alert alert-danger"   role="alert">
+                    //         //            ${data.message}
+                    //         //         </div>`)
+                    //         //             }
+                    //         //             // lakukan sesuatu dengan data di sini
+                    //         //         } catch (error) {
+                    //         //             console.error('Error:', error);
+                    //         //             // lakukan sesuatu dengan error di sini
+                    //         //         }
+                    //         //     })();
+                    //     });
+                    // }
 
                 } else {
                     document.getElementById('navbar_fullname').innerHTML = "not login!";
