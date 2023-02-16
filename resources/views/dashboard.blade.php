@@ -165,20 +165,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- <div class="row justify-content-center mx-auto">
-                        <div class="col-md progress-wrapper bg-white  rounded pb-2">
-                            <div class="progress-info">
-                                <div class="progress-percentage">
-                                    <span class="text-xs font-weight-bold text-dark">60%</span>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                    aria-valuemax="100" style="width: 60%; background:#19194b"></div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
             <div class="row flex-column">
@@ -187,10 +173,6 @@
                         <form action="" method="get">
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex flex-row">
-                                    {{-- <div class="icon icon-shape  shadow text-center border-radius-md"
-                                        style="background: #19194b">
-                                        <i class="fas fa-shopping-cart text-lg opacity-10" aria-hidden="true"></i>
-                                    </div> --}}
                                     <div>
                                         <img src="{{ asset('img/icons/dashboard/expenses.png') }}" alt=""
                                             class="" style="width:80px">
@@ -283,31 +265,17 @@
                     <div class="coloumn__quick__access d-md-block d-none">
                         <p style="font-weight: 500; font-size:13px ; margin-top:-8px">Quick Access</p>
                         <div class="d-flex " style="overflow-x: scroll; margin-top:-8px">
-                            <a href="" class="" type="button" data-bs-toggle="modal"
-                                data-bs-target="#modalExpenses" aria-controls="new-expense-form" id="myBtn">
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modalExpenses"
+                                aria-controls="new-expense-form" id="myBtn">
                                 <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                                    {{-- <div class="icon icon-shape  shadow text-center border-radius-md"
-                                        style="min-height: 60px; max-height: 60px; min-width: 80px; max-width: 80px;background-color:#19194b">
-                                        <i class="ni ni-bag-17 text-lg opacity-10" aria-hidden="true"></i>
-                                        <div class="mt-1">
-                                            <span class="text-white" style="font-size: 10px">New&nbsp;Expenses</span>
-                                        </div>
-                                    </div> --}}
                                     <div>
                                         <img src="{{ asset('img/icons/dashboard/new-expenses.png') }}" alt=""
                                             class="" style="width:85px">
                                     </div>
                                 </div>
                             </a>
-                            <a href="" class="" data-bs-toggle="modal" data-bs-target="#topUp">
+                            <a data-bs-toggle="modal" data-bs-target="#topUp">
                                 <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                                    {{-- <div class="icon icon-shape shadow text-center border-radius-md"
-                                        style="min-height: 60px; max-height: 60px; min-width: 80px; max-width: 80px;background-color:#19194b">
-                                        <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
-                                        <div class="mt-1">
-                                            <span class="text-white" style="font-size: 10px">Top&nbsp;Up</span>
-                                        </div>
-                                    </div> --}}
                                     <div>
                                         <img src="{{ asset('img/icons/dashboard/top-up.png') }}" alt=""
                                             class="" style="width:85px">
@@ -421,10 +389,6 @@
             </div>
         </div>
     </div>
-
-
-    {{-- get ful-name card --}}
-
     <script>
         $(document).ready(function() {
 
@@ -708,7 +672,8 @@
             url: API_URL + "api/analytics/pie/" + document.getElementById('user_id').value +
                 "?expense_type=" + FilterExpenseType +
                 "&start_date=" + FilterStartDate +
-                "&end_date=" + FilterEndDate,
+                "&end_date=" + FilterEndDate +
+                "&member_id=" + FilterMember,
             success: function(res) {
                 var arrayPie = [];
                 var valuePie = {};
