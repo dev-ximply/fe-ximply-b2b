@@ -121,7 +121,7 @@
                 <div class="col-md px-2">
                     <div class="card-text pb-0">
                         <div class="table-responsive">
-                            <table class="table table-flush" id="table11">
+                            <table class="table table-flush" >
                                 <thead class="thead-light">
                                     <tr>
                                         <th
@@ -149,7 +149,7 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="tableBody">
                                     @if (count($approvals) > 0)
                                         @foreach ($approvals as $approval)
                                             <tr>
@@ -309,6 +309,7 @@
 
     <script>
         function getDetail(element) {
+            console.log(element)
             document.getElementById('topupAmount').value = element.dataset.topupRequest;
             document.getElementById('topupAmountApprove').value = element.dataset.topupRequest;
             document.getElementById('topUpId').value = element.dataset.topupId;
@@ -456,6 +457,173 @@
             });
         }
     </script>
+
+
+{{-- filter untuk category --}}
+<script>
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                "Authorization": "Bearer " + AUTH_TOKEN,
+                "Accept": "application/json"
+            }
+        });
+
+
+        $(document).ready(function() {
+            var urlSearch = "";
+            $('#status').on('change', function() {
+                var status = $('#status').val();
+                urlSearch = API_URL + "api/topup/approval/list/" + 
+                    USR_ID +
+                    "?status=" + status;
+                new getDataExpenses(urlSearch);
+            });
+        });
+
+        $(document).ready(function(){
+           var urlSearch = "";
+           $('#status').on('change', function(){
+              var status = $('#status').val();
+              urlSearch = API_URL = "api"
+           }); 
+        });
+
+
+        function getDataExpenses(urlSearch) {
+            $("#tableBody").html("");
+            // $("#totalAmount").html("0.00");
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": "Bearer " + AUTH_TOKEN,
+                    "Accept": "application/json"
+                }
+            });
+            $.ajax({
+                type: "GET",
+                url: urlSearch,
+                beforeSend: function() {
+                    $("#main-loader").show();
+                },
+                success: function(res) {
+                    if (res) {
+                        console.log(res);
+                        var response = res['data'];
+                        var tableOut = "";
+                        // var totalAmount = 0;
+                        for (const obj of response) {
+                            // totalAmount = totalAmount + parseFloat(obj.total_amount);
+                            // console.log(totalAmount);
+                            tableOut += '<tr>' +
+                                '<td class="align-middle text-start text-xs text-dark">' +
+                                obj.date +
+                                '</td>'
+                            tableOut += '<td class="align-middle text-start text-capitalize text-xs text-dark">'+
+                                            '<div><span class="font-weight-bold">'+
+                                                            obj.full_name +
+                                                        '</span></div>'+
+                                                    '<div><span>'+
+                                                  '</span></div>'+
+                                                  '<div><span>Remain Limit : </span><span class="text-xs font-weight-bold">'+
+                                                            obj.remain_limit +
+                                                        '</span>'+
+                                                    '</div>'+
+                                                '</td>'
+                            tableOut += '<td class="align-middle text-start text-xs text-dark">'+
+                                          '<span class="text-xs">Top Up : </span><span class="font-weight-bold">'+
+                                                       obj.amount +
+                                                    '</span>'+
+                                            '</td>'+
+                                            '<td class="align-middle text-start text-xs text-dark">'+
+                                                '<div class="" style="max-width: 300px">'+
+                                                    '<div><span>Purpose : </span><span'+
+                                                                'class="font-weight-bold text-wrap"'+
+                                                                'style="text-align: justify">'+
+                                                                obj.purpose_name +
+                                                              
+                                                            '</span></div>'+
+                                                        '<div><span>Note : </span><span class="font-weight-bold text-wrap"'+
+                                                               'style="text-align: justify">'+
+                                                                obj.note +
+                                                            '</span></div>'+
+                                                    '</div>'+
+                                                '</td>'
+                                            if (obj.status == 'pending'){
+                                               tableOut += '<td class="align-middle text-center text-xs d-flex justify-content-center">'+
+                                                             '<span class="badge badge-xs d-flex justify-content-center mb-4"'+
+                                                             'style="border:1px solid #FFCF23; color:#FFCF23; width: 60px; margin-top:20px">pending</span>'+
+                                                            '</td>'
+                                            }else if(obj.status == 'approved'){
+                                                tableOut += '<td class="align-middle text-center text-xs d-flex justify-content-center">'+
+                                                              '<span class="badge badge-xs d-flex justify-content-center mb-4"'+
+                                                               'style="border: 1px solid #50B720; color:#50B720; width: 60px; margin-top:20px">approved</span>'+
+                                                            '</td>'
+                                            }else if(obj.status == 'rejected'){
+                                                '<td class="align-middle text-center text-xs d-flex justify-content-center">'+
+                                                '<span class="badge badge-xs d-flex justify-content-center mb-4"'+
+                                                    'style="border:1px solid #E40909; color:#E40909; width: 60px; margin-top:20px">rejected</span>'+
+                                                '</td>'
+                                            }else{
+                                                '<td class="align-middle text-center text-xs d-flex justify-content-center">'+
+                                                '<span class="badge badge-secondary badge-xs">unknown</span>'+
+                                                '</td>'
+                                            }
+                                            
+                                            if(obj.status == 'pending'){
+                                               tableOut += '<td class="align-middle text-center text-xs">'+
+                                                          '<div class="d-flex flex-row justify-content-center pt-3">'+
+                                                        '<button onclick="getDetail(this)"' + 
+                                                        'class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center"'+
+                                                                'data-toggle="tooltip" data-placement="left"'+
+                                                                'title="Edit"'+
+                                                                'style="width: 60px; height:25px; background-color:#FFCF23"'+
+                                                                'data-topup-id=`'+  obj.topup_id  +'`'+
+                                                                'data-topup-request=`' + obj.amount + '`'+
+                                                                'data-bs-toggle="modal"'+
+                                                                'data-bs-target="#approve-ask-dialog">'+
+                                                                '<i class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>'+
+                                                                '<span style="font-size: 0.6em">Edit</span>'+
+                                                            '</button>'+
+                                                            '<button onclick="topupDecision(`' +  obj.topup_id  + '`,`' +  obj.amount + '`,`approved`)"'+
+                                                                'class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center approved"'+
+                                                                'data-toggle="tooltip" data-placement="left"'+
+                                                                'title="Approve"'+
+                                                                'style="width: 60px; height:25px; background-color:#50B720">'+
+                                                                '<i class="fa-solid fa-circle-check text-white text-lg me-1"></i>'+
+                                                                '<span style="font-size: 0.6em">Approve</span>'+
+                                                            '</button>'+
+                                                           '<button data-bs-toggle="tooltip" onclick="topupDecision(`' + obj.topup_id + '`,`' + obj.amount + '`,`rejected`)"'+
+                                                                'class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center rejected"'+
+                                                                'data-bs-original-title="reject" data-toggle="tooltip"'+
+                                                                'data-placement="left" title="Reject"'+
+                                                                'style="width: 60px; height:25px; background-color: #E40909">'+
+                                                                '<i class="fas fa-circle-xmark text-white text-lg me-1"></i>'+
+                                                                '<span style="font-size: 0.6em">Reject</span>'+
+                                                            '</button>'+
+                                                       '</div>'+
+                                                       '</td>'
+                                            }else{
+                                                tableOut += '<td class="align-middle text-center text-xs">'+
+                                                    '<span class="badge badge-secondary badge-xs mt-3">done</span>'+
+                                                    '</td>'
+
+                                            }
+ 
+                        }
+                        $("#tableBody").append(tableOut);
+                        // $("#totalAmount").html(Intl.NumberFormat().format(totalAmount));
+                    } else {
+                        $("#tableBody").empty();
+                    }
+
+                },
+                complete: function(data) {
+                    $("#main-loader").hide();
+                }
+            });
+        }
+    });
+</script>
 
 {{-- <script>
     $(document).ready(function() {

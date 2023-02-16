@@ -316,7 +316,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tableBody">
                             @if (count($data['expenses']) != 0)
                                 @foreach ($data['expenses'] as $item)
                                     @php
@@ -554,5 +554,134 @@
         function handleChangeStatus(event) {
             event.submit();
         }
+    </script>
+
+
+    {{-- filter untuk category --}}
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": "Bearer " + AUTH_TOKEN,
+                    "Accept": "application/json"
+                }
+            });
+
+
+            $(document).ready(function() {
+                var urlSearch = "";
+                $('#status').on('change', function() {
+                    var status = $('#status').val();
+                    urlSearch = API_URL + "api/expense/list/nested?user_id=" +
+                        USR_ID +
+                        "&status=" + status;
+                    new getDataExpenses(urlSearch);
+                });
+            });
+
+
+            function getDataExpenses(urlSearch) {
+                $("#tableBody").html("");
+                // $("#totalAmount").html("0.00");
+                $.ajaxSetup({
+                    headers: {
+                        "Authorization": "Bearer " + AUTH_TOKEN,
+                        "Accept": "application/json"
+                    }
+                });
+                $.ajax({
+                    type: "GET",
+                    url: urlSearch,
+                    beforeSend: function() {
+                        $("#main-loader").show();
+                    },
+                    success: function(res) {
+                        if (res) {
+                            console.log(res);
+                            var response = res['data'];
+                            var tableOut = "";
+                            // var totalAmount = 0;
+                            for (const obj of response) {
+                                // totalAmount = totalAmount + parseFloat(obj.total_amount);
+                                // console.log(totalAmount);
+                                tableOut += '<tr class="align-middle">' +
+                                    '<td colspan="7" style="color: #000000;font-weight:500;font-size:12px;" class="text-md-start text-end ps-md-4 text-break text-wrap">' +
+                                    obj.long_date +
+                                    '</td> </tr>'
+                                for (const expense of obj.expenses) {
+                                    tableOut +=
+                                        '<tr><td class="font-weight-bold pt-3">';
+                                    tableOut +=
+                                        '<p class="text-sm text-dark">' + expense.receipt_date +
+                                        '</p></td>';
+                                    if (expense.status == 'approved') {
+                                        tableOut +=
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<span class="badge badge-xs d-flex justify-content-center"' +
+                                            'style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">' +
+                                                expense.status  
+                                             '</span>' +
+                                                + '</p></td>';
+
+                                    } else if (expense.status == 'pending') {
+                                        tableOut +=
+                                            '<td class=""align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">'  +
+                                                '<span class="badge badge-xs d-flex justify-content-center"' +
+                                                 'style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">' +
+                                                        expense.status
+                                                '</span>'
+                                            + '</p></td>';
+                                    } else if (expense.status == 'rejected') {
+                                        tableOut +=
+                                            '<td class=""align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                                '<span class="badge badge-xs d-flex justify-content-center"' +
+                                                 'style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">'+
+                                                       expense.status
+                                                    '</span>' 
+                                            + '</td>';
+
+                                    } else {
+                                        tableOut +=
+                                            '<td class=""align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            expense.status + '</p></td>';
+
+                                    }
+
+                                    tableOut +=
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
+                                        expense.purpose_name + '</p></td>';
+                                    tableOut +=
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
+                                        expense.merchant + '</p></td>';
+                                    tableOut +=
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
+                                        expense.total_amount + '</p></td>';
+                                    tableOut +=
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
+                                        expense.category_name + '</p></td>';
+                                    tableOut +=
+                                        '<td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between" data-label="Action">' +
+                                        ' <button onclick="getExpenseData(' + '`' + expense.id + '`' +
+                                        ')"' +
+                                        'class = "btn text-white d-flex  justify-content-center align-items-center text-capitalize"' +
+                                        'data-bs-toggle = "modal" data-bs-target = "#viewExpenseDetail"' +
+                                        'style ="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">' +
+                                        ' View' + ' </button> </td></tr>'
+                                }
+
+                            }
+                            $("#tableBody").append(tableOut);
+                            // $("#totalAmount").html(Intl.NumberFormat().format(totalAmount));
+                        } else {
+                            $("#tableBody").empty();
+                        }
+
+                    },
+                    complete: function(data) {
+                        $("#main-loader").hide();
+                    }
+                });
+            }
+        });
     </script>
 @endsection

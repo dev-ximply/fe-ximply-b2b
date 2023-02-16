@@ -39,6 +39,7 @@
 
     {{-- Separator NUmber --}}
     <script src="{{ asset('js/separator/easy-number-separator.js') }}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/gh/amiryxe/easy-number-separator/easy-number-separator.js"></script> --}}
     {{-- Separator --}}
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
