@@ -400,44 +400,50 @@
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
+                        let check = checkPin("",function(){
+                            topUpApproval();
                         });
-                        $.ajax({
-                            type: "POST",
-                            url: "{{ route('approves.action') }}",
-                            data: {
-                                topup_id: topupId,
-                                decision: decision,
-                                amount_approved: amountApproved,
-                            },
-                            success: function(response) {
-                                const {
-                                    success,
-                                    status,
-                                    message
-                                } = response;
-                                if (success === true) {
-                                    swalWithBootstrapButtons.fire(
-                                        "Success!",
-                                        "Your request success.",
-                                        "success"
-                                    );
-
-                                    setTimeout(function() {
-                                        window.location.reload(true);
-                                    }, 1000);
-                                } else {
-                                    swalWithBootstrapButtons.fire(
-                                        "Error!",
-                                        message,
-                                        "error"
-                                    );
+                        function topUpApproval(){
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 }
-                            }
-                        });
+                            });
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ route('approves.action') }}",
+                                data: {
+                                    topup_id: topupId,
+                                    decision: decision,
+                                    amount_approved: amountApproved,
+                                },
+                                success: function(response) {
+                                    const {
+                                        success,
+                                        status,
+                                        message
+                                    } = response;
+                                    if (success === true) {
+                                        swalWithBootstrapButtons.fire(
+                                            "Success!",
+                                            "Your request success.",
+                                            "success"
+                                        );
+
+                                        setTimeout(function() {
+                                            window.location.reload(true);
+                                        }, 1000);
+                                    } else {
+                                        swalWithBootstrapButtons.fire(
+                                            "Error!",
+                                            message,
+                                            "error"
+                                        );
+                                    }
+                                }
+                            });
+                        }
+                         
                     } else {
                         swalWithBootstrapButtons.fire(
                             "Cancelled",

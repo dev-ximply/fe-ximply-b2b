@@ -264,52 +264,60 @@
             })
             .then((result) => {
                 if (result.isConfirmed) {
-
-                    $.ajaxSetup({
-                        headers: {
-                            "Authorization": "Bearer " + AUTH_TOKEN,
-                            "Accept": "application/json",
-                        }
+                    let check = checkPin("#manualForm",function(){
+                        CreateExpense();
                     });
+                    function CreateExpense(){
+                        $.ajaxSetup({
+                            headers: {
+                                "Authorization": "Bearer " + AUTH_TOKEN,
+                                "Accept": "application/json",
+                            }
+                        });
 
-                    $.ajax({
-                        url: API_URL + "api/expense/create",
-                        type: 'post',
-                        data: formDataExpense,
-                        contentType: false,
-                        processData: false,
-                        beforeSend: function() {
-                            if ($("#main-loader")) {
-                                $("#main-loader").show();
+                        $.ajax({
+                            url: API_URL + "api/expense/create",
+                            type: 'post',
+                            data: formDataExpense,
+                            contentType: false,
+                            processData: false,
+                            beforeSend: function() {
+                                if ($("#main-loader")) {
+                                    $("#main-loader").show();
+                                }
+                            },
+                            success: function(res) {
+                                if (res['success'] == true) {
+                                    swalWithBootstrapButtons.fire(
+                                        "Success!",
+                                        "Your request success.",
+                                        "success"
+                                    );
+                                    setTimeout(function() {
+                                        window.location.reload(true);
+                                    }, 1000);
+                                } else {
+                                    swalWithBootstrapButtons.fire(
+                                        "oops!",
+                                        res['message'],
+                                    );
+                                }
+                            },
+                            complete: function(data) {
+                                $("#main-loader").hide();
+                                if (data.status != 200) {
+                                    Swal.fire(
+                                        "something wrong",
+                                        "please contact ximply support!",
+                                    );
+                                }
                             }
-                        },
-                        success: function(res) {
-                            if (res['success'] == true) {
-                                swalWithBootstrapButtons.fire(
-                                    "Success!",
-                                    "Your request success.",
-                                    "success"
-                                );
-                                setTimeout(function() {
-                                    window.location.reload(true);
-                                }, 1000);
-                            } else {
-                                swalWithBootstrapButtons.fire(
-                                    "oops!",
-                                    res['message'],
-                                );
-                            }
-                        },
-                        complete: function(data) {
-                            $("#main-loader").hide();
-                            if (data.status != 200) {
-                                Swal.fire(
-                                    "something wrong",
-                                    "please contact ximply support!",
-                                );
-                            }
-                        }
-                    });
+                        });
+
+                    }
+                    
+
+                    
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     swalWithBootstrapButtons.fire(
                         "Cancelled",
