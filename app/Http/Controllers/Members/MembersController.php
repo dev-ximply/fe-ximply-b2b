@@ -52,10 +52,11 @@ class MembersController extends Controller
         ];
 
         $paramsUpdateProfile = [
+            'user_id'=>$request->user_id,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'user_id'=>$request->user_id
+            'employee_id' => $request->employee_id,
         ];
 
         try {
@@ -67,20 +68,12 @@ class MembersController extends Controller
             }
 
             if ($request->departement_id) {
-
                 self::updateDepartement($paramsDepartements);
             }
 
             if ($request->role_id) {
-
                 self::updateRole($paramsRole);
             }
-
-            
-
-            // if($emailId){
-            //     self::updateEmail($paramsEmail);
-            // }
 
             return [
                 "status" => 200,
@@ -88,7 +81,6 @@ class MembersController extends Controller
                 "message" => "berhasil"
             ];
         } catch (\Exception $e) {
-
             throw new \Exception($e->getMessage());
         }
     }

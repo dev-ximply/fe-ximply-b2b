@@ -174,7 +174,7 @@
             document.getElementById('edit_first_name').value = first_name;
             document.getElementById('edit_last_name').value = last_name;
             document.getElementById('edit_email').value = email;
-            document.getElementById('edit_employee_code').value = employee_id;
+            document.getElementById('edit_employee_id').value = employee_id;
             document.getElementById('edit_department_name').innerHTML = group_name;
             document.getElementById('edit_department_name').value = group_name;
             document.getElementById('edit_role_name').innerHTML = role_name;
