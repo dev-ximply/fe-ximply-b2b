@@ -668,7 +668,6 @@
             url: API_URL + "api/user/profile/info?user_id=" + document.getElementById(
                 'navbar_uid').value,
             success: function(res) {
-                console.log(res);
                 if (res) {
                     var response = res['data'];
                     document.getElementById('navbar_fullname').innerHTML = "Welcome, " + response[
