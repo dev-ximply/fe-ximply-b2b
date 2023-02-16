@@ -795,17 +795,17 @@
 $(document).ready(function(){
     const getDataCheck = async function(userId, pin) {
             try {
+                var formData = new FormData();
+                formData.append('user_id', userId);
+                formData.append('access_pin', pin);
+
                 const response = await fetch(API_URL + "api/user/pin/use", {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + AUTH_TOKEN
                     },
-                    body: `{
-                        "user_id" : ${userId},
-                        "access_pin" : ${pin}
-                    }`,
+                    body: formData,
                 });
                 console.log(response);
                 const data = await response.json();
@@ -976,7 +976,6 @@ $(document).ready(function() {
                                         method: 'POST',
                                         headers: {
                                             'Accept': 'application/json',
-                                            'Content-Type': 'application/json',
                                             'Authorization': 'Bearer ' + token
                                         },
                                         body: `{
