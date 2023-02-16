@@ -734,7 +734,7 @@
                     }
 
                     $("#set_new_pin").submit(function(event) {
-                        alert("Handler for .submit() called.");
+                        // alert("Handler for .submit() called.");
                         event.preventDefault();
 
                         const pin = $('input[name^=pin]').map(function(idx, elem) {
