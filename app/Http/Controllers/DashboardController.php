@@ -16,6 +16,12 @@ class DashboardController extends Controller
     //
     public function index()
     {
+        if (Auth::check()) {
+            return redirect("/group");
+        } else {
+            return view("/auth/login", ['title' => 'Login']);
+        }
+        
         return view(
             'dashboard',
             [

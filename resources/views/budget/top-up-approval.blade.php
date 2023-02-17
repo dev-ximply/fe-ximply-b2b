@@ -13,7 +13,7 @@
                                         Remain Budget</span>
                                 </div>
                                 <div class="text-center text-secondary"><span class="font-weight-bolder text-md"
-                                        style="color: #3A8DDA; font-size:30px">Rp
+                                        style="color: #3A8DDA; font-size:30px">
                                         <span>
                                             Rp <span>
                                                 {{ $data['top_up'] != null ? number_format($data['top_up']->remain_limit, 2) : '0' }}
@@ -211,7 +211,7 @@
                                                 <td class="align-middle text-center text-xs">
                                                     @if ($approval['status'] == 'pending')
                                                         <div class="d-flex flex-row justify-content-center pt-3">
-                                                            <button onclick="getDetail(this)"
+                                                            <button onclick="getDetail('{{ $approval['topup_id']  }}', '{{  $approval['amount']  }}')"
                                                                 class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center "
                                                                 data-toggle="tooltip" data-placement="left"
                                                                 title="Edit"
@@ -308,11 +308,20 @@
     </script>
 
     <script>
-        function getDetail(element) {
-            console.log(element)
-            document.getElementById('topupAmount').value = element.dataset.topupRequest;
-            document.getElementById('topupAmountApprove').value = element.dataset.topupRequest;
-            document.getElementById('topUpId').value = element.dataset.topupId;
+
+     function getDetail(topup_id, amount, idfunction) {
+        // console.log(element);
+            if(idfunction != ""){
+            $(idfunction).modal('show')
+            }
+
+            // console.log(topup_id, amount);
+            document.getElementById('topUpId').value = topup_id;
+            document.getElementById('topupAmount').value= amount;
+            document.getElementById('topupAmountApprove').value = amount;
+            // document.getElementById('topupAmountApprove').value = element.dataset.topupRequest;
+            // document.getElementById('topUpId').value = element.dataset.topupId;
+
         }
 
         function handleSubmitApprove(event) {
@@ -487,13 +496,13 @@
             });
         });
 
-        $(document).ready(function(){
-           var urlSearch = "";
-           $('#status').on('change', function(){
-              var status = $('#status').val();
-              urlSearch = API_URL = "api"
-           }); 
-        });
+        // $(document).ready(function(){
+        //    var urlSearch = "";
+        //    $('#status').on('change', function(){
+        //       var status = $('#status').val();
+        //       urlSearch = API_URL = "api"
+        //    }); 
+        // });
 
 
         function getDataExpenses(urlSearch) {
@@ -518,6 +527,7 @@
                         var tableOut = "";
                         // var totalAmount = 0;
                         for (const obj of response) {
+                            console.log(obj);
                             // totalAmount = totalAmount + parseFloat(obj.total_amount);
                             // console.log(totalAmount);
                             tableOut += '<tr>' +
@@ -578,15 +588,14 @@
                                             if(obj.status == 'pending'){
                                                tableOut += '<td class="align-middle text-center text-xs">'+
                                                           '<div class="d-flex flex-row justify-content-center pt-3">'+
-                                                        '<button onclick="getDetail(this)"' + 
+                                                        '<button onclick="getDetail(`' + obj.topup_id + '`,`' + obj.amount  + '`,`' + '#approve-ask-dialog' + '`)"'+ 
                                                         'class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center"'+
                                                                 'data-toggle="tooltip" data-placement="left"'+
                                                                 'title="Edit"'+
                                                                 'style="width: 60px; height:25px; background-color:#FFCF23"'+
                                                                 'data-topup-id=`'+  obj.topup_id  +'`'+
                                                                 'data-topup-request=`' + obj.amount + '`'+
-                                                                'data-bs-toggle="modal"'+
-                                                                'data-bs-target="#approve-ask-dialog">'+
+                                                                'data-bs-toggle="modal" data-bs-target="#approve-ask-dialog">'+
                                                                 '<i class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>'+
                                                                 '<span style="font-size: 0.6em">Edit</span>'+
                                                             '</button>'+
@@ -614,6 +623,7 @@
                                                     '</td>'
 
                                             }
+                                            
  
                         }
                         $("#tableBody").append(tableOut);

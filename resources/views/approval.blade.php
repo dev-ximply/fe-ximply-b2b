@@ -104,7 +104,7 @@
                                     <tr>
                                         <td class="align-middle text-start text-capitalize text-xs">
                                             <div class="d-flex">
-                                                <img src="{{ config('storage.base_url') . $expense_approval->receipt_picture_directory }}"
+                                                <img  src="{{ config('storage.base_url') . $expense_approval->receipt_picture_directory }}"
                                                     class="img-fluid ms-3" alt="receipt" style="width: 50px">
                                                 <div class="ms-3 my-auto show-modal">
                                                     <div>
@@ -116,7 +116,7 @@
                                                         <span class="text-xs text-dark">
                                                             {{ $expense_approval->full_name }}
                                                         </span>
-                                                    </div>;
+                                                    </div>
                                                     <div>
                                                         <span class="text-xxs text-dark">
                                                             {{ $expense_approval->date }}
@@ -231,10 +231,10 @@
     </script> --}}
 
     <script>
-        function getExpenseData(receipt_directory, additional_directory, receipt_date, merchant, total_amount, location,
+        function getExpenseData(receipt_picture_directory, additional_picture_directory, receipt_date, merchant, total_amount, location,
             category, sub_category, partner, purpose, expense_of, status, approval_id) {
-            document.getElementById('detail_receipt_file').src = STORAGE_URL + receipt_directory;
-            document.getElementById('detail_additional_file').src = STORAGE_URL + additional_directory;
+            document.getElementById('detail_receipt_file').src = STORAGE_URL + receipt_picture_directory;
+            document.getElementById('detail_additional_file').src = STORAGE_URL + additional_picture_directory;
             document.getElementById('detail_date').value = receipt_date;
             document.getElementById('detail_merchant').value = merchant;
             document.getElementById('detail_total_amount').value = total_amount;
@@ -391,8 +391,9 @@
                             tableOut += '<tr>'+
                                         '<td class="align-middle text-start text-capitalize text-xs">'+
                                             '<div class="d-flex">'+
-                                                '<img src="`' + 'config' +'`(' +  'storage' + '`.' + 'base_url' + '`)' +  '`.' + obj.receipt_picture_directory + '`"' +
+                                                '<img src="`' + obj.receipt_picture_directory + '`"'+
                                                     'class="img-fluid ms-3" alt="receipt" style="width: 50px">'+
+                                                '<button onclick="console.log(receipt_picture_directory)">Tes</button>'+
                                                 '<div class="ms-3 my-auto show-modal">'+
                                                     '<div>'+
                                                         '<span class="text-xs text-dark text-bold">'+
@@ -452,7 +453,7 @@
                             if(obj.status == 'pending'){
                                 tableOut +=  '<td class="text-sm align-middle text-center">'+
                                                 '<div class="d-flex flex-row pt-3 d-flex justify-content-center">'+
-                                                   '<button onclick="getExpenseData(`' + obj.approval_id + '`,' + '`' + obj.receipt_picture_directory + '`, ' + '`' + obj.additional_picture_directory + '`, ' + '`' + obj.receipt_date + '`, ' + '`' + obj.merchant + '`, '  + '`' + '`' + obj.total_amount + '`, ' + '`' + obj.location + '`, ' + '`' + obj.category_name + '`, ' + '`' + obj.sub_category_name + '`, ' + '`' + obj.client_name + '`, ' + '`' + obj.purpose_name + '`, ' + '`' + obj.expense_of + '`, ' + obj.status + '`)"'+
+                                                    '<button onclick="getExpenseData(`' + obj.receipt_picture_directory  + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`, `' + obj.total_amount + '`,`' + obj.location + '`,`' + obj.category_name + '`,`' + obj.sub_category_name + '`,`' +  obj.client_name + '`,`' +  obj.purpose_name + '`,`' + obj.expense_of + '`,`' + obj.status + '`,`' + obj.approval_id + '`)"'+
                                                         'class="mx-1 btn text-white d-flex align-items-center d-flex justify-content-center"'+
                                                         'data-bs-original-title="approve" data-toggle="tooltip"'+
                                                         'data-placement="left" title="Review"'+
@@ -483,16 +484,18 @@
                                                 '</div>'+
                                             '</td>'
                             }else{
-                                tableOut += '<td class="text-sm align-middle text-center">'+
-                                             '<div class="pt-3 d-flex justify-content-center">'+
-                                                '<button onclick="getExpenseData(' + obj.approval_id + ',' + obj.receipt_picture_directory + ',' + obj.additional_picture_directory +', ' + obj.receipt_date + ', ' + obj.merchant + ', '  + obj.total_amount + ', ' + obj.location + ', ' + obj.category_name + ', ' + obj.sub_category_name + ', ' + obj.client_name + ', ' + obj.purpose_name + ',' + obj.expense_of + ', ' + obj.status + ')"'+
-                                                    'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"'+
+                                tableOut += 
+                                '<td class="text-sm align-middle text-center">'+
+                                   '<div class="pt-3 d-flex justify-content-center">'+
+                                      '<button onclick="getExpenseData(`' + obj.receipt_picture_directory + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`,`' + obj.total_amount + '`,`' + obj.location + '`,`' + obj.category_name + '`,`' + obj.sub_category_name + '`,`' + obj.client_name + '`,`' + obj.purpose_name + '`,`' + obj.expense_of + '`,`' + obj.status + '`,`' + obj.approval_id + '`)"'+
+                                          'data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"'+
+                                              'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"'+
                                                     'style="width: 60px; height:25px; background-color:#FFCF23">'+
-                                                    '<i class="fas fa-circle-check text-white text-md me-1"></i>'+
+                                                        '<i class="fas fa-circle-check text-white text-md me-1"></i>'+
                                                     '<span style="font-size: 0.6em">Detail</span>'+
-                                                '</button>'+
-                                            '</div>'+
-                                            '</td>'
+                                                    '</button>'+
+                                      '</div>'+
+                                    '</td>'
                             }
                                           
                                           
