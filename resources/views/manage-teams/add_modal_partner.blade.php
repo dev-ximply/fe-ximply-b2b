@@ -45,10 +45,10 @@
 
                             <select class="form-control " name="user_assign_id" id="user_assign_id">
 
-                                <option value="" selected>Pilih User</option>
+                                <option hidden selected>Pilih User</option>
 
                                 @foreach ($data['a_partner'] as $member)
-                                <option value="{{ $member->id }}">{{ $member->full_name }}</option>
+                                <option value="{{ $member->id }}" data-group="{{$member->group_id}}">{{ $member->full_name }}</option>
                                 @endforeach
 
                             </select>
@@ -56,13 +56,7 @@
                     </div>
                     <div class="col-6">
                         <label class="form-label mt-4" style="color: black; font-weight:500">Group</label>
-                        <select class="form-control " name="group_id" id="group_id">
-                            <option value="" selected>Select</option>
-                            @foreach ($data['partners'] as $item_group)
-                            <option value="{{ $item_group->id }}">{{ strtolower($item_group->group_name) }}
-                            </option>
-                            @endforeach
-                        </select>
+                        <input type="text" value="" class="form-control" name="group_id" id="group_id" readonly style="background-color: white">
                     </div>
                 </div>
                 <div class="row">
@@ -89,6 +83,20 @@
 </div>
 
 <script>
+    $("#user_assign_id").change(function(){
+        const group_id = $(this).find(':selected').data('group')
+        const user_id = {{Auth::user()['id']}};
+        $.get(API_URL + "api/group/list/"+ TENANT_CODE, 
+        {
+            "user_id" : user_id,
+            "group_id" : group_id
+
+        }, function (res, textStatus, jqXHR) {
+            console.log(res.data.group_name);
+            document.getElementById('group_id').value = res.data.group_name;
+        });
+
+    });
     function addPartner(userId, companyName, picName, email, handphone, group_id, userAssignId) {
         var tenantCode = TENANT_CODE;
         var userid = USR_ID;
