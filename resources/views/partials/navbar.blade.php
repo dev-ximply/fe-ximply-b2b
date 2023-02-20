@@ -140,7 +140,7 @@
                         <span id="navbar_fullname" class="text-capitalize" style="font-size: 16px"></span>
                     </div>
                     <div>
-                        <span id="group_Name" class="text-capitalize" style="font-weight:500;font-size:13px"></span>
+                        <span id="navbar_group_Name" class="text-capitalize" style="font-weight:500;font-size:13px"></span>
                     </div>
                 </li>
             </ul>
@@ -562,8 +562,6 @@
     </div>
 </div>
 {{-- Modal check Pin --}}
-<input type="text" id="have_manager" hidden>
-<input type="text" id="have_member" hidden>
 <script>
     $(document).ready(function() {
         const getDataCheck = async function(userId, pin) {
@@ -649,9 +647,7 @@
                         'full_name'];
                     document.getElementById('navbar_profilepict').src = STORAGE_URL + response[
                         'profile_picture'];
-                    document.getElementById('have_manager').value = response['have_manager'];
-                    document.getElementById('have_member').value = response['have_member'];
-                    document.getElementById('group_name').innerHTML = response['group_name'];
+                    document.getElementById('navbar_group_Name').innerHTML = response['group_name'];                    
                     $subscription_type = response['subscription_type'];
                     if ($subscription_type == "trial") {
                         document.getElementById('show_hide_subs').style.display = "block";
