@@ -159,9 +159,9 @@
                     $("#loader").hide();
                 }
                 if (success === true) {
-                    // setTimeout(function() {
-                    //     window.location.reload(true);
-                    // }, 1000);
+                    setTimeout(function() {
+                        window.location.reload(true);
+                    }, 1000);
                 }
             }
         });

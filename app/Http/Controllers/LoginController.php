@@ -17,7 +17,11 @@ class LoginController extends Controller
     {
 
         if (Auth::check()) {
-            return redirect("/dashboard");
+            if(session()->get('is_superadmin') == true){
+                return redirect("/group");
+            }else{
+                return redirect("/dashboard");
+            }
         } else {
             return view("/auth/login", ['title' => 'Login']);
         }

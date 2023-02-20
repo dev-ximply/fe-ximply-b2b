@@ -47,7 +47,7 @@
             border-radius: 15px;
         }
     </style>
-    
+
     <div class="row mb-4 mt-3 mx-1 justify-content-between">
         <div class="col-md d-sm-flex justify-content-start px-0 mx-0">
             <div class="d-flex me-2">
@@ -72,15 +72,29 @@
 
 
     <div class="row" style="margin-left: -5px;">
-        @foreach ($data['members'] as $item)
+        @foreach ($data['members'] as $item) 
             <div class="col-md-3">
                 <div class="card mb-3">
-                    <div class="card-body p-2">
-                        <div class="d-flex">
+                    <div class=" p-2 px-3">
+                        <div class="d-flex justify-content-center">
                             <div class="my-auto">
                                 <h6 class="text-capitalize text-dark">
                                     {{ $item->full_name }}
                                 </h6>
+                                @if (session()->get('is_superadmin') == true)
+                                    @if ($item->role_name == 'member')
+                                        <span class="text-capitalize px-3 py-1 "
+                                            style="font-size:11px;background:#f3fcf7;color:#62ca50; border-radius:3px">{{ $item->role_name }}</span>
+                                    @else
+                                        <span class="text-capitalize px-3 py-1 "
+                                            style="font-size:11px;background:#eff6fe;color:#5695cf; border-radius:3px">{{ $item->role_name }}</span>
+                                    @endif
+                                @else
+                                    @if ($item->role_name == 'member')
+                                        <span class="text-capitalize px-3 py-1 "
+                                            style="font-size:11px;background:#f3fcf7;color:#62ca50; border-radius:3px">{{ $item->role_name }}</span>
+                                    @endif
+                                @endif
                             </div>
                             <div class="ms-auto">
                                 <div class="dropdown">
@@ -102,32 +116,32 @@
                             </div>
                         </div>
                         <div class="w-100 mt-1">
-                            <span class="me-2 font-weight-normal " style="font-size: 0.8em">Department : <span
+                            <span class="me-2 font-weight-normal " style="font-size: 0.8em; color:#000">Department : <span
                                     class="text-capitalize">
                                     {{ $item->group_name != null || $item->group_name != '' ? $item->group_name : '*' }}
                                 </span></span>
                         </div>
                         <div class="w-100 mt-1">
-                            <span class="me-2 font-weight-normal" style="font-size: 0.8em">Set Limit : Rp
+                            <span class="me-2 font-weight-normal" style="font-size: 0.8em; color:#000">Set Limit : Rp
                                 {{ number_format($item->limit->assign_limit) }}</span>
                         </div>
                         <div class="w-100 mt-1">
-                            <span class="me-2 font-weight-normal" style="font-size: 0.8em">Remain : Rp
+                            <span class="me-2 font-weight-normal" style="font-size: 0.8em; color:#000">Remain : Rp
                                 {{ number_format($item->limit->remain_limit) }}</span>
                         </div>
                         <div class="w-100 mt-1">
-                            <span class="me-2 font-weight-normal" style="font-size: 0.8em">Auto Approve : Rp
+                            <span class="me-2 font-weight-normal" style="font-size: 0.8em; color:#000">Auto Approve : Rp
                                 {{ number_format($item->limit->auto_approve) }}</span>
                         </div>
                         <div class="w-100 mt-1">
-                            <span class="me-2 font-weight-normal" style="font-size: 0.8em">Created :
+                            <span class="me-2 font-weight-normal" style="font-size: 0.8em; color:#000">Created :
                                 {{ $item->limit->created_date }}
                             </span>
                         </div>
                         <hr class="horizontal dark">
                         <div class="w-100 mt-1">
                             <div class="d-flex mb-2">
-                                <span class="me-2 text-sm font-weight-normal">Used : Rp
+                                <span class="me-2 text-sm" style=" color:#000; font-weight:500">Used : Rp
                                     {{ number_format($item->limit->used_limit) }}
                                 </span>
                             </div>
@@ -147,6 +161,7 @@
             document.getElementById('auto_approve_edit').value = auto_approve;
             document.getElementById('expire_date').value = expire_date;
             // document.getElementById('used_limit').value = used_limit;
+            console.log(remain_limit);
             console.log(auto_approve);
 
         }
@@ -220,9 +235,9 @@
                                         window.location.reload(true);
                                     }, 1000);
                                 }
-                               
+
                             },
-                        
+
 
                         });
 
@@ -238,7 +253,4 @@
                 });
         }
     </script>
-
-
-
 @endsection

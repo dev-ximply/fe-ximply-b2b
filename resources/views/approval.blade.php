@@ -52,11 +52,7 @@
                                                 value="done">Done</option>
                                         </select>
                                     </div>
-                                    <div class="col-md mt-2">
-                                        {{-- <button type="submit" style="line-height:10px; height:25px; font-size:9px"
-                                            class="form-control text-bold" id="filter_button">
-                                            F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R
-                                        </button> --}}
+                                    {{-- <div class="col-md mt-2">
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
                                             class="form-control text-bold d-flex justify-content-center" id="filter_button">
@@ -64,7 +60,7 @@
                                             <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
 
                                         </button>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </form>
                         </div>

@@ -20,7 +20,8 @@
                         <div class="col-md my-2">
                             <label for="projectName" class="form-label text-dark" style="font-weight: 600">Spending
                                 Budget Limit</label>
-                            <input type="text" class="form-control number_separator" id="edit_budget_limit_avail" disabled>
+                            <input type="text" class="form-control number_separator" id="edit_budget_limit_avail"
+                                disabled>
                             <script>
                                 new NumericInput(document.getElementById('edit_budget_limit_avail'), 'en-CA');
                             </script>
@@ -33,16 +34,18 @@
                                 id="edit_budget_limit_avail_topup" name="edit_budget_limit_avail_topup" value="0">
                             <script>
                                 new NumericInput(document.getElementById('edit_budget_limit_avail_topup'), 'en-CA');
+                                // new NumericInput(document.getElementById('edit_budget_limit_avail_topup'), 'en-CA');
+                                // new Intl.NumberFormat(document.getElementById('edit_budget_limit_avail_topup')).format(123456.789);
                             </script>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label text-dark " style="font-weight: 600">Auto Approve Amount</label>
-                            <input type="text" class="form-control number-separator number_separator" id="auto_approve_edit"
-                                name="auto_approve_edit" value="0">
-                            <script>
+                            <input type="text" class="form-control number-separator number_separator"
+                                id="auto_approve_edit" name="auto_approve_edit" value="0">
+                            {{-- <script>
                                 new NumericInput(document.getElementById('auto_approve_edit'), 'en-CA');
-                            </script>
+                            </script> --}}
                         </div>
 
                         <div class="col-md-6">
@@ -67,6 +70,7 @@
                         </div>
                             
                         @endif --}}
+                        {{-- <input type="text" id="valuation"> --}}
                     </div>
 
 
@@ -83,6 +87,50 @@
 </div>
 
 
+
+
+
+{{-- <script>
+    $(".numberSeparator").on('keyup', function(){
+    var n = parseInt($(this).val().replace(/\D/g,''),10);
+    $(this).val(n.toLocaleString());
+});
+</script> --}}
+
+
+
+
+
+{{-- <script>
+    $('input.number_separator').keyup(function(event) {
+        if (event.which >= 37 && event.which <= 40) return;
+        $(this).val(function(index, value) {
+            return value
+                // Keep only digits, decimal points, and dashes at the start of the string:
+                .replace(/[^\d.-]|(?!^)-/g, "")
+                // Remove duplicated decimal points, if they exist:
+                .replace(/^([^.]*\.)(.*$)/, (_, g1, g2) => g1 + g2.replace(/\./g, ''))
+                // Keep only two digits past the decimal point:
+                .replace(/\.(\d{2})\d+/, '.$1')
+                // Add thousands separators:
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        });
+    });
+</script> --}}
+
+<script>
+    // $('.number_separator').keydown(function() {
+    //     var x = $('.number_separator').val();
+    //     $('.number_separator').val(addCommas(x));
+
+    //     function addCommas(x) {
+    //         var parts = x.toString().split(".");
+    //         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    //         return parts.join(".");
+    //     }
+    // });
+</script>
+
 <script>
     $("input.number_separator").each((i, ele) => {
         let clone = $(ele).clone(false)
@@ -92,25 +140,26 @@
         $(ele).after(clone)
         $(ele).hide()
         clone.mouseenter(() => {
-
             ele1.show()
             clone.hide()
-        })
+        });
         setInterval(() => {
             let newv = Number(ele1.val()).toLocaleString("en-CA")
             if (clone.val() != newv) {
                 clone.val(newv)
             }
-        }, 10)
+        }, 10);
 
         $(ele).mouseleave(() => {
             $(clone).show()
             $(ele1).hide()
-        })
+        });
 
 
-    })
+    });
+
 </script>
+
 
 <script>
     easyNumberSeparator({
