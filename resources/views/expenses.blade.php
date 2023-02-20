@@ -269,13 +269,6 @@
                                                 value="done">Done</option>
                                         </select>
                                     </div>
-                                    {{-- <div class="col-md mt-2">
-                                        <button type="submit" value="submit"
-                                            style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
-                                            class="form-control text-bold d-flex justify-content-center" id="filter_button">
-                                            <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
-                                        </button>
-                                    </div> --}}
                                 </div>
                             </form>
                         </div>
@@ -598,8 +591,6 @@
                             var tableOut = "";
                             // var totalAmount = 0;
                             for (const obj of response) {
-                                // totalAmount = totalAmount + parseFloat(obj.total_amount);
-                                // console.log(totalAmount);
                                 tableOut += '<tr class="align-middle">' +
                                     '<td colspan="7" style="color: #000000;font-weight:500;font-size:12px;" class="text-md-start text-end ps-md-4 text-break text-wrap">' +
                                     obj.long_date +
@@ -667,7 +658,6 @@
 
                             }
                             $("#tableBody").append(tableOut);
-                            // $("#totalAmount").html(Intl.NumberFormat().format(totalAmount));
                         } else {
                             $("#tableBody").empty();
                         }
