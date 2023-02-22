@@ -589,7 +589,6 @@
                             console.log(res);
                             var response = res['data'];
                             var tableOut = "";
-
                             // var totalAmount = 0;
                             for (const obj of response) {
                                 var i = 1;
