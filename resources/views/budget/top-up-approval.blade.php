@@ -35,6 +35,9 @@
                                     <input type="text" class=" number_separator number-separator w-100 px-2"
                                         id="topupAmountApprove"
                                         style="color: #3A8DDA; font-weight: bold; border-radius:10px; height:45px; border:1px solid black">
+                                    {{-- <script>
+                                        new NumericInput(document.getElementById('topupAmountApprove'))
+                                    </script> --}}
 
                                 </div>
                                 <div class="d-flex flex-row justify-content-between">
@@ -272,7 +275,9 @@
             let clone = $(ele).clone(false)
             clone.attr("type", "text")
             let ele1 = $(ele)
-            clone.val(Number(ele1.val()).toLocaleString("en-CA"))
+            console.log('TESSS',ele1);
+
+            clone.val(Number(ele1.val()))
             $(ele).after(clone)
             $(ele).hide()
             clone.mouseenter(() => {
@@ -280,17 +285,24 @@
                 clone.hide()
             });
             setInterval(() => {
-                let newv = Number(ele1.val()).toLocaleString("en-CA")
-                if (clone.val() != newv) {
-                    clone.val(newv)
+                let newv = Number(ele1.val())
+                let nfobject = new Intl.NumberFormat('en-CA');
+                let output = nfobject.format(newv);
+                
+                if (clone.val() != output) {
+                    clone.val(output)
                 }
             }, 10);
 
-            $(ele).mouseleave(() => {
-                $(clone).show()
-                $(ele1).hide()
-            });
+            // clone.mouseleave(() => {
+            //     ele.show()
+            //     ele1.hide()
+            // });
 
+            // $(ele).mouseleave(() => {
+            //     $(clone).show()
+            //     $(ele1).hide()
+            // });
 
         });
     </script>
@@ -345,7 +357,7 @@
                 data: {
                     topup_id: topUpId,
                     decision: 'approved',
-                    amount_approved: document.getElementById('topupAmountApprove').value,
+                    amount_approved: topupAmountApprove,
                 },
                 success: function(response) {
                     const {
@@ -560,6 +572,7 @@
                                         'style="border: 1px solid #50B720; color:#50B720; width: 60px; margin-top:20px">approved</span>' +
                                         '</td>'
                                 } else if (obj.status == 'rejected') {
+                                    tableOut +=
                                     '<td class="align-middle text-center text-xs d-flex justify-content-center">' +
                                     '<span class="badge badge-xs d-flex justify-content-center mb-4"' +
                                     'style="border:1px solid #E40909; color:#E40909; width: 60px; margin-top:20px">rejected</span>' +
