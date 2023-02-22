@@ -35,6 +35,9 @@
                                     <input type="text" class=" number_separator number-separator w-100 px-2"
                                         id="topupAmountApprove"
                                         style="color: #3A8DDA; font-weight: bold; border-radius:10px; height:45px; border:1px solid black">
+                                    {{-- <script>
+                                        new NumericInput(document.getElementById('topupAmountApprove'))
+                                    </script> --}}
 
                                 </div>
                                 <div class="d-flex flex-row justify-content-between">
@@ -101,19 +104,13 @@
                                                 value="done">Done</option>
                                         </select>
                                     </div>
-                                    <div class="col-md mt-2">
-                                        {{-- <button type="submit" style="line-height:10px; height:25px; font-size:9px; background:#191a4b; color:white"
-                                            class="form-control text-bold" id="filter_button">
-                                            F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R
-                                        </button> --}}
+                                    {{-- <div class="col-md mt-2">
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
                                             class="form-control text-bold d-flex justify-content-center" id="filter_button">
-
                                             <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
-
                                         </button>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </form>
                         </div>
@@ -164,8 +161,6 @@
                                                             {{ $approval['full_name'] }}
                                                         </span></div>
                                                     <div><span>
-                                                            {{-- {{ $item['department'] }} --}}
-
                                                         </span></div>
                                                     <div><span>Remain Limit : </span><span class="text-xs font-weight-bold">
                                                             {{ number_format($approval['remain_limit'], 2) }}
@@ -176,17 +171,12 @@
                                                     <span class="text-xs">Top Up : </span><span class="font-weight-bold">
                                                         {{ number_format($approval['amount'], 2) }}
                                                     </span>
-                                                    {{-- <div><span>Approved : <span class="font-weight-bold">
-                                                                {{ $approval['approval_amount'] }}
-                                                            </span></span>
-                                                    </div> --}}
                                                 </td>
                                                 <td class="align-middle text-start text-xs text-dark">
                                                     <div class="" style="max-width: 300px">
                                                         <div><span>Purpose : </span><span
                                                                 class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">
-                                                                {{-- {{ $item['purpose'] }} --}}
                                                                 Award & Recognition
                                                             </span></div>
                                                         <div><span>Note : </span><span class="font-weight-bold text-wrap"
@@ -285,7 +275,9 @@
             let clone = $(ele).clone(false)
             clone.attr("type", "text")
             let ele1 = $(ele)
-            clone.val(Number(ele1.val()).toLocaleString("en-CA"))
+            console.log('TESSS',ele1);
+
+            clone.val(Number(ele1.val()))
             $(ele).after(clone)
             $(ele).hide()
             clone.mouseenter(() => {
@@ -293,20 +285,27 @@
                 clone.hide()
             });
             setInterval(() => {
-                let newv = Number(ele1.val()).toLocaleString("en-CA")
-                if (clone.val() != newv) {
-                    clone.val(newv)
+                let newv = Number(ele1.val())
+                let nfobject = new Intl.NumberFormat('en-CA');
+                let output = nfobject.format(newv);
+                
+                if (clone.val() != output) {
+                    clone.val(output)
                 }
             }, 10);
-    
-            $(ele).mouseleave(() => {
-                $(clone).show()
-                $(ele1).hide()
-            });
-    
-    
+
+            // clone.mouseleave(() => {
+            //     ele.show()
+            //     ele1.hide()
+            // });
+
+            // $(ele).mouseleave(() => {
+            //     $(clone).show()
+            //     $(ele1).hide()
+            // });
+
+
         });
-    
     </script>
 
     <script>
@@ -320,17 +319,13 @@
 
     <script>
         function getDetail(topup_id, amount, idfunction) {
-            // console.log(element);
             if (idfunction != "") {
                 $(idfunction).modal('show')
             }
 
-            // console.log(topup_id, amount);
             document.getElementById('topUpId').value = topup_id;
             document.getElementById('topupAmount').value = amount;
             document.getElementById('topupAmountApprove').value = amount;
-            // document.getElementById('topupAmountApprove').value = element.dataset.topupRequest;
-            // document.getElementById('topUpId').value = element.dataset.topupId;
 
         }
 
@@ -363,7 +358,7 @@
                 data: {
                     topup_id: topUpId,
                     decision: 'approved',
-                    amount_approved: document.getElementById('topupAmountApprove').value,
+                    amount_approved: topupAmountApprove,
                 },
                 success: function(response) {
                     const {
@@ -507,15 +502,6 @@
                 });
             });
 
-            // $(document).ready(function(){
-            //    var urlSearch = "";
-            //    $('#status').on('change', function(){
-            //       var status = $('#status').val();
-            //       urlSearch = API_URL = "api"
-            //    }); 
-            // });
-
-
             function getDataExpenses(urlSearch) {
                 $("#tableBody").html("");
                 // $("#totalAmount").html("0.00");
@@ -539,8 +525,6 @@
                             // var totalAmount = 0;
                             for (const obj of response) {
                                 console.log(obj);
-                                // totalAmount = totalAmount + parseFloat(obj.total_amount);
-                                // console.log(totalAmount);
                                 tableOut += '<tr>' +
                                     '<td class="align-middle text-start text-xs text-dark">' +
                                     obj.date +
@@ -589,6 +573,7 @@
                                         'style="border: 1px solid #50B720; color:#50B720; width: 60px; margin-top:20px">approved</span>' +
                                         '</td>'
                                 } else if (obj.status == 'rejected') {
+                                    tableOut +=
                                     '<td class="align-middle text-center text-xs d-flex justify-content-center">' +
                                     '<span class="badge badge-xs d-flex justify-content-center mb-4"' +
                                     'style="border:1px solid #E40909; color:#E40909; width: 60px; margin-top:20px">rejected</span>' +
@@ -657,43 +642,6 @@
             }
         });
     </script>
-
-    {{-- <script>
-    $(document).ready(function() {
-        $("#status").on("change", function() {
-            var country = $('#status').find("option:selected").val();
-            // var age = $('#ddlAge').find("option:selected").val();
-            SearchData(country)
-        });
-    });
-
-    function SearchData(country) {
-        if (country.toUpperCase() == 'STATUS') {
-            $('#table11 tbody tr').show();
-        } else {
-            $('#table11 tbody tr:has(td)').each(function() {
-                var rowCountry = $.trim($(this).find('td:eq(1)').text());
-                // var rowAge = $.trim($(this).find('td:eq(2)').text());
-                if (country.toUpperCase() != '' ) {
-                    if (rowCountry.toUpperCase() == country.toUpperCase()) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-                } else if ($(this).find('td:eq(1)').text() != '' || $(this).find('td:eq(1)').text() != '') {
-                    if (country != '' ) {
-                        if (rowCountry.toUpperCase() == country.toUpperCase()) {
-                            $(this).show();
-                        } else {
-                            $(this).hide();
-                        }
-                    }
-                }
-
-            });
-        }
-    }
-</script> --}}
 
     <script>
         function handleChangeStatus(event) {

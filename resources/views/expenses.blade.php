@@ -269,13 +269,6 @@
                                                 value="done">Done</option>
                                         </select>
                                     </div>
-                                    {{-- <div class="col-md mt-2">
-                                        <button type="submit" value="submit"
-                                            style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
-                                            class="form-control text-bold d-flex justify-content-center" id="filter_button">
-                                            <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
-                                        </button>
-                                    </div> --}}
                                 </div>
                             </form>
                         </div>
@@ -596,10 +589,10 @@
                             console.log(res);
                             var response = res['data'];
                             var tableOut = "";
+                            
                             // var totalAmount = 0;
                             for (const obj of response) {
-                                // totalAmount = totalAmount + parseFloat(obj.total_amount);
-                                // console.log(totalAmount);
+                                var i = 1;
                                 tableOut += '<tr class="align-middle">' +
                                     '<td colspan="7" style="color: #000000;font-weight:500;font-size:12px;" class="text-md-start text-end ps-md-4 text-break text-wrap">' +
                                     obj.long_date +
@@ -608,7 +601,7 @@
                                     tableOut +=
                                         '<tr><td class="font-weight-bold pt-3">';
                                     tableOut +=
-                                        '<p class="text-sm text-dark">' + expense.receipt_date +
+                                        '<p class="text-sm text-dark">' +  '#' + i++ +
                                         '</p></td>';
                                     if (expense.status == 'approved') {
                                         tableOut +=
@@ -621,7 +614,7 @@
 
                                     } else if (expense.status == 'pending') {
                                         tableOut +=
-                                            '<td class=""align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">'  +
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">'  +
                                                 '<span class="badge badge-xs d-flex justify-content-center"' +
                                                  'style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">' +
                                                         expense.status
@@ -629,7 +622,7 @@
                                             + '</p></td>';
                                     } else if (expense.status == 'rejected') {
                                         tableOut +=
-                                            '<td class=""align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
                                                 '<span class="badge badge-xs d-flex justify-content-center"' +
                                                  'style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">'+
                                                        expense.status
@@ -638,16 +631,16 @@
 
                                     } else {
                                         tableOut +=
-                                            '<td class=""align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
                                             expense.status + '</p></td>';
 
                                     }
 
                                     tableOut +=
-                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
                                         expense.purpose_name + '</p></td>';
                                     tableOut +=
-                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
                                         expense.merchant + '</p></td>';
                                     tableOut +=
                                         '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
@@ -667,7 +660,6 @@
 
                             }
                             $("#tableBody").append(tableOut);
-                            // $("#totalAmount").html(Intl.NumberFormat().format(totalAmount));
                         } else {
                             $("#tableBody").empty();
                         }

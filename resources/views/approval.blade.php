@@ -90,7 +90,7 @@
                                     <th class="text-uppercase  text-xxs font-weight-bolder opacity-9" style="color:black">
                                         Status
                                     </th>
-                                    <th class="text-uppercase  text-xxs text-center font-weight-bolder opacity-9"
+                                    <th class="text-uppercase  text-xxs text-start ps-5 font-weight-bolder opacity-9"
                                         style="color:black">Action
                                     </th>
                                 </tr>
@@ -121,19 +121,19 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle text-start text-xs text-capitalize text-dark">
+                                        <td class="ps-4 align-middle text-start text-xs text-capitalize text-dark">
                                             {{ $expense_approval->category_name }}
                                         </td>
-                                        <td class="align-middle text-start text-xs text-dark">
+                                        <td class="ps-4 align-middle text-start text-xs text-dark">
                                             {{ $expense_approval->purpose_name }}
                                         </td>
-                                        <td class="align-middle text-start text-xs text-dark">
+                                        <td class="ps-4 align-middle text-start text-xs text-dark text-break text-wrap">
                                             {{ $expense_approval->merchant }}
                                         </td>
-                                        <td class="align-middle text-start text-xs text-dark">
+                                        <td class="ps-4 align-middle text-start text-xs text-dark">
                                             {{ number_format($expense_approval->total_amount, 2) }}
                                         </td>
-                                        <td class="align-middle text-start text-xs">
+                                        <td class="ps-4 align-middle text-start text-xs">
                                             @if ($expense_approval->status == 'pending')
                                                 <span class="badge badge-xs d-flex justify-content-center"
                                                     style="border:1px solid #FFCF23; color:#FFCF23; width: 55px">pending</span>
@@ -147,7 +147,7 @@
                                                 <span class="badge badge-secondary badge-xs">unknown</span>
                                             @endif
                                         </td>
-                                        <td class="text-sm align-middle text-center">
+                                        <td class="ps-4 text-sm align-middle text-center">
                                             @if ($expense_approval->status == 'pending')
                                                 <div class="d-flex flex-row pt-3 d-flex justify-content-center">
                                                     <button
@@ -312,9 +312,9 @@
                                 if ($("#loader")) {
                                     $("#loader").hide();
                                 }
-                                // setTimeout(function() {
-                                //     location.reload();
-                                // }, 1000);
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1000);
                             }
                         });
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -389,7 +389,6 @@
                                             '<div class="d-flex">'+
                                                 '<img src="`' + obj.receipt_picture_directory + '`"'+
                                                     'class="img-fluid ms-3" alt="receipt" style="width: 50px">'+
-                                                '<button onclick="console.log(receipt_picture_directory)">Tes</button>'+
                                                 '<div class="ms-3 my-auto show-modal">'+
                                                     '<div>'+
                                                         '<span class="text-xs text-dark text-bold">'+
