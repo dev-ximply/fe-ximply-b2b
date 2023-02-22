@@ -4,9 +4,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {{-- <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/logos/logo-company-sq.png') }}">
-    <link rel="icon" type="image/png" href="{{ asset('img/logos/logo-company-sq.png') }}"> --}}
-
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">
@@ -20,23 +17,32 @@
     <!-- css table-->
     <link rel="stylesheet" href="{{ asset('css/table/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/table/style.css') }}">
+
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+
     <!-- Nucleo Icons -->
     <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet" />
+
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/5c2c5b6638.js" crossorigin="anonymous"></script>
     <script src="{{ asset('fontawesome-kit.js') }}" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
     <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet">
+
     {{-- Custom Styling --}}
     <link rel="stylesheet" href="{{ asset('css/core-style.css') }}">
+
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.0.9') }}" rel="stylesheet" />
     <script src="{{ asset('js/plugins/jquery-3.6.1.min.js') }}"></script>
 
+    {{-- Separator NUmber --}}
+    <script src="{{ asset('js/separator/easy-number-separator.js') }}"></script>
+
+    {{-- highchart --}}
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -67,16 +73,22 @@
         <input type="text" id="usr_id" value="{{ Auth::user()['id'] }}" hidden>
         <input type="text" id="AuthToken" value="{{ Session::get('AuthToken') }}" hidden>
         <input type="text" id="TenantCode" value="{{ Session::get('TenantCode') }}" hidden>
+        <input type="text" id="config_api_url" value="{{ config('api.base_url') }}" hidden>
+        <input type="text" id="config_storage_url" value="{{ config('storage.base_url') }}" hidden>
         <script>
             const USR_ID = document.getElementById('usr_id').value;
             const AUTH_TOKEN = document.getElementById('AuthToken').value;
             const TENANT_CODE = document.getElementById('TenantCode').value;
+            const API_URL = document.getElementById('config_api_url').value;
+            const STORAGE_URL = document.getElementById('config_storage_url').value;
         </script>
     @else
         <script>
             const USR_ID = "";
             const AUTH_TOKEN = "";
             const TENANT_CODE = "";
+            const API_URL = "";
+            const STORAGE_URL = "";
         </script>
     @endif
 
@@ -96,6 +108,11 @@
         </div>
     </main>
     @include('partials.rightside')
+
+
+
+
+
 
     <!-- JS Table -->
     <script src="{{ asset('js/table/main.js') }}"></script>
@@ -129,16 +146,9 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
-
-    <!-- Github buttons -->
-    {{-- <script async defer src="https://buttons.github.io/buttons.js"></script> --}}
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('js/soft-ui-dashboard.min.js?v=1.0.9') }}"></script>
 
 </body>
-<!-- The core Firebase JS SDK is always required and must be listed first
-    -->
-{{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> --}}
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
 <script>
     var firebaseConfig = {
@@ -195,4 +205,5 @@
     }
 </script>
 @stack('jsBottom')
+
 </html>

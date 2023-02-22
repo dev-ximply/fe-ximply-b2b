@@ -32,8 +32,9 @@
                             <div class="row justify-content-center">
                                 <div class="bg-secondary overflow-hidden d-flex align-items-center justify-content-center mb-2 mt-3"
                                     style="border-radius: 50%; width:156px; height:156px">
-                                    <img src="{{ config('storage.base_url') . $data['profile']->profile_picture }}" alt="user image"
-                                        class=""
+                                    <img 
+                                    src="{{ config('storage.base_url') . $data['profile']->profile_picture }}"
+                                        alt="user image" class=""
                                         style="min-width: 155px !important; min-height:155px !important; border-radius:50%"
                                         id="ava-pic-2">
                                 </div>
@@ -71,7 +72,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md">
                                             <label for="" class="text-dark text-xs" style="font-weight:600">Birthday
@@ -85,7 +86,7 @@
                                             value="{{ $data['profile']->birthday_date }}">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md">
                                             <label for="" class="text-dark text-xs text-capitalize"
@@ -98,6 +99,9 @@
                                             value="{{ $data['profile']->birthday_place }}">
                                     </div>
                                 </div>
+
+                            </div>
+                            <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md">
@@ -119,16 +123,39 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="row ">
+                                        <div class="col-md">
+                                            <label for="" class="text-dark text-xs"
+                                                style="font-weight:600">Phone</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md mb-2">
+                                        <input onchange="changeInfoProfile(this.value, 'phone')" type="text"
+                                            id="handphone" class="form-control bg-white text-dark"
+                                            placeholder="Add your mobile phone number"
+                                            value="{{ $data['profile']->handphone }}" readonly>
+                                        <script>
+                                            new PhoneInput(document.getElementById('handphone'));
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <button class="btn text-white" style="background: #62ca50">Save</button>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md mb-2">
-                                    <label for="" class="text-dark text-xs"
-                                        style="font-weight:600">Department</label>
-                                    <input type="text" class="form-control" disabled>
+                                    <label for="" class="text-dark text-xs" style="font-weight:600">Group</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ $data['profile_role'][0]->group_name }}" disabled
+                                        >
                                 </div>
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Employee
-                                        Code</label>
+                                        Id</label>
                                     <input type="text" class="form-control" disabled>
                                 </div>
                             </div>
@@ -149,7 +176,7 @@
                                 </div>
                             </div>
 
-                            <div class="row ">
+                            {{-- <div class="row ">
                                 <div class="row ">
                                     <div class="col-md">
                                         <label for="" class="text-dark text-xs"
@@ -169,7 +196,7 @@
                                     <button class="btn text-white" style="background: #ff720c; width:100%;min-width:auto"
                                         data-bs-target="#phoneModal" data-bs-toggle="modal">Change Phone</button>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="row">
                                     <div class="col-md">
@@ -190,7 +217,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 
     <script>

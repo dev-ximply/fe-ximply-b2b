@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id()->startingValue(1000000);
+            $table->uuid('id')->primary();
             $table->string('username')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('google_id')->nullable();
@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreignId('created_by_uid')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

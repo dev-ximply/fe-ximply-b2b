@@ -589,7 +589,6 @@
                             console.log(res);
                             var response = res['data'];
                             var tableOut = "";
-                            
                             // var totalAmount = 0;
                             for (const obj of response) {
                                 var i = 1;
@@ -601,33 +600,30 @@
                                     tableOut +=
                                         '<tr><td class="font-weight-bold pt-3">';
                                     tableOut +=
-                                        '<p class="text-sm text-dark">' +  '#' + i++ +
+                                        '<p class="text-sm text-dark">' + '#' + i++ +
                                         '</p></td>';
                                     if (expense.status == 'approved') {
                                         tableOut +=
                                             '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
                                             '<span class="badge badge-xs d-flex justify-content-center"' +
                                             'style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">' +
-                                                expense.status  
-                                             '</span>' +
-                                                + '</p></td>';
+                                            expense.status '</span>' +
+                                            +'</p></td>';
 
                                     } else if (expense.status == 'pending') {
                                         tableOut +=
-                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">'  +
-                                                '<span class="badge badge-xs d-flex justify-content-center"' +
-                                                 'style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">' +
-                                                        expense.status
-                                                '</span>'
-                                            + '</p></td>';
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<span class="badge badge-xs d-flex justify-content-center"' +
+                                            'style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">' +
+                                            expense.status '</span>' +
+                                            '</p></td>';
                                     } else if (expense.status == 'rejected') {
                                         tableOut +=
                                             '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
-                                                '<span class="badge badge-xs d-flex justify-content-center"' +
-                                                 'style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">'+
-                                                       expense.status
-                                                    '</span>' 
-                                            + '</td>';
+                                            '<span class="badge badge-xs d-flex justify-content-center"' +
+                                            'style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">' +
+                                            expense.status '</span>' +
+                                            '</td>';
 
                                     } else {
                                         tableOut +=

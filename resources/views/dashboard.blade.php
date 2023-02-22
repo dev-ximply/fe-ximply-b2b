@@ -55,24 +55,32 @@
                         aria-controls="new-expense-form" id="myBtn">
                         {{-- <a href="" class="" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
                         <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                            <div class="icon icon-shape  shadow text-center border-radius-md"
+                            {{-- <div class="icon icon-shape  shadow text-center border-radius-md"
                                 style="min-height: 65px; max-height: 65px; min-width: 80px; max-width: 80px;background-color:#19194b">
                                 <i class="ni ni-bag-17 text-lg opacity-10" aria-hidden="true"></i>
                                 <div class="mt-1">
                                     <span class="text-white" style="font-size: 10px">New&nbsp;Expenses</span>
                                 </div>
+                            </div> --}}
+                            <div>
+                                <img src="{{ asset('img/icons/dashboard/new-expenses.png') }}" alt="" class=""
+                                    style="width:85px">
                             </div>
                         </div>
                     </a>
                     <a href="" class="" data-bs-toggle="modal" data-bs-target="#topUp">
                         {{-- <a href="" class="" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
                         <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                            <div class="icon icon-shape shadow text-center border-radius-md"
+                            {{-- <div class="icon icon-shape shadow text-center border-radius-md"
                                 style="min-height: 65px; max-height: 65px; min-width: 80px; max-width: 80px;background-color:#19194b">
                                 <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
                                 <div class="mt-1">
                                     <span class="text-white" style="font-size: 10px">Top&nbsp;Up</span>
                                 </div>
+                            </div> --}}
+                            <div>
+                                <img src="{{ asset('img/icons/dashboard/top-up.png') }}" alt="" class=""
+                                    style="width:85px">
                             </div>
                         </div>
                     </a>
@@ -92,9 +100,15 @@
         </div>
         {{-- end quick access --}}
 
+        <form action="">
+
+            <input type="text" class="text-dark" id="fullname_uid" value="{{ Auth::user()['id'] }}" hidden>
+
+        </form>
+
         {{-- end card --}}
-        <div class="col-md-8 mb-3">
-            <div class="row mb-3">
+        <div class="col-md-8 mb-0">
+            <div class="row mb-1">
                 <div class="col-md-5 mt-3">
                     <div class="coloumn__card">
                         <label class="d-flex justify-content-end" style="color: #ffffff">
@@ -107,8 +121,7 @@
                         <span class="text-white">Balance <p class="text-white">
                                 {{ number_format($data['limit']['remain_limit'], 2) }}</p></span>
                         <div class="d-flex justify-content-between text-white">
-                            <p class="text-white">Jack</p>
-                            <p class="text-white">03/23</p>
+                            <p class="text-white" id="fullName"></p>
                         </div>
                     </div>
                 </div>
@@ -116,7 +129,7 @@
                 <div class="col-md pt-0 mt-3">
                     <div class="row justify-content-between">
                         <div class="col-md column_info text-center">
-                            <div class="column_content_info card">
+                            <div class="column_content_info card" style="">
                                 <span class="title__amount" style="font-weight: 600;">Remain Budget <p>(Remain Expense)
                                     </p>
                                 </span>
@@ -152,20 +165,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row justify-content-center mx-auto">
-                        <div class="col-md progress-wrapper bg-white  rounded pb-2">
-                            <div class="progress-info">
-                                <div class="progress-percentage">
-                                    {{-- <span class="text-xs font-weight-bold text-dark">60%</span> --}}
-                                </div>
-                            </div>
-                            <div class="progress">
-                                {{-- <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                    aria-valuemax="100" style="width: 60%; background:#19194b"></div> --}}
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="row flex-column">
@@ -174,96 +173,70 @@
                         <form action="" method="get">
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex flex-row">
-                                    <div class="icon icon-shape  shadow text-center border-radius-md"
-                                        style="background: #19194b">
-                                        <i class="fas fa-shopping-cart text-lg opacity-10" aria-hidden="true"></i>
+                                    <div>
+                                        <img src="{{ asset('img/icons/dashboard/expenses.png') }}" alt=""
+                                            class="" style="width:80px">
                                     </div>
                                     <div class="d-flex flex-column ms-2">
                                         <span style="font-size: 16px;color:black;font-weight:400">Expenses</span>
-                                        {{-- <span style="font-size: 16px;color:black;font-weight:700">
-                                            {{ number_format($data['limit']['used_limit'], 2) }}</span> --}}
                                     </div>
                                 </div>
-                                <div class="d-flex flex-lg-row flex-column ms-auto">
-                                    <div class="me-2" style="width: 100%; max-width:155px">
-                                        <div class="input-group">
-                                            <span for=""
-                                                class="input-group-text z-index-1 font-weight-bold text-dark px-1"
-                                                id="basic-addon1"
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
-                                            <input type="date" class="form-control px-1" id="filter_start_date"
-                                                name="filter_start_date"
-                                                style="font-size:10px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
+                                <div class="d-flex flex-column ms-auto">
+                                    <div class="d-flex">
+                                        <div class="me-2 mb-2" style="width: 100%; max-width:155px">
+                                            <div class="input-group">
+                                                <span for=""
+                                                    class="input-group-text z-index-1 font-weight-bold text-dark px-1"
+                                                    id="basic-addon1"
+                                                    style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
+                                                <input type="date" class="form-control px-1" id="filter_start_date"
+                                                    name="filter_start_date"
+                                                    value='{{ isset($_GET['filter_start_date']) ? $_GET['filter_start_date'] : '' }}'
+                                                    style="font-size:10px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
+                                            </div>
+                                        </div>
+                                        <div class="me-2 mb-2" style="width: 100%; max-width:155px">
+                                            <div class="input-group">
+                                                <span for="" class="input-group-text z-index-1 font-weight-bold"
+                                                    style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
+                                                <input type="date" class="form-control px-1" id="filter_end_date"
+                                                    name="filter_end_date"
+                                                    value='{{ isset($_GET['filter_end_date']) ? $_GET['filter_end_date'] : '' }}'
+                                                    style="font-size:10px; height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="me-2" style="width: 100%; max-width:155px">
-                                        <div class="input-group">
-                                            <span for="" class="input-group-text z-index-1 font-weight-bold"
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
-                                            <input type="date" class="form-control px-1" id="filter_end_date"
-                                                name="filter_end_date"
-                                                style="font-size:10px; height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
+                                    <div class="d-flex">
+                                        <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
+                                            <select name="filter_member" id="filter_member" class="form-select text-dark"
+                                                style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
+                                                <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
+                                                    Your Data</option>
+                                            </select>
+                                        </div>
+                                        <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
+                                            <select name="filter_expense_type" id="filter_expense_type"
+                                                class="form-select text-dark"
+                                                style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
+                                                <option value="" class="text-dark px-1" selected>Expense Type
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
-                                        <select name="filter_member" id="filter_member" class="form-select text-dark"
-                                            style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
-                                            <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
-                                                Member</option>
-                                        </select>
-                                    </div>
-                                    <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
-                                        <select name="filter_expense_type" id="filter_expense_type"
-                                            class="form-select text-dark"
-                                            style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
-                                            <option value="" class="text-dark px-1" selected>Expense Type</option>
-                                        </select>
-                                    </div>
-                                    <div class=" mb-2 ms-auto " style="width: 100%; max-width:65px">
+                                    <div class="d-flex justify-content-end ms-auto me-2"
+                                        style="width: 100%; max-width:65px">
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
                                             class="form-control text-bold d-flex justify-content-center"
                                             id="filter_button">
-                                            {{-- F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R --}}
                                             <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
                                         </button>
                                     </div>
+
+
+
                                 </div>
-                                {{-- <div class="row flex-md-row flex-column ms-auto">
-                                    <div class="col-md">
-                                        <div class="input-group">
-                                            <span for=""
-                                                class="input-group-text z-index-1 font-weight-bold text-dark"
-                                                id="basic-addon1"
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
-                                            <input type="date" class="form-control px-2 text-dark"
-                                                id="filter_start_date" name="filter_start_date"
-                                                style="font-size:11px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
-                                        </div>
-                                    </div>
-                                    <div class="col-md">
-                                        <div class="input-group">
-                                            <span for="" class="input-group-text z-index-1 font-weight-bold"
-                                                style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
-                                            <input type="date" class="form-control px-2" id="filter_end_date"
-                                                name="filter_end_date"
-                                                style="font-size:11px; height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
-                                        </div>
-                                    </div>
-                                    <div class="col-md mb-2" style="height:15px;">
-                                        <select name="filter_expense_type" id="filter_expense_type"
-                                            class="form-select text-dark"
-                                            style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
-                                            <option value="" class="text-dark" selected>Expense Type</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md mb-2">
-                                        <button type="submit" value="submit"
-                                            style="line-height:10px; height:25px; font-size:9px"
-                                            class="form-control text-bold" id="filter_button">
-                                            F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R</button>
-                                    </div>
-                                </div> --}}
+
                             </div>
                         </form>
                         <div class="chart">
@@ -292,30 +265,24 @@
                     <div class="coloumn__quick__access d-md-block d-none">
                         <p style="font-weight: 500; font-size:13px ; margin-top:-8px">Quick Access</p>
                         <div class="d-flex " style="overflow-x: scroll; margin-top:-8px">
-                            <a href="" class="" type="button" data-bs-toggle="modal"
-                                data-bs-target="#modalExpenses" aria-controls="new-expense-form" id="myBtn">
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modalExpenses"
+                                aria-controls="new-expense-form" id="myBtn">
                                 <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                                    <div class="icon icon-shape  shadow text-center border-radius-md"
-                                        style="min-height: 60px; max-height: 60px; min-width: 80px; max-width: 80px;background-color:#19194b">
-                                        <i class="ni ni-bag-17 text-lg opacity-10" aria-hidden="true"></i>
-                                        <div class="mt-1">
-                                            <span class="text-white" style="font-size: 10px">New&nbsp;Expenses</span>
-                                        </div>
+                                    <div>
+                                        <img src="{{ asset('img/icons/dashboard/new-expenses.png') }}" alt=""
+                                            class="" style="width:85px">
                                     </div>
                                 </div>
                             </a>
-                            <a href="" class="" data-bs-toggle="modal" data-bs-target="#topUp">
+                            <a data-bs-toggle="modal" data-bs-target="#topUp">
                                 <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                                    <div class="icon icon-shape shadow text-center border-radius-md"
-                                        style="min-height: 60px; max-height: 60px; min-width: 80px; max-width: 80px;background-color:#19194b">
-                                        <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
-                                        <div class="mt-1">
-                                            <span class="text-white" style="font-size: 10px">Top&nbsp;Up</span>
-                                        </div>
+                                    <div>
+                                        <img src="{{ asset('img/icons/dashboard/top-up.png') }}" alt=""
+                                            class="" style="width:85px">
                                     </div>
                                 </div>
                             </a>
-                            <a href="">
+                            <a href="" hidden>
                                 <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
                                     <div class="icon icon-shape bg-gradient-secondary-cstm shadow text-center border-radius-md"
                                         style="min-height: 60px; max-height: 60px; min-width: 80px; max-width: 80px;">
@@ -371,24 +338,43 @@
                             </div>
                         </div>
                         @php
+                            
                             $no = 0;
+                            
                         @endphp
                         <div class="table-responsive" style="max-height:300px; overflow-y:auto">
                             <table class="table">
                                 <tbody>
                                     <tr class="text-start" style="font-size:12px;color:#000000">
-                                        <th>status</th>
+                                        <th>Status</th>
                                         <th>Expense</th>
                                         <th>Total</th>
                                     </tr>
                                     @foreach ($data['recent_expenses'] as $recentExpenses)
                                         @php
+                                            
                                             $no = $no + 1;
+                                            
                                         @endphp
                                         @if ($no <= 10)
                                             <tr class="text-start" style="font-size:12px;color:#000000">
-                                                <td style="font-size:11px">{{ $recentExpenses->status }}</td>
-                                                <td><span class="fw-bold">{{ $recentExpenses->category }}</span><br><span
+                                                <td>
+                                                    @if ($recentExpenses->status == 'pending')
+                                                        <span class="badge badge-xs d-flex justify-content-center"
+                                                            style="border:1px solid #FFCF23; color:#FFCF23; width: 55px">pending</span>
+                                                    @elseif ($recentExpenses->status == 'approved')
+                                                        <span class="badge badge-xs d-flex justify-content-center"
+                                                            style="border:1px solid #50B720; color:#50B720; width: 55px">approved</span>
+                                                    @elseif ($recentExpenses->status == 'rejected')
+                                                        <span class="badge badge-xs d-flex justify-content-center"
+                                                            style="border:1px solid #E40909; color:#E40909; width: 55px">rejected</span>
+                                                    @else
+                                                        <span class="badge badge-secondary badge-xs">unknown</span>
+                                                    @endif
+                                                </td>
+
+                                                <td><span
+                                                        class="fw-bold">{{ $recentExpenses->category_name }}</span><br><span
                                                         style="font-size:10px">{{ $recentExpenses->merchant }}</span></td>
                                                 <td class="fw-bold">Rp
                                                     {{ number_format($recentExpenses->total_amount, 2) }}</td>
@@ -403,6 +389,35 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+
+
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": "Bearer " + AUTH_TOKEN,
+                    "Accept": "application/json"
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: API_URL + "api/user/profile/info?user_id=" + document.getElementById(
+                    'fullname_uid').value,
+                success: function(res) {
+                    if (res) {
+                        var response = res['data'];
+
+                        console.log(res);
+
+                        document.getElementById('fullName').innerHTML = response[
+                            'full_name'];
+                    }
+                }
+            });
+        });
+    </script>
+
 
     {{-- OCR --}}
     <script>
@@ -467,7 +482,6 @@
                 swalWithBootstrapButtons
                     .fire({
                         title: "<h5>are you sure want to process?</h5>",
-
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonText: "Yes",
@@ -515,6 +529,7 @@
         var FilterExpenseType = "";
         var FilterStartDate = "";
         var FilterEndDate = "";
+        var FilterMember = "";
         var FilterMember = "";
 
         if (window.location.search) {
@@ -581,7 +596,7 @@
                     }],
                     yAxis: [{ // Primary yAxis
                         labels: {
-                            // format: '{value}°C',
+                            // format: '{value}Â°C',
                             style: {
                                 color: Highcharts.getOptions().colors[1]
                             }
@@ -657,7 +672,8 @@
             url: API_URL + "api/analytics/pie/" + document.getElementById('user_id').value +
                 "?expense_type=" + FilterExpenseType +
                 "&start_date=" + FilterStartDate +
-                "&end_date=" + FilterEndDate,
+                "&end_date=" + FilterEndDate +
+                "&member_id=" + FilterMember,
             success: function(res) {
                 var arrayPie = [];
                 var valuePie = {};
@@ -771,7 +787,7 @@
                 }
             }
         });
-
+        const params = getQueryParams();
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
@@ -790,8 +806,9 @@
                         for (const obj of response) {
                             var CategoryId = obj.id;
                             var CategoryName = obj.category_name;
-                            $("#filter_expense_type").append('<option value="' + CategoryName +
-                                '">' + CategoryName + '</option>');
+                            $("#filter_expense_type").append('<option value="' + CategoryId +
+                                '"' + (CategoryId == params.filter_expense_type ? 'selected' :
+                                    '') + '>' + CategoryName + '</option>');
                         }
                     } else {
                         $("#filter_expense_type").empty();
@@ -799,7 +816,6 @@
                 }
             });
         });
-
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
@@ -807,7 +823,6 @@
                     "Accept": "application/json"
                 }
             });
-
             $.ajax({
                 type: "GET",
                 url: API_URL + "api/spend/list/assigned/" + TENANT_CODE +
@@ -820,7 +835,8 @@
                             var uid = obj.id;
                             var uname = obj.full_name;
                             $("#filter_member").append('<option value="' + uid +
-                                '">' + uname + '</option>');
+                                '"' + (uid == params.filter_member ? 'selected' :
+                                    '') + '>' + uname + '</option>');
                         }
                     } else {
                         $("#filter_member").empty();

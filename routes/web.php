@@ -17,6 +17,7 @@ use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Payment\PostPaymentController;
 use App\Http\Controllers\Reports\ViewReportsController;
 use App\Http\Controllers\Account\ListReferralController;
+use App\Http\Controllers\Activity\ActivityController;
 use App\Http\Controllers\Members\MemberExpenseController;
 use App\Http\Controllers\Payment\CancelPaymentController;
 use App\Http\Controllers\Payment\DetailPaymentController;
@@ -24,9 +25,12 @@ use App\Http\Controllers\Auth\ConfirmationEmailController;
 use App\Http\Controllers\Budgets\NewBudgetController;
 use App\Http\Controllers\Budgets\TopUpApprovalController;
 use App\Http\Controllers\Group\GroupController;
+use App\Http\Controllers\Group\GroupInfoController;
+use App\Http\Controllers\Members\MemberInfoController;
 use App\Http\Controllers\Partner\PartnerController;
 use App\Http\Controllers\Role\PermissionController;
 use App\Http\Controllers\Subscription\PaySubscriptionController;
+use App\Http\Controllers\Tenant\TenansController;
 
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -68,12 +72,15 @@ Route::get('/approval', [ApprovalController::class, 'index'])->name('approval')-
 // Manage Teams
 Route::get('/employee', [MembersController::class, 'index'])->middleware('auth');
 Route::put('/employees', [MembersController::class, 'updateEmployee'])->middleware('auth')->name('employees.update');
+// Route::get('/info-member', [MemberInfoController::class, 'index'])->middleware('auth');
 
 Route::get('/group', [GroupController::class, 'index'])->middleware('auth');
 Route::put('/groups', [GroupController::class, 'updateGroup'])->middleware('auth')->name('groups.update');
-
+Route::get('/group-info/{id}', [GroupInfoController::class, 'index'])->middleware('auth')->name('groupInfo');
 Route::get('/partner', [PartnerController::class, 'index'])->middleware('auth');
+Route::post('/partners', [PartnerController::class, 'addPartner'])->middleware('auth')->name('parners.store');
 Route::put('/partners', [PartnerController::class, 'updatePartner'])->middleware('auth')->name('partners.update');
+Route::delete('/partners', [PartnerController::class, 'deletePartner'])->middleware('auth')->name('partners.delete');
 Route::put('/partners/assign', [PartnerController::class, 'updatePartnerAssign'])->middleware('auth')->name('partners.assign.update');
 
 Route::get('/expense/{user_id}', [MemberExpenseController::class, 'index'])->middleware('auth');
@@ -87,7 +94,8 @@ Route::post('/spend/add', [NewBudgetController::class, 'add_spend'])->name('add_
 Route::get('/spend/request', [TopUpApprovalController::class, 'index'])->middleware('auth');
 
 // Approve
-Route::post('/approves', [TopUpApprovalController::class, 'upprove'])->middleware('auth')->name('approves.action');
+Route::post('/approves', [TopUpApprovalController::class, 'approve'])->middleware('auth')->name('approves.action');
+
 
 Route::get('/pre-approval', function () {
     return view(
@@ -105,23 +113,34 @@ Route::get('/permission', [PermissionController::class, 'index'])->name('permiss
 Route::put('/permissions', [PermissionController::class, 'changePermission'])->name('permissions.change')->middleware('auth');
 Route::put('/permissions/role-name', [PermissionController::class, 'changeRoleName'])->name('permissions.role-name.change')->middleware('auth');
 
+// Account Settings
+
+Route::get('/account-settings', [SettingsController::class, 'account_settings'])->name('account-settings')->middleware('auth');
 // Tenant
-Route::get('/tenant', function () {
-    return view(
-        'tenant',
-        [
-            'title' => 'Manage Tenant',
-            'section' => 'tenant'
-        ]
-    );
-});
+// Route::get('/tenant', function () {
+//     return view(
+//         'tenant',
+//         [
+//             'title' => 'Manage Tenant',
+//             'section' => 'tenant'
+//         ]
+//     );
+// });
+Route::get('/tenant', [TenansController::class, 'index'])->middleware('auth');
+// Tenant
+// Route::get('/tenant', function () {
+//     return view(
+//         'tenant',
+//         [
+//             'title' => 'Manage Tenant',
+//             'section' => 'tenant'
+//         ]
+//     );
+// });
+
 
 // Activity
-Route::get('/activity', function () {
-    return view('activity.activity', [
-        'title' => 'Activity', 'section' => 'activity'
-    ]);
-})->middleware('auth');
+Route::get('/activity', [ActivityController::class, 'index'])->middleware('auth');
 
 // Report
 Route::get('/report', [ReportsController::class, 'index'])->middleware('auth');

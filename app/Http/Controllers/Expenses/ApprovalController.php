@@ -9,23 +9,53 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class ApprovalController extends Controller
 {
-    //
-    public static function index()
+    public function index(Request $request)
     {
+        $statusType = $request->statusType;
+
         return view(
             'approval',
             [
                 'title' => 'Approval',
                 'section' => 'approval',
                 'data' => [
-                    'limit' => SpendsController::get_balance(Auth::user()['id']),
-                    'expense_approval' => self::list_expense_approval(Auth::user()['id']),
+                    'limit' => SpendsController::get_balance(Auth::user()['id']),                    
+                    'expense_approval' => self::asyncGetExpenses(Auth::user()['id'], $statusType),
+                    // 'expense_approval' => self::list_expense_approval(Auth::user()['id']),
                 ]
             ]
         );
+    }
+
+    public function asyncGetExpenses($user_id, $statusType = null)
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $params = [];
+        $params['user_id'] = $user_id;
+        if ($statusType != null) {
+            $params['status'] = $statusType;
+        }
+
+        $url = config('api.base_url') . 'api/expense/approval/list/' . Session::get('TenantCode');
+        $response = Http::withHeaders($headers)
+            ->asForm()
+            ->get($url, $params);
+
+        $response = json_decode($response->getBody());
+
+        if ($response->success == false) {
+            return [];
+        }
+
+        return $response->data;
     }
 
     public static function list_expense_approval($user_id, $token = false)
@@ -47,4 +77,5 @@ class ApprovalController extends Controller
 
         return $response->data;
     }
+
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +12,6 @@
     <title>
         Ximply
     </title>
-
     <!-- css table-->
     <link rel="stylesheet" href="{{ asset('css/table/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/table/style.css') }}">
@@ -32,17 +30,22 @@
     <link rel="stylesheet" href="{{ asset('css/core-style.css') }}">
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.0.9') }}" rel="stylesheet" />
-    <script src="{{ asset('js/plugins/jquery-3.6.1.min.js') }}"></script>    
+    <script src="{{ asset('js/plugins/jquery-3.6.1.min.js') }}"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="{{ asset('js/env-javascript.js') }}"></script>
 </head>
-
 <body>
+    <input type="text" id="config_api_url" value="{{ config('api.base_url') }}" hidden>
+    <input type="text" id="config_storage_url" value="{{ config('storage.base_url') }}" hidden>
+    <script>
+        const API_URL = document.getElementById('config_api_url').value;
+        const STORAGE_URL = document.getElementById('config_storage_url').value;
+    </script>
     <input type="text" id="user_id" value="{{ $user_id }}" hidden>
     <div class="row">
         <div class="card">
@@ -57,6 +60,7 @@
                                         style="border-right: 1px solid #adadadad; font-size:11px;height:35px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
                                     <input type="date" class="form-control px-2 text-dark" id="filter_start_date"
                                         name="filter_start_date"
+                                        value="{{ isset($_GET['filter_start_date']) ? $_GET['filter_start_date'] : '' }}"
                                         style="font-size:11px;height:35px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
                                 </div>
                             </div>
@@ -66,30 +70,38 @@
                                         style="border-right: 1px solid #adadadad; font-size:11px;height:35px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
                                     <input type="date" class="form-control px-2 text-dark" id="filter_end_date"
                                         name="filter_end_date"
+                                        value="{{ isset($_GET['filter_end_date']) ? $_GET['filter_end_date'] : '' }}"
                                         style="font-size:11px;height:35px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-2">
+                        {{-- <div class="d-flex col-md-7 flex-row"> --}}
+                        {{-- <div class="col-md me-4 mb-2 w-100">
+                                <select name="filter_member" id="filter_member" class="form-select text-dark"
+                                    style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
+                                    <option value="" class="text-dark px-1" selected>
+                                        Your Data</option>
+                                </select>
+                            </div> --}}
+                        <div class="col-md mb-2 w-100">
                             <select name="filter_expense_type" id="filter_expense_type" class="form-select text-dark"
                                 style="font-size:11px;line-height:16px !important;border-radius:5px !important">
                                 <option value="" class="text-dark" selected>Expense Type</option>
                             </select>
                         </div>
-                        {{-- <div class="col-md-1 mb-2 d-flex" style="">
-                            <button type="submit" value="submit" style="line-height:16px; font-size:10px"
-                                class="form-control text-bold" id="filter_button">
-                                F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R</button>
-                        </div> --}}
+                        {{-- </div>                         --}}
                         <div class="col-md mb-2">
-                            <button type="submit" value="submit"
+                            {{-- <button type="submit" value="submit"
                                 style="line-height:16px;  font-size:11px;background:#19194b;color:white"
-                                class="form-control text-bold d-flex justify-content-center"
-                                id="filter_button">
-                                {{-- F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R --}}
+                                class="form-control text-bold d-flex justify-content-center" id="filter_button">
                                 <span>FILTER&nbsp;&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
+                            </button> --}}
+                            <button type="submit" value="submit"
+                                style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
+                                class="form-control text-bold d-flex justify-content-center" id="filter_button">
+                                <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
                             </button>
-                        </div>  
+                        </div>
                     </div>
                 </form>
                 <div class="row">
@@ -120,54 +132,18 @@
         </div>
     </div>
 </body>
-
-<input type="text" value="{{ config('api.base_url') }}" id="api_endpoint" hidden>
-
+{{-- <input type="text" value="{{ config('api.base_url') }}" id="api_endpoint" hidden> --}}
 </html>
 <script src="{{ asset('js/core/popper.min.js') }}"></script>
 <script src="{{ asset('js/core/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/plugins/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('js/plugins/smooth-scrollbar.min.js') }}"></script>
-
 <script>
-    // jQuery(function($) {
-    //     var from = $("#filter_start_date")
-    //         .datepicker({
-    //             dateFormat: "yy-mm-dd",
-    //             changeMonth: true
-    //         })
-    //         .on("change", function() {
-    //             to.datepicker("option", "minDate", getDate(this));
-    //         }),
-    //         to = $("#filter_end_date").datepicker({
-    //             dateFormat: "yy-mm-dd",
-    //             changeMonth: true
-    //         })
-    //         .on("change", function() {
-    //             from.datepicker("option", "maxDate", getDate(this));
-    //         });
-
-    //     function getDate(element) {
-    //         var date;
-    //         var dateFormat = "yy-mm-dd";
-    //         try {
-    //             date = $.datepicker.parseDate(dateFormat, element.value);
-    //         } catch (error) {
-    //             date = null;
-    //         }
-
-    //         return date;
-    //     }
-    // });
-</script>
-
-<script>
-    const API_URL = document.getElementById('api_endpoint').value;
-
+    // const API_URL = document.getElementById('api_endpoint').value;
     var FilterExpenseType = "";
     var FilterStartDate = "";
     var FilterEndDate = "";
-
+    var FilterMember = "";
     if (window.location.search) {
         const queryString = window.location.search;
         if (queryString != "" || queryString != null || queryString > 0) {
@@ -175,9 +151,9 @@
             FilterExpenseType = urlParams.get('filter_expense_type');
             FilterStartDate = urlParams.get('filter_start_date');
             FilterEndDate = urlParams.get('filter_end_date');
+            FilterMember = urlParams.get('filter_member');
         }
     }
-
     $.ajaxSetup({
         headers: {
             "Accept": "application/json"
@@ -192,7 +168,6 @@
         success: function(res) {
             var time = [0];
             var total_amount = [0];
-
             if (res['success'] == true) {
                 time = [];
                 total_amount = [];
@@ -205,7 +180,6 @@
             } else {
                 // Swal.fire('failed<br>Please contact ximply support');
             }
-
             Highcharts.setOptions({
                 lang: {
                     thousandsSep: ','
@@ -265,7 +239,6 @@
                 credits: {
                     enabled: false
                 },
-
                 legend: {
                     enabled: false,
                     align: 'left',
@@ -283,11 +256,9 @@
                         yAxis: 1,
                         data: total_amount,
                         color: '#ff720c'
-
                         // tooltip: {
                         //     valueSuffix: ' mm'
                         // }
-
 
                     },
                     //  {
@@ -295,7 +266,6 @@
                     //     type: 'spline',
                     //     data: total_amount,
                     //     color: '#000'
-
                     //     // tooltip: {
                     //     //     valueSuffix: '°C'
                     //     // }
@@ -305,11 +275,10 @@
         },
         complete: function(data) {
             if (data.status != 200) {
-                Swal.fire('failed<br>Please contact ximply support');
+                // Swal.fire('failed<br>Please contact ximply support');
             }
         }
     });
-
 
     $.ajaxSetup({
         headers: {
@@ -329,7 +298,6 @@
             valuePie['y'] = 0;
             valuePie['y_label'] = 0;
             arrayPie[0] = valuePie;
-
             if (res['success'] == true) {
                 var arrayPie = [];
                 var i = 0;
@@ -351,11 +319,9 @@
                 function() {
                     var total = 0;
                     $('#expensesCategory').highcharts({
-
                         lang: {
                             thousandsSep: ','
                         },
-
                         chart: {
                             type: 'pie'
                         },
@@ -404,7 +370,6 @@
                             itemMarginTop: 0,
                             itemMarginBottom: 0,
                             itemMarginRight: 0,
-
                             borderWidth: 0,
                             useHTML: true,
                             labelFormatter: function() {
@@ -431,18 +396,17 @@
         },
         complete: function(data) {
             if (data.status != 200) {
-                Swal.fire('failed<br>Please contact ximply support');
+                // Swal.fire('failed<br>Please contact ximply support');
             }
         }
     });
-
+    const params = getQueryParams();
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
                 "Accept": "application/json"
             }
         });
-
         $.ajax({
             type: "GET",
             url: API_URL + "api/category/list/main?user_id=" + document.getElementById(
@@ -453,8 +417,9 @@
                     for (const obj of response) {
                         var CategoryId = obj.id;
                         var CategoryName = obj.category_name;
-                        $("#filter_expense_type").append('<option value="' + CategoryName +
-                            '">' + CategoryName + '</option>');
+                        $("#filter_expense_type").append('<option value="' + CategoryId +
+                            '"' + (CategoryId == params.filter_expense_type ? 'selected' :
+                                '') + '>' + CategoryName + '</option>');
                     }
                 } else {
                     $("#filter_expense_type").empty();
@@ -462,4 +427,32 @@
             }
         });
     });
+    // $(document).ready(function() {
+    //         $.ajaxSetup({
+    //             headers: {
+    //                 "Authorization": "Bearer " + AUTH_TOKEN,
+    //                 "Accept": "application/json"
+    //             }
+    //         });
+    //         $.ajax({
+    //             type: "GET",
+    //             url: API_URL + "api/spend/list/assigned/" + TENANT_CODE +
+    //                 "?user_id=" + document.getElementById(
+    //                     'user_id').value,
+    //             success: function(res) {
+    //                 if (res) {
+    //                     var response = res['data'];
+    //                     for (const obj of response) {
+    //                         var uid = obj.id;
+    //                         var uname = obj.full_name;
+    //                         $("#filter_member").append('<option value="' + uid +
+    //                             '"' + (uid == params.filter_member ? 'selected' :
+    //                                 '') + '>' + uname + '</option>');
+    //                     }
+    //                 } else {
+    //                     $("#filter_member").empty();
+    //                 }
+    //             }
+    //         });
+    //     });
 </script>

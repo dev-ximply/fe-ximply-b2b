@@ -38,13 +38,26 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
+
+                        <input type="hidden" id="partner_assign_id">
+
+                        <label class="form-label mt-4" style="color: black; font-weight:500">User</label>
+
+                            <select class="form-control " name="user_assign_id" id="user_assign_id">
+
+                                <option hidden selected>Pilih User</option>
+
+                                @foreach ($data['a_partner'] as $member)
+                                <option value="{{ $member->id }}" data-group="{{$member->group_id}}">{{ $member->full_name }}</option>
+                                @endforeach
+
+                            </select>
+
+                    </div>
+                    <div class="col-6">
                         <label class="form-label mt-4" style="color: black; font-weight:500">Group</label>
-                        <select class="form-control " name="group_id" id="group_id">
-                            <option value="" selected>Select</option>
-                            @foreach ($data['groups'] as $item_group)
-                                <option value="{{ $item_group->id }}">{{ strtolower($item_group->group_name) }}
-                                </option>
-                            @endforeach
+                        <select class="form-control" name="group_id" id="group_id" style="background-color: white" readonly disabled>
+                            <option value="" id="option_group"></option>
                         </select>
                     </div>
                 </div>
@@ -53,8 +66,9 @@
                         <div>
                             <button class="btn text-white" data-bs-dismiss="modal"
                                 style="background-color: #D42A34">Cancel</button>
-                            <button class="btn text-white" style="background-color: #62ca50"
-                                onclick="addPartner({{ Auth::user()['id'] }}, document.getElementById('companyName').value, document.getElementById('picName').value, document.getElementById('email').value, document.getElementById('handphone').value, document.getElementById('group_id').value)">Submit</button>
+                            <button class="btn text-white" style="background-color: #62ca50" onclick="addPartner({{ Auth::user()['id'] }})">
+                                Submit
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -64,14 +78,37 @@
 </div>
 
 <script>
-    function addPartner(userId, companyName, picName, email, handphone, group_id) {
+    $("#user_assign_id").change(function(){
+        const group_id = $(this).find(':selected').data('group')
+        const user_id = {{Auth::user()['id']}};
+        $.get(API_URL + "api/group/list/"+ TENANT_CODE, 
+        {
+            "user_id" : user_id,
+            "group_id" : group_id
 
+        }, function (res, textStatus, jqXHR) {
+            $('#option_group').val(res.data.id);
+            $("#option_group").text(res.data.group_name);
+        });
+
+    });
+    function addPartner(userId ) {
+        
+        const companyName   =  document.getElementById('companyName').value;
+        const picName       =  document.getElementById('picName').value;
+        const email         =  document.getElementById('email').value;
+        const handphone     =  document.getElementById('handphone').value;
+        const group_id      =  document.getElementById('group_id').value;
+        const userAssignId  =  document.getElementById('user_assign_id').value;
+        var tenantCode = TENANT_CODE;
+        var userid = USR_ID;
         console.log(userId);
         console.log(companyName);
         console.log(picName);
         console.log(handphone);
         console.log(email);
         console.log(group_id);
+        console.log(userAssignId);
 
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -93,59 +130,42 @@
             .then((result) => {
                 if (result.isConfirmed) {
 
-                    var formData = new FormData();
-
-                    formData.append('tenant_code', TENANT_CODE);
-                    formData.append('user_id', userId);
-                    formData.append('company_name', companyName);
-                    formData.append('contact_name', picName);
-                    formData.append('handphone', handphone);
-                    formData.append('email', email);
-                    formData.append('group_id', group_id);
-
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-
                     $.ajax({
+                        type: "POST",
                         url: API_URL + "api/partner/add",
-                        type: 'post',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        beforeSend: function() {
-                            if ($("#loader")) {
-                                $("#loader").show();
-                            }
+                        // url: "{{ route('parners.store') }}",
+                        data: {
+                            user_id:userid,
+                            tenant_code:tenantCode,
+                            company_name: companyName,
+                            contact_name: picName,
+                            handphone: handphone,
+                            email: email,
+                            group_id: group_id,
+                            assign_user_id: userAssignId,
                         },
-                        success: function(res) {
-                            if (res['success'] == "true" || res['success'] == true) {
-                                swalWithBootstrapButtons.fire(
-                                    "Success!",
-                                    "Your request success.",
-                                    "success"
-                                );
-                                
-                                if ($("#loader")) {
-                                    $("#loader").hide();
-                                }
+                        success: function(response) {
 
+                            const {
+                                success,
+                                status,
+                                message
+                            } = response;
+
+                            console.log(response)
+
+                            if (success === true) {
                                 setTimeout(function() {
-                                    location.reload();
+                                    window.location.reload(true);
                                 }, 1000);
-                            } else {
-                                swalWithBootstrapButtons.fire(
-                                    "Error!",
-                                    "Your request can't processed.<br>" + res['message'],
-                                    "error"
-                                );
                             }
-                        },
-                        complete: function(data) {
-
                         }
+
                     });
 
                 } else if (result.dismiss === Swal.DismissReason.cancel) {

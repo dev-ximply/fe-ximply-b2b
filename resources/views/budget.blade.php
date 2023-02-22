@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
+    @include('budget.edit-budget')
     <style>
         .slider-wrapper {
             width: 100%;
@@ -47,50 +48,6 @@
         }
     </style>
 
-    <div class="modal fade" id="edit_modal_budget" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="background: #19194B; color:white">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">Edit Budget</h5>
-                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
-                        {{-- <span aria-hidden="true">×</span> --}}
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post">
-                        @csrf
-                        <input type="text" id="edit_user_id" hidden>
-                        <div class="my-2">
-                            <label for="projectName" class="form-label text-dark" style="font-weight: 600">Name</label>
-                            <input type="text" class="form-control" id="edit_budget_name" disabled>
-                        </div>
-                        <div class="my-2">
-                            <label for="projectName" class="form-label text-dark" style="font-weight: 600">Budget</label>
-                            <input type="text" class="form-control" id="edit_budget_limit_avail" disabled>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <label class="form-label text-dark" style="font-weight: 600">Topup Limit</label>
-                                <input type="number" class="form-control" id="edit_budget_limit" name="edit_budget_limit">
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label text-dark" style="font-weight: 600">Auto Approve Amount</label>
-                                <input type="number" class="form-control" id="edit_approve_limit"
-                                    name="edit_approve_limit">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end mt-3">
-                            <button type="button" name="button" class="btn btn-danger-cstm m-0"
-                                data-bs-dismiss="modal">Cancel</button>
-                            <input type="button" onclick="postEditBudget()" name="button" value="Submit" class="btn btn-success-cstm m-0 ms-2">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row mb-4 mt-3 mx-1 justify-content-between">
         <div class="col-md d-sm-flex justify-content-start px-0 mx-0">
             <div class="d-flex me-2">
@@ -99,18 +56,8 @@
                     <span>
                         New Budget
                     </span>
-                    {{-- &nbsp;
-                    <i class="fas fa-plus text-md"></i> --}}
                 </a>
             </div>
-            {{-- @if (Auth::user()->account_detail()['role_level'] != 0)
-                <div class="d-flex me-2">
-                    <a href="/spend/request" class="btn btn-outline-dark btn-icon text-xs d-flex align-items-center">
-                        Top Up Requested
-                         &nbsp;<i class="fa-solid fa-circle-exclamation text-md text-warning"></i>
-                    </a>
-                </div>
-            @endif --}}
         </div>
         <div class="col-md text-md-end text-start mt-2 px-0 mx-0">
             @if (session()->get('is_superadmin') == false)
@@ -123,16 +70,24 @@
         </div>
     </div>
 
+
     <div class="row" style="margin-left: -5px;">
         @foreach ($data['members'] as $item)
             <div class="col-md-3">
                 <div class="card mb-3">
-                    <div class="card-body p-2">
-                        <div class="d-flex">
+                    <div class=" p-2 px-3">
+                        <div class="d-flex justify-content-center">
                             <div class="my-auto">
                                 <h6 class="text-capitalize text-dark">
                                     {{ $item->full_name }}
                                 </h6>
+                                @if ($item->role_name == 'member')
+                                    <span class="text-capitalize px-3 py-1 "
+                                        style="font-size:11px;background:#f3fcf7;color:#62ca50; border-radius:3px">{{ $item->role_name }}</span>
+                                @else
+                                    <span class="text-capitalize px-3 py-1 "
+                                        style="font-size:11px;background:#eff6fe;color:#5695cf; border-radius:3px">{{ $item->role_name }}</span>
+                                @endif
                             </div>
                             <div class="ms-auto">
                                 <div class="dropdown">
@@ -142,50 +97,48 @@
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-end me-sm-n4 me-n3"
                                         aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" data-bs-toggle="modal"
-                                            data-bs-target="#edit_modal_budget" onclick="getDetailBudget('{{ $item->full_name }}', {{ $item->id }}, {{ $item->limit->remain_limit }}, {{ $item->limit->auto_approve }})">Edit</a>
-                                        {{-- TEST<a class="dropdown-item" href="javascript:;">Retire</a> --}}
+                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit_modal_budget"
+                                            onclick="getDetailBudgets('{{ $item->id }}', '{{ $item->full_name }}', '{{ $item->limit->remain_limit }}', '{{ $item->limit->auto_approve }}', '{{ $item->limit->expire_date }}')">Edit</a>
+                                        <a class="dropdown-item">
+                                            <span onclick="deleteBudget('{{ $item->limit->spend_id }}')">
+                                                Delete
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="w-100 mt-1">
-                            <span class="me-2 font-weight-normal " style="font-size: 0.8em">Department : <span
+                            <span class="me-2 font-weight-normal " style="font-size: 0.8em; color:#000">Department : <span
                                     class="text-capitalize">
                                     {{ $item->group_name != null || $item->group_name != '' ? $item->group_name : '*' }}
                                 </span></span>
                         </div>
                         <div class="w-100 mt-1">
-                            <span class="me-2 font-weight-normal" style="font-size: 0.8em">Set Limit : Rp
+                            <span class="me-2 font-weight-normal" style="font-size: 0.8em; color:#000">Set Limit : Rp
                                 {{ number_format($item->limit->assign_limit) }}</span>
                         </div>
                         <div class="w-100 mt-1">
-                            <span class="me-2 font-weight-normal" style="font-size: 0.8em">Remain : Rp
+                            <span class="me-2 font-weight-normal" style="font-size: 0.8em; color:#000">Remain : Rp
                                 {{ number_format($item->limit->remain_limit) }}</span>
                         </div>
                         <div class="w-100 mt-1">
-                            <span class="me-2 font-weight-normal" style="font-size: 0.8em">Auto Approve : Rp
+                            <span class="me-2 font-weight-normal" style="font-size: 0.8em; color:#000">Auto Approve : Rp
                                 {{ number_format($item->limit->auto_approve) }}</span>
+                        </div>
+                        <div class="w-100 mt-1">
+                            <span class="me-2 font-weight-normal" style="font-size: 0.8em; color:#000">Created :
+                                {{ $item->limit->created_date }}
+                            </span>
                         </div>
                         <hr class="horizontal dark">
                         <div class="w-100 mt-1">
                             <div class="d-flex mb-2">
-                                <span class="me-2 text-sm font-weight-normal">Used : Rp
+                                <span class="me-2 text-sm" style=" color:#000; font-weight:500">Used : Rp
                                     {{ number_format($item->limit->used_limit) }}
                                 </span>
-                                {{-- TEST<span
-                                    class="ms-auto text-sm font-weight-normal">{{ number_format($item->limit->budget_spending) }}
-                                    %</span> --}}
                             </div>
                         </div>
-                        {{-- <div class="row mt-2">
-                            <div class="col text-end">
-                                <h6 class="text-sm mb-0">
-                                    {{ $item->limit->expire_date }}
-                                </h6>
-                                <p class="text-secondary text-sm font-weight-normal mb-0">Expired Date</p>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -193,16 +146,28 @@
     </div>
 
     <script>
+        function getDetailBudgets(id, full_name, remain_limit, auto_approve, expire_date) {
 
-        function getDetailBudget($uname, $uid, $limit, $auto_approve) {
-            document.getElementById('edit_budget_name').value = $uname;
-            document.getElementById('edit_user_id').value = $uid;
-            document.getElementById('edit_budget_limit_avail').value = $limit;
-            document.getElementById('edit_budget_limit').value = 0;
-            document.getElementById('edit_approve_limit').value = $auto_approve;
+            document.getElementById('edit_user_id').value = id;
+            document.getElementById('edit_budget_name').value = full_name;
+            document.getElementById('edit_budget_limit_avail').value = remain_limit;
+            document.getElementById('auto_approve_edit').value = auto_approve;
+            document.getElementById('expire_date').value = expire_date;
+            // document.getElementById('used_limit').value = used_limit;
+            console.log(remain_limit);
+            console.log(auto_approve);
+
         }
+    </script>
 
-        function postEditBudget() {
+    <script>
+        function deleteBudget(spendId) {
+
+            var tenant = TENANT_CODE;
+            var userId = USR_ID;
+
+            console.log(spendId);
+
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success-cstm mx-2",
@@ -210,9 +175,10 @@
                 },
                 buttonsStyling: false,
             });
+
             swalWithBootstrapButtons
                 .fire({
-                    title: "<h5>are you sure you want to process?</h5>",
+                    title: "<h5>Are you sure you want to process?</h5>",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonText: "Yes",
@@ -221,55 +187,56 @@
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        var formData = new FormData();
-                        formData.append('tenant_code', TENANT_CODE);
-                        formData.append('user_id', USR_ID);
-                        formData.append('assign_user_id', document.getElementById('edit_user_id').value);
-                        formData.append('limit', document.getElementById('edit_budget_limit').value);
-                        formData.append('auto_approve_limit', document.getElementById('edit_approve_limit').value);
-
+                        //delete parner
+                        console.log(spendId);
                         $.ajaxSetup({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             }
                         });
-
                         $.ajax({
-                            url: API_URL + "api/spend/member/assign",
-                            type: 'post',
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            beforeSend: function() {
-                                if ($("#loader")) {
-                                    $("#loader").show();
-                                }
+                            type: "DELETE",
+                            url: API_URL + "api/spends/" + spendId,
+
+                            // url: "{{ route('partners.delete') }}",
+                            data: {
+                                spend_id: spendId,
+                                user_id: userId,
+                                tenant_code: tenant
                             },
-                            success: function(res) {
-                                if (res['success'] == "true" || res['success'] == true) {
-                                    swalWithBootstrapButtons.fire(
-                                        "Success!",
-                                        "Your request success.",
-                                        "success"
-                                    );
+                            success: function(response) {
+
+                                const {
+                                    success,
+                                    status,
+                                    message
+                                } = response;
+
+                                console.log(response)
+
+                                if (status === true) {
+                                    setTimeout(function() {
+                                        window.location.reload(true);
+                                    }, 1000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
-                                        "Error!",
-                                        "Your request can't processed.",
-                                        "error"
+                                        "Succees",
+                                        message,
+                                        "Error"
                                     );
+                                    setTimeout(function() {
+                                        window.location.reload(true);
+                                    }, 1000);
                                 }
+
                             },
-                            complete: function(data) {
-                                if ($("#loader")) {
-                                    $("#loader").hide();
-                                }
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 1000);
-                            }
+
+
                         });
+
+
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
+
                         swalWithBootstrapButtons.fire(
                             "Cancelled",
                             "Your request cancelled :)",
@@ -278,37 +245,5 @@
                     }
                 });
         }
-
-        $(".responsive").slick({
-            prevArrow: $(".prev"),
-            nextArrow: $(".next"),
-            infinite: false,
-            speed: 300,
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: false
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
     </script>
 @endsection

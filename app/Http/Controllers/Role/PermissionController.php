@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request as Psr7Request;
+use Illuminate\Support\Facades\Session;
+
 class PermissionController extends Controller
 {
 
@@ -16,6 +20,9 @@ class PermissionController extends Controller
             'title' => 'Permission',
             'section' => 'permission',
             'permissions' => collect(self::getPermissions()),
+            'data' =>[
+                'tenant' => self::infoTenant(Auth::user()['id'])
+            ]
         ]);
     }
 
@@ -89,5 +96,25 @@ class PermissionController extends Controller
         }
 
         throw new \Exception($response->json()['message']);
+    }
+
+
+    
+    public static function infoTenant($user_id)
+    {
+        $client = new Client();
+        $headers = [
+            'Authorization' => 'Bearer ' . Session::get('AuthToken'),
+            'Accept' => 'application/json',
+        ];
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/tenant/info/' . Session::get('TenantCode') .  '/' . $user_id, $headers);
+        $res = $client->sendAsync($request)->wait();
+        $response = json_decode($res->getBody());
+
+        if ($response->success == false) {
+            return [];
+        }
+
+        return $response->data;
     }
 }

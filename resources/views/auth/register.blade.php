@@ -125,6 +125,13 @@
                                     <form role="form" class="pt-0" method="POST"
                                         action="{{ route('register_action') }}">
                                         @csrf
+
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control form-control-lg"
+                                                placeholder="Token Register (mandatory)" aria-label="tenant_token" name="tenant_token"
+                                                value="{{ old('tenant_token') }}" autocomplete="tenant_token" required autofocus>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col-md mb-3">
                                                 <input type="text" class="form-control form-control-lg"
@@ -199,11 +206,11 @@
                                             </span>
                                         </div>
 
-                                        <div class="mb-3">
+                                        {{-- <div class="mb-3">
                                             <input type="text" class="form-control form-control-lg"
                                                 placeholder="Referral Code (optional)" aria-label="referral_code" name="referral_code"
                                                 value="{{ old('referral_code') }}" autocomplete="referral_code" autofocus>
-                                        </div>
+                                        </div> --}}
 
                                         {{-- <div class="alert alert-success text-white d-flex align-items-center justify-content-between"
                                             style="background:#81C6E8; height:80px; display: none !important" role="alert">

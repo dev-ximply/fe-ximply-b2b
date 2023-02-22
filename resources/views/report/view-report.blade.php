@@ -96,7 +96,7 @@
                                     </td>
                                     <td class="text-xs font-weight-bold  pt-3 pb-0">
                                         <div class="d-flex align-items-center text-break text-wrap text-capitalize">
-                                            <p class="text-xs text-dark">{{ $item->category }}</p>
+                                            <p class="text-xs text-dark">{{ $item->category_name }}</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -177,18 +177,18 @@
                                         "your request success.",
                                         "success"
                                     );
-                                    setTimeout(function() {
-                                        window.location.reload(true);
-                                    }, 1000);
+                                    // setTimeout(function() {
+                                    //     window.location.reload(true);
+                                    // }, 1000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
                                         "Error!",
                                         res['message'],
                                         "error"
                                     );
-                                    setTimeout(function() {
-                                        window.location.reload(true);
-                                    }, 1000);
+                                    // setTimeout(function() {
+                                    //     window.location.reload(true);
+                                    // }, 1000);
                                 }
                             },
                             complete: function(data) {

@@ -32,7 +32,7 @@
 <!-- Modal -->
 <div class="modal fade text-dark" id="manualForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl text-dark">
+    <div class="modal-dialog modal-dialog-centered modal-lg text-dark">
         <div class="modal-content">
             <div class="modal-header px-4" style="background: #19194b">
                 <h6 class="modal-title fs-6 text-white" id="staticBackdropLabel">New Expense</h6>
@@ -90,7 +90,7 @@
                                         <label for="" class="text-dark" style="font-weight:500">Total
                                             Amount</label>
                                         <input type="text" name="total_amount" id="total_amount"
-                                            class="form-control" placeholder="Amount" step="1.0" required>
+                                            class="form-control number-separator" placeholder="Amount" step="1.0" required>
                                         <script>
                                             new NumericInput(document.getElementById('total_amount'), 'en-CA');
                                         </script>
@@ -185,7 +185,7 @@
                             </div>
                         </div>
                         <div style="text-align: right; margin-top:20px; margin-right:12px">
-                            <button class="btn text-white" style="background: #62CA50">Submit</button>
+                            <button type="submit" class="btn text-white" style="background: #62CA50">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -193,6 +193,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    easyNumberSeparator({
+      selector: '.number-separator',
+      separator: ',',
+      decimalSeparator: '.',
+      resultInput: '#result_input',
+    })
+  </script>
+
 <script>
     // new expense
     function NewExpenses() {
@@ -206,9 +216,11 @@
         var location = $("#location").val();
         var total_amount = $("#total_amount").val();
         var fileReceipt = $('#file_receipt')[0].files;
+        console.log(fileReceipt);
         var fileAdditional = $('#file_additional')[0].files;
 
         var formDataExpense = new FormData();
+
 
         formDataExpense.append('tenant_code', TENANT_CODE);
         formDataExpense.append('user_id', user_id);
@@ -220,7 +232,7 @@
         formDataExpense.append('merchant', merchant);
         formDataExpense.append('location', location);
         formDataExpense.append('total_amount', total_amount);
-
+        console.log(formDataExpense);
         if (fileReceipt.length > 0) {
             formDataExpense.append('file_receipt', fileReceipt[0]);
         }
@@ -228,6 +240,8 @@
         if (fileAdditional.length > 0) {
             formDataExpense.append('file_additional', fileAdditional[0]);
         }
+
+        // new
 
         // console.log(formDataExpense);
 
@@ -250,52 +264,60 @@
             })
             .then((result) => {
                 if (result.isConfirmed) {
-
-                    $.ajaxSetup({
-                        headers: {
-                            "Authorization": "Bearer " + AUTH_TOKEN,
-                            "Accept": "application/json",
-                        }
+                    let check = checkPin("#manualForm",function(){
+                        CreateExpense();
                     });
+                    function CreateExpense(){
+                        $.ajaxSetup({
+                            headers: {
+                                "Authorization": "Bearer " + AUTH_TOKEN,
+                                "Accept": "application/json",
+                            }
+                        });
 
-                    $.ajax({
-                        url: API_URL + "api/expense/create",
-                        type: 'post',
-                        data: formDataExpense,
-                        contentType: false,
-                        processData: false,
-                        beforeSend: function() {
-                            if ($("#main-loader")) {
-                                $("#main-loader").show();
+                        $.ajax({
+                            url: API_URL + "api/expense/create",
+                            type: 'post',
+                            data: formDataExpense,
+                            contentType: false,
+                            processData: false,
+                            beforeSend: function() {
+                                if ($("#main-loader")) {
+                                    $("#main-loader").show();
+                                }
+                            },
+                            success: function(res) {
+                                if (res['success'] == true) {
+                                    swalWithBootstrapButtons.fire(
+                                        "Success!",
+                                        "Your request success.",
+                                        "success"
+                                    );
+                                    setTimeout(function() {
+                                        window.location.reload(true);
+                                    }, 1000);
+                                } else {
+                                    swalWithBootstrapButtons.fire(
+                                        "oops!",
+                                        res['message'],
+                                    );
+                                }
+                            },
+                            complete: function(data) {
+                                $("#main-loader").hide();
+                                if (data.status != 200) {
+                                    Swal.fire(
+                                        "something wrong",
+                                        "please contact ximply support!",
+                                    );
+                                }
                             }
-                        },
-                        success: function(res) {
-                            if (res['success'] == true) {
-                                swalWithBootstrapButtons.fire(
-                                    "Success!",
-                                    "Your request success.",
-                                    "success"
-                                );
-                                // setTimeout(function() {
-                                //     window.location.reload(true);
-                                // }, 1000);
-                            } else {
-                                swalWithBootstrapButtons.fire(
-                                    "oops!",
-                                    res['message'],
-                                );
-                            }
-                        },
-                        complete: function(data) {
-                            $("#main-loader").hide();
-                            if (data.status != 200) {
-                                Swal.fire(
-                                    "something wrong",
-                                    "please contact ximply support!",
-                                );
-                            }
-                        }
-                    });
+                        });
+
+                    }
+                    
+
+                    
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     swalWithBootstrapButtons.fire(
                         "Cancelled",
@@ -331,7 +353,7 @@
                 // send receipt to nanonets
                 setTimeout(function() {
                     var formdata = new FormData();
-                    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                    
                     formdata.append("tenant_code", TENANT_CODE);
                     formdata.append("user_id", $("#user_id").val());
                     formdata.append("file_receipt", fileReceipt[0]);
