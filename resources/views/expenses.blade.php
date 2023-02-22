@@ -589,8 +589,10 @@
                             console.log(res);
                             var response = res['data'];
                             var tableOut = "";
+
                             // var totalAmount = 0;
                             for (const obj of response) {
+                                var i = 1;
                                 tableOut += '<tr class="align-middle">' +
                                     '<td colspan="7" style="color: #000000;font-weight:500;font-size:12px;" class="text-md-start text-end ps-md-4 text-break text-wrap">' +
                                     obj.long_date +
@@ -599,46 +601,43 @@
                                     tableOut +=
                                         '<tr><td class="font-weight-bold pt-3">';
                                     tableOut +=
-                                        '<p class="text-sm text-dark">' + expense.receipt_date +
+                                        '<p class="text-sm text-dark">' + '#' + i++ +
                                         '</p></td>';
                                     if (expense.status == 'approved') {
                                         tableOut +=
                                             '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
                                             '<span class="badge badge-xs d-flex justify-content-center"' +
                                             'style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">' +
-                                                expense.status  
-                                             '</span>' +
-                                                + '</p></td>';
+                                            expense.status '</span>' +
+                                            +'</p></td>';
 
                                     } else if (expense.status == 'pending') {
                                         tableOut +=
-                                            '<td class=""align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">'  +
-                                                '<span class="badge badge-xs d-flex justify-content-center"' +
-                                                 'style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">' +
-                                                        expense.status
-                                                '</span>'
-                                            + '</p></td>';
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<span class="badge badge-xs d-flex justify-content-center"' +
+                                            'style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">' +
+                                            expense.status '</span>' +
+                                            '</p></td>';
                                     } else if (expense.status == 'rejected') {
                                         tableOut +=
-                                            '<td class=""align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
-                                                '<span class="badge badge-xs d-flex justify-content-center"' +
-                                                 'style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">'+
-                                                       expense.status
-                                                    '</span>' 
-                                            + '</td>';
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<span class="badge badge-xs d-flex justify-content-center"' +
+                                            'style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">' +
+                                            expense.status '</span>' +
+                                            '</td>';
 
                                     } else {
                                         tableOut +=
-                                            '<td class=""align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
                                             expense.status + '</p></td>';
 
                                     }
 
                                     tableOut +=
-                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
                                         expense.purpose_name + '</p></td>';
                                     tableOut +=
-                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
                                         expense.merchant + '</p></td>';
                                     tableOut +=
                                         '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
