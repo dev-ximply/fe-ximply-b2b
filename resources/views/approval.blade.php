@@ -16,12 +16,14 @@
                     </p>
                 </div>
                 <div class="col-md text-md-end text-start mt-2 px-0 mx-0">
-                    <p class="mb-0 text-xs text-uppercase font-weight-bolder" style="color:black">Remain Budget</p>
-                    <h5 class=" mb-0  font-weight-bolder" style="color:black">
-                        Rp <span>
-                            {{ $data['limit'] != null ? number_format($data['limit']['remain_limit'], 2) : '0' }}
-                        </span>
-                    </h5>
+                    @if (session()->get('is_superadmin') == false)
+                        <p class="mb-0 text-xs text-uppercase font-weight-bolder" style="color:black">Remain Budget</p>
+                        <h5 class=" mb-0  font-weight-bolder" style="color:black">
+                            Rp <span>
+                                {{ $data['limit'] != null ? number_format($data['limit']['remain_limit'], 2) : '0' }}
+                            </span>
+                        </h5>
+                    @endif
                 </div>
             </div>
             <div class="card" style="border-radius: 5px">
@@ -29,29 +31,36 @@
                 <div class="card-header pb-0">
                     <div class="row">
                         <div class="d-flex mb-4 justify-content-start justify-content-md-end">
-                            <form action="" style="z-index: 0">
+                            <form id="formSearch" action="" style="z-index: 0" onsubmit="handleChangeStatus(event)">
                                 <div class="row">
                                     <div class="col-md mt-2">
-                                        <select name="2ff" id="2ff" class="rounded border border-secondary"
-                                            style="font-size:12px; height: 25px; color:black">
-                                            <option value="">Category</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md mt-2">
-                                        <select name="3ff" id="3ff" class="rounded border border-secondary"
-                                            style="font-size:12px; height: 25px; color:black">
+                                        <select name="statusType" id="status"
+                                            class="rounded border border-secondary text-secondary"
+                                            style="font-size:12px; height: 25px; width: 150px">
                                             <option value="">Status</option>
-                                            <option value="pending">Pending</option>
-                                            <option value="approved">Approved</option>
-                                            <option value="rejected">Rejected</option>
-                                            <option value="done">Done</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
+                                                value="pending">Pending</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'rejected' ? 'selected' : '' }}
+                                                value="rejected">Rejected</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'approved' ? 'selected' : '' }}
+                                                value="approved">Approved</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
+                                                value="done">Done</option>
                                         </select>
                                     </div>
-                                    <div class="col-md mt-2">
-                                        <input type="submit" value="Search"
-                                            class="px-2 rounded bg-white border border-secondary text-dark"
-                                            style="font-size:12px; height: 25px; width: 100px" />
-                                    </div>
+                                    {{-- <div class="col-md mt-2">
+                                        <button type="submit" value="submit"
+                                            style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
+                                            class="form-control text-bold d-flex justify-content-center" id="filter_button">
+
+                                            <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
+
+                                        </button>
+                                    </div> --}}
                                 </div>
                             </form>
                         </div>
@@ -81,22 +90,22 @@
                                     <th class="text-uppercase  text-xxs font-weight-bolder opacity-9" style="color:black">
                                         Status
                                     </th>
-                                    <th class="text-uppercase  text-xxs text-center font-weight-bolder opacity-9"
+                                    <th class="text-uppercase  text-xxs text-start ps-5 font-weight-bolder opacity-9"
                                         style="color:black">Action
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tableBody">
                                 @foreach ($data['expense_approval'] as $expense_approval)
                                     <tr>
                                         <td class="align-middle text-start text-capitalize text-xs">
                                             <div class="d-flex">
-                                                <img src="{{ config('storage.base_url') . $expense_approval->receipt_picture_directory }}"
+                                                <img  src="{{ config('storage.base_url') . $expense_approval->receipt_picture_directory }}"
                                                     class="img-fluid ms-3" alt="receipt" style="width: 50px">
                                                 <div class="ms-3 my-auto show-modal">
                                                     <div>
                                                         <span class="text-xs text-dark text-bold">
-                                                            {{ $expense_approval->category }}
+                                                            {{ $expense_approval->sub_category_name }}
                                                         </span>
                                                     </div>
                                                     <div>
@@ -112,42 +121,42 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle text-start text-xs text-capitalize text-dark">
-                                            {{ $expense_approval->category }}
+                                        <td class="ps-4 align-middle text-start text-xs text-capitalize text-dark">
+                                            {{ $expense_approval->category_name }}
                                         </td>
-                                        <td class="align-middle text-start text-xs text-dark">
-                                            {{ $expense_approval->purpose }}
+                                        <td class="ps-4 align-middle text-start text-xs text-dark">
+                                            {{ $expense_approval->purpose_name }}
                                         </td>
-                                        <td class="align-middle text-start text-xs text-dark">
+                                        <td class="ps-4 align-middle text-start text-xs text-dark text-break text-wrap">
                                             {{ $expense_approval->merchant }}
                                         </td>
-                                        <td class="align-middle text-start text-xs text-dark">
+                                        <td class="ps-4 align-middle text-start text-xs text-dark">
                                             {{ number_format($expense_approval->total_amount, 2) }}
                                         </td>
-                                        <td class="align-middle text-start text-xs">
+                                        <td class="ps-4 align-middle text-start text-xs">
                                             @if ($expense_approval->status == 'pending')
                                                 <span class="badge badge-xs d-flex justify-content-center"
-                                                    style="background-color: #FFCF23; width: 50px">pending</span>
+                                                    style="border:1px solid #FFCF23; color:#FFCF23; width: 55px">pending</span>
                                             @elseif ($expense_approval->status == 'approved')
                                                 <span class="badge badge-xs d-flex justify-content-center"
-                                                    style="background-color: #50B720; width: 50px">approved</span>
+                                                    style="border:1px solid #50B720; color:#50B720; width: 55px">approved</span>
                                             @elseif ($expense_approval->status == 'rejected')
                                                 <span class="badge badge-xs d-flex justify-content-center"
-                                                    style="background-color: #E40909; width: 50px">rejected</span>
+                                                    style="border:1px solid #E40909; color:#E40909; width: 55px">rejected</span>
                                             @else
                                                 <span class="badge badge-secondary badge-xs">unknown</span>
                                             @endif
                                         </td>
-                                        <td class="text-sm align-middle text-center">
+                                        <td class="ps-4 text-sm align-middle text-center">
                                             @if ($expense_approval->status == 'pending')
                                                 <div class="d-flex flex-row pt-3 d-flex justify-content-center">
                                                     <button
-                                                        onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category }}', '{{ $expense_approval->sub_category }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
+                                                        onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category_name }}', '{{ $expense_approval->sub_category_name }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose_name }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
                                                         class="mx-1
                                                         btn text-white d-flex align-items-center d-flex
                                                         justify-content-center"
                                                         data-bs-original-title="approve" data-toggle="tooltip"
-                                                        data-placement="left" title="approve this expenses"
+                                                        data-placement="left" title="Review"
                                                         style="width: 60px; height:25px; background-color:#FFCF23"
                                                         data-bs-toggle="modal" data-bs-target="#viewExpenseDetail">
                                                         <i
@@ -155,21 +164,21 @@
                                                         <span style="font-size: 0.6em">Review</span>
                                                     </button>
                                                     <button
-                                                        onclick="approvalDecision({{ Auth::user()['id'] }}, {{ $expense_approval->approval_id }}, 'approved')"
+                                                        onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $expense_approval->approval_id }}', 'approved')"
                                                         data-bs-toggle="tooltip"
                                                         class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"
-                                                        data-bs-original-title="reject" data-toggle="tooltip"
-                                                        data-placement="left" title="reject this expenses"
+                                                        data-bs-original-title="Approve" data-toggle="tooltip"
+                                                        data-placement="left" title="Approve this expenses"
                                                         style="width: 60px; height:25px; background-color:#50B720">
                                                         <i class="fas fa-circle-check text-white text-md me-1"></i>
                                                         <span style="font-size: 0.6em">Approve</span>
                                                     </button>
                                                     <button
-                                                        onclick="approvalDecision({{ Auth::user()['id'] }}, {{ $expense_approval->approval_id }}, 'rejected')"
+                                                        onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $expense_approval->approval_id }}', 'rejected')"
                                                         data-bs-toggle="tooltip"
                                                         class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"
                                                         data-bs-original-title="reject" data-toggle="tooltip"
-                                                        data-placement="left" title="reject this expenses"
+                                                        data-placement="left" title="Reject this expenses"
                                                         style="width: 60px; height:25px; background-color:#E40909">
                                                         <i class="fas fa-circle-xmark text-white text-md me-1"></i>
                                                         <span style="font-size: 0.6em">Reject</span>
@@ -178,7 +187,7 @@
                                             @else
                                                 <div class="pt-3 d-flex justify-content-center">
                                                     <button
-                                                        onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category }}', '{{ $expense_approval->sub_category }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
+                                                        onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category_name }}', '{{ $expense_approval->sub_category_name }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose_name }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
                                                         data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"
                                                         class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"
                                                         style="width: 60px; height:25px; background-color:#FFCF23">
@@ -218,10 +227,10 @@
     </script> --}}
 
     <script>
-        function getExpenseData(receipt_directory, additional_directory, receipt_date, merchant, total_amount, location,
+        function getExpenseData(receipt_picture_directory, additional_picture_directory, receipt_date, merchant, total_amount, location,
             category, sub_category, partner, purpose, expense_of, status, approval_id) {
-            document.getElementById('detail_receipt_file').src = STORAGE_URL + receipt_directory;
-            document.getElementById('detail_additional_file').src = STORAGE_URL + additional_directory;
+            document.getElementById('detail_receipt_file').src = STORAGE_URL + receipt_picture_directory;
+            document.getElementById('detail_additional_file').src = STORAGE_URL + additional_picture_directory;
             document.getElementById('detail_date').value = receipt_date;
             document.getElementById('detail_merchant').value = merchant;
             document.getElementById('detail_total_amount').value = total_amount;
@@ -240,6 +249,9 @@
         }
 
         function approvalDecision(userId, approval_id, decision) {
+            console.log(userId);
+            console.log(approval_id);
+            console.log(decision);
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success-cstm mx-2",
@@ -315,4 +327,188 @@
                 });
         }
     </script>
+
+    <script>
+        function handleChangeStatus(event) {
+            event.submit();
+        }
+    </script>
+
+
+  
+{{-- filter untuk category --}}
+<script>
+    $(document).ready(function() {
+        var tenant_code = TENANT_CODE;
+        $.ajaxSetup({
+            headers: {
+                "Authorization": "Bearer " + AUTH_TOKEN,
+                "Accept": "application/json"
+            }
+        });
+
+
+        $(document).ready(function() {
+            var urlSearch = "";
+            $('#status').on('change', function() {
+                var status = $('#status').val();
+                urlSearch = API_URL + "api/expense/approval/list/" + tenant_code  + '/?user_id=' +
+                    USR_ID +
+                    "&status=" + status;
+                new getDataExpenses(urlSearch);
+            });
+        });
+
+
+        function getDataExpenses(urlSearch) {
+            $("#tableBody").html("");
+            // $("#totalAmount").html("0.00");
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": "Bearer " + AUTH_TOKEN,
+                    "Accept": "application/json"
+                }
+            });
+            $.ajax({
+                type: "GET",
+                url: urlSearch,
+                beforeSend: function() {
+                    $("#main-loader").show();
+                },
+                success: function(res) {
+                    if (res) {
+                        console.log(res);
+                        var response = res['data'];
+                        var tableOut = "";
+                        // var totalAmount = 0;
+                        for (const obj of response) {
+                            // totalAmount = totalAmount + parseFloat(obj.total_amount);
+                            // console.log(totalAmount);
+                            tableOut += '<tr>'+
+                                        '<td class="align-middle text-start text-capitalize text-xs">'+
+                                            '<div class="d-flex">'+
+                                                '<img src="`' + obj.receipt_picture_directory + '`"'+
+                                                    'class="img-fluid ms-3" alt="receipt" style="width: 50px">'+
+                                                '<div class="ms-3 my-auto show-modal">'+
+                                                    '<div>'+
+                                                        '<span class="text-xs text-dark text-bold">'+
+                                                            obj.sub_category_name +
+                                                       '</span>'+
+                                                    '</div>'+
+                                                    '<div>'+
+                                                        '<span class="text-xs text-dark">'+
+                                                            obj.full_name +
+                                                        '</span>'+
+                                                    '</div>'+
+                                                    '<div>'+
+                                                        '<span class="text-xxs text-dark">'+
+                                                            obj.date +
+                                                        '</span>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</td>'
+
+                            tableOut += '<td class="align-middle text-start text-xs text-capitalize text-dark">'+
+                                             obj.category_name +
+                                        '</td>'
+                            tableOut += '<td class="align-middle text-start text-xs text-dark">'+
+                                            obj.purpose_name +
+                                        '</td>'
+                            tableOut += '<td class="align-middle text-start text-xs text-dark">'+
+                                            obj.merchant +
+                                        '</td>'
+                            tableOut += '<td class="align-middle text-start text-xs text-dark">'+
+                                            obj.total_amount +
+                                        '</td>'
+                       
+                                     
+                           if (obj.status == 'pending'){
+                            tableOut += '<td class="align-middle text-start text-xs">'+
+                                                '<span class="badge badge-xs d-flex justify-content-center"'+
+                                                    'style="border:1px solid #FFCF23; color:#FFCF23; width: 55px">pending</span>'+
+                                            '</td>'
+                           }else if(obj.status == 'approved'){
+                            tableOut += '<td class="align-middle text-start text-xs">'+
+                                '<span class="badge badge-xs d-flex justify-content-center"'+
+                                    'style="border:1px solid #50B720; color:#50B720; width: 55px">approved</span>'+
+                            '</td>'
+                           }else if(obj.status == 'rejected'){
+                            tableOut +=  '<td class="align-middle text-start text-xs">'+
+                                '<span class="badge badge-xs d-flex justify-content-center"'+
+                                                    'style="border:1px solid #E40909; color:#E40909; width: 55px">rejected</span>'+
+                            '</td>'
+                           }else{
+                            tableOut += '<td class="align-middle text-start text-xs">'+
+                               '<span class="badge badge-secondary badge-xs">unknown</span>'+
+                            '</td>'
+                           }
+
+                          
+                            if(obj.status == 'pending'){
+                                tableOut +=  '<td class="text-sm align-middle text-center">'+
+                                                '<div class="d-flex flex-row pt-3 d-flex justify-content-center">'+
+                                                    '<button onclick="getExpenseData(`' + obj.receipt_picture_directory  + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`, `' + obj.total_amount + '`,`' + obj.location + '`,`' + obj.category_name + '`,`' + obj.sub_category_name + '`,`' +  obj.client_name + '`,`' +  obj.purpose_name + '`,`' + obj.expense_of + '`,`' + obj.status + '`,`' + obj.approval_id + '`)"'+
+                                                        'class="mx-1 btn text-white d-flex align-items-center d-flex justify-content-center"'+
+                                                        'data-bs-original-title="approve" data-toggle="tooltip"'+
+                                                        'data-placement="left" title="Review"'+
+                                                        'style="width: 60px; height:25px; background-color:#FFCF23"'+
+                                                        'data-bs-toggle="modal" data-bs-target="#viewExpenseDetail">'+
+                                                        '<i class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>'+
+                                                        '<span style="font-size: 0.6em">Review</span>'+
+                                                    '</button>'+
+                                                    '<button onclick="approvalDecision(`' + USR_ID + '`,`'  + obj.approval_id + '`,`approved`)"' +
+                                                        'data-bs-toggle="tooltip"'+
+                                                        'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"'+
+                                                        'data-bs-original-title="Approve" data-toggle="tooltip"'+
+                                                        'data-placement="left" title="Approve this expenses"'+
+                                                        'style="width: 60px; height:25px; background-color:#50B720">'+
+                                                        '<i class="fas fa-circle-check text-white text-md me-1"></i>'+
+                                                        '<span style="font-size: 0.6em">Approve</span>'+
+                                                    '</button>'+
+                                                    '<button onclick="approvalDecision(`' + USR_ID + '`,'  + '`' + obj.approval_id + '`,`rejected`)"'+
+                                                        'data-bs-toggle="tooltip"'+
+                                                        // '<button onclick="getExpenseData(' + '`' + expense.id + '`' + ')"' +
+                                                        'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"'+
+                                                        'data-bs-original-title="reject" data-toggle="tooltip"'+
+                                                        'data-placement="left" title="Reject this expenses"'+
+                                                        'style="width: 60px; height:25px; background-color:#E40909">'+
+                                                        '<i class="fas fa-circle-xmark text-white text-md me-1"></i>'+
+                                                        '<span style="font-size: 0.6em">Reject</span>'+
+                                                    '</button>'+
+                                                '</div>'+
+                                            '</td>'
+                            }else{
+                                tableOut += 
+                                '<td class="text-sm align-middle text-center">'+
+                                   '<div class="pt-3 d-flex justify-content-center">'+
+                                      '<button onclick="getExpenseData(`' + obj.receipt_picture_directory + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`,`' + obj.total_amount + '`,`' + obj.location + '`,`' + obj.category_name + '`,`' + obj.sub_category_name + '`,`' + obj.client_name + '`,`' + obj.purpose_name + '`,`' + obj.expense_of + '`,`' + obj.status + '`,`' + obj.approval_id + '`)"'+
+                                          'data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"'+
+                                              'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"'+
+                                                    'style="width: 60px; height:25px; background-color:#FFCF23">'+
+                                                        '<i class="fas fa-circle-check text-white text-md me-1"></i>'+
+                                                    '<span style="font-size: 0.6em">Detail</span>'+
+                                                    '</button>'+
+                                      '</div>'+
+                                    '</td>'
+                            }
+                                          
+                                          
+                           
+ 
+                        }
+                        $("#tableBody").append(tableOut);
+                        // $("#totalAmount").html(Intl.NumberFormat().format(totalAmount));
+                    } else {
+                        $("#tableBody").empty();
+                    }
+
+                },
+                complete: function(data) {
+                    $("#main-loader").hide();
+                }
+            });
+        }
+    });
+</script>
 @endsection

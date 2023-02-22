@@ -198,182 +198,120 @@
             cursor: url(grabbed.cur), default;
         }
     </style>
-
-    <div class="row mt-4 mb-0">
-        <div class="col-md">
-            <div class="row p-0 mb-2">
-                <div class="text-dark">Available Balance</div>
-                <div><span
-                        class="text-md font-weight-bolder text-dark fs-5">{{ number_format($data['limit']['remain_limit'], 2) }}</span>
+    @if (session()->get('is_superadmin') == false)
+        <div class="row mt-2 mb-0">
+            <div class="col-md">
+                <div class="row p-0 mb-2">
+                    <div class="text-dark">Available Balance</div>
+                    <div><span
+                            class="text-md font-weight-bolder text-dark fs-5">{{ number_format($data['limit']['remain_limit'], 2) }}</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md dropdown text-end">
-            <button class="btn text-white" type="button" id="dropDownExpense" data-bs-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false" style="background-color: #191a4d">New Expense</button>
-
-            <ul class="dropdown-menu" aria-labelledby="dropDownExpense">
-                <li>
-                    <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal" data-bs-target="#manualForm"
-                        onclick="handlingModalForm(false)">
-                        <span class="" style="background: #191a4d;border-radius:50%;">
-                            <div class="d-flex align-items-center" id="ava-upload-button-1">
-                                <span class="overflow-hidden d-flex align-items-center justify-content-center"
-                                    style="border-radius: 50%;background: #191a4d; width:20px; height:20px">
-                                    <i class="fa-solid fa-pen-to-square text-white p-1" style=""></i>
-                                </span>
-                                &nbsp;<span id="ava-pic-1" class="text-dark">Manual Form</span>
-                            </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal" data-bs-target="#manualForm"
-                        onclick="handlingModalForm(true)">
-                        <span class="" style="background: #191a4d;border-radius:50%;">
-                            <div class="d-flex align-items-center" id="ava-upload-button-2">
-                                <span class="overflow-hidden d-flex align-items-center justify-content-center"
-                                    style="border-radius: 50%;background: #191a4d; width:20px; height:20px">
-                                    <i class="fa-solid fa-receipt text-white "></i>
-                                </span>
-                                &nbsp;<span id="ava-pic-2" class="text-dark">Scan Receipt</span>
-                            </div>
-                    </a>
-                </li>
-            </ul>            
-        </div>
-    </div>
-    <div class="row" style="display: none">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-10">
-            <form action="" method="get">
-                <div class="row row-cols-md-5 row-cols-1 justify-content-end">
-                    <div class="col-md mt-2">
-                        <div class="col-md input-group">
-                            <span for="" class="input-group-text z-index-1 font-weight-bold text-dark"
-                                id="basic-addon1"
-                                style="border-right: 1px solid #adadadad; font-size:11px;height:35px;border-top-left-radius:5px;border-bottom-left-radius:5px">From</span>
-                            <input type="date" class="form-control px-2 text-dark" id="form" name="start_date"
-                                style="font-size:11px;height:35px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
-                        </div>
-                    </div>
-                    <div class="col-md mt-2">
-                        <div class="input-group">
-                            <span for="" class="input-group-text z-index-1 font-weight-bold text-dark"
-                                style="border-right: 1px solid #adadadad; font-size:11px;height:35px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
-                            <input type="date" class="form-control px-2 text-dark" id="form" name="end_date"
-                                style="font-size:11px;height:35px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
-                        </div>
-                    </div>
-                    <div class="col-md mt-2">
-                        <select name="category" id="list_category" class="form-select text-dark"
-                            style="font-size:11px;line-height:16px !important;border-radius:5px !important">
-                            <option value="" class="text-dark" selected>Expense Type</option>
-                        </select>
-                    </div>
-                    <div class="col-md mt-2">
-                        <select name="category" id="" class="form-select text-dark"
-                            style="font-size:11px;line-height:16px !important;border-radius:5px !important">
-                            <option value="" class="text-dark" selected>Status</option>
-                            <option value="done" class="text-dark">done</option>
-                            <option value="pending" class="text-dark">pending</option>
-                            <option value="approved" class="text-dark">approved</option>
-                            <option value="rejected" class="text-dark">rejected</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2 mt-2 d-flex" style="width: 70px">
-                        <button type="submit" style="line-height:16px;" class="form-control" value="Search">
-                            <i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="mySidebar" class="sidebar pt-3 shadow-sm"
-        style="border-top-left-radius:10px;background: rgb(249,249,249);
-    background: linear-gradient(180deg, rgba(249,249,249,1) %, rgba(255,255,255,1) 40%);">
-        <div class="col-md text-center mb-3" style="border-bottom: 1px solid #c8c8c8">
-            <h5 class="text-dark font-weight-bolder">Voucher</h5>
-        </div>
-        <div class="col-md d-flex justify-content-end text-center pt-0">
-            <a href="/voucher" class=" text-dark text-center" style="width: 100px">
-                <div class="text-center d-flex align-items-center justify-content-center text-xs text-white me-2"
-                    style="border-radius:5px; background: #191a4d">
-                    View All
-                </div>
-            </a>
-        </div>
-        @php
-            $iterateCoupon = 1;
-        @endphp
-        @foreach ($data['coupons'] as $itemCoupon)
-            <div class="col-md w-100 text-center">
-                <a class="" data-bs-toggle="collapse" href="#collapseExample{{ $iterateCoupon }}" role="button"
-                    aria-expanded="false" aria-controls="collapseExample1">
-                    <div class="w-100">
-                        <img src="{{ config('storage.base_url') . $itemCoupon->discount_picture }}" alt=""
-                            class="img-fluid" style="width: 200px" srcset="">
-                    </div>
-                </a>
-                <div class="collapse " id="collapseExample{{ $iterateCoupon }}">
-                    <div class="card mx-3 ">
-                        <div class="card-body">
-                            <div class="d-flex flex-column">
-                                <div class="d-flex flex-column align-items-center p-0 justify-content-center">
-                                    <img src="{{ config('storage.base_url') . $itemCoupon->discount_barcode_picture }}"
-                                        class="img-fluid" alt="" style="width: 90px">
+            <div class="col-md dropdown text-end">
+                <button class="btn text-white" type="button" id="dropDownExpense" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" style="background-color: #191a4d">New Expense</button>
+                <ul class="dropdown-menu" aria-labelledby="dropDownExpense">
+                    <li>
+                        <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal"
+                            data-bs-target="#manualForm" onclick="handlingModalForm(false)">
+                            <span class="" style="background: #191a4d;border-radius:50%;">
+                                <div class="d-flex align-items-center" id="ava-upload-button-1">
+                                    <span class="overflow-hidden d-flex align-items-center justify-content-center"
+                                        style="border-radius: 50%;background: #191a4d; width:20px; height:20px">
+                                        <i class="fa-solid fa-pen-to-square text-white p-1" style=""></i>
+                                    </span>
+                                    &nbsp;<span id="ava-pic-1" class="text-dark">Manual Form</span>
                                 </div>
-                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal"
+                            data-bs-target="#manualForm" onclick="handlingModalForm(true)">
+                            <span class="" style="background: #191a4d;border-radius:50%;">
+                                <div class="d-flex align-items-center" id="ava-upload-button-2">
+                                    <span class="overflow-hidden d-flex align-items-center justify-content-center"
+                                        style="border-radius: 50%;background: #191a4d; width:20px; height:20px">
+                                        <i class="fa-solid fa-receipt text-white "></i>
+                                    </span>
+                                    &nbsp;<span id="ava-pic-2" class="text-dark">Scan Receipt</span>
+                                </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    @endif
+    <div class="row mt-4 position-relative">
+        <div class="col-12">
+            <div class="card" style="border-radius: 5px">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="d-flex mb-4 justify-content-start justify-content-md-end">
+                            <form id="formSearch" action="" style="z-index: 0" onsubmit="handleChangeStatus(event)">
+                                <div class="row">
+                                    <div class="col-md mt-2">
+                                        <select name="statusType" id="status"
+                                            class="rounded border border-secondary text-secondary"
+                                            style="font-size:12px; height: 25px; width: 150px">
+                                            <option value="">Status</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
+                                                value="pending">Pending</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'rejected' ? 'selected' : '' }}
+                                                value="rejected">Rejected</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'approved' ? 'selected' : '' }}
+                                                value="approved">Approved</option>
+                                            <option
+                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
+                                                value="done">Done</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            @php
-                $iterateCoupon = $iterateCoupon + 1;
-            @endphp
-        @endforeach
-    </div>
-
-    @if (count($data['expenses']) != 0)
-        <div class="row mt-4 position-relative">
-            <div class="col-12">
-                <div class="card" style="border-radius: 5px">
-                    <div class="table-responsive">
-                        <table class="table table-borderless text-dark" border="1">
-                            <thead>
-                                <tr>
-                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                        style="color: #000000; ">Date Receipts
-                                    </th>
-                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                        style="color: #000000; ">Status
-                                    </th>
-                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                        style="color: #000000; ">Purpose
-                                    </th>
-                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                        style="color: #000000; ">
-                                        Merchant
-                                    </th>
-                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                        style="color: #000000; ">
-                                        Amount
-                                    </th>
-                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                        style="color: #000000; ">
-                                        Expense
-                                    </th>
-                                    <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                        style="color: #000000; ">
-                                        Action
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                <div class="table-responsive">
+                    <table class="table table-borderless text-dark" border="1">
+                        <thead>
+                            <tr>
+                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                    style="color: #000000; ">Date Receipts
+                                </th>
+                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                    style="color: #000000; ">Status
+                                </th>
+                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                    style="color: #000000; ">Purpose
+                                </th>
+                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                    style="color: #000000; ">
+                                    Merchant
+                                </th>
+                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                    style="color: #000000; ">
+                                    Amount
+                                </th>
+                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                    style="color: #000000; ">
+                                    Expense
+                                </th>
+                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                    style="color: #000000; ">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            @if (count($data['expenses']) != 0)
                                 @foreach ($data['expenses'] as $item)
                                     @php
+                                        
                                         $i = 1;
+                                        
                                     @endphp
                                     <tr class="align-middle">
                                         <td colspan="7" style="color: #000000;font-weight:500;font-size:12px;"
@@ -401,7 +339,7 @@
                                                     </span>
                                                 @elseif($expense->status == 'rejected')
                                                     <span class="badge badge-xs d-flex justify-content-center"
-                                                        style=" background:#E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">
+                                                        style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">
                                                         {{ $expense->status }}
                                                     </span>
                                                 @else
@@ -413,7 +351,7 @@
                                             </td>
                                             <td class="text-md-start ps-md-4 text-end text-break text-wrap"
                                                 data-label="Purpose" style="color: #000000">
-                                                {{ $expense->purpose }}
+                                                {{ $expense->purpose_name }}
                                             </td>
                                             <td class="text-break text-wrap text-md-start text-end ps-md-4"
                                                 data-label="Merchant" style="color: #000000">
@@ -427,11 +365,11 @@
                                             </td>
                                             <td class="text-break text-wrap ps-md-4 text-md-start text-end"
                                                 data-label="Expense" style="color: #000000">
-                                                {{ $expense->category }}
+                                                {{ $expense->category_name }}
                                             </td>
                                             <td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between"
                                                 data-label="Action">
-                                                <button onclick="getExpenseData({{ $expense->id }})"
+                                                <button onclick="getExpenseData('{{ $expense->id }}' )"
                                                     class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
                                                     data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"
                                                     style="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">
@@ -440,22 +378,29 @@
                                         </tr>
                                     @endforeach
                                 @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            @else
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="row justify-content-center h-100 align-items-center">
+                                            <div class="d-flex align-items-center justify-content-center flex-column py-5">
+                                                <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid"
+                                                    alt="" style="width: 100px">
+                                                <h6 class="font-weight-bold text-dark py-0">You don't have expense</h6>
+                                                <span class="text-xs" style="text-align: center">Scan your recepit or
+                                                    create new
+                                                    expense form the button
+                                                    above</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    @else
-        <div class="row justify-content-center h-100 align-items-center">
-            <div class="d-flex align-items-center justify-content-center flex-column py-5">
-                <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid" alt="" style="width: 100px">
-                <h6 class="font-weight-bold text-dark py-0">You don't have expense</h6>
-                <span class="text-xs" style="text-align: center">Scan your recepit or create new expense form the button
-                    above</span>
-            </div>
-        </div>
-    @endif
+    </div>
 
     <script>
         $(document).ready(function() {
@@ -508,10 +453,10 @@
                         document.getElementById('detail_total_amount').value = response['total_amount']
                             .toLocaleString();
                         document.getElementById('detail_location').value = response['location'];
-                        document.getElementById('detail_category').value = response['category'];
-                        document.getElementById('detail_sub_category').value = response['sub_category'];
+                        document.getElementById('detail_category').value = response['category_name'];
+                        document.getElementById('detail_sub_category').value = response['sub_category_name'];
                         document.getElementById('detail_partner').value = response['client_name'];
-                        document.getElementById('detail_purpose').value = response['purpose'];
+                        document.getElementById('detail_purpose').value = response['purpose_name'];
                         document.getElementById('dataExpenseOf').value = response['expense_of'];
                         $('#ex1').zoom();
                         $('#ex2').zoom();
@@ -594,4 +539,137 @@
         }
     </script>
     <!-- side voucher-->
+    <script>
+        function handleChangeStatus(event) {
+            event.submit();
+        }
+    </script>
+
+
+    {{-- filter untuk category --}}
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": "Bearer " + AUTH_TOKEN,
+                    "Accept": "application/json"
+                }
+            });
+
+
+            $(document).ready(function() {
+                var urlSearch = "";
+                $('#status').on('change', function() {
+                    var status = $('#status').val();
+                    urlSearch = API_URL + "api/expense/list/nested?user_id=" +
+                        USR_ID +
+                        "&status=" + status;
+                    new getDataExpenses(urlSearch);
+                });
+            });
+
+
+            function getDataExpenses(urlSearch) {
+                $("#tableBody").html("");
+                // $("#totalAmount").html("0.00");
+                $.ajaxSetup({
+                    headers: {
+                        "Authorization": "Bearer " + AUTH_TOKEN,
+                        "Accept": "application/json"
+                    }
+                });
+                $.ajax({
+                    type: "GET",
+                    url: urlSearch,
+                    beforeSend: function() {
+                        $("#main-loader").show();
+                    },
+                    success: function(res) {
+                        if (res) {
+                            console.log(res);
+                            var response = res['data'];
+                            var tableOut = "";
+                            
+                            // var totalAmount = 0;
+                            for (const obj of response) {
+                                var i = 1;
+                                tableOut += '<tr class="align-middle">' +
+                                    '<td colspan="7" style="color: #000000;font-weight:500;font-size:12px;" class="text-md-start text-end ps-md-4 text-break text-wrap">' +
+                                    obj.long_date +
+                                    '</td> </tr>'
+                                for (const expense of obj.expenses) {
+                                    tableOut +=
+                                        '<tr><td class="font-weight-bold pt-3">';
+                                    tableOut +=
+                                        '<p class="text-sm text-dark">' +  '#' + i++ +
+                                        '</p></td>';
+                                    if (expense.status == 'approved') {
+                                        tableOut +=
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<span class="badge badge-xs d-flex justify-content-center"' +
+                                            'style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">' +
+                                                expense.status  
+                                             '</span>' +
+                                                + '</p></td>';
+
+                                    } else if (expense.status == 'pending') {
+                                        tableOut +=
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">'  +
+                                                '<span class="badge badge-xs d-flex justify-content-center"' +
+                                                 'style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">' +
+                                                        expense.status
+                                                '</span>'
+                                            + '</p></td>';
+                                    } else if (expense.status == 'rejected') {
+                                        tableOut +=
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                                '<span class="badge badge-xs d-flex justify-content-center"' +
+                                                 'style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">'+
+                                                       expense.status
+                                                    '</span>' 
+                                            + '</td>';
+
+                                    } else {
+                                        tableOut +=
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            expense.status + '</p></td>';
+
+                                    }
+
+                                    tableOut +=
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
+                                        expense.purpose_name + '</p></td>';
+                                    tableOut +=
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
+                                        expense.merchant + '</p></td>';
+                                    tableOut +=
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
+                                        expense.total_amount + '</p></td>';
+                                    tableOut +=
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
+                                        expense.category_name + '</p></td>';
+                                    tableOut +=
+                                        '<td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between" data-label="Action">' +
+                                        ' <button onclick="getExpenseData(' + '`' + expense.id + '`' +
+                                        ')"' +
+                                        'class = "btn text-white d-flex  justify-content-center align-items-center text-capitalize"' +
+                                        'data-bs-toggle = "modal" data-bs-target = "#viewExpenseDetail"' +
+                                        'style ="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">' +
+                                        ' View' + ' </button> </td></tr>'
+                                }
+
+                            }
+                            $("#tableBody").append(tableOut);
+                        } else {
+                            $("#tableBody").empty();
+                        }
+
+                    },
+                    complete: function(data) {
+                        $("#main-loader").hide();
+                    }
+                });
+            }
+        });
+    </script>
 @endsection
