@@ -66,7 +66,7 @@
                         <div>
                             <button class="btn text-white" data-bs-dismiss="modal"
                                 style="background-color: #D42A34">Cancel</button>
-                            <button class="btn text-white" style="background-color: #62ca50" onclick="addPartner({{ Auth::user()['id'] }})">
+                            <button class="btn text-white" style="background-color: #62ca50" onclick="addPartner('{{ Auth::user()['id'] }}')">
                                 Submit
                             </button>
                         </div>
@@ -79,8 +79,9 @@
 
 <script>
     $("#user_assign_id").change(function(){
-        const group_id = $(this).find(':selected').data('group')
-        const user_id = {{Auth::user()['id']}};
+        const group_id = $(this).find(':selected').data('group');
+     
+        const user_id = '{{Auth::user()['id']}}';
         $.get(API_URL + "api/group/list/"+ TENANT_CODE, 
         {
             "user_id" : user_id,
