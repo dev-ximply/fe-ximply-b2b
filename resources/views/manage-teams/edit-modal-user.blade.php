@@ -48,7 +48,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                {{-- <input type="hidden" name="test" id="user_id"> --}}
                                 <div class="col-6">
                                     <label class="form-label mt-2" style="color: black; font-weight:500">Group</label>
                                     <div class="">
@@ -109,13 +108,6 @@
         let employeeId = event.target.querySelector('#edit_employee_id').value;
         let departementId = event.target.querySelector("#edit_department_id").value;
         let roleId = event.target.querySelector("#edit_role_id").value;
-        // console.log(firstNameId);
-        // console.log(lastNameId);
-        // console.log(emailId);
-        // console.log(employeeId);
-        // console.log(departementId);
-        // console.log(roleId);
-        // console.log('submit')
         const datas = {
             user_id: userId,
             first_name: firstNameId,

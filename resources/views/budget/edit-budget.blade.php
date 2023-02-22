@@ -5,7 +5,6 @@
             <div class="modal-header" style="background: #19194B; color:white">
                 <h5 class="modal-title text-white" id="exampleModalLabel">Edit Budget</h5>
                 <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
-                    {{-- <span aria-hidden="true">×</span> --}}
                 </button>
             </div>
             <div class="modal-body">
@@ -34,8 +33,6 @@
                                 id="edit_budget_limit_avail_topup" name="edit_budget_limit_avail_topup" value="0">
                             <script>
                                 new NumericInput(document.getElementById('edit_budget_limit_avail_topup'), 'en-CA');
-                                // new NumericInput(document.getElementById('edit_budget_limit_avail_topup'), 'en-CA');
-                                // new Intl.NumberFormat(document.getElementById('edit_budget_limit_avail_topup')).format(123456.789);
                             </script>
                         </div>
 
@@ -43,36 +40,21 @@
                             <label class="form-label text-dark " style="font-weight: 600">Auto Approve Amount</label>
                             <input type="text" class="form-control number-separator number_separator"
                                 id="auto_approve_edit" name="auto_approve_edit" value="0">
-                            {{-- <script>
-                                new NumericInput(document.getElementById('auto_approve_edit'), 'en-CA');
-                            </script> --}}
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label text-dark" style="font-weight: 600">Period</label>
-                            {{-- <div class="col-6"> --}}
-
                             <select class="form-control" name="frequency" id="edit_frequency">
                                 <option value="onetime">Onetime</option>
                                 <option value="monthly">Monthly</option>
                             </select>
-                            {{-- </div> --}}
                         </div>
                         <div class="col-6">
                             <label class="form-label text-dark" style="font-weight: 600">Expire Date</label>
                             <input type="date" class="form-control" id="expire_date" name="expire_date"
                                 value="{{ old('expire_date') }}">
                         </div>
-                        {{-- @if (session()->get('is_superadmin') == false)
-                        <div class="col-6">
-                            <label class="form-label text-dark" style="font-weight: 600">Used Limit</label>
-                            <input type="text" id="used_limit" class="form-control" name="used_limit" value="0">
-                        </div>
-                            
-                        @endif --}}
-                        {{-- <input type="text" id="valuation"> --}}
                     </div>
-
 
                     <div class="d-flex justify-content-end mt-3">
                         <button type="button" name="button" class="btn btn-danger-cstm m-0"
@@ -85,51 +67,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-{{-- <script>
-    $(".numberSeparator").on('keyup', function(){
-    var n = parseInt($(this).val().replace(/\D/g,''),10);
-    $(this).val(n.toLocaleString());
-});
-</script> --}}
-
-
-
-
-
-{{-- <script>
-    $('input.number_separator').keyup(function(event) {
-        if (event.which >= 37 && event.which <= 40) return;
-        $(this).val(function(index, value) {
-            return value
-                // Keep only digits, decimal points, and dashes at the start of the string:
-                .replace(/[^\d.-]|(?!^)-/g, "")
-                // Remove duplicated decimal points, if they exist:
-                .replace(/^([^.]*\.)(.*$)/, (_, g1, g2) => g1 + g2.replace(/\./g, ''))
-                // Keep only two digits past the decimal point:
-                .replace(/\.(\d{2})\d+/, '.$1')
-                // Add thousands separators:
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        });
-    });
-</script> --}}
-
-<script>
-    // $('.number_separator').keydown(function() {
-    //     var x = $('.number_separator').val();
-    //     $('.number_separator').val(addCommas(x));
-
-    //     function addCommas(x) {
-    //         var parts = x.toString().split(".");
-    //         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    //         return parts.join(".");
-    //     }
-    // });
-</script>
 
 <script>
     $("input.number_separator").each((i, ele) => {
@@ -157,7 +94,6 @@
 
 
     });
-
 </script>
 
 

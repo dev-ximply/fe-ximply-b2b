@@ -101,19 +101,13 @@
                                                 value="done">Done</option>
                                         </select>
                                     </div>
-                                    <div class="col-md mt-2">
-                                        {{-- <button type="submit" style="line-height:10px; height:25px; font-size:9px; background:#191a4b; color:white"
-                                            class="form-control text-bold" id="filter_button">
-                                            F&nbsp;I&nbsp;L&nbsp;T&nbsp;E&nbsp;R
-                                        </button> --}}
+                                    {{-- <div class="col-md mt-2">
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
                                             class="form-control text-bold d-flex justify-content-center" id="filter_button">
-
                                             <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
-
                                         </button>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </form>
                         </div>
@@ -164,8 +158,6 @@
                                                             {{ $approval['full_name'] }}
                                                         </span></div>
                                                     <div><span>
-                                                            {{-- {{ $item['department'] }} --}}
-
                                                         </span></div>
                                                     <div><span>Remain Limit : </span><span class="text-xs font-weight-bold">
                                                             {{ number_format($approval['remain_limit'], 2) }}
@@ -176,17 +168,12 @@
                                                     <span class="text-xs">Top Up : </span><span class="font-weight-bold">
                                                         {{ number_format($approval['amount'], 2) }}
                                                     </span>
-                                                    {{-- <div><span>Approved : <span class="font-weight-bold">
-                                                                {{ $approval['approval_amount'] }}
-                                                            </span></span>
-                                                    </div> --}}
                                                 </td>
                                                 <td class="align-middle text-start text-xs text-dark">
                                                     <div class="" style="max-width: 300px">
                                                         <div><span>Purpose : </span><span
                                                                 class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">
-                                                                {{-- {{ $item['purpose'] }} --}}
                                                                 Award & Recognition
                                                             </span></div>
                                                         <div><span>Note : </span><span class="font-weight-bold text-wrap"
@@ -298,15 +285,14 @@
                     clone.val(newv)
                 }
             }, 10);
-    
+
             $(ele).mouseleave(() => {
                 $(clone).show()
                 $(ele1).hide()
             });
-    
-    
+
+
         });
-    
     </script>
 
     <script>
@@ -320,17 +306,13 @@
 
     <script>
         function getDetail(topup_id, amount, idfunction) {
-            // console.log(element);
             if (idfunction != "") {
                 $(idfunction).modal('show')
             }
 
-            // console.log(topup_id, amount);
             document.getElementById('topUpId').value = topup_id;
             document.getElementById('topupAmount').value = amount;
             document.getElementById('topupAmountApprove').value = amount;
-            // document.getElementById('topupAmountApprove').value = element.dataset.topupRequest;
-            // document.getElementById('topUpId').value = element.dataset.topupId;
 
         }
 
@@ -507,15 +489,6 @@
                 });
             });
 
-            // $(document).ready(function(){
-            //    var urlSearch = "";
-            //    $('#status').on('change', function(){
-            //       var status = $('#status').val();
-            //       urlSearch = API_URL = "api"
-            //    }); 
-            // });
-
-
             function getDataExpenses(urlSearch) {
                 $("#tableBody").html("");
                 // $("#totalAmount").html("0.00");
@@ -539,8 +512,6 @@
                             // var totalAmount = 0;
                             for (const obj of response) {
                                 console.log(obj);
-                                // totalAmount = totalAmount + parseFloat(obj.total_amount);
-                                // console.log(totalAmount);
                                 tableOut += '<tr>' +
                                     '<td class="align-middle text-start text-xs text-dark">' +
                                     obj.date +
@@ -657,43 +628,6 @@
             }
         });
     </script>
-
-    {{-- <script>
-    $(document).ready(function() {
-        $("#status").on("change", function() {
-            var country = $('#status').find("option:selected").val();
-            // var age = $('#ddlAge').find("option:selected").val();
-            SearchData(country)
-        });
-    });
-
-    function SearchData(country) {
-        if (country.toUpperCase() == 'STATUS') {
-            $('#table11 tbody tr').show();
-        } else {
-            $('#table11 tbody tr:has(td)').each(function() {
-                var rowCountry = $.trim($(this).find('td:eq(1)').text());
-                // var rowAge = $.trim($(this).find('td:eq(2)').text());
-                if (country.toUpperCase() != '' ) {
-                    if (rowCountry.toUpperCase() == country.toUpperCase()) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-                } else if ($(this).find('td:eq(1)').text() != '' || $(this).find('td:eq(1)').text() != '') {
-                    if (country != '' ) {
-                        if (rowCountry.toUpperCase() == country.toUpperCase()) {
-                            $(this).show();
-                        } else {
-                            $(this).hide();
-                        }
-                    }
-                }
-
-            });
-        }
-    }
-</script> --}}
 
     <script>
         function handleChangeStatus(event) {
