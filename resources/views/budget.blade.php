@@ -72,7 +72,7 @@
 
 
     <div class="row" style="margin-left: -5px;">
-        @foreach ($data['members'] as $item) 
+        @foreach ($data['members'] as $item)
             <div class="col-md-3">
                 <div class="card mb-3">
                     <div class=" p-2 px-3">
@@ -81,19 +81,12 @@
                                 <h6 class="text-capitalize text-dark">
                                     {{ $item->full_name }}
                                 </h6>
-                                @if (session()->get('is_superadmin') == true)
-                                    @if ($item->role_name == 'member')
-                                        <span class="text-capitalize px-3 py-1 "
-                                            style="font-size:11px;background:#f3fcf7;color:#62ca50; border-radius:3px">{{ $item->role_name }}</span>
-                                    @else
-                                        <span class="text-capitalize px-3 py-1 "
-                                            style="font-size:11px;background:#eff6fe;color:#5695cf; border-radius:3px">{{ $item->role_name }}</span>
-                                    @endif
+                                @if ($item->role_name == 'member')
+                                    <span class="text-capitalize px-3 py-1 "
+                                        style="font-size:11px;background:#f3fcf7;color:#62ca50; border-radius:3px">{{ $item->role_name }}</span>
                                 @else
-                                    @if ($item->role_name == 'member')
-                                        <span class="text-capitalize px-3 py-1 "
-                                            style="font-size:11px;background:#f3fcf7;color:#62ca50; border-radius:3px">{{ $item->role_name }}</span>
-                                    @endif
+                                    <span class="text-capitalize px-3 py-1 "
+                                        style="font-size:11px;background:#eff6fe;color:#5695cf; border-radius:3px">{{ $item->role_name }}</span>
                                 @endif
                             </div>
                             <div class="ms-auto">

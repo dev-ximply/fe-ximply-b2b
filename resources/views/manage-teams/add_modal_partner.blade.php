@@ -56,7 +56,9 @@
                     </div>
                     <div class="col-6">
                         <label class="form-label mt-4" style="color: black; font-weight:500">Group</label>
-                        <input type="text" value="" class="form-control" name="group_id" id="group_id" readonly style="background-color: white">
+                        <select class="form-control" name="group_id" id="group_id" style="background-color: white" readonly disabled>
+                            <option value="" id="option_group"></option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
@@ -64,14 +66,7 @@
                         <div>
                             <button class="btn text-white" data-bs-dismiss="modal"
                                 style="background-color: #D42A34">Cancel</button>
-                            <button class="btn text-white" style="background-color: #62ca50" onclick="addPartner('{{ Auth::user()['id'] }}',
-                                document.getElementById('companyName').value,
-                                document.getElementById('picName').value,
-                                document.getElementById('email').value,
-                                document.getElementById('handphone').value,
-                                document.getElementById('group_id').value,
-                                document.getElementById('user_assign_id').value,
-                                )">
+                            <button class="btn text-white" style="background-color: #62ca50" onclick="addPartner({{ Auth::user()['id'] }})">
                                 Submit
                             </button>
                         </div>
@@ -92,12 +87,19 @@
             "group_id" : group_id
 
         }, function (res, textStatus, jqXHR) {
-            console.log(res.data.group_name);
-            document.getElementById('group_id').value = res.data.group_name;
+            $('#option_group').val(res.data.id);
+            $("#option_group").text(res.data.group_name);
         });
 
     });
-    function addPartner(userId, companyName, picName, email, handphone, group_id, userAssignId) {
+    function addPartner(userId ) {
+        
+        const companyName   =  document.getElementById('companyName').value;
+        const picName       =  document.getElementById('picName').value;
+        const email         =  document.getElementById('email').value;
+        const handphone     =  document.getElementById('handphone').value;
+        const group_id      =  document.getElementById('group_id').value;
+        const userAssignId  =  document.getElementById('user_assign_id').value;
         var tenantCode = TENANT_CODE;
         var userid = USR_ID;
         console.log(userId);
