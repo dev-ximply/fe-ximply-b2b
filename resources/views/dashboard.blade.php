@@ -46,59 +46,62 @@
     </div>
 
     <div class="row mb-2 flex-md-row flex-column">
-        {{-- quick accesss --}}
-        <div class="col-md d-md-none d-block">
-            <div class="coloumn__quick__access">
-                <p>Quick Access</p>
-                <div class="d-flex justify-content-between" style="overflow-x: scroll;">
-                    <a href="" class="" type="button" data-bs-toggle="modal" data-bs-target="#modalExpenses"
-                        aria-controls="new-expense-form" id="myBtn">
-                        {{-- <a href="" class="" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
-                        <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                            {{-- <div class="icon icon-shape  shadow text-center border-radius-md"
+
+        @if (session()->get('is_superadmin') == false)
+            {{-- quick accesss --}}
+            <div class="col-md d-md-none d-block">
+                <div class="coloumn__quick__access">
+                    <p>Quick Access</p>
+                    <div class="d-flex justify-content-between" style="overflow-x: scroll;">
+                        <a href="" class="" type="button" data-bs-toggle="modal"
+                            data-bs-target="#modalExpenses" aria-controls="new-expense-form" id="myBtn">
+                            {{-- <a href="" class="" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
+                            <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
+                                {{-- <div class="icon icon-shape  shadow text-center border-radius-md"
                                 style="min-height: 65px; max-height: 65px; min-width: 80px; max-width: 80px;background-color:#19194b">
                                 <i class="ni ni-bag-17 text-lg opacity-10" aria-hidden="true"></i>
                                 <div class="mt-1">
                                     <span class="text-white" style="font-size: 10px">New&nbsp;Expenses</span>
                                 </div>
                             </div> --}}
-                            <div>
-                                <img src="{{ asset('img/icons/dashboard/new-expenses.png') }}" alt="" class=""
-                                    style="width:85px">
+                                <div>
+                                    <img src="{{ asset('img/icons/dashboard/new-expenses.png') }}" alt=""
+                                        class="" style="width:85px">
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <a href="" class="" data-bs-toggle="modal" data-bs-target="#topUp">
-                        {{-- <a href="" class="" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
-                        <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                            {{-- <div class="icon icon-shape shadow text-center border-radius-md"
+                        </a>
+                        <a href="" class="" data-bs-toggle="modal" data-bs-target="#topUp">
+                            {{-- <a href="" class="" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
+                            <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
+                                {{-- <div class="icon icon-shape shadow text-center border-radius-md"
                                 style="min-height: 65px; max-height: 65px; min-width: 80px; max-width: 80px;background-color:#19194b">
                                 <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
                                 <div class="mt-1">
                                     <span class="text-white" style="font-size: 10px">Top&nbsp;Up</span>
                                 </div>
                             </div> --}}
-                            <div>
-                                <img src="{{ asset('img/icons/dashboard/top-up.png') }}" alt="" class=""
-                                    style="width:85px">
-                            </div>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                            <div class="icon icon-shape bg-gradient-secondary-cstm shadow text-center border-radius-md"
-                                style="min-height: 65px; max-height: 65px; min-width: 80px; max-width: 80px;">
-                                <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i>
-                                <div class="mt-1">
-                                    <span class="text-white" style="font-size: 10px">Add</span>
+                                <div>
+                                    <img src="{{ asset('img/icons/dashboard/top-up.png') }}" alt="" class=""
+                                        style="width:85px">
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                        <a href="">
+                            <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
+                                <div class="icon icon-shape bg-gradient-secondary-cstm shadow text-center border-radius-md"
+                                    style="min-height: 65px; max-height: 65px; min-width: 80px; max-width: 80px;">
+                                    <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i>
+                                    <div class="mt-1">
+                                        <span class="text-white" style="font-size: 10px">Add</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        {{-- end quick access --}}
+            {{-- end quick access --}}
+        @endif
 
         <form action="">
 
@@ -128,8 +131,8 @@
 
                 <div class="col-md pt-0 mt-3">
                     <div class="row justify-content-between">
-                        <div class="col-md column_info text-center">
-                            <div class="column_content_info card" style="">
+                        <div class="col-md column_info  text-center">
+                            <div class="column_content_info card pt-2" style="">
                                 <span class="title__amount" style="font-weight: 600;">Remain Budget <p>(Remain Expense)
                                     </p>
                                 </span>
@@ -142,7 +145,7 @@
                         </div>
                         @if (session()->get('manage_budget') == 1)
                             <div class="col-md column_info text-center">
-                                <div class="column_content_info card">
+                                <div class="column_content_info card pt-2">
                                     <span class="title__amount" style="font-weight: 600;">Budget Spending <p>Amount
                                             Spending
                                         </p>
@@ -154,7 +157,7 @@
                             </div>
                         @endif
                         <div class="col-md column_info text-center">
-                            <div class="column_content_info card">
+                            <div class="column_content_info card pt-2">
                                 <span class="title__amount" style="font-weight: 600;">Used Expense <p>Limit has been used
                                     </p>
                                 </span>
@@ -172,7 +175,7 @@
                     <div class="coloumn__expense ">
                         <form action="" method="get">
                             <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row">
+                                <div class="d-flex flex-row me-3">
                                     <div>
                                         <img src="{{ asset('img/icons/dashboard/expenses.png') }}" alt=""
                                             class="" style="width:80px">
@@ -181,9 +184,9 @@
                                         <span style="font-size: 16px;color:black;font-weight:400">Expenses</span>
                                     </div>
                                 </div>
-                                <div class="d-flex flex-column ms-auto">
-                                    <div class="d-flex">
-                                        <div class="me-2 mb-2" style="width: 100%; max-width:155px">
+                                <div class="d-flex flex-column ms-auto" style="width:490px">
+                                    <div class="d-flex w-100">
+                                        <div class="me-2 mb-2" style="width: 100%; ">
                                             <div class="input-group">
                                                 <span for=""
                                                     class="input-group-text z-index-1 font-weight-bold text-dark px-1"
@@ -195,7 +198,7 @@
                                                     style="font-size:10px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
                                             </div>
                                         </div>
-                                        <div class="me-2 mb-2" style="width: 100%; max-width:155px">
+                                        <div class="me-2 mb-2" style="width: 100%; ">
                                             <div class="input-group">
                                                 <span for="" class="input-group-text z-index-1 font-weight-bold"
                                                     style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
@@ -207,18 +210,26 @@
                                         </div>
                                     </div>
                                     <div class="d-flex">
-                                        <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
+                                        <div class="me-2 mb-3" style="width: 100%; height:15px">
                                             <select name="filter_member" id="filter_member" class="form-select text-dark"
                                                 style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
                                                 <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
                                                     Your Data</option>
                                             </select>
                                         </div>
-                                        <div class="me-2 mb-3" style="width: 100%; max-width:155px;height:15px">
+                                        <div class="me-2 mb-3" style="width: 100%; height:15px">
                                             <select name="filter_expense_type" id="filter_expense_type"
                                                 class="form-select text-dark"
                                                 style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
                                                 <option value="" class="text-dark px-1" selected>Expense Type
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="me-2 mb-3" style="width: 100%; height:15px">
+                                            <select name="filter_group" id="filter_group"
+                                                class="form-select text-dark"
+                                                style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
+                                                <option value="" class="text-dark px-1" selected>Group
                                                 </option>
                                             </select>
                                         </div>
@@ -261,41 +272,43 @@
         </div>
         <div class="col-md-4 mb-3 mt-3">
             <div class="row mb-3 flex-column">
-                <div class="col-md mb-3">
-                    <div class="coloumn__quick__access d-md-block d-none">
-                        <p style="font-weight: 500; font-size:13px ; margin-top:-8px">Quick Access</p>
-                        <div class="d-flex " style="overflow-x: scroll; margin-top:-8px">
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#modalExpenses"
-                                aria-controls="new-expense-form" id="myBtn">
-                                <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                                    <div>
-                                        <img src="{{ asset('img/icons/dashboard/new-expenses.png') }}" alt=""
-                                            class="" style="width:85px">
-                                    </div>
-                                </div>
-                            </a>
-                            <a data-bs-toggle="modal" data-bs-target="#topUp">
-                                <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                                    <div>
-                                        <img src="{{ asset('img/icons/dashboard/top-up.png') }}" alt=""
-                                            class="" style="width:85px">
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="" hidden>
-                                <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                                    <div class="icon icon-shape bg-gradient-secondary-cstm shadow text-center border-radius-md"
-                                        style="min-height: 60px; max-height: 60px; min-width: 80px; max-width: 80px;">
-                                        <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i>
-                                        <div class="mt-1">
-                                            <span class="text-white" style="font-size: 10px">Add</span>
+                @if (session()->get('is_superadmin') == false)
+                    <div class="col-md mb-3">
+                        <div class="coloumn__quick__access d-md-block d-none">
+                            <p style="font-weight: 500; font-size:13px ; margin-top:-8px">Quick Access</p>
+                            <div class="d-flex " style="overflow-x: scroll; margin-top:-8px">
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#modalExpenses"
+                                    aria-controls="new-expense-form" id="myBtn">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
+                                        <div>
+                                            <img src="{{ asset('img/icons/dashboard/new-expenses.png') }}" alt=""
+                                                class="" style="width:85px">
                                         </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                                <a data-bs-toggle="modal" data-bs-target="#topUp">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
+                                        <div>
+                                            <img src="{{ asset('img/icons/dashboard/top-up.png') }}" alt=""
+                                                class="" style="width:85px">
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" hidden>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
+                                        <div class="icon icon-shape bg-gradient-secondary-cstm shadow text-center border-radius-md"
+                                            style="min-height: 60px; max-height: 60px; min-width: 80px; max-width: 80px;">
+                                            <i class="ni ni-fat-add text-lg opacity-10" aria-hidden="true"></i>
+                                            <div class="mt-1">
+                                                <span class="text-white" style="font-size: 10px">Add</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
                 <div class="col-md">
                     <div class="card overflow-hidden" style="min-height: 150px; border-radius:5px">
                         <div class="card-body p-3">
@@ -328,12 +341,13 @@
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="coloumn__recent__expense " style="margin-top: 15px; height:400px;border-radius:5px">
+                    <div class="coloumn__recent__expense " style="margin-top: 25px; border-radius:5px">
                         <div class="d-flex justify-content-between">
                             <p style="font-weight: 500; font-size:13px">Recent Expense</p>
                             <div class="ms-auto">
                                 <span class="text-sm mb-0 text-capitalize font-weight-normal">
-                                    <a href="/expense">View All&nbsp;<i class="fa-solid fa-chevron-right"></i></a>
+                                    <a href='{{ session()->get('is_superadmin') == true ? '/approval' : '/expense' }}'>View
+                                        All&nbsp;<i class="fa-solid fa-chevron-right"></i></a>
                                 </span>
                             </div>
                         </div>
@@ -389,22 +403,82 @@
             </div>
         </div>
     </div>
-    <div class="row flex-md-row">
-        <div class="col-md-12  bg-white">
-            <div class="table-responsive">
-                <table class="table table-borderless text-dark">
-                    <thead>
-                        <th>Tes</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tes</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="row">
+        <div class="col-md">
+            <div class="card py-4 px-3" style="border-radius:8px">
+                <div class="col-md-3 ms-auto">
+                    <div class="position-relative">
+                        <input type="search" class="form-control" placeholder="Search...">
+                        <i class="fa-sharp fa-solid fa-magnifying-glass" style="position:absolute; top:13px;right:8px"></i>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">Date</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">Group</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">User</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">Merchant</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">
+                                    Expense Type</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">
+                                    Amount</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">
+                                    Status</th>
+                                <th class="text-dark opacity-9"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle text-start ps-4">
+                                    {{-- <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg"
+                                                class="avatar avatar-sm me-3">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-xs">John Michael</h6>
+                                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                                        </div>
+                                    </div> --}}
+
+                                    <span class="text-dark text-xs fw-semibold">23/04/18</span>
+
+                                </td>
+                                <td class="align-middle text-start ps-2">
+                                    <p class="text-xs text-dark fw-semibold mb-0">Finance</p>
+                                    {{-- <p class="text-xs text-secondary mb-0">Organization</p> --}}
+                                </td>
+                                <td>
+                                    <p class="text-xs text-dark fw-semibold mb-0">Abdul</p>
+                                    {{-- <p class="text-xs text-secondary mb-0">F</p> --}}
+                                </td>
+                                <td>
+                                    <p class="text-xs text-dark fw-semibold mb-0">Manager</p>
+                                    {{-- <p class="text-xs text-secondary mb-0">Organization</p> --}}
+                                </td>
+                                <td class="align-middle text-start text-break text-wrap text-sm">
+                                    <span class="text-dark">Bussinses Trip</span>
+                                </td>
+                                <td class="align-middle text-start ps-4">
+                                    <span class="text-dark text-xs fw-semibold">Rp. 1000.000,00</span>
+                                </td>
+                                <td class="align-middle text-start text-sm ps-4">
+                                    {{-- <span class="badge badge-sm badge-success">Online</span> --}}
+                                    <span class="badge badge-xs d-flex justify-content-center text-center"
+                                    style="border:1px solid #50B720; color:#50B720; width: 70px">approved</span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+
+
     <script>
         $(document).ready(function() {
 

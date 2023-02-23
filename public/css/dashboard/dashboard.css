@@ -18,7 +18,7 @@
     margin: 10px 0;
     padding: 5px;
     color: black;
-    height: 150px;
+    height: 10em;
     max-height: 15em;
 }
 
@@ -999,13 +999,13 @@
     );
     margin: 10px 0;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 8px;
     /* box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
                     -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
                     -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09); */
     height: 100%;
     /* max-height: 12.4em; */
-    max-height: 9.4em;
+    max-height: 10em;
     width: 100%;
 }
 
@@ -1063,7 +1063,7 @@
 
 .coloumn__quick__access {
     background-color: #ffffff;
-    height: 150px;
+    height: 10em;
     margin: 10px 0;
     padding: 20px;
     border-radius: 5px;
