@@ -145,7 +145,7 @@
                         </div>
                         @if (session()->get('manage_budget') == 1)
                             <div class="col-md column_info text-center">
-                                <div class="column_content_info card pt-4"
+                                <div class="column_content_info card pt-4">
                                     <span class="title__amount" style="font-weight: 600;">Budget Spending <p>Amount
                                             Spending
                                         </p>
@@ -174,8 +174,8 @@
                 <div class="col-md">
                     <div class="coloumn__expense ">
                         <form action="" method="get">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row me-3">
+                            <div class="d-flex flex-md-row flex-column justify-content-between">
+                                <div class="d-flex flex-row me-3 mb-2">
                                     <div>
                                         <img src="{{ asset('img/icons/dashboard/expenses.png') }}" alt=""
                                             class="" style="width:80px">
@@ -184,8 +184,8 @@
                                         <span style="font-size: 16px;color:black;font-weight:400">Expenses</span>
                                     </div>
                                 </div>
-                                <div class="d-flex flex-column ms-auto" style="width:490px">
-                                    <div class="d-flex w-100">
+                                <div class="d-flex wrapper_expense flex-column ms-auto">
+                                    <div class="d-flex w-100 ">
                                         <div class="me-2 mb-2" style="width: 100%; ">
                                             <div class="input-group">
                                                 <span for=""
@@ -198,7 +198,7 @@
                                                     style="font-size:10px;height:25px; border-top-right-radius:5px !important;border-bottom-right-radius:5px !important">
                                             </div>
                                         </div>
-                                        <div class="me-2 mb-2" style="width: 100%; ">
+                                        <div class="mb-2" style="width: 100%; ">
                                             <div class="input-group">
                                                 <span for="" class="input-group-text z-index-1 font-weight-bold"
                                                     style="border-right: 1px solid #adadadad; color:black; font-size:9px;height:25px;border-top-left-radius:5px;border-bottom-left-radius:5px">To</span>
@@ -209,12 +209,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="d-flex">
+                                    <div class="d-flex flex-md-row flex-column w-100 w-md-100">
                                         <div class="me-2 mb-3" style="width: 100%; height:15px">
-                                            <select name="filter_member" id="filter_member" class="form-select text-dark"
+                                            <select name="filter_group" id="filter_group" class="form-select text-dark"
                                                 style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
-                                                <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
-                                                    Your Data</option>
+                                                <option value="" class="text-dark px-1" selected>Group
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="me-2 mb-3" style="width: 100%; height:15px">
@@ -225,16 +225,15 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="me-2 mb-3" style="width: 100%; height:15px">
-                                            <select name="filter_group" id="filter_group"
-                                                class="form-select text-dark"
+                                        <div class=" mb-3" style="width: 100%; height:15px">
+                                            <select name="filter_member" id="filter_member" class="form-select text-dark"
                                                 style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
-                                                <option value="" class="text-dark px-1" selected>Group
-                                                </option>
+                                                <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
+                                                    Your Data</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-end ms-auto me-2"
+                                    <div class="d-flex  justify-content-end ms-auto  mt-1"
                                         style="width: 100%; max-width:65px">
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
@@ -403,36 +402,41 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md">
-            <div class="card py-4 px-3" style="border-radius:8px">
-                <div class="col-md-3 ms-auto">
-                    <div class="position-relative">
-                        <input type="search" class="form-control" placeholder="Search...">
-                        <i class="fa-sharp fa-solid fa-magnifying-glass" style="position:absolute; top:13px;right:8px"></i>
+    @if (session()->get('is_superadmin') == true)
+        <div class="row">
+            <div class="col-md">
+                <div class="card py-4 px-3" style="border-radius:5px">
+                    <div class="col-md-3 ms-auto">
+                        <div class="position-relative">
+                            <input type="search" class="form-control" placeholder="Search...">
+                            <i class="fa-sharp fa-solid fa-magnifying-glass"
+                                style="position:absolute; top:13px;right:8px"></i>
+                        </div>
                     </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table align-items-center mb-0">
-                        <thead>
-                            <tr>
-                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">Date</th>
-                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">Group</th>
-                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">User</th>
-                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">Merchant</th>
-                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">
-                                    Expense Type</th>
-                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">
-                                    Amount</th>
-                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">
-                                    Status</th>
-                                <th class="text-dark opacity-9"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="align-middle text-start ps-4">
-                                    {{-- <div class="d-flex px-2 py-1">
+                    <div class="table-responsive">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">Date</th>
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">Group
+                                    </th>
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">User
+                                    </th>
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">
+                                        Merchant</th>
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">
+                                        Expense Type</th>
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">
+                                        Amount</th>
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">
+                                        Status</th>
+                                    <th class="text-dark opacity-9"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="align-middle text-start ps-4">
+                                        {{-- <div class="d-flex px-2 py-1">
                                         <div>
                                             <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg"
                                                 class="avatar avatar-sm me-3">
@@ -443,40 +447,41 @@
                                         </div>
                                     </div> --}}
 
-                                    <span class="text-dark text-xs fw-semibold">23/04/18</span>
+                                        <span class="text-dark text-xs fw-semibold">23/04/18</span>
 
-                                </td>
-                                <td class="align-middle text-start ps-2">
-                                    <p class="text-xs text-dark fw-semibold mb-0">Finance</p>
-                                    {{-- <p class="text-xs text-secondary mb-0">Organization</p> --}}
-                                </td>
-                                <td>
-                                    <p class="text-xs text-dark fw-semibold mb-0">Abdul</p>
-                                    {{-- <p class="text-xs text-secondary mb-0">F</p> --}}
-                                </td>
-                                <td>
-                                    <p class="text-xs text-dark fw-semibold mb-0">Manager</p>
-                                    {{-- <p class="text-xs text-secondary mb-0">Organization</p> --}}
-                                </td>
-                                <td class="align-middle text-start text-break text-wrap text-sm">
-                                    <span class="text-dark">Bussinses Trip</span>
-                                </td>
-                                <td class="align-middle text-start ps-4">
-                                    <span class="text-dark text-xs fw-semibold">Rp. 1000.000,00</span>
-                                </td>
-                                <td class="align-middle text-start text-sm ps-4">
-                                    {{-- <span class="badge badge-sm badge-success">Online</span> --}}
-                                    <span class="badge badge-xs d-flex justify-content-center text-center"
-                                    style="border:1px solid #50B720; color:#50B720; width: 70px">approved</span>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="align-middle text-start ps-2">
+                                        <p class="text-xs text-dark fw-semibold mb-0">Finance</p>
+                                        {{-- <p class="text-xs text-secondary mb-0">Organization</p> --}}
+                                    </td>
+                                    <td>
+                                        <p class="text-xs text-dark fw-semibold mb-0">Abdul</p>
+                                        {{-- <p class="text-xs text-secondary mb-0">F</p> --}}
+                                    </td>
+                                    <td>
+                                        <p class="text-xs text-dark fw-semibold mb-0">Manager</p>
+                                        {{-- <p class="text-xs text-secondary mb-0">Organization</p> --}}
+                                    </td>
+                                    <td class="align-middle text-start text-break text-wrap text-sm">
+                                        <span class="text-dark">Bussinses Trip</span>
+                                    </td>
+                                    <td class="align-middle text-start ps-4">
+                                        <span class="text-dark text-xs fw-semibold">Rp. 1000.000,00</span>
+                                    </td>
+                                    <td class="align-middle text-start text-sm ps-4">
+                                        {{-- <span class="badge badge-sm badge-success">Online</span> --}}
+                                        <span class="badge badge-xs d-flex justify-content-center text-center"
+                                            style="border:1px solid #50B720; color:#50B720; width: 70px">approved</span>
+                                    </td>
+                                </tr>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
     <script>
         $(document).ready(function() {
