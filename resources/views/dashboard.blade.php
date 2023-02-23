@@ -274,9 +274,9 @@
             <div class="row mb-3 flex-column">
                 @if (session()->get('is_superadmin') == false)
                     <div class="col-md mb-3">
-                        <div class="coloumn__quick__access d-md-block d-none" style="margin-top:10px">
-                            <p style="font-weight: 500; font-size:13px ; margin-top:-8px">Quick Access</p>
-                            <div class="d-flex " style="overflow-x: scroll; margin-top:-8px">
+                        <div class="coloumn__quick__access d-md-block d-none pt-4" style="margin-top:10px">
+                            <p style="font-weight: 500; font-size:13px ; ">Quick Access</p>
+                            <div class="d-flex " style="overflow-x: scroll;">
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#modalExpenses"
                                     aria-controls="new-expense-form" id="myBtn">
                                     <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
