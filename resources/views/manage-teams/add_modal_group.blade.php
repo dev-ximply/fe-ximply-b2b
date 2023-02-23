@@ -28,9 +28,9 @@
                 </form>
                 <div class="d-flex justify-content-end">
                     <div>
-                        <button type="button" class="btn text-white" data-bs-dismiss="modal"
+                        <button type="button" class="btn text-white me-2" data-bs-dismiss="modal"
                             style="background-color: #D42A34">Cancel</button>
-                        <button type="button" class="btn text-white" style="background-color: #62ca50" onclick="addGroup('{{ Auth::user()['id'] }}', document.getElementById('GroupName').value, document.getElementById('haveClient').checked)">Submit</button>
+                        <button type="button" class="btn text-white ms-2" style="background-color: #62ca50" onclick="addGroup('{{ Auth::user()['id'] }}', document.getElementById('GroupName').value, document.getElementById('haveClient').checked)">Submit</button>
                     </div>
                 </div>
             </div>

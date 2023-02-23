@@ -86,7 +86,7 @@ class LoginController extends Controller
                 }
 
                 if($detail['is_superadmin'] == true){
-                    return redirect("/group");
+                    return redirect("/");
                 }else{
                     return redirect("/");
                 }                

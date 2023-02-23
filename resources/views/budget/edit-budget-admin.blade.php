@@ -11,7 +11,7 @@
                 <form>
                     @csrf
                     <div class="row">
-                        <input type="text" id="edit_user_id" hidden>
+                        <input type="text" id="edit_admin_id" hidden>
                         <div class="col-md my-2" hidden>
                             <label for="projectName" class="form-label text-dark" style="font-weight: 600">Name</label>
                             <input type="text" class="form-control" id="edit_budget_name" disabled>
@@ -59,7 +59,7 @@
                     <div class="d-flex justify-content-end mt-4">
                         <button type="button" name="button" class="btn btn-danger-cstm m-0"
                             data-bs-dismiss="modal">Cancel</button>
-                        <input type="button" onclick="postAdminBudgett('{{ Auth::user()['id'] }}')" name="button"
+                        <input type="button" onclick="postAdminBudget('{{ Auth::user()['id'] }}')" name="button"
                             value="Submit" class="btn btn-success-cstm m-0 ms-2">
                     </div>
                 </form>
@@ -69,7 +69,7 @@
 </div>
 
 <script>
-    function postAdminBudgett(id) {
+    function postAdminBudget(id) {
 
         var tenant = TENANT_CODE;
         var user_id = USR_ID;
@@ -98,11 +98,9 @@
 
                     formData.append('user_id', user_id);
                     formData.append('tenant_code', tenant);
-                    formData.append('assign_user_id', document.getElementById('edit_user_id').value);
-                    formData.append('limit', document.getElementById('edit_budget_limit_avail_topup').value);
-                    formData.append('auto_approve_limit', document.getElementById('auto_approve_edit').value);
-                    formData.append('expire_date', document.getElementById('expire_date').value);
-                    formData.append('frequency', document.getElementById('edit_frequency').value);
+                    formData.append('assign_user_id', user_id);
+                    formData.append('limit', document.getElementById('edit_budget_limit_admin').value);
+
 
                     for (const value of formData.values()) {
                         console.log(value);
@@ -123,8 +121,8 @@
                         contentType: false,
                         processData: false,
                         beforeSend: function() {
-                            if ($("#loader")) {
-                                $("#loader").show();
+                            if ($("#main-loader")) {
+                                $("#main-loader").show();
                             }
                         },
                         success: function(res) {
@@ -144,8 +142,8 @@
                             }
                         },
                         complete: function(data) {
-                            if ($("#loader")) {
-                                $("#loader").hide();
+                            if ($("#main-loader")) {
+                                $("#main-loader").hide();
                             }
                             setTimeout(function() {
                                 location.reload();
@@ -162,3 +160,5 @@
             });
     }
 </script>
+
+

@@ -18,25 +18,22 @@ class DashboardController extends Controller
     public function index()
     {
 
-        if (session()->get('is_superadmin') == true) {
-            return redirect("/group");
-        } else {
-            return view(
-                'dashboard',
-                [
-                    'title' => 'Dashboard',
-                    'section' => 'dashboard',
-                    'data' => [
-                        'limit' => SpendsController::get_balance(Auth::user()['id']),
-                        'data_expenses' => self::list(Auth::user()['id']),
-                        'voucher' =>  self::list_voucher(Auth::user()['id']),
-                        'recent_expenses' =>  self::recent_expenses(Auth::user()['id']),
-                        'purpose' => self::list_purpose(Auth::user()['id']),
-                        'client' => self::list_client(Auth::user()['id'])
-                    ]
+
+        return view(
+            'dashboard',
+            [
+                'title' => 'Dashboard',
+                'section' => 'dashboard',
+                'data' => [
+                    'limit' => SpendsController::get_balance(Auth::user()['id']),
+                    'data_expenses' => self::list(Auth::user()['id']),
+                    'voucher' =>  self::list_voucher(Auth::user()['id']),
+                    'recent_expenses' =>  self::recent_expenses(Auth::user()['id']),
+                    'purpose' => self::list_purpose(Auth::user()['id']),
+                    'client' => self::list_client(Auth::user()['id'])
                 ]
-            );
-        }
+            ]
+        );
     }
 
 

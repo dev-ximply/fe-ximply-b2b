@@ -167,17 +167,22 @@
                                                         </span>
                                                     </div>
                                                 </td>
-                                                <td class="align-middle text-start text-xs text-dark">
+                                                <td class="align-middle text-start text-xs text-dark text-break text-wrap">
                                                     <span class="text-xs">Top Up : </span><span class="font-weight-bold">
                                                         {{ number_format($approval['amount'], 2) }}
+                                                    </span><br>
+                                                    <span class="text-xs">
+                                                        Approved :
+                                                        <span class="fw-bold">
+                                                            {{ number_format($approval['approval_amount'], 2) }}
+                                                        </span>
                                                     </span>
                                                 </td>
                                                 <td class="align-middle text-start text-xs text-dark">
                                                     <div class="" style="max-width: 300px">
-                                                        <div><span>Purpose : </span><span
-                                                                class="font-weight-bold text-wrap"
+                                                        <div><span>Purpose : </span><span class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">
-                                                                Award & Recognition
+                                                               {{ $approval['purpose_name'] }}
                                                             </span></div>
                                                         <div><span>Note : </span><span class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">
@@ -275,7 +280,7 @@
             let clone = $(ele).clone(false)
             clone.attr("type", "text")
             let ele1 = $(ele)
-            console.log('TESSS',ele1);
+            console.log('TESSS', ele1);
 
             clone.val(Number(ele1.val()))
             $(ele).after(clone)
@@ -288,7 +293,7 @@
                 let newv = Number(ele1.val())
                 let nfobject = new Intl.NumberFormat('en-CA');
                 let output = nfobject.format(newv);
-                
+
                 if (clone.val() != output) {
                     clone.val(output)
                 }
@@ -543,7 +548,12 @@
                                 tableOut += '<td class="align-middle text-start text-xs text-dark">' +
                                     '<span class="text-xs">Top Up : </span><span class="font-weight-bold">' +
                                     obj.amount +
-                                    '</span>' +
+                                    '</span><br/>' +
+                                    '<span class="text-xs">Approved :'+
+                                        '<span class="fw-bold">'+
+                                            obj.approval_amount +
+                                        '</span>'+
+                                    '</span>'+
                                     '</td>' +
                                     '<td class="align-middle text-start text-xs text-dark">' +
                                     '<div class="" style="max-width: 300px">' +
@@ -573,10 +583,10 @@
                                         '</td>'
                                 } else if (obj.status == 'rejected') {
                                     tableOut +=
-                                    '<td class="align-middle text-center text-xs d-flex justify-content-center">' +
-                                    '<span class="badge badge-xs d-flex justify-content-center mb-4"' +
-                                    'style="border:1px solid #E40909; color:#E40909; width: 60px; margin-top:20px">rejected</span>' +
-                                    '</td>'
+                                        '<td class="align-middle text-center text-xs d-flex justify-content-center">' +
+                                        '<span class="badge badge-xs d-flex justify-content-center mb-4"' +
+                                        'style="border:1px solid #E40909; color:#E40909; width: 60px; margin-top:20px">rejected</span>' +
+                                        '</td>'
                                 } else {
                                     '<td class="align-middle text-center text-xs d-flex justify-content-center">' +
                                     '<span class="badge badge-secondary badge-xs">unknown</span>' +

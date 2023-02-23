@@ -21,9 +21,9 @@
                                 Budget Limit</label>
                             <input type="text" class="form-control number_separator" id="edit_budget_limit_avail"
                                 disabled>
-                            <script>
+                            {{-- <script>
                                 new NumericInput(document.getElementById('edit_budget_limit_avail'), 'en-CA');
-                            </script>
+                            </script> --}}
                         </div>
                     </div>
                     <div class="row">
@@ -68,48 +68,6 @@
     </div>
 </div>
 
-<script>
-    $("input.number_separator").each((i, ele) => {
-        let clone = $(ele).clone(false)
-        clone.attr("type", "text")
-        let ele1 = $(ele)
-        console.log('TESSS', ele1);
-
-        clone.val(Number(ele1.val()))
-        $(ele).after(clone)
-        $(ele).hide()
-        clone.mouseenter(() => {
-            ele1.show()
-            clone.hide()
-        });
-        setInterval(() => {
-            let newV = Number(ele1.val())
-            let nfobject = new Intl.NumberFormat('en-CA');
-            let output = nfobject.format(newV);
-
-            if (clone.val() != output) {
-                clone.val(output)
-            }
-        }, 10);
-
-        // $(ele).mouseleave(() => {
-        //     $( isNaN(clone).show())
-        //     $(ele1).hide()
-        //     console.log('tes',ele);
-        // });
-
-    });
-</script>
-
-
-<script>
-    easyNumberSeparator({
-        selector: '.number-separator',
-        separator: ',',
-        decimalSeparator: '.',
-        resultInput: '#result_input',
-    })
-</script>
 
 <script>
     function postEditBudget(id) {
