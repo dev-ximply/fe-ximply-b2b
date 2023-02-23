@@ -145,7 +145,7 @@
                         </div>
                         @if (session()->get('manage_budget') == 1)
                             <div class="col-md column_info text-center">
-                                <div class="column_content_info card pt-4">
+                                <div class="column_content_info card pt-4"
                                     <span class="title__amount" style="font-weight: 600;">Budget Spending <p>Amount
                                             Spending
                                         </p>
@@ -184,18 +184,6 @@
                                         <span style="font-size: 16px;color:black;font-weight:400">Expenses</span>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .wrapper_expense {
-                                        width: 490px;
-                                    }
-
-                                    @media only screen and (max-width:768px) {
-                                        .wrapper_expense {
-                                            width: 100%;
-                                        }
-                                    }
-                                </style>
                                 <div class="d-flex wrapper_expense flex-column ms-auto">
                                     <div class="d-flex w-100 ">
                                         <div class="me-2 mb-2" style="width: 100%; ">
@@ -321,8 +309,7 @@
                     </div>
                 @endif
                 <div class="col-md">
-                    <div class="coloumn__quick__access overflow-hidden"
-                        style="margin:10px 0; min-height: 150px; border-radius:5px">
+                    <div class="coloumn__quick__access overflow-hidden" style="margin:10px 0; min-height: 150px; border-radius:5px">
                         <div class="card-body">
                             <div class="d-flex flex-row">
                                 <div class="me-auto">
