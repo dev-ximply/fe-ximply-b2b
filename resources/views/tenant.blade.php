@@ -30,9 +30,7 @@
                                     <div class="row justify-content-center">
                                         <div class="bg-secondary overflow-hidden d-flex align-items-center justify-content-center mb-2 mt-3"
                                             style="border-radius: 50%; width:156px; height:156px">
-                                            <img 
-                                            {{-- src="{{ config('storage.base_url') . $data['profile']->profile_picture }}" --}}
-                                                alt="user image" class=""
+                                            <img {{-- src="{{ config('storage.base_url') . $data['profile']->profile_picture }}" --}} alt="user image" class=""
                                                 style="min-width: 155px !important; min-height:155px !important; border-radius:50%"
                                                 id="ava-pic-2">
                                         </div>
@@ -213,15 +211,27 @@
                             <p class="text-xs text-dark">Your Corporate Informations</p>
                         </span>
                     </div>
+
+                    @php
+                        $logo_company = $data['t_info']->company_logo;
+                        // var_dump($data['t_info']->company_logo);
+                    @endphp
                     <div class="row">
                         <div class="col-md-2">
                             <div class="row justify-content-center">
-                                <div class="bg-secondary overflow-hidden d-flex align-items-center justify-content-center mb-2 mt-3"
-                                    style="border-radius: 50%; width:156px; height:156px">
-                                    <img src="{{ asset('img\logos\logo-new\logo-companyyy.png') }}" alt="Company Logo"
-                                        class=""
-                                        style="min-width: 155px !important; min-height:155px !important; border-radius:50%;"
-                                        id="ava-pic-2">
+                                <div class="overflow-hidden d-flex align-items-center justify-content-center mb-2 mt-3"
+                                    style="border-radius: 50%; width:156px; height:156px; background:#efefef">
+                                    @if ($data['t_info']->company_logo == true)
+                                        <img src="{{ config('storage.base_url') . $logo_company }}" alt="Company Logo"
+                                            class=""
+                                            style="min-width: 155px !important; min-height:155px !important; border-radius:50%;"
+                                            id="ava-pic-2">
+                                    @else
+                                        <img src="{{ asset('img/team-2.jpg') }}" alt="Company Logo"
+                                            class=""
+                                            style="min-width: 155px !important; min-height:155px !important; border-radius:50%;"
+                                            id="ava-pic-2">
+                                    @endif
                                 </div>
                                 <div class="mx-2 text-center">
                                     <div class="dropdown-item text-dark">
@@ -243,20 +253,21 @@
                         <div class="col-md-10">
                             <form action="" enctype="multipart/form-data" onsubmit="changeForm()">
                                 @csrf
-                                @method('PUT')
+                                {{-- @method('PUT') --}}
                                 <div class="row mb-2">
                                     <div class="col-md-6 mt-3">
                                         <label for="" class="text-dark text-xs" style="font-weight:600">Company
                                             Name</label>
                                         <input type="text" class="form-control text-dark text-capitalize"
-                                            placeholder="Company Name" value="{{ $data['t_info']->company_name }}">
+                                            placeholder="Company Name" id="companyName"
+                                            value="{{ $data['t_info']->company_name }}">
                                     </div>
                                     <div class="col-md-6 mt-3">
                                         <label for="" class="text-dark text-xs"
                                             style="font-weight:600">Industry</label>
                                         <input onchange="" type="text"
-                                            class="form-control text-dark text-capitalize" placeholder="Industry"
-                                            value="{{ $data['t_info']->industry }}">
+                                            class="form-control text-dark text-capitalize" id="companyIndustry"
+                                            placeholder="Industry" value="{{ $data['t_info']->industry }}">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -270,8 +281,8 @@
                                         </div>
                                         <div class="col-md-12 mb-2">
                                             <input onchange="" type="text" onfocus=""
-                                                class="form-control bg-white text-dark" placeholder="Company Size"
-                                                value="{{ $data['t_info']->company_size }}">
+                                                class="form-control bg-white text-dark" id="companySize"
+                                                placeholder="Company Size" value="{{ $data['t_info']->company_size }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -282,14 +293,16 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-2">
-                                            <input onchange="" type="text" class="form-control bg-white text-dark"
-                                                placeholder="Country" value="{{ $data['t_info']->country }}">
+                                            <input onchange="" type="text" id="companyCountry"
+                                                class="form-control bg-white text-dark" placeholder="Country"
+                                                value="{{ $data['t_info']->country }}">
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <button class="btn text-white mt-2" style="background: #62ca50">Save</button>
+                                    <button type="submit" class="btn text-white mt-2"
+                                        style="background: #62ca50">Save</button>
                                 </div>
                             </form>
 
@@ -300,25 +313,80 @@
         </div>
     </div>
 
+
     <script>
         function changeForm() {
+
+            var tenant = TENANT_CODE;
+            var userId = USR_ID;
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success-cstm mx-2",
+                    cancelButton: "btn btn-danger-cstm mx-2",
+                },
+                buttonsStyling: false,
+            });
+
+            var formDatas = new FormData();
+
+            formDatas.append('tenant_code', tenant);
+            formDatas.append('user_id', userId);
+            formDatas.append('company_name', document.getElementById('companyName').value);
+            formDatas.append('industry', document.getElementById('companyIndustry').value);
+            formDatas.append('company_size', document.getElementById('companySize').value);
+            formDatas.append('country', document.getElementById('companyCountry').value);
+
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "Authorization": "Bearer " + AUTH_TOKEN,
+                    "Accept": "application/json"
                 }
             });
 
             $.ajax({
-                url: "api/tenant/info/update",
-                type:PUT,
-                data:{
-
+                url: API_URL + "api/tenant/info/update",
+                type: 'post',
+                data: formDatas,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $("#main-loader").show();
+                },
+                success: function(res) {
+                    if (res['success'] == true) {
+                        swalWithBootstrapButtons.fire({
+                            type: 'success',
+                            title: 'Success',
+                            text: 'Your company profile updated',
+                            showConfirmButton: true,
+                            timer: 2000
+                        });
+                    } else {
+                        swalWithBootstrapButtons.fire(
+                            "!",
+                            res['message'],
+                            "error"
+                        );
+                    }
+                },
+                complete: function(data) {
+                    $("#main-loader").hide();
+                    setTimeout(function() {
+                        window.location.reload(true);
+                    }, 1000);
+                    if (data.status != 200) {
+                        Swal.fire(
+                            "something wrong",
+                            "please contact ximply support!",
+                            "error"
+                        );
+                    }
                 }
-            })
+            });
         }
-
-
-
+    </script>
+    <script>
         $(document).ready(function() {
             var readURL = function(input) {
                 if (input.files && input.files[0]) {
@@ -341,5 +409,89 @@
                 $("#photo_profile_file").click();
             });
         });
+    </script>
+
+
+    <script>
+        function changePhotoProfile() {
+
+            var tenant = TENANT_CODE;
+            var userId = USR_ID;
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success-cstm mx-2",
+                    cancelButton: "btn btn-danger-cstm mx-2",
+                },
+                buttonsStyling: false,
+            });
+
+            var picture_file = $('#photo_profile_file')[0].files;
+
+            // console.log(picture_file);
+
+            if (picture_file.length == 0) {
+                swalWithBootstrapButtons.fire('!', 'please choose image', 'error');
+            } else {
+                var formChangePhotoProfile = new FormData();
+
+                formChangePhotoProfile.append('tenant_code', tenant);
+                formChangePhotoProfile.append('user_id', userId);
+                formChangePhotoProfile.append('company_logo', picture_file[0]);
+
+                $.ajaxSetup({
+                    headers: {
+                        "Authorization": "Bearer " + AUTH_TOKEN,
+                        "Accept": "application/json"
+                    }
+                });
+
+                $.ajax({
+                    url: API_URL + "api/tenant/info/update",
+                    type: 'post',
+                    data: formChangePhotoProfile,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $("#main-loader").show();
+                    },
+                    success: function(res) {
+                        if (res['success'] == true) {
+                            swalWithBootstrapButtons.fire({
+                                    type: 'Success',
+                                    title: 'Success',
+                                    text: "Your logo company success updated.",
+                                    showConfirmButton: true,
+                                    timer: 2000
+                                }
+                                // "success!",
+                                // "Your profile updated.",
+                                // "success",
+                                // "2000"
+                            );
+                        } else {
+                            swalWithBootstrapButtons.fire(
+                                "!",
+                                res['message'],
+                                "error"
+                            );
+                        }
+                    },
+
+                    complete: function(data) {
+                        $("#main-loader").hide();
+                        setTimeout(function() {
+                            window.location.reload(true);
+                        }, 1000);
+                        if (data.status != 200) {
+                            Swal.fire(
+                                "something wrong",
+                                "please contact ximply support!",
+                                "error"
+                            );
+                        }
+                    }
+                });
+            }
+        }
     </script>
 @endsection

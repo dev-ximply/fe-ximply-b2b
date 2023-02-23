@@ -32,8 +32,7 @@
                             <div class="row justify-content-center">
                                 <div class="bg-secondary overflow-hidden d-flex align-items-center justify-content-center mb-2 mt-3"
                                     style="border-radius: 50%; width:156px; height:156px">
-                                    <img 
-                                    src="{{ config('storage.base_url') . $data['profile']->profile_picture }}"
+                                    <img src="{{ config('storage.base_url') . $data['profile']->profile_picture }}"
                                         alt="user image" class=""
                                         style="min-width: 155px !important; min-height:155px !important; border-radius:50%"
                                         id="ava-pic-2">
@@ -150,8 +149,7 @@
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Group</label>
                                     <input type="text" class="form-control"
-                                        value="{{ $data['profile_role'][0]->group_name }}" disabled
-                                        >
+                                        value="{{ $data['profile_role'][0]->group_name }}" disabled>
                                 </div>
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Employee
@@ -357,6 +355,9 @@
                     },
                     complete: function(data) {
                         $("#main-loader").hide();
+                        setTimeout(function() {
+                            window.location.reload(true);
+                        }, 1000);
                         if (data.status != 200) {
                             Swal.fire(
                                 "something wrong",
