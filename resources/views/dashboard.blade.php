@@ -132,7 +132,7 @@
                 <div class="col-md pt-0 mt-3">
                     <div class="row justify-content-between">
                         <div class="col-md column_info  text-center">
-                            <div class="column_content_info card pt-2" style="">
+                            <div class="column_content_info card pt-4" style="">
                                 <span class="title__amount" style="font-weight: 600;">Remain Budget <p>(Remain Expense)
                                     </p>
                                 </span>
@@ -145,7 +145,7 @@
                         </div>
                         @if (session()->get('manage_budget') == 1)
                             <div class="col-md column_info text-center">
-                                <div class="column_content_info card pt-2">
+                                <div class="column_content_info card pt-4">
                                     <span class="title__amount" style="font-weight: 600;">Budget Spending <p>Amount
                                             Spending
                                         </p>
@@ -157,7 +157,7 @@
                             </div>
                         @endif
                         <div class="col-md column_info text-center">
-                            <div class="column_content_info card pt-2">
+                            <div class="column_content_info card pt-4">
                                 <span class="title__amount" style="font-weight: 600;">Used Expense <p>Limit has been used
                                     </p>
                                 </span>
@@ -274,9 +274,9 @@
             <div class="row mb-3 flex-column">
                 @if (session()->get('is_superadmin') == false)
                     <div class="col-md mb-3">
-                        <div class="coloumn__quick__access d-md-block d-none">
-                            <p style="font-weight: 500; font-size:13px ; margin-top:-8px">Quick Access</p>
-                            <div class="d-flex " style="overflow-x: scroll; margin-top:-8px">
+                        <div class="coloumn__quick__access d-md-block d-none pt-4" style="margin-top:10px">
+                            <p style="font-weight: 500; font-size:13px ; ">Quick Access</p>
+                            <div class="d-flex " style="overflow-x: scroll;">
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#modalExpenses"
                                     aria-controls="new-expense-form" id="myBtn">
                                     <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
@@ -310,8 +310,8 @@
                     </div>
                 @endif
                 <div class="col-md">
-                    <div class="card overflow-hidden" style="min-height: 150px; border-radius:5px">
-                        <div class="card-body p-3">
+                    <div class="coloumn__quick__access overflow-hidden" style="margin:10px 0; min-height: 150px; border-radius:5px">
+                        <div class="card-body">
                             <div class="d-flex flex-row">
                                 <div class="me-auto">
                                     <span class=" mb-0 text-capitalize text-dark"
@@ -341,7 +341,7 @@
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="coloumn__recent__expense " style="margin-top: 25px; border-radius:5px">
+                    <div class="coloumn__recent__expense " style="margin-top: 15px; border-radius:5px">
                         <div class="d-flex justify-content-between">
                             <p style="font-weight: 500; font-size:13px">Recent Expense</p>
                             <div class="ms-auto">
@@ -477,7 +477,6 @@
             </div>
         </div>
     </div>
-
 
     <script>
         $(document).ready(function() {
