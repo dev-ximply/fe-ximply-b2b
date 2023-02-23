@@ -1110,3 +1110,13 @@
         width: 100%;
     }
 }
+
+.wrapper_expense {
+    width: 490px;
+}
+
+@media only screen and (max-width:768px) {
+    .wrapper_expense {
+        width: 100%;
+    }
+}
