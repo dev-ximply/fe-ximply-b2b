@@ -145,7 +145,7 @@
                         </div>
                         @if (session()->get('manage_budget') == 1)
                             <div class="col-md column_info text-center">
-                                <div class="column_content_info card pt-4"
+                                <div class="column_content_info card pt-4">
                                     <span class="title__amount" style="font-weight: 600;">Budget Spending <p>Amount
                                             Spending
                                         </p>
