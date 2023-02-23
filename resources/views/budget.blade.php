@@ -331,7 +331,6 @@
                         $.ajax({
                             type: "POST",
                             url: API_URL + "api/spends/" + spendId + '/tozero',
-
                             // url: "{{ route('partners.delete') }}",
                             data: {
                                 spend_id: spendId,

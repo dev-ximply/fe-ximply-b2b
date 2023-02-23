@@ -42,9 +42,6 @@
     <div class="collapse navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
 
         <ul class="navbar-nav">
-
-
-
             <li class="nav-item">
 
                 <a class="nav-link @if ($section == 'dashboard') active @endif" href="/">
@@ -63,9 +60,6 @@
                 </a>
 
             </li>
-
-
-
 
             @if (session()->get('approval_expense') == 1 &&
                     session()->get('approval_topup') == 1 &&

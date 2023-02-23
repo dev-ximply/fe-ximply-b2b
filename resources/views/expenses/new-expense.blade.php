@@ -285,7 +285,7 @@
                                 if ($("#main-loader")) {
                                     $("#main-loader").show();
                                 }
-                            },
+                            }, 
                             success: function(res) {
                                 if (res['success'] == true) {
                                     swalWithBootstrapButtons.fire(

@@ -149,7 +149,7 @@
                 } = response;
                 if ($("#loader")) {
                     $("#loader").hide();
-                }
+                } 
                 if (success === true) {
                     setTimeout(function() {
                         window.location.reload(true);

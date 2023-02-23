@@ -164,7 +164,7 @@
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Role</label>
                                     {{-- <input type="text" class="form-control" value="{{$data['user']->role->define_role_name}}" disabled> --}}
-                                    <input type="text" class="form-control" value="{{$data['user']->role_name}}" disabled>
+                                    <input type="text" class="form-control" value="{{$data['user']->role_name}}"disabled>
                                 </div>
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Employee

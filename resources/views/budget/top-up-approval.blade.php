@@ -182,7 +182,7 @@
                                                     <div class="" style="max-width: 300px">
                                                         <div><span>Purpose : </span><span class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">
-                                                               {{ $approval['purpose_name'] }}
+                                                               {{ $approval['purpose'] }}
                                                             </span></div>
                                                         <div><span>Note : </span><span class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">
@@ -560,7 +560,7 @@
                                     '<div><span>Purpose : </span><span' +
                                     'class="font-weight-bold text-wrap"' +
                                     'style="text-align: justify">' +
-                                    obj.purpose_name +
+                                    obj.purpose +
 
                                     '</span></div>' +
                                     '<div><span>Note : </span><span class="font-weight-bold text-wrap"' +
@@ -596,8 +596,7 @@
                                 if (obj.status == 'pending') {
                                     tableOut += '<td class="align-middle text-center text-xs">' +
                                         '<div class="d-flex flex-row justify-content-center pt-3">' +
-                                        '<button onclick="getDetail(`' + obj.topup_id + '`,`' + obj
-                                    .amount + '`,`' + '#approve-ask-dialog' + '`)"' +
+                                        '<button onclick="getDetail(`' + obj.topup_id + '`,`' + obj.amount + '`,`' + '#approve-ask-dialog' + '`)"' +
                                         'class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center"' +
                                         'data-toggle="tooltip" data-placement="left"' +
                                         'title="Edit"' +
@@ -608,8 +607,7 @@
                                         '<i class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>' +
                                         '<span style="font-size: 0.6em">Edit</span>' +
                                         '</button>' +
-                                        '<button onclick="topupDecision(`' + obj.topup_id + '`,`' + obj
-                                    .amount + '`,`approved`)"' +
+                                        '<button onclick="topupDecision(`' + obj.topup_id + '`,`' + obj.amount + '`,`approved`)"' +
                                         'class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center approved"' +
                                         'data-toggle="tooltip" data-placement="left"' +
                                         'title="Approve"' +

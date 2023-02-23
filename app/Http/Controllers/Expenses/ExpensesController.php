@@ -17,7 +17,6 @@ class ExpensesController extends Controller
     public function index(Request $request)
     {
         $statusType = $request->statusType;
-
         if (session()->get('is_superadmin') == true) {
             return redirect('/');
         } else {
