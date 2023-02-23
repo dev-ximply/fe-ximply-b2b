@@ -15,7 +15,6 @@ class LoginController extends Controller
 {
     public function index()
     {
-
         if (Auth::check()) {
             if(session()->get('is_superadmin') == true){
                 return redirect("/group");

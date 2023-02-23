@@ -104,8 +104,8 @@
                         contentType: false,
                         processData: false,
                         beforeSend: function() {
-                            if ($("#loader")) {
-                                $("#loader").show();
+                            if ($("#main-loader")) {
+                                $("#main-loader").show();
                             }
                         },
                         success: function(res) {
@@ -124,8 +124,8 @@
                             }
                         },
                         complete: function(data) {
-                            if ($("#loader")) {
-                                $("#loader").hide();
+                            if ($("#main-loader")) {
+                                $("#main-loader").hide();
                             }
                             setTimeout(function() {
                                 location.reload();

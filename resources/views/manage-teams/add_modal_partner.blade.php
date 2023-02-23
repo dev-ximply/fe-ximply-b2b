@@ -70,7 +70,7 @@
                                 style="background-color: #D42A34">Cancel</button>
                             <button class="btn text-white ms-2" style="background-color: #62ca50"
                                 onclick="addPartner('{{ Auth::user()['id'] }}')">
-                                Submit
+                                Submit 
                             </button>
                         </div>
                     </div>

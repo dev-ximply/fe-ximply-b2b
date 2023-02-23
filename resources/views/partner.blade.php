@@ -509,7 +509,7 @@
                                     }, 1000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
-                                        "gagal",
+                                        "Failed",
                                         message,
                                         "error"
                                     );
