@@ -49,7 +49,7 @@
                                 <div class="col-6">
                                     <label class="form-label mt-2" style="color: black; font-weight:500">Group</label>
                                     <div class="">
-                                        <select class="form-control " name="department_id" id="department_id" required>
+                                        <select class="form-select" name="department_id" id="department_id" required>
                                             <option value="" selected>Select</option>
                                             @foreach ($data['list_department'] as $item_departement)
                                                 <option value="{{ $item_departement->id }}">
@@ -64,7 +64,7 @@
                             <div class="col-6">
                                 <label class="form-label mt-2" style="color: black; font-weight:500">Role</label>
                                 <div class="">
-                                    <select class="form-control " name="role_id" id="role_id">
+                                    <select class="form-select" name="role_id" id="role_id">
                                         <option value="" selected>Select</option>
                                         @foreach ($data['list_role'] as $item_role)
                                             <option value="{{ $item_role->id }}">{{ $item_role->role_name }}
@@ -77,13 +77,13 @@
                         <div class="row mt-2 ">
                             <div class="d-flex mt-4 justify-content-end mb-0">
                                 <div class="mb-0">
-                                    <button class="btn text-white" data-bs-dismiss="modal"
+                                    <button class="btn text-white me-2" data-bs-dismiss="modal"
                                         style="background-color: #D42A34">Cancel</button>
                                     @if (session()->get('is_superadmin') == true)
-                                        <button type="sumbit" class="btn text-white" style="background-color: #62ca50"
+                                        <button type="sumbit" class="btn text-white ms-2" style="background-color: #62ca50"
                                             onclick="sendInvitation('{{ Auth::user()['id'] }}', document.getElementById('email').value, document.getElementById('first_name').value, document.getElementById('last_name').value,  document.getElementById('employee_id').value, document.getElementById('role_id').value, document.getElementById('department_id').value)">Submit</button>
                                     @else
-                                        <button type="sumbit" class="btn text-white" style="background-color: #62ca50"
+                                        <button type="sumbit" class="btn text-white ms-2" style="background-color: #62ca50"
                                             onclick="sendInvitation('{{ Auth::user()['id'] }}', document.getElementById('email').value, document.getElementById('first_name').value, document.getElementById('last_name').value, document.getElementById('employee_id').value, document.getElementById('role_id').value)">Submit</button>
                                     @endif
                                 </div>
@@ -172,9 +172,9 @@
                                     res['message'],
                                     "error"
                                 );
-                                setTimeout(function() {
-                                    window.location.reload(true);
-                                }, 1000);
+                                // setTimeout(function() {
+                                //     window.location.reload(true);
+                                // }, 1000);
                             }
                         },
                         complete: function(data) {

@@ -17,20 +17,23 @@ class ExpensesController extends Controller
     public function index(Request $request)
     {
         $statusType = $request->statusType;
-
-        return view(
-            'expenses',
-            [
-                'title' => 'expense',
-                'section' => 'expense',
-                'data' => [
-                    'limit' => SpendsController::get_balance(Auth::user()['id']),
-                    'expenses' => self::asyncGetExpenses(Auth::user()['id'], $statusType),
-                    // 'expenses' => self::list(Auth::user()['id']),
-                    'coupons' => self::list_coupon(Auth::user()['id'])
+        if (session()->get('is_superadmin') == true) {
+            return redirect('/');
+        } else {
+            return view(
+                'expenses',
+                [
+                    'title' => 'expense',
+                    'section' => 'expense',
+                    'data' => [
+                        'limit' => SpendsController::get_balance(Auth::user()['id']),
+                        'expenses' => self::asyncGetExpenses(Auth::user()['id'], $statusType),
+                        // 'expenses' => self::list(Auth::user()['id']),
+                        'coupons' => self::list_coupon(Auth::user()['id'])
+                    ]
                 ]
-            ]
-        );
+            );
+        }
     }
 
     public function asyncGetExpenses($user_id, $statusType = null)

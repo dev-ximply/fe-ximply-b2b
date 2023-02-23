@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="col-md-12 mb-2">
                                          <?php 
-                                            $contact = $data['tenant']->contant_company ?? ""
+                                            $contact = $data['tenant']->company_contact ?? ""
                                         ?>
                                         <input type="text" value="{{ $contact }}" id="contact_company" class="form-control">
                                     </div>
@@ -163,12 +163,13 @@
                             <div class="row">
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Role</label>
-                                    <input type="text" class="form-control" value="{{$data['user']->role->define_role_name}}" disabled>
+                                    {{-- <input type="text" class="form-control" value="{{$data['user']->role->define_role_name}}" disabled> --}}
+                                    <input type="text" class="form-control" value="{{$data['user']->role_name}}"disabled>
                                 </div>
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Employee
                                         Id</label>
-                                    <input type="text" class="form-control" disabled>
+                                    <input type="text" class="form-control" value="{{ $data['user']->employee_id }}" disabled>
                                 </div>
                             </div>
                             <div class="row">

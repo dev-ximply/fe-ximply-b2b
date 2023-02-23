@@ -321,7 +321,6 @@
                     </thead>
 
                     <tbody>
-
                         @if (count($data['t_partner']) > 0)
                             @foreach ($data['t_partner'] as $item)
                                 <tr class="">
@@ -364,12 +363,6 @@
 
                                     </td>
 
-
-
-
-
-
-
                                     <td class="text-sm d-flex justify-content-md-center justify-content-between"
                                         data-label="Action">
 
@@ -409,9 +402,10 @@
                         @else
                             <tr>
 
-                                <td colspan="4" style="font-size: 12px">
-
-                                    data empty
+                                <td colspan="7" class="  " style="font-size: 15px; font-weight:700" >
+                                    <div class="text-center d-flex align-items-center justify-content-center">
+                                        Data Empty
+                                    </div>
 
                                 </td>
 
@@ -491,6 +485,11 @@
                                 tenant_code:tenant,
                                 partner_id: id,
                             },
+                            beforeSend: function() {
+                                if ($("#main-loader")) {
+                                    $("#main-loader").show();
+                                }
+                            },
                             success: function(response) {
 
                                 const {
@@ -510,7 +509,7 @@
                                     }, 1000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
-                                        "gagal",
+                                        "Failed",
                                         message,
                                         "error"
                                     );

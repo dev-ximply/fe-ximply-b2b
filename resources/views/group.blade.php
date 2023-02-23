@@ -384,6 +384,11 @@
                                 user_id: userId,
                                 tenant_code: tenant
                             },
+                            beforeSend: function() {
+                                if ($("#main-loader")) {
+                                    $("#main-loader").show();
+                                }
+                            },
                             success: function(response) {
 
                                 const {

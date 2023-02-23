@@ -43,20 +43,22 @@
 
                         <label class="form-label mt-4" style="color: black; font-weight:500">User</label>
 
-                            <select class="form-control " name="user_assign_id" id="user_assign_id">
+                        <select class="form-select" name="user_assign_id" id="user_assign_id">
 
-                                <option hidden selected>Pilih User</option>
+                            <option hidden selected>Pilih User</option>
 
-                                @foreach ($data['a_partner'] as $member)
-                                <option value="{{ $member->id }}" data-group="{{$member->group_id}}">{{ $member->full_name }}</option>
-                                @endforeach
+                            @foreach ($data['a_partner'] as $member)
+                                <option value="{{ $member->id }}" data-group="{{ $member->group_id }}">
+                                    {{ $member->full_name }}</option>
+                            @endforeach
 
-                            </select>
+                        </select>
 
                     </div>
                     <div class="col-6">
                         <label class="form-label mt-4" style="color: black; font-weight:500">Group</label>
-                        <select class="form-control" name="group_id" id="group_id" style="background-color: white" readonly disabled>
+                        <select class="form-control" name="group_id" id="group_id" style="background-color: white"
+                            readonly disabled>
                             <option value="" id="option_group"></option>
                         </select>
                     </div>
@@ -64,10 +66,11 @@
                 <div class="row">
                     <div class="d-flex justify-content-end mt-4">
                         <div>
-                            <button class="btn text-white" data-bs-dismiss="modal"
+                            <button class="btn text-white me-2" data-bs-dismiss="modal"
                                 style="background-color: #D42A34">Cancel</button>
-                            <button class="btn text-white" style="background-color: #62ca50" onclick="addPartner('{{ Auth::user()['id'] }}')">
-                                Submit
+                            <button class="btn text-white ms-2" style="background-color: #62ca50"
+                                onclick="addPartner('{{ Auth::user()['id'] }}')">
+                                Submit 
                             </button>
                         </div>
                     </div>
@@ -78,29 +81,29 @@
 </div>
 
 <script>
-    $("#user_assign_id").change(function(){
+    $("#user_assign_id").change(function() {
         const group_id = $(this).find(':selected').data('group');
-     
-        const user_id = '{{Auth::user()['id']}}';
-        $.get(API_URL + "api/group/list/"+ TENANT_CODE, 
-        {
-            "user_id" : user_id,
-            "group_id" : group_id
 
-        }, function (res, textStatus, jqXHR) {
+        const user_id = '{{ Auth::user()['id'] }}';
+        $.get(API_URL + "api/group/list/" + TENANT_CODE, {
+            "user_id": user_id,
+            "group_id": group_id
+
+        }, function(res, textStatus, jqXHR) {
             $('#option_group').val(res.data.id);
             $("#option_group").text(res.data.group_name);
         });
 
     });
-    function addPartner(userId ) {
-        
-        const companyName   =  document.getElementById('companyName').value;
-        const picName       =  document.getElementById('picName').value;
-        const email         =  document.getElementById('email').value;
-        const handphone     =  document.getElementById('handphone').value;
-        const group_id      =  document.getElementById('group_id').value;
-        const userAssignId  =  document.getElementById('user_assign_id').value;
+
+    function addPartner(userId) {
+
+        const companyName = document.getElementById('companyName').value;
+        const picName = document.getElementById('picName').value;
+        const email = document.getElementById('email').value;
+        const handphone = document.getElementById('handphone').value;
+        const group_id = document.getElementById('group_id').value;
+        const userAssignId = document.getElementById('user_assign_id').value;
         var tenantCode = TENANT_CODE;
         var userid = USR_ID;
         console.log(userId);
@@ -141,14 +144,19 @@
                         url: API_URL + "api/partner/add",
                         // url: "{{ route('parners.store') }}",
                         data: {
-                            user_id:userid,
-                            tenant_code:tenantCode,
+                            user_id: userid,
+                            tenant_code: tenantCode,
                             company_name: companyName,
                             contact_name: picName,
                             handphone: handphone,
                             email: email,
                             group_id: group_id,
                             assign_user_id: userAssignId,
+                        },
+                        beforeSend: function() {
+                            if ($("#main-loader")) {
+                                $("#main-loader").show();
+                            }
                         },
                         success: function(response) {
 

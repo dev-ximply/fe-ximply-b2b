@@ -22,7 +22,7 @@
 
                     <div class="avatar avatar-xl position-relative">
 
-                        <img src="{{ asset('img/logos/logo-new/logo-companyy.png') }}" alt="profile_image"
+                        <img src="{{  config('storage.base_url'). $data['tenant']->company_logo }}" alt="profile_image"
 
                             class="p-2 w-100 border-radius-lg shadow-sm" style="width: 90px !important">
 

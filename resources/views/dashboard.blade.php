@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div class="row mb-5 flex-md-row flex-column">
+    <div class="row mb-2 flex-md-row flex-column">
         {{-- quick accesss --}}
         <div class="col-md d-md-none d-block">
             <div class="coloumn__quick__access">
@@ -386,6 +386,22 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row flex-md-row">
+        <div class="col-md-12  bg-white">
+            <div class="table-responsive">
+                <table class="table table-borderless text-dark">
+                    <thead>
+                        <th>Tes</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tes</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
