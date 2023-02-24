@@ -249,7 +249,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-10">
                             <form action="" enctype="multipart/form-data" onsubmit="changeForm()">
                                 @csrf

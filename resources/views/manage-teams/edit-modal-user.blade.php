@@ -117,46 +117,82 @@
             departement_id: departementId,
             role_id: roleId,
         };
+
         console.log(datas);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: "PUT",
-            url: "{{ route('employees.update') }}",
-            data: {
-                user_id: userId,
-                first_name: firstNameId,
-                last_name: lastNameId,
-                email: emailId,
-                employee_id: employeeId,
-                departement_id: departementId,
-                role_id: roleId,
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success-cstm mx-2",
+                cancelButton: "btn btn-danger-cstm mx-2",
             },
-            beforeSend: function() {
-                if ($("#loader")) {
-                    $("#loader").show();
-                }
-            },
-            success: function(response) {
-                console.log(response);
-                const {
-                    success,
-                    status,
-                    message
-                } = response;
-                if ($("#loader")) {
-                    $("#loader").hide();
-                } 
-                if (success === true) {
-                    setTimeout(function() {
-                        window.location.reload(true);
-                    }, 1000);
-                }
-            }
+            buttonsStyling: false,
         });
+        swalWithBootstrapButtons
+            .fire({
+                title: "<h5>Are you sure you want to process?</h5>",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                reverseButtons: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: "PUT",
+                        url: "{{ route('employees.update') }}",
+                        data: {
+                            user_id: userId,
+                            first_name: firstNameId,
+                            last_name: lastNameId,
+                            email: emailId,
+                            employee_id: employeeId,
+                            departement_id: departementId,
+                            role_id: roleId,
+                        },
+                        beforeSend: function() {
+                            if ($("#loader")) {
+                                $("#loader").show();
+                            }
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            const {
+                                success,
+                                status,
+                                message
+                            } = response;
+                            if (success === true) {
+
+                                setTimeout(function() {
+                                    window.location.reload(true);
+                                }, 1000);
+                            } else {
+                                swalWithBootstrapButtons.fire(
+                                    "Failed",
+                                    message,
+                                    "error"
+                                );
+                            }
+                        }
+                    });
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+
+                    swalWithBootstrapButtons.fire(
+                        "Cancelled",
+                        "Your request cancelled :)",
+                        "error"
+                    );
+                }
+            });
+
     }
 </script>
 
