@@ -51,7 +51,7 @@
                                 <div class="col-md mt-2  d-flex align-items-center justify-content-center">
                                     <div class="position-relative mt-2" style="height:350px; min-height:auto">
                                         <div id="btn-scan-receipt-nanonets"
-                                            class="ava-upload-button  my-3 d-flex flex-column align-items-center justify-content-center"
+                                            class="align-middle ava-upload-button  my-3 d-flex flex-column align-items-center justify-content-center"
                                             style="vertical-align: middle; height: 350px; width:350px; min-height:100%; min-width:300px;">
                                             <img id="ava-pic-2" class="ava-pic"
                                                 src="{{ asset('img/icons/receipt.png') }}" style="margin-top:-80px">
@@ -90,7 +90,8 @@
                                         <label for="" class="text-dark" style="font-weight:500">Total
                                             Amount</label>
                                         <input type="text" name="total_amount" id="total_amount"
-                                            class="form-control number-separator" placeholder="Amount" step="1.0" required>
+                                            class="form-control number-separator" placeholder="Amount" step="1.0"
+                                            required>
                                         <script>
                                             new NumericInput(document.getElementById('total_amount'), 'en-CA');
                                         </script>
@@ -138,6 +139,12 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <label for="" class="text-dark" style="font-weight:500">Note</label>
+                                        <textarea name="note" id="note_id" cols="3" rows="3" class="form-control"></textarea>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6 px-4">
                                 <ul class="nav nav-tabs" role="tablist">
@@ -157,7 +164,7 @@
                                             <div style="">
                                                 <div id="file_receipt_upload"
                                                     class=" ava-upload-button  my-3 d-flex align-items-center justify-content-center"
-                                                    style="vertical-align: middle; height: auto;width:auto; min-height:240px; min-width:300px">
+                                                    style="vertical-align: middle; height: auto;width:auto; min-height:372px; min-width:300px">
                                                     <img id="ava-pic-4" class="ava-pic"
                                                         src="{{ asset('img/icons/receipt.png') }}">
                                                 </div>
@@ -174,7 +181,8 @@
                                                     class=" ava-upload-button  my-3 d-flex align-items-center justify-content-center"
                                                     style="vertical-align: middle; height: auto;width:auto; min-height:240px; min-width:300px">
                                                     <img id="ava-pic-5" class="ava-pic"
-                                                        src="{{ asset('img/icons/receipt.png') }}" alt="additional_photo">
+                                                        src="{{ asset('img/icons/receipt.png') }}"
+                                                        alt="additional_photo">
                                                 </div>
                                                 <input name="file_additional" id="file_additional"
                                                     class="ava-file-upload" type="file" accept="image/*" />
@@ -184,7 +192,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="text-align: right; margin-top:20px; margin-right:12px">
+                        <div style="text-align: right; margin-top:30px; margin-right:12px">
                             <button type="submit" class="btn text-white" style="background: #62CA50">Submit</button>
                         </div>
                     </form>
@@ -196,12 +204,12 @@
 
 <script>
     easyNumberSeparator({
-      selector: '.number-separator',
-      separator: ',',
-      decimalSeparator: '.',
-      resultInput: '#result_input',
+        selector: '.number-separator',
+        separator: ',',
+        decimalSeparator: '.',
+        resultInput: '#result_input',
     })
-  </script>
+</script>
 
 <script>
     // new expense
@@ -211,6 +219,7 @@
         var sub_category = $("#sub_category").val();
         var purpose = $("#purpose").val();
         var client_id = $("#client_id").val();
+        var note_id = $("#note_id").val();
         var receipt_date = $("#receipt_date").val();
         var merchant = $("#merchant").val();
         var location = $("#location").val();
@@ -228,6 +237,7 @@
         formDataExpense.append('sub_category', sub_category);
         formDataExpense.append('purpose', purpose);
         formDataExpense.append('client_id', client_id);
+        formDataExpense.append('note', note_id);
         formDataExpense.append('receipt_date', receipt_date);
         formDataExpense.append('merchant', merchant);
         formDataExpense.append('location', location);
@@ -241,6 +251,9 @@
             formDataExpense.append('file_additional', fileAdditional[0]);
         }
 
+        for (const value of formDataExpense.values()) {
+            console.log(value);
+        }
         // new
 
         // console.log(formDataExpense);
@@ -264,10 +277,11 @@
             })
             .then((result) => {
                 if (result.isConfirmed) {
-                    let check = checkPin("#manualForm",function(){
+                    let check = checkPin("#manualForm", function() {
                         CreateExpense();
                     });
-                    function CreateExpense(){
+
+                    function CreateExpense() {
                         $.ajaxSetup({
                             headers: {
                                 "Authorization": "Bearer " + AUTH_TOKEN,
@@ -285,7 +299,7 @@
                                 if ($("#main-loader")) {
                                     $("#main-loader").show();
                                 }
-                            }, 
+                            },
                             success: function(res) {
                                 if (res['success'] == true) {
                                     swalWithBootstrapButtons.fire(
@@ -293,9 +307,9 @@
                                         "Your request success.",
                                         "success"
                                     );
-                                    setTimeout(function() {
-                                        window.location.reload(true);
-                                    }, 1000);
+                                    // setTimeout(function() {
+                                    //     window.location.reload(true);
+                                    // }, 1000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
                                         "oops!",
@@ -315,9 +329,9 @@
                         });
 
                     }
-                    
 
-                    
+
+
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     swalWithBootstrapButtons.fire(
                         "Cancelled",
@@ -353,7 +367,7 @@
                 // send receipt to nanonets
                 setTimeout(function() {
                     var formdata = new FormData();
-                    
+
                     formdata.append("tenant_code", TENANT_CODE);
                     formdata.append("user_id", $("#user_id").val());
                     formdata.append("file_receipt", fileReceipt[0]);
