@@ -102,16 +102,24 @@
                                         <td class="text-xs font-weight-bold">
                                             <div class="d-flex justify-content-center pb-0 mt-3">
                                                 @if (session()->get('is_superadmin') == false)
-                                                    <button
-                                                        class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
-                                                        style="background-color: #85cdfd;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                        data-bs-target="#modalInfoMember" data-bs-toggle="modal"
-                                                        onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->employee_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')">
-                                                        Info
-                                                    </button>
+                                                    @if($item->is_activate == 0)
+                                                        <p class="p-1" style="background:#efefef; color:black; border-radius:8px; font-size:12px" >
+                                                            Inactive
+                                                        </p>
+                                                    @else
+                                                        <button
+                                                            class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
+                                                            style="background-color: #85cdfd;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                            data-bs-target="#modalInfoMember" data-bs-toggle="modal"
+                                                            onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->employee_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')">
+                                                            Info
+                                                        </button>
+                                                    @endif
                                                 @else
                                                     @if ($item->is_activate == 0)
-                                                        inactive
+                                                    <p class="p-1" style="background:#efefef; color:black; border-radius:8px; font-size:12px" >
+                                                        Inactive
+                                                    </p>
                                                     @else
                                                         <button
                                                             class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
