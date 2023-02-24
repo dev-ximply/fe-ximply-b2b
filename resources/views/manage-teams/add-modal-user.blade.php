@@ -80,10 +80,10 @@
                                     <button class="btn text-white me-2" data-bs-dismiss="modal"
                                         style="background-color: #D42A34">Cancel</button>
                                     @if (session()->get('is_superadmin') == true)
-                                        <button type="sumbit" class="btn text-white ms-2" style="background-color: #62ca50"
+                                        <button type="submit" class="btn text-white ms-2" style="background-color: #62ca50"
                                             onclick="sendInvitation('{{ Auth::user()['id'] }}', document.getElementById('email').value, document.getElementById('first_name').value, document.getElementById('last_name').value,  document.getElementById('employee_id').value, document.getElementById('role_id').value, document.getElementById('department_id').value)">Submit</button>
                                     @else
-                                        <button type="sumbit" class="btn text-white ms-2" style="background-color: #62ca50"
+                                        <button type="submit" class="btn text-white ms-2" style="background-color: #62ca50"
                                             onclick="sendInvitation('{{ Auth::user()['id'] }}', document.getElementById('email').value, document.getElementById('first_name').value, document.getElementById('last_name').value, document.getElementById('employee_id').value, document.getElementById('role_id').value)">Submit</button>
                                     @endif
                                 </div>

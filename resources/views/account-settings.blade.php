@@ -11,8 +11,7 @@
     @include('account-settings.email-settings')
     @include('account-settings.password-settings')
     @include('account-settings.phone-settings')
-    <div id="loader"
-        style="display:none; text-align: center; z-index: 5000; position: absolute; width: 100%; top: 40%">
+    <div id="loader" style="display:none; text-align: center; z-index: 5000; position: absolute; width: 100%; top: 40%">
         <img height="100px" src="{{ asset('img/loader.gif') }}">
     </div>
     <div class="row">
@@ -32,14 +31,25 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="row justify-content-center">
-                                <div class="bg-secondary overflow-hidden d-flex align-items-center justify-content-center mb-2 mt-3"
-                                    style="border-radius: 50%; width:156px; height:156px">
-                                    <?php 
-                                        $logo = $data['tenant']->company_logo ?? "";
+                                <div class="overflow-hidden d-flex align-items-center justify-content-center mb-2 mt-3"
+                                    style="border-radius: 50%; width:156px; height:156px; background:#efefef">
+                                    <?php
+                                    $logo = $data['tenant']->company_logo ?? '';
                                     ?>
-                                    <img src="{{ config('storage.base_url').$logo }} " alt="user image" class=""
+
+                                    @if ($data['tenant']->company_logo == true)
+                                        <img src="{{ config('storage.base_url') . $logo }}" alt="Company Logo"
+                                            class=""
+                                            style="min-width: 155px !important; min-height:155px !important; border-radius:50%;"
+                                            id="ava-pic-2">
+                                    @else
+                                        <img src="{{ asset('img/team-2.jpg') }}" alt="Company Logo" class=""
+                                            style="min-width: 155px !important; min-height:155px !important; border-radius:50%;"
+                                            id="ava-pic-2">
+                                    @endif
+                                    {{-- <img src="{{ config('storage.base_url') . $logo }} " alt="user image" class=""
                                         style="min-width: 155px !important; min-height:155px !important; border-radius:50%"
-                                        id="ava-pic-2">
+                                        id="ava-pic-2"> --}}
                                 </div>
                                 <div class="mx-2 text-center">
                                     <div class="dropdown-item text-dark">
@@ -57,7 +67,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-10">
                             <div class="row mb-2">
                                 <div class="col-md-6 mt-3">
@@ -65,13 +75,15 @@
                                         Name
                                     </label>
                                     <input type="text" class="form-control text-dark text-capitalize"
-                                        placeholder="Company Name" id="company_name" value="{{$data['tenant']->company_name}}">
+                                        placeholder="Company Name" id="company_name"
+                                        value="{{ $data['tenant']->company_name }}">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Industrial
                                         Company</label>
                                     <input type="text" class="form-control text-dark text-capitalize"
-                                        placeholder="Industrial Company" id="industrial_name" value="{{$data['tenant']->industry}}">
+                                        placeholder="Industrial Company" id="industrial_name"
+                                        value="{{ $data['tenant']->industry }}">
                                 </div>
                             </div>
                             <div class="row">
@@ -84,7 +96,7 @@
                                     </div>
                                     <div class="col-md mb-2">
                                         <input type="text" class="form-control bg-white text-dark" placeholder="Address"
-                                            value="{{$data['tenant']->country}}" id="address">
+                                            value="{{ $data['tenant']->country }}" id="address">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -95,15 +107,16 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                         <?php 
-                                            $contact = $data['tenant']->company_contact ?? ""
+                                        <?php
+                                        $contact = $data['tenant']->company_contact ?? '';
                                         ?>
-                                        <input type="text" value="{{ $contact }}" id="contact_company" class="form-control">
+                                        <input type="text" value="{{ $contact }}" id="contact_company"
+                                            class="form-control">
                                     </div>
                                 </div>
-                            
+
                             </div>
-                            <input type="hidden" id="id_user" value="{{  Auth::user()['id']  }}">
+                            <input type="hidden" id="id_user" value="{{ Auth::user()['id'] }}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
@@ -112,10 +125,11 @@
                                                 style="font-weight:600">First Name</label>
                                         </div>
                                     </div>
-                                 
+
                                     <div class="col-md mb-2">
                                         <input type="text" class="form-control bg-white text-dark"
-                                            placeholder="Firstname Admin" id="firstname" value="{{$data['user']->first_name}}">
+                                            placeholder="Firstname Admin" id="firstname"
+                                            value="{{ $data['user']->first_name }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -125,15 +139,16 @@
                                                 style="font-weight:600">Last Name</label>
                                         </div>
                                     </div>
-                                
+
                                     <div class="col-md mb-2">
                                         <input type="text" class="form-control bg-white text-dark"
-                                            placeholder="Lastname Admin" id="lastname" value="{{$data['user']->last_name}}">
+                                            placeholder="Lastname Admin" id="lastname"
+                                            value="{{ $data['user']->last_name }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                
+
                                 <div class="col-md-6 mb-2">
                                     <div class="row ">
                                         <div class="col-md">
@@ -144,19 +159,21 @@
                                     <div class="col-md mb-2">
                                         <input onchange="changeInfoProfile(this.value, 'phone')" type="text"
                                             id="handphone" class="form-control bg-white text-dark"
-                                            placeholder="Add your mobile phone number"  value="{{$data['user']->handphone}}" readonly>
+                                            placeholder="Add your mobile phone number"
+                                            value="{{ $data['user']->handphone }}" readonly>
                                         <script>
                                             new PhoneInput(document.getElementById('handphone'));
                                         </script>
                                     </div>
-                                 
+
                                 </div>
-                               
+
                             </div>
                             <div class="row">
                                 <div class="col-md mb-0">
                                     <div class="text-end">
-                                        <button type="submit" onclick="changeAccount()" class="btn text-white" style="background: #62ca50">Save</button>
+                                        <button type="submit" onclick="changeAccount()" class="btn text-white"
+                                            style="background: #62ca50">Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -164,12 +181,14 @@
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Role</label>
                                     {{-- <input type="text" class="form-control" value="{{$data['user']->role->define_role_name}}" disabled> --}}
-                                    <input type="text" class="form-control" value="{{$data['user']->role_name}}"disabled>
+                                    <input type="text" class="form-control"
+                                        value="{{ $data['user']->role_name }}"disabled>
                                 </div>
                                 <div class="col-md mb-2">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Employee
                                         Id</label>
-                                    <input type="text" class="form-control" value="{{ $data['user']->employee_id }}" disabled>
+                                    <input type="text" class="form-control" value="{{ $data['user']->employee_id }}"
+                                        disabled>
                                 </div>
                             </div>
                             <div class="row">
@@ -180,10 +199,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md mb-2">
-                                    <input type="text" class="form-control "
-                                        placeholder="Member Total" value="{{$data['member']->remainder_user}}" disabled>
+                                    <input type="text" class="form-control " placeholder="Member Total"
+                                        value="{{ $data['member']->remainder_user }}" disabled>
                                 </div>
-                             
+
                             </div>
                             <div class="row">
                                 <div class="row">
@@ -194,7 +213,7 @@
                                 </div>
                                 <div class="col-md-9 mb-2">
                                     <input type="email" class="form-control bg-white text-dark"
-                                        placeholder="your email" value="{{$data['user']->email}}" disabled>
+                                        placeholder="your email" value="{{ $data['user']->email }}" disabled>
                                 </div>
                                 <div class="col-md-3">
                                     <button class="btn text-white" style="background: #ff720c; width:100%; min-width:auto"
@@ -310,6 +329,10 @@
         });
 
         function changePhotoProfile() {
+
+            let tenant = TENANT_CODE;
+            let userId = USR_ID;
+
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success-cstm mx-2",
@@ -327,8 +350,10 @@
             } else {
                 var formChangePhotoProfile = new FormData();
 
-                formChangePhotoProfile.append('user_id', user_id);
-                formChangePhotoProfile.append('profile_picture', picture_file[0]);
+
+                formChangePhotoProfile.append('tenant_code', tenant);
+                formChangePhotoProfile.append('user_id', userId);
+                formChangePhotoProfile.append('company_logo', picture_file[0]);
 
                 $.ajaxSetup({
                     headers: {
@@ -338,19 +363,19 @@
                 });
 
                 $.ajax({
-                    url: API_URL + "api/user/profile/update-profile-picture",
+                    url: API_URL + "api/tenant/info/update",
                     type: 'post',
                     data: formChangePhotoProfile,
                     contentType: false,
                     processData: false,
                     beforeSend: function() {
-                        $("#loader").show();
+                        $("#main-loader").show();
                     },
                     success: function(res) {
                         if (res['success'] == true) {
                             swalWithBootstrapButtons.fire(
-                                "success!",
-                                "Your profile updated.",
+                                "Success!",
+                                "Your logo company success updated.",
                                 "success"
                             );
                         } else {
@@ -362,7 +387,10 @@
                         }
                     },
                     complete: function(data) {
-                        $("#loader").hide();
+                        $("#main-loader").hide();
+                        setTimeout(function() {
+                            window.location.reload(true);
+                        }, 1000);
                         if (data.status != 200) {
                             Swal.fire(
                                 "something wrong",
@@ -374,7 +402,8 @@
                 });
             }
         }
-        function changeAccount(){
+
+        function changeAccount() {
             const company = document.getElementById('company_name').value;
             const industrial_name = document.getElementById('industrial_name').value;
             const address = document.getElementById('address').value;
@@ -393,62 +422,62 @@
                 buttonsStyling: false,
             });
             swalWithBootstrapButtons
-            .fire({
-                title: "<h5>Are you sure you want to process?</h5>",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Yes",
-                cancelButtonText: "No",
-                reverseButtons: false,
-            }).then((result) => {
-                if (result.isConfirmed) {
+                .fire({
+                    title: "<h5>Are you sure you want to process?</h5>",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    reverseButtons: false,
+                }).then((result) => {
+                    if (result.isConfirmed) {
 
-                    var formData = new FormData();
+                        var formData = new FormData();
 
-                    formData.append('tenant_code', tenant);
-                    formData.append('user_id', id_user);
-                    formData.append('company_name', company);
-                    formData.append('industry', industrial_name);
+                        formData.append('tenant_code', tenant);
+                        formData.append('user_id', id_user);
+                        formData.append('company_name', company);
+                        formData.append('industry', industrial_name);
 
-                    $.ajax({
-                        url: API_URL + "api/tenant/info/update",
-                        type: 'post',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        beforeSend: function() {
-                            if ($("#loader")) {
-                                $("#loader").show();
-                            }
-                        },
-                        success: function(res) {
-                            return res['success'];
-                        },
-                        error: function(xhr, status, error) {
+                        $.ajax({
+                            url: API_URL + "api/tenant/info/update",
+                            type: 'post',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            beforeSend: function() {
+                                if ($("#loader")) {
+                                    $("#loader").show();
+                                }
+                            },
+                            success: function(res) {
+                                return res['success'];
+                            },
+                            error: function(xhr, status, error) {
                                 var errorMessage = xhr.status + ': ' + xhr.statusText;
                                 console.log(errorMessage);
                                 return errorMessage
-                         }
-                        
-                    });
+                            }
 
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    swalWithBootstrapButtons.fire(
-                        "Cancelled",
-                        "Your request cancelled :)",
-                        "error"
-                    );
-                }
-            })
-            .then((res) => {
-                console.log(id_user);
-                var formDataProfile = new FormData();
+                        });
 
-                formDataProfile.append('user_id', id_user);
-                formDataProfile.append('first_name', firstname);
-                formDataProfile.append('last_name', lastname);
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        swalWithBootstrapButtons.fire(
+                            "Cancelled",
+                            "Your request cancelled :)",
+                            "error"
+                        );
+                    }
+                })
+                .then((res) => {
+                    console.log(id_user);
+                    var formDataProfile = new FormData();
 
-                $.ajax({
+                    formDataProfile.append('user_id', id_user);
+                    formDataProfile.append('first_name', firstname);
+                    formDataProfile.append('last_name', lastname);
+
+                    $.ajax({
                         url: API_URL + "api/user/profile/update",
                         type: 'post',
                         data: formDataProfile,
@@ -461,7 +490,7 @@
                                     "Your request success.",
                                     "success"
                                 );
-                                
+
                                 if ($("#loader")) {
                                     $("#loader").hide();
                                 }
@@ -478,12 +507,12 @@
                             }
                         },
                         error: function(xhr, status, error) {
-                                var errorMessage = xhr.status + ': ' + xhr.statusText;
-                                console.log(errorMessage);
-                                return errorMessage
-                         }
+                            var errorMessage = xhr.status + ': ' + xhr.statusText;
+                            console.log(errorMessage);
+                            return errorMessage
+                        }
                     });
-            });
+                });
             // .then((rest) => {
             //     var formDatahandphone = new FormData();
 
@@ -503,7 +532,7 @@
             //                         "Your request success.",
             //                         "success"
             //                     );
-                                
+
 
             //                     setTimeout(function() {
             //                         location.reload();

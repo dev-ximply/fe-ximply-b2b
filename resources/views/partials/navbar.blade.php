@@ -140,7 +140,8 @@
                         <span id="navbar_fullname" class="text-capitalize" style="font-size: 16px"></span>
                     </div>
                     <div>
-                        <span id="navbar_group_Name" class="text-capitalize" style="font-weight:500;font-size:13px"></span>
+                        <span id="navbar_group_Name" class="text-capitalize"
+                            style="font-weight:500;font-size:13px"></span>
                     </div>
                 </li>
             </ul>
@@ -214,13 +215,23 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0 d-flex flex-row mb-2 ms-2"
-                        id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        &nbsp;
-                        <img id="navbar_profilepict" src="{{ asset('img/team-2.jpg') }}" alt=""
-                            class="img-fluid"
-                            style="width: 2em; height: 2em; border-radius:50%; border: 1px solid grey">
-                    </a>
+                    @if (session()->get('is_superadmin') == true)
+                        <a href="javascript:;" class="nav-link text-body p-0 d-flex flex-row mb-2 ms-2"
+                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            &nbsp;
+                            <img id="navbar_profilepict_admin" src="{{ asset('img/team-2.jpg') }}" alt=""
+                                class="img-fluid"
+                                style="width: 2em; height: 2em; border-radius:50%; border: 1px solid grey">
+                        </a>
+                    @else
+                        <a href="javascript:;" class="nav-link text-body p-0 d-flex flex-row mb-2 ms-2"
+                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            &nbsp;
+                            <img id="navbar_profilepict" src="{{ asset('img/team-2.jpg') }}" alt=""
+                                class="img-fluid"
+                                style="width: 2em; height: 2em; border-radius:50%; border: 1px solid grey">
+                        </a>
+                    @endif
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                         @if (session()->get('is_superadmin') == false)
                             <li class="mb-0">
@@ -561,6 +572,39 @@
         </div>
     </div>
 </div>
+
+
+{{-- get logo profile compnay --}}
+<script>
+    $(document).ready(function() {
+        let tenant = TENANT_CODE;
+        let userId = USR_ID;
+
+
+        $.ajaxSetup({
+            headers: {
+                "Authorization": "Bearer " + AUTH_TOKEN,
+                "Accept": "application/json"
+            }
+        });
+        $.ajax({
+            type: "GET",
+            url: API_URL + "api/tenant/info/" + tenant + '/' + userId,
+            success: function(res) {
+                if (res['success'] == true) {
+                    var response = res['data'];
+                    document.getElementById('navbar_profilepict_admin').src = STORAGE_URL +
+                        response['company_logo'];
+
+                }else{
+                    document.getElementById('navbar_profilepict_admin').src = 'img/team-2.png';
+                }
+            }
+        });
+
+    });
+</script>
+{{-- get logo profile compnay --}}
 {{-- Modal check Pin --}}
 <script>
     $(document).ready(function() {
@@ -647,7 +691,7 @@
                         'full_name'];
                     document.getElementById('navbar_profilepict').src = STORAGE_URL + response[
                         'profile_picture'];
-                    document.getElementById('navbar_group_Name').innerHTML = response['group_name'];                    
+                    document.getElementById('navbar_group_Name').innerHTML = response['group_name'];
                     $subscription_type = response['subscription_type'];
                     if ($subscription_type == "trial") {
                         document.getElementById('show_hide_subs').style.display = "block";
