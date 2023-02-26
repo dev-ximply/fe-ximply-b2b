@@ -22,7 +22,7 @@
         top: 0;
         right: 0;
         /* background: url(icon.png); */
-        
+
     }
 
     .zoom img {
@@ -68,7 +68,8 @@
                         <div class="row mb-2">
                             <div class="col-md-6">
                                 <label for="" class="text-dark" style="font-weight:500">Total Amount</label>
-                                <input type="text" class="form-control bg-white number_separator" id="detail_total_amount" readonly>
+                                <input type="text" class="form-control bg-white number_separator"
+                                    id="detail_total_amount" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="" class="text-dark" style="font-weight:500">Location</label>
@@ -105,7 +106,11 @@
                                 <label for="dataExpenseOf" class="text-dark" style="font-weight:500">Expense Of</label>
                                 <input type="text" placeholder="" class="form-control bg-white" id="dataExpenseOf"
                                     readonly>
-                        </div>
+                            </div>
+                            <div class="col-md">
+                                <label for="" class="text-dark" style="font-weight:500">Note</label>
+                                <textarea name="note" id="detail_note" cols="1" rows="1" class="form-control"></textarea>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 px-4">
@@ -150,16 +155,14 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer text-end" id="decisionButton" style="display: none">      
-                <button
-                    onclick="approvalDecision({{ Auth::user()['id'] }}, approvalID, 'approved')"
-                    type="button" class="btn text-white" style="width: 140px; background-color:#50B720">
+            <div class="modal-footer text-end" id="decisionButton" style="display: none">
+                <button onclick="approvalDecision({{ Auth::user()['id'] }}, approvalID, 'approved')" type="button"
+                    class="btn text-white" style="width: 140px; background-color:#50B720">
                     <i class="fas fa-circle-check text-white text-lg me-1"></i>
                     Approve
                 </button>
-                <button
-                    onclick="approvalDecision({{ Auth::user()['id'] }}, approvalID, 'rejected')"
-                    type="button" class="btn text-white" style="width: 140px; background-color: #E40909">
+                <button onclick="approvalDecision({{ Auth::user()['id'] }}, approvalID, 'rejected')" type="button"
+                    class="btn text-white" style="width: 140px; background-color: #E40909">
                     <i class="fas fa-circle-xmark text-white text-lg me-1"></i>
                     Reject
             </div>
@@ -169,30 +172,30 @@
 
 
 <script>
-$("input.number_separator").each((i,ele)=>{
-            let clone=$(ele).clone(false)
-            clone.attr("type","text")
-            let ele1=$(ele)
-            clone.val(Number(ele1.val()).toLocaleString("en-CA"))
-            $(ele).after(clone)
-            $(ele).hide()
-            clone.mouseenter(()=>{
+    $("input.number_separator").each((i, ele) => {
+        let clone = $(ele).clone(false)
+        clone.attr("type", "text")
+        let ele1 = $(ele)
+        clone.val(Number(ele1.val()).toLocaleString("en-CA"))
+        $(ele).after(clone)
+        $(ele).hide()
+        clone.mouseenter(() => {
 
-                ele1.show()
-                clone.hide()
-            })
-            setInterval(()=>{
-                let newv=Number(ele1.val()).toLocaleString("en-CA")
-                if(clone.val()!=newv){
-                    clone.val(newv)
-                }
-            },10)
-
-            $(ele).mouseleave(()=>{
-                $(clone).show()
-                $(ele1).hide()
-            })
-            
-
+            ele1.show()
+            clone.hide()
         })
+        setInterval(() => {
+            let newv = Number(ele1.val()).toLocaleString("en-CA")
+            if (clone.val() != newv) {
+                clone.val(newv)
+            }
+        }, 10)
+
+        $(ele).mouseleave(() => {
+            $(clone).show()
+            $(ele1).hide()
+        })
+
+
+    })
 </script>

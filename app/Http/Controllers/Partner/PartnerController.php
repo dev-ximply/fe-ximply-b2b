@@ -163,7 +163,7 @@ class PartnerController extends Controller
             'Accept' => 'application/json'
         ];
 
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/member/list/' . Session::get('TenantCode') . '?user_id=' .   $user_id, $headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/member/list/' . Session::get('TenantCode') . '/active' . '?user_id=' .   $user_id, $headers);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 

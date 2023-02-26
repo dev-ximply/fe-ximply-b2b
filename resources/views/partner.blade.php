@@ -332,9 +332,7 @@
                                     </td>
 
                                     <td class="text-sm" data-label="Contact Name" style="color: #000000">
-
-                                        {{ $item->contact_name }}
-
+                                        {{ $item->contact_name != '' ? $item->contact_name : '-'}}
                                     </td>
 
                                     <td class="text-sm" data-label="Contact Info" style="color: #000000">

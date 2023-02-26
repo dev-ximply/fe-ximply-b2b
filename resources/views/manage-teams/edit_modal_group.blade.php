@@ -52,7 +52,7 @@
 <script src="{{ asset('js/plugins/choices.min.js') }}"></script>
 <script src="{{ asset('js/plugins/flatpickr.min.js') }}"></script>
 <script>
-    function editGroup(userId,groupId,groupName,IsHaveClient){
+    function editGroup(userId, groupId, groupName, IsHaveClient) {
         console.log(userId);
         console.log(groupId);
         console.log(groupName);
@@ -80,9 +80,9 @@
 
                     var formData = new FormData();
 
-                    if(IsHaveClient == true){
+                    if (IsHaveClient == true) {
                         IsHaveClient = 1;
-                    }else{
+                    } else {
                         IsHaveClient = 0;
                     }
 
@@ -104,8 +104,8 @@
                         contentType: false,
                         processData: false,
                         beforeSend: function() {
-                            if ($("#main-loader")) {
-                                $("#main-loader").show();
+                            if ($("#loader")) {
+                                $("#loader").show();
                             }
                         },
                         success: function(res) {
@@ -124,8 +124,8 @@
                             }
                         },
                         complete: function(data) {
-                            if ($("#main-loader")) {
-                                $("#main-loader").hide();
+                            if ($("#loader")) {
+                                $("#loader").hide();
                             }
                             setTimeout(function() {
                                 location.reload();
@@ -206,7 +206,7 @@
 </script>
 
 <script>
-    function handleSubmitChangeGroup(event){
+    function handleSubmitChangeGroup(event) {
         event.preventDefault();
 
         let groupId = event.target.querySelector("#group_id").value;
@@ -215,35 +215,76 @@
 
         console.log('submit')
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success-cstm mx-2",
+                cancelButton: "btn btn-danger-cstm mx-2",
+            },
+            buttonsStyling: false,
         });
 
-        $.ajax({
-                type: "PUT",
-                url: "{{ route('groups.update') }}",
-                data: {
-                    group_id: groupId,
-                    group_name: groupName,
-                    has_client: hasClient,
-                },
-                success: function(response) {
-                    console.log(response)
-                    const {
-                        success,
-                        status,
-                        message
-                    } = response;
+        swalWithBootstrapButtons
+            .fire({
+                title: "<h5>Are you sure you want to process?</h5>",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                reverseButtons: false,
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
 
-                    if(success===true){
-                        setTimeout(function() {
-                            window.location.reload(true);
-                        }, 1000);
-                    }
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: "PUT",
+                        url: "{{ route('groups.update') }}",
+                        data: {
+                            group_id: groupId,
+                            group_name: groupName,
+                            has_client: hasClient,
+                        },
+                        beforeSend: function() {
+                            if ($("#main-loader")) {
+                                $("#main-loader").show();
+                            }
+                        },
+                        success: function(res) {
+                            if (res['success'] == "true" || res['success'] == true) {
+                                swalWithBootstrapButtons.fire({
+                                    title:"Success",
+                                    text:'Your request success.',
+                                    timer:1000
+                                }
+                                    // "Success!",
+                                    // "Your request success.",
+                                    // "success"
+                                );
+                            } else {
+                                swalWithBootstrapButtons.fire(
+                                    "Error!",
+                                    "Your request can't processed." + res['message'],
+                                    "error"
+                                );
+                            }
+                        },
+                        complete: function(data) {
+                            if ($("#main-loader")) {
+                                $("#main-loader").hide();
+                            }
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        }
+
+                    });
+
                 }
-
             });
 
     }

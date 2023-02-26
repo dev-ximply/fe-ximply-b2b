@@ -301,6 +301,10 @@
                                 </th>
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
                                     style="color: #000000; ">
+                                    Note
+                                </th>
+                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                    style="color: #000000; ">
                                     Action
                                 </th>
                             </tr>
@@ -366,6 +370,10 @@
                                             <td class="text-break text-wrap ps-md-4 text-md-start text-end"
                                                 data-label="Expense" style="color: #000000">
                                                 {{ $expense->category_name }}
+                                            </td>
+                                            <td class="text-break text-wrap ps-md-4 text-md-start text-end"
+                                                data-label="Expense" style="color: #000000">
+                                                {{ $expense->note }}
                                             </td>
                                             <td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between"
                                                 data-label="Action">
@@ -457,6 +465,7 @@
                         document.getElementById('detail_sub_category').value = response['sub_category_name'];
                         document.getElementById('detail_partner').value = response['client_name'];
                         document.getElementById('detail_purpose').value = response['purpose_name'];
+                        document.getElementById('detail_note').value = response['note'];
                         document.getElementById('dataExpenseOf').value = response['expense_of'];
                         $('#ex1').zoom();
                         $('#ex2').zoom();
@@ -604,25 +613,25 @@
                                         '</p></td>';
                                     if (expense.status == 'approved') {
                                         tableOut +=
-                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
-                                            '<span class="badge badge-xs d-flex justify-content-center"' +
-                                            'style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">' +
-                                            expense.status '</span>' +
-                                            +'</p></td>';
-
+                                        '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                           '<span class="badge badge-xs d-flex justify-content-center"'+
+                                             'style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">'+
+                                                        expense.status +
+                                            '</span>'+
+                                        '</td>';
                                     } else if (expense.status == 'pending') {
                                         tableOut +=
                                             '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
                                             '<span class="badge badge-xs d-flex justify-content-center"' +
                                             'style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">' +
-                                            expense.status '</span>' +
+                                            expense.status +'</span>' +
                                             '</p></td>';
                                     } else if (expense.status == 'rejected') {
                                         tableOut +=
                                             '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
                                             '<span class="badge badge-xs d-flex justify-content-center"' +
                                             'style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">' +
-                                            expense.status '</span>' +
+                                            expense.status + '</span>' +
                                             '</td>';
 
                                     } else {
@@ -633,8 +642,14 @@
                                     }
 
                                     tableOut +=
-                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
-                                        expense.purpose_name + '</p></td>';
+                                        // '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
+                                        // expense.purpose_name + '</p></td>';
+
+                                        '<td class="text-md-start ps-md-4 text-end text-break text-wrap"'+
+                                                'data-label="Purpose" style="color: #000000">'+
+                                                 expense.purpose_name +
+                                            '</td>';
+
                                     tableOut +=
                                         '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
                                         expense.merchant + '</p></td>';
@@ -642,8 +657,12 @@
                                         '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
                                         expense.total_amount + '</p></td>';
                                     tableOut +=
-                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
+                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
                                         expense.category_name + '</p></td>';
+                                    tableOut += '<td class="text-break text-wrap ps-md-4 text-md-start text-end"'+
+                                                'data-label="Expense" style="color: #000000">'+
+                                                 expense.note +
+                                            '</td>';
                                     tableOut +=
                                         '<td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between" data-label="Action">' +
                                         ' <button onclick="getExpenseData(' + '`' + expense.id + '`' +
