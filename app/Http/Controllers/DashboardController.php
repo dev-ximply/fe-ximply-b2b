@@ -24,7 +24,7 @@ class DashboardController extends Controller
                 'section' => 'dashboard',
                 'data' => [
                     'limit' => SpendsController::get_balance(Auth::user()['id']),
-                    'data_expenses' => self::list(Auth::user()['id']),
+                    'reports' => self::list_report(Auth::user()['id']),
                     'voucher' =>  self::list_voucher(Auth::user()['id']),
                     'recent_expenses' =>  self::recent_expenses(Auth::user()['id']),
                     'purpose' => self::list_purpose(Auth::user()['id']),
@@ -53,16 +53,23 @@ class DashboardController extends Controller
         return false;
     }
 
-    public static function list($user_id, $token = false)
+    public static function list_report($user_id, $token = false)
     {
         $client = new Client();
+
         $headers = [
             'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json'
         ];
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/spend/balance?user_id=' . $user_id, $headers);
-        $res = $client->sendAsync($request)->wait();
-        $response = json_decode($res->getBody());
+
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/reports/expenses/' . $user_id, $headers);
+
+        try {
+            $res = $client->sendAsync($request)->wait();
+            $response = json_decode($res->getBody());
+        } catch (Throwable $th) {
+            return [];
+        }
 
         if ($response->success == false) {
             return [];

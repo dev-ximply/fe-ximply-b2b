@@ -1,14 +1,3 @@
-{{-- 
-<style>
-    @media only screen and(max-width:600px){
-        .upgradePro{
-            position: absolute;
-            top: 0;
-            right: 40px;
-            margin-top: -1px;
-        }
-    }
-</style> --}}
 <style>
     #password-strength-status {
         padding: 5px 10px;
@@ -107,7 +96,7 @@
         margin: 0;
     }
 </style>
-<nav class="navbar navbar-main navbar-expand-lg position-sticky mt-3 top-1 px-0  shadow-none border-radius-xl"
+<nav class="navbar navbar-main navbar-expand-lg position-sticky mt-3 top-1 px-0 shadow-none border-radius-xl"
     id="navbarBlur" data-scroll="true" style="z-index: 1;">
     <form action="">
         <input type="text" class="text-dark" id="navbar_uid" value="{{ Auth::user()['id'] }}" hidden>
@@ -186,11 +175,6 @@
                     }
                 </style>
                 <li class="nav-item dropdown pe-2 d-flex align-items-center ms-2">
-                    {{-- <a href="javascript:;" class="nav-link text-body p-0 mb-1" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="notif-badge">2</span>
-                        <i class="fa fa-bell cursor-pointer "></i>
-                    </a> --}}
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                         <li class="mb-2">
                             <a class="dropdown-item border-radius-md" href="javascript:;">
@@ -258,17 +242,6 @@
                                 </a>
                             </li>
                         @endif
-                        {{-- <li class="mb-0">
-                            <a class="dropdown-item border-radius-md" href="/setting">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="text-sm font-weight-normal mb-1">
-                                        <span class="font-weight-bold"><i
-                                                class="fa-solid fa-cog me-sm-1"></i></i></span><span
-                                            class="font-weight-bold"> Setting</span>
-                                    </h6>
-                                </div>
-                            </a>
-                        </li> --}}
                         <li class="mb-0">
                             <a class="dropdown-item border-radius-md" href="{{ route('logout_action') }}"
                                 onclick="event.preventDefault();
@@ -313,7 +286,6 @@
             </div>
             <form id="your-modal-form">
                 <div class="modal-body">
-
                     <div id="alertModal"></div>
                     <div class="row">
                         <label for="" style="color: black">Current Password</label>
@@ -327,7 +299,6 @@
                             </span>
                         </div>
                         <label for="" style="color: black">New Password</label>
-                        <input type="hidden" value="{{ Auth::user()['id'] }}" name="user_id" id="user_id">
                         <div class="input-groups mb-3">
                             <input type="password" class="form-control form-control-lg" id="password_new"
                                 placeholder="Password" aria-label="Password" aria-label="Password" name="password"
@@ -356,7 +327,6 @@
                             show_eye.classList.toggle('fa-eye-slash')
                             show_eye.classList.toggle('fa-eye')
                             if (show_eye.classList.contains("fa-eye-slash")) return x.setAttribute("type", "text")
-
                             x.setAttribute("type", "password")
                         }
 
@@ -398,7 +368,6 @@
                     </script>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    {{-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cance</button> --}}
                     <button type="submit" class="btn text-white w-100" id="confirm"
                         style="background: #191a4b">Confirm</button>
                 </div>
@@ -447,7 +416,7 @@
                 <script>
                     //var pinContainer = document.getElementsByClassName("pin-code")[0];
                     var pinContainer = document.querySelector(".pin-code");
-                    console.log('There is ' + pinContainer.length + ' Pin Container on the page.');
+                    // console.log('There is ' + pinContainer.length + ' Pin Container on the page.');
 
                     pinContainer.addEventListener('keyup', function(event) {
                         var target = event.srcElement;
@@ -522,16 +491,13 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            {{-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cance</button> --}}
                             <button type="submit" class="btn text-white "
                                 style="width:314px; background: #191a4b">Submit</button>
                         </div>
                     </div>
                 </form>
                 <script>
-                    //var pinContainer = document.getElementsByClassName("pin-code")[0];
-                    var pinContainer = document.querySelector(".check-pin-code");
-                    console.log('There is ' + pinContainer.length + ' Pin Container on the page.');
+                    var pinContainer = document.querySelector(".check-pin-code");;
 
                     pinContainer.addEventListener('keyup', function(event) {
                         var target = event.srcElement;
@@ -591,13 +557,15 @@
             type: "GET",
             url: API_URL + "api/tenant/info/" + tenant + '/' + userId,
             success: function(res) {
-                if (res['success'] == true) {
-                    var response = res['data'];
-                    document.getElementById('navbar_profilepict_admin').src = STORAGE_URL +
-                        response['company_logo'];
-
-                }else{
-                    document.getElementById('navbar_profilepict_admin').src = 'img/team-2.png';
+                if (document.getElementById('navbar_profilepict_admin')) {
+                    if (res['success'] == true) {
+                        var response = res['data'];
+                        document.getElementById('navbar_profilepict_admin').src = STORAGE_URL +
+                            response['company_logo'];
+                    } else {
+                        document.getElementById('navbar_profilepict_admin').src =
+                            'img/team-2.png';
+                    }
                 }
             }
         });
@@ -621,11 +589,9 @@
                     },
                     body: formData,
                 });
-                console.log(response);
                 const data = await response.json();
                 return await data;
             } catch (error) {
-                console.log('Error:', error);
                 throw error;
             }
         }
@@ -644,7 +610,6 @@
                     }).get().join('');
                     const data = getDataCheck(user_id, pin);
                     data.then((response) => {
-                        console.log(response); // menampilkan "Data berhasil diambil!"
                         if (response['status'] == 200 || response['success'] == true ||
                             response.is_correct == true) {
                             $("#checkPin").modal('hide');
@@ -661,8 +626,6 @@
                             }, 1500)
                         }
                     }).catch((error) => {
-                        console.log(
-                            error); // menampilkan pesan error jika Promise gagal
                     });
                 });
                 // lakukan sesuatu dengan data di sini
@@ -682,15 +645,16 @@
         });
         $.ajax({
             type: "GET",
-            url: API_URL + "api/user/profile/info?user_id=" + document.getElementById(
-                'navbar_uid').value,
+            url: API_URL + "api/user/profile/info?user_id=" + USR_ID,
             success: function(res) {
                 if (res) {
                     var response = res['data'];
                     document.getElementById('navbar_fullname').innerHTML = "Welcome, " + response[
                         'full_name'];
-                    document.getElementById('navbar_profilepict').src = STORAGE_URL + response[
-                        'profile_picture'];
+                    if (document.getElementById('navbar_profilepict')) {
+                        document.getElementById('navbar_profilepict').src = STORAGE_URL + response[
+                            'profile_picture'];
+                    }
                     document.getElementById('navbar_group_Name').innerHTML = response['group_name'];
                     $subscription_type = response['subscription_type'];
                     if ($subscription_type == "trial") {
@@ -711,7 +675,6 @@
                                     }
                                 },
                                 success: function(response) {
-                                    console.log(response);
                                     $("#loader_nav").hide();
                                     if (response.status == 200) {
                                         $('#alertModal').html(`<div class="alert alert-success"   role="alert">
@@ -741,7 +704,6 @@
 
                                 },
                                 error: function(xhr, status, error) {
-                                    console.log(error, xhr);
                                 }
                             });
                         });
@@ -751,14 +713,12 @@
                     }
 
                     $("#set_new_pin").submit(function(event) {
-                        // alert("Handler for .submit() called.");
                         event.preventDefault();
 
                         const pin = $('input[name^=pin]').map(function(idx, elem) {
                             return $(elem).val();
                         }).get().join('');
                         const dataPin = pin;
-                        console.log(pin);
 
                         $.ajax({
                             type: "POST",
@@ -780,8 +740,6 @@
                                     status,
                                     message
                                 } = response;
-
-                                console.log(response)
 
                                 if (success === true) {
                                     setTimeout(function() {
@@ -900,7 +858,9 @@
 
                 } else {
                     document.getElementById('navbar_fullname').innerHTML = "not login!";
-                    document.getElementById('navbar_profilepict').src = 'img/team-2.png';
+                    if (document.getElementById('navbar_profilepict')) {
+                        document.getElementById('navbar_profilepict').src = 'img/team-2.png';
+                    }
                 }
             }
         });
