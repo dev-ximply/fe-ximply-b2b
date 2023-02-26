@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <p class="text-center text-lg font-weight-bold text-dark">Latest Activity</p>
                     {{-- <div class="card"> --}}
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="max-height:500px; overflow-y:auto">
                         <table class="table table-striped align-items-center  mb-0  ">
                             <thead>
                                 <tr>
