@@ -191,7 +191,7 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class=" mb-3" style="width: 100%; height:15px">
+                                        <div class="me-2 mb-3" style="width: 100%; height:15px">
                                             <select name="filter_member" id="filter_member" class="form-select text-dark"
                                                 style="font-size:9px; line-height:10px !important;border-radius:5px !important;">
                                                 @if (session()->get('is_superadmin') == false)
@@ -201,7 +201,7 @@
                                                 @endif
                                             </select>
                                         </div>
-                                        <div class="me-2 mb-3" style="width: 100%; height:15px">
+                                        <div class="mb-3" style="width: 100%; height:15px">
                                             <select name="filter_expense_type" id="filter_expense_type"
                                                 class="form-select text-dark"
                                                 style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
@@ -210,7 +210,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="d-flex  justify-content-end ms-auto  mt-1"
+                                    <div class="d-flex justify-content-end ms-auto  mt-1"
                                         style="width: 100%; max-width:65px">
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
