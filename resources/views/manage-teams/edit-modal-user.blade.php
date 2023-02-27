@@ -157,29 +157,42 @@
                             role_id: roleId,
                         },
                         beforeSend: function() {
-                            if ($("#loader")) {
-                                $("#loader").show();
-                            }
+                            $("#main-loader").show();
                         },
-                        success: function(response) {
-                            console.log(response);
-                            const {
-                                success,
-                                status,
-                                message
-                            } = response;
-                            if (success === true) {
+                        success: function(res) {
+                            if (res['success'] == true) {
 
                                 setTimeout(function() {
-                                    window.location.reload(true);
+                                    Swal.fire(
+                                        "Success!",
+                                        "Your request success.",
+                                        "success"
+                                    );
+
                                 }, 1000);
+                                window.location.reload(true);
                             } else {
                                 swalWithBootstrapButtons.fire(
-                                    "Failed",
-                                    message,
+                                    "Error!",
+                                    res['message'],
                                     "error"
                                 );
+                                // setTimeout(function() {
+                                //     window.location.reload(true);
+                                // }, 1000);
                             }
+                        },
+                        complete: function(data) {
+                            $("#main-loader").hide();
+                            if (data.status != 200) {
+                                Swal.fire(
+                                    "opps!",
+                                    data.message,
+                                    "error"
+                                );
+                                console.log(data);
+                            }
+
                         }
                     });
 
