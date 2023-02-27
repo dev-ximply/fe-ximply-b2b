@@ -1,5 +1,4 @@
 @extends('layouts.main')
-
 @section('container')
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
     @include('expenses.new-expense')
@@ -12,7 +11,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                     <div class="d-flex py-2 justify-content-center align-items-center flex-column text-center">
                         <a class="new_expense text-white bg-gradient-primary px-3 py-1 rounded mb-2" href="#"
                             data-bs-toggle="modal" data-bs-target="#manualForm" onclick="handlingModalForm(false)"
@@ -44,9 +42,7 @@
             </div>
         </div>
     </div>
-
     <div class="row mb-2 flex-md-row flex-column">
-
         @if (session()->get('is_superadmin') == false)
             {{-- quick accesss --}}
             <div class="col-md d-md-none d-block">
@@ -102,13 +98,9 @@
             </div>
             {{-- end quick access --}}
         @endif
-
         <form action="">
-
             <input type="text" class="text-dark" id="fullname_uid" value="{{ Auth::user()['id'] }}" hidden>
-
         </form>
-
         {{-- end card --}}
         <div class="col-md-8 mb-0">
             <div class="row mb-1">
@@ -128,7 +120,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md pt-0 mt-3">
                     <div class="row justify-content-between">
                         <div class="col-md column_info  text-center">
@@ -161,7 +152,6 @@
                                 <span class="title__amount" style="font-weight: 600;">Used Expense <p>Limit has been used
                                     </p>
                                 </span>
-
                                 <hr id="hr_used" style="">
                                 <p class="total_amount text-center" style="font-weight:600">
                                     {{ number_format($data['limit']['used_limit'], 2) }}</p>
@@ -217,19 +207,22 @@
                                                 </option>
                                             </select>
                                         </div>
+                                        <div class=" mb-3" style="width: 100%; height:15px">
+                                            <select name="filter_member" id="filter_member" class="form-select text-dark"
+                                                style="font-size:9px; line-height:10px !important;border-radius:5px !important;">
+                                                @if (session()->get('is_superadmin') == false)
+                                                    <option value="{{ Auth::user()['id'] }}" class="text-dark px-1"
+                                                        selected>
+                                                        Your Data</option>
+                                                @endif
+                                            </select>
+                                        </div>
                                         <div class="me-2 mb-3" style="width: 100%; height:15px">
                                             <select name="filter_expense_type" id="filter_expense_type"
                                                 class="form-select text-dark"
                                                 style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
                                                 <option value="" class="text-dark px-1" selected>Expense Type
                                                 </option>
-                                            </select>
-                                        </div>
-                                        <div class=" mb-3" style="width: 100%; height:15px">
-                                            <select name="filter_member" id="filter_member" class="form-select text-dark"
-                                                style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
-                                                <option value="{{ Auth::user()['id'] }}" class="text-dark px-1" selected>
-                                                    Your Data</option>
                                             </select>
                                         </div>
                                     </div>
@@ -242,11 +235,7 @@
                                             <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
                                         </button>
                                     </div>
-
-
-
                                 </div>
-
                             </div>
                         </form>
                         <div class="chart">
@@ -309,7 +298,8 @@
                     </div>
                 @endif
                 <div class="col-md">
-                    <div class="coloumn__quick__access overflow-hidden" style="margin:10px 0; min-height: 150px; border-radius:5px">
+                    <div class="coloumn__quick__access overflow-hidden"
+                        style="margin:10px 0; min-height: 150px; border-radius:5px">
                         <div class="card-body">
                             <div class="d-flex flex-row">
                                 <div class="me-auto">
@@ -351,9 +341,7 @@
                             </div>
                         </div>
                         @php
-                            
                             $no = 0;
-                            
                         @endphp
                         <div class="table-responsive" style="max-height:300px; overflow-y:auto">
                             <table class="table">
@@ -365,9 +353,7 @@
                                     </tr>
                                     @foreach ($data['recent_expenses'] as $recentExpenses)
                                         @php
-                                            
                                             $no = $no + 1;
-                                            
                                         @endphp
                                         @if ($no <= 10)
                                             <tr class="text-start" style="font-size:12px;color:#000000">
@@ -385,7 +371,6 @@
                                                         <span class="badge badge-secondary badge-xs">unknown</span>
                                                     @endif
                                                 </td>
-
                                                 <td><span
                                                         class="fw-bold">{{ $recentExpenses->category_name }}</span><br><span
                                                         style="font-size:10px">{{ $recentExpenses->merchant }}</span></td>
@@ -406,23 +391,34 @@
         <div class="row">
             <div class="col-md">
                 <div class="card py-4 px-3" style="border-radius:5px">
-                    <div class="col-md-3 ms-auto">
-                        <div class="position-relative">
-                            <input type="search" class="form-control" placeholder="Search...">
-                            <i class="fa-sharp fa-solid fa-magnifying-glass"
-                                style="position:absolute; top:13px;right:8px"></i>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            Expense Data
+                        </div>
+                        <div>
+                            <button class="btn btn-secondary btn-sm" onclick="htmlTableToExcel('xlsx')">export
+                                excel</button>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
+                    <div class="table-responsive" style="max-height:400px; overflow-y:auto">
+                        <table id="reportsToExcel" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">Date</th>
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">upload date
+                                    </th>
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">upload time
+                                    </th>
                                     <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">Group
                                     </th>
-                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">User
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2"
+                                        width="20%">Expense By
                                     </th>
-                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">Role
+                                    </th>
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9">receipt date
+                                    </th>
+                                    <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2"
+                                        width="15%">
                                         Merchant</th>
                                     <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-9 ps-2">
                                         Expense Type</th>
@@ -434,47 +430,53 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="align-middle text-start ps-4">
-                                        {{-- <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg"
-                                                class="avatar avatar-sm me-3">
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-xs">John Michael</h6>
-                                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                                        </div>
-                                    </div> --}}
-
-                                        <span class="text-dark text-xs fw-semibold">23/04/18</span>
-
-                                    </td>
-                                    <td class="align-middle text-start ps-2">
-                                        <p class="text-xs text-dark fw-semibold mb-0">Finance</p>
-                                        {{-- <p class="text-xs text-secondary mb-0">Organization</p> --}}
-                                    </td>
-                                    <td>
-                                        <p class="text-xs text-dark fw-semibold mb-0">Abdul</p>
-                                        {{-- <p class="text-xs text-secondary mb-0">F</p> --}}
-                                    </td>
-                                    <td>
-                                        <p class="text-xs text-dark fw-semibold mb-0">Manager</p>
-                                        {{-- <p class="text-xs text-secondary mb-0">Organization</p> --}}
-                                    </td>
-                                    <td class="align-middle text-start text-break text-wrap text-sm">
-                                        <span class="text-dark">Bussinses Trip</span>
-                                    </td>
-                                    <td class="align-middle text-start ps-4">
-                                        <span class="text-dark text-xs fw-semibold">Rp. 1000.000,00</span>
-                                    </td>
-                                    <td class="align-middle text-start text-sm ps-4">
-                                        {{-- <span class="badge badge-sm badge-success">Online</span> --}}
-                                        <span class="badge badge-xs d-flex justify-content-center text-center"
-                                            style="border:1px solid #50B720; color:#50B720; width: 70px">approved</span>
-                                    </td>
-                                </tr>
-
+                                @foreach ($data['reports'] as $reports)
+                                    <tr>
+                                        <td class="align-middle text-start ps-4">
+                                            <span
+                                                class="text-dark text-xs fw-semibold">{{ date('Y-m-d', strtotime($reports->created_at)) }}</span>
+                                        </td>
+                                        <td class="align-middle text-start ps-4">
+                                            <span
+                                                class="text-dark text-xs fw-semibold">{{ date('H:i:s', strtotime($reports->created_at)) }}</span>
+                                        </td>
+                                        <td class="align-middle text-start ps-2">
+                                            <p class="text-xs text-dark fw-semibold mb-0">{{ $reports->group_name }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs text-dark fw-semibold mb-0">{{ $reports->expense_by }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs text-dark fw-semibold mb-0">{{ $reports->role_name }}</p>
+                                        </td>
+                                        <td class="align-middle text-start ps-4">
+                                            <span
+                                                class="text-dark text-xs fw-semibold">{{ $reports->receipt_date }}</span>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs text-dark fw-semibold mb-0">{{ $reports->merchant }}</p>
+                                        </td>
+                                        <td class="align-middle text-start text-break text-wrap text-sm">
+                                            <span class="text-dark">{{ $reports->expense_type }}</span>
+                                        </td>
+                                        <td class="align-middle text-start ps-4">
+                                            <span
+                                                class="text-dark text-xs fw-semibold">{{ $reports->total_amount }}</span>
+                                        </td>
+                                        <td class="align-middle text-start text-sm ps-4">
+                                            @if ($reports->status == 'approved')
+                                                <span class="badge badge-xs d-flex justify-content-center text-center"
+                                                    style="border:1px solid #50B720; color:#50B720; width: 70px">{{ $reports->status }}</span>
+                                            @elseif ($reports->status == 'rejected')
+                                                <span class="badge badge-xs d-flex justify-content-center text-center"
+                                                    style="border:1px solid #dc2424; color:#dc2424; width: 70px">{{ $reports->status }}</span>
+                                            @else
+                                                <span class="badge badge-xs d-flex justify-content-center text-center"
+                                                    style="border:1px solid #d6cb00; color:#d6cb00; width: 70px">{{ $reports->status }}</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -483,17 +485,49 @@
         </div>
     @endif
 
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+    <script>
+        function htmlTableToExcel(type) {
+            var data = document.getElementById('reportsToExcel');
+            var excelFile = XLSX.utils.table_to_book(data, {
+                sheet: "sheet1"
+            });
+            XLSX.write(excelFile, {
+                bookType: type,
+                bookSST: true,
+                type: 'base64'
+            });
+            XLSX.writeFile(excelFile, 'ExpenseData ' + getNow() + '.' + type);
+        }
+
+        function getNow() {
+            var today = new Date();
+            var dd = today.getDate();
+
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+
+            today = mm + '-' + dd + '-' + yyyy;
+            return today;
+        }
+    </script>
+
     <script>
         $(document).ready(function() {
-
-
             $.ajaxSetup({
                 headers: {
                     "Authorization": "Bearer " + AUTH_TOKEN,
                     "Accept": "application/json"
                 }
             });
-
             $.ajax({
                 type: "GET",
                 url: API_URL + "api/user/profile/info?user_id=" + document.getElementById(
@@ -501,9 +535,7 @@
                 success: function(res) {
                     if (res) {
                         var response = res['data'];
-
-                        console.log(res);
-
+                        // console.log(res);
                         document.getElementById('fullName').innerHTML = response[
                             'full_name'];
                     }
@@ -511,8 +543,6 @@
             });
         });
     </script>
-
-
     {{-- OCR --}}
     <script>
         function getExpenseData(expense_id) {
@@ -530,14 +560,12 @@
                         var response = res['data'];
                         document.getElementById('detail_receipt_file').src = STORAGE_URL + response[
                             'receipt_picture_directory'];
-
                         document.getElementById('detail_date').value = response['receipt_date'];
                         document.getElementById('detail_merchant').value = response['merchant'];
                         document.getElementById('detail_total_amount').value = response['total_amount']
                             .toLocaleString();
                         document.getElementById('detail_location').value = response['location'];
                         document.getElementById('detail_category').value = response['category'];
-
                         $('#ex1').zoom();
                     } else {
                         Swal.fire('failed<br>Please contact ximply support');
@@ -560,10 +588,8 @@
                 document.getElementById('create-receipt-body').style.display = "block";
             }
         }
-
         //for delete
         if (document.querySelector(".delete")) {
-
             document.querySelector(".delete").addEventListener("click", function() {
                 const swalWithBootstrapButtons = Swal.mixin({
                     customClass: {
@@ -572,7 +598,6 @@
                     },
                     buttonsStyling: false,
                 });
-
                 swalWithBootstrapButtons
                     .fire({
                         title: "<h5>are you sure want to process?</h5>",
@@ -590,7 +615,6 @@
                                 "success"
                             );
                         } else if (
-
                             result.dismiss === Swal.DismissReason.cancel
                         ) {
                             swalWithBootstrapButtons.fire(
@@ -603,7 +627,6 @@
             });
         }
     </script>
-
     {{-- slider --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -618,14 +641,12 @@
             }).mount();
         });
     </script>
-
     <script>
         var FilterExpenseType = "";
         var FilterStartDate = "";
         var FilterEndDate = "";
+        var FilterGroup = "";
         var FilterMember = "";
-        var FilterMember = "";
-
         if (window.location.search) {
             const queryString = window.location.search;
             if (queryString != "" || queryString != null || queryString > 0) {
@@ -633,10 +654,10 @@
                 FilterExpenseType = urlParams.get('filter_expense_type');
                 FilterStartDate = urlParams.get('filter_start_date');
                 FilterEndDate = urlParams.get('filter_end_date');
+                FilterGroup = urlParams.get('filter_group');
                 FilterMember = urlParams.get('filter_member');
             }
         }
-
         $.ajaxSetup({
             headers: {
                 "Authorization": "Bearer " + AUTH_TOKEN,
@@ -645,15 +666,15 @@
         });
         $.ajax({
             type: "GET",
-            url: API_URL + "api/analytics/series/" + document.getElementById('user_id').value +
+            url: API_URL + "api/v2/analytics/series/" + document.getElementById('user_id').value +
                 "?expense_type=" + FilterExpenseType +
                 "&start_date=" + FilterStartDate +
                 "&end_date=" + FilterEndDate +
+                "&group_id" + FilterGroup +
                 "&member_id=" + FilterMember,
             success: function(res) {
                 var time = [0];
                 var total_amount = [0];
-
                 if (res['success'] == true) {
                     time = [];
                     total_amount = [];
@@ -666,7 +687,6 @@
                 } else {
                     // Swal.fire('failed<br>Please contact Beazy support');
                 }
-
                 Highcharts.setOptions({
                     lang: {
                         thousandsSep: ','
@@ -726,7 +746,6 @@
                     credits: {
                         enabled: false
                     },
-
                     legend: {
                         enabled: false,
                         align: 'left',
@@ -749,12 +768,10 @@
             },
             complete: function(data) {
                 if (data.status != 200) {
-                    Swal.fire('failed<br>Please contact Beazy support');
+                    Swal.fire('failed<br>please contact ximply support');
                 }
             }
         });
-
-
         $.ajaxSetup({
             headers: {
                 "Authorization": "Bearer " + AUTH_TOKEN,
@@ -763,10 +780,11 @@
         });
         $.ajax({
             type: "GET",
-            url: API_URL + "api/analytics/pie/" + document.getElementById('user_id').value +
+            url: API_URL + "api/v2/analytics/pie/" + document.getElementById('user_id').value +
                 "?expense_type=" + FilterExpenseType +
                 "&start_date=" + FilterStartDate +
                 "&end_date=" + FilterEndDate +
+                "&group_id" + FilterGroup +
                 "&member_id=" + FilterMember,
             success: function(res) {
                 var arrayPie = [];
@@ -775,7 +793,6 @@
                 valuePie['y'] = 0;
                 valuePie['y_label'] = 0;
                 arrayPie[0] = valuePie;
-
                 if (res['success'] == true) {
                     var arrayPie = [];
                     var i = 0;
@@ -797,11 +814,9 @@
                     function() {
                         var total = 0;
                         $('#expensesCategory').highcharts({
-
                             lang: {
                                 thousandsSep: ','
                             },
-
                             chart: {
                                 type: 'pie'
                             },
@@ -850,7 +865,6 @@
                                 itemMarginTop: 0,
                                 itemMarginBottom: 0,
                                 itemMarginRight: 0,
-
                                 borderWidth: 0,
                                 useHTML: true,
                                 labelFormatter: function() {
@@ -877,11 +891,13 @@
             },
             complete: function(data) {
                 if (data.status != 200) {
-                    Swal.fire('failed<br>Please contact Beazy support');
+                    Swal.fire('failed<br>please contact ximply support');
                 }
             }
         });
+
         const params = getQueryParams();
+
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
@@ -889,7 +905,6 @@
                     "Accept": "application/json"
                 }
             });
-
             $.ajax({
                 type: "GET",
                 url: API_URL + "api/category/list/main?user_id=" + document.getElementById(
@@ -910,6 +925,7 @@
                 }
             });
         });
+
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
@@ -919,24 +935,80 @@
             });
             $.ajax({
                 type: "GET",
-                url: API_URL + "api/spend/list/assigned/" + TENANT_CODE +
-                    "?user_id=" + document.getElementById(
-                        'user_id').value,
+                url: API_URL + "api/list/groups",
                 success: function(res) {
                     if (res) {
                         var response = res['data'];
                         for (const obj of response) {
-                            var uid = obj.id;
-                            var uname = obj.full_name;
-                            $("#filter_member").append('<option value="' + uid +
-                                '"' + (uid == params.filter_member ? 'selected' :
-                                    '') + '>' + uname + '</option>');
+                            $("#filter_group").append('<option value="' + obj.id +
+                                '"' + (obj.id == params.filter_group ? 'selected' :
+                                    '') + '>' + obj.group_name + '</option>');
                         }
                     } else {
-                        $("#filter_member").empty();
+                        $("#filter_group").empty();
                     }
                 }
             });
         });
+
+        $('#filter_group').on('change', function() {
+            var group_id = $(this).val();
+            if (group_id) {
+                $.ajaxSetup({
+                    headers: {
+                        "Authorization": "Bearer " + AUTH_TOKEN,
+                        "Accept": "application/json"
+                    }
+                });
+                $.ajax({
+                    type: "GET",
+                    url: API_URL + "api/list/users/" + group_id,
+                    success: function(res) {
+                        if (res) {
+                            var response = res['data'];
+                            $("#filter_member").empty();
+                            for (const obj of response) {
+                                $("#filter_member").append('<option value="' + obj.id +
+                                    '"' + (obj.id == params.filter_member ? 'selected' :
+                                        '') + '>' + obj.name + '</option>');
+                            }
+                        } else {
+                            $("#filter_member").empty();
+                        }
+                    }
+                });
+            } else {
+                $("#filter_member").empty();
+            }
+        });
+
+        // $(document).ready(function() {
+        //     $.ajaxSetup({
+        //         headers: {
+        //             "Authorization": "Bearer " + AUTH_TOKEN,
+        //             "Accept": "application/json"
+        //         }
+        //     });
+        //     $.ajax({
+        //         type: "GET",
+        //         url: API_URL + "api/spend/list/assigned/" + TENANT_CODE +
+        //             "?user_id=" + document.getElementById(
+        //                 'user_id').value,
+        //         success: function(res) {
+        //             if (res) {
+        //                 var response = res['data'];
+        //                 for (const obj of response) {
+        //                     var uid = obj.id;
+        //                     var uname = obj.full_name;
+        //                     $("#filter_member").append('<option value="' + uid +
+        //                         '"' + (uid == params.filter_member ? 'selected' :
+        //                             '') + '>' + uname + '</option>');
+        //                 }
+        //             } else {
+        //                 $("#filter_member").empty();
+        //             }
+        //         }
+        //     });
+        // });
     </script>
 @endsection
