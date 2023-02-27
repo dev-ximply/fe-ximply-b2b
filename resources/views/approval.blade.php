@@ -387,6 +387,7 @@
                         console.log(res);
                         var response = res['data'];
                         var tableOut = "";
+                        var storage = [];
                         // var totalAmount = 0;
                         for (const obj of response) {
                             // totalAmount = totalAmount + parseFloat(obj.total_amount);
@@ -394,8 +395,10 @@
                             tableOut += '<tr>'+
                                         '<td class="align-middle text-start text-capitalize text-xs">'+
                                             '<div class="d-flex">'+
-                                                '<img src="`' + obj.receipt_picture_directory + '`"'+
+                                                '<img  src="`' + 'config(' + '`' + storage.base_url + '`' + ')' + '.' + obj.receipt_picture_directory + '`"'+
                                                     'class="img-fluid ms-3" alt="receipt" style="width: 50px">'+
+                                                    // <img  src="{{ config('storage.base_url') . $expense_approval->receipt_picture_directory }}"
+                                                    // class="img-fluid ms-3" alt="receipt" style="width: 50px">
                                                 '<div class="ms-3 my-auto show-modal">'+
                                                     '<div>'+
                                                         '<span class="text-xs text-dark text-bold">'+
@@ -416,48 +419,46 @@
                                             '</div>'+
                                         '</td>'
 
-                            tableOut += '<td class="align-middle text-start text-xs text-capitalize text-dark">'+
+                            tableOut += '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark">'+
                                              obj.category_name +
-                                        '</td>'
-                            tableOut += '<td class="align-middle text-start text-xs text-dark">'+
+                                        '</td>';
+                            tableOut +=  '<td class="ps-4 align-middle text-start text-xs text-dark">'+
                                             obj.purpose_name +
-                                        '</td>'
-                            tableOut += '<td class="align-middle text-start text-xs text-dark">'+
+                                        '</td>';
+                            tableOut +=  '<td class="ps-4 align-middle text-start text-xs text-dark text-break text-wrap">'+
                                             obj.merchant +
-                                        '</td>'
-                            tableOut += '<td class="align-middle text-start text-xs text-dark">'+
-                                            obj.total_amount +
+                                        '</td>';
+                            tableOut += '<td class="ps-4 align-middle text-start text-xs text-dark">'+
+                                            obj.total_amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") +
                                         '</td>';
                             
                             tableOut += '<td class="ps-4 align-middle text-start text-xs text-dark">'+
                                             obj.note +
-                                        '</td>';
-                       
-                                     
+                                        '</td>';        
                            if (obj.status == 'pending'){
-                            tableOut += '<td class="align-middle text-start text-xs">'+
+                            tableOut += '<td class="ps-4 align-middle text-start text-xs">'+
                                                 '<span class="badge badge-xs d-flex justify-content-center"'+
                                                     'style="border:1px solid #FFCF23; color:#FFCF23; width: 55px">pending</span>'+
                                             '</td>'
                            }else if(obj.status == 'approved'){
-                            tableOut += '<td class="align-middle text-start text-xs">'+
+                            tableOut += '<td class="ps-4 align-middle text-start text-xs">'+
                                 '<span class="badge badge-xs d-flex justify-content-center"'+
                                     'style="border:1px solid #50B720; color:#50B720; width: 55px">approved</span>'+
                             '</td>'
                            }else if(obj.status == 'rejected'){
-                            tableOut +=  '<td class="align-middle text-start text-xs">'+
+                            tableOut +=  '<td class="ps-4 align-middle text-start text-xs">'+
                                 '<span class="badge badge-xs d-flex justify-content-center"'+
                                                     'style="border:1px solid #E40909; color:#E40909; width: 55px">rejected</span>'+
                             '</td>'
                            }else{
-                            tableOut += '<td class="align-middle text-start text-xs">'+
+                            tableOut += '<td class="ps-4 align-middle text-start text-xs">'+
                                '<span class="badge badge-secondary badge-xs">unknown</span>'+
                             '</td>'
                            }
 
                           
                             if(obj.status == 'pending'){
-                                tableOut +=  '<td class="text-sm align-middle text-center">'+
+                                tableOut +=  '<td class="ps-4 text-sm align-middle text-center">'+
                                                 '<div class="d-flex flex-row pt-3 d-flex justify-content-center">'+
                                                     '<button onclick="getExpenseData(`' + obj.receipt_picture_directory  + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`, `' + obj.total_amount + '`,`' + obj.location + '`,`' + obj.category_name + '`,`' + obj.sub_category_name + '`,`' +  obj.client_name + '`,`' +  obj.purpose_name + '`,`' + obj.expense_of + '`,`' +  obj.note + '`,`' + obj.status + '`,`' + obj.approval_id + '`)"'+
                                                         'class="mx-1 btn text-white d-flex align-items-center d-flex justify-content-center"'+
@@ -491,7 +492,7 @@
                                             '</td>'
                             }else{
                                 tableOut += 
-                                '<td class="text-sm align-middle text-center">'+
+                                '<td class="ps-4 text-sm align-middle text-center">'+
                                    '<div class="pt-3 d-flex justify-content-center">'+
                                       '<button onclick="getExpenseData(`' + obj.receipt_picture_directory + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`,`' + obj.total_amount + '`,`' + obj.location + '`,`' + obj.category_name + '`,`' + obj.sub_category_name + '`,`' + obj.client_name + '`,`' + obj.purpose_name + '`,`' + obj.expense_of + '`,`' +   obj.note  + '`,`' + obj.status + '`,`' + obj.approval_id + '`)"'+
                                           'data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"'+
