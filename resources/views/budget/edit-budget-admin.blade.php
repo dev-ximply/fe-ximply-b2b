@@ -144,6 +144,7 @@
                             if ($("#main-loader")) {
                                 $("#main-loader").hide();
                             }
+                            
                             setTimeout(function() {
                                 location.reload();
                             }, 1000);

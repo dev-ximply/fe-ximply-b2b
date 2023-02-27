@@ -390,7 +390,7 @@
             let clone = $(ele).clone(false)
             clone.attr("type", "text")
             let ele1 = $(ele)
-            console.log('TESSS', ele1);
+            // console.log('TESSS', ele1);
 
             clone.val(Number(ele1.val()))
             $(ele).after(clone)
