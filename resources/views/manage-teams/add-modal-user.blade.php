@@ -158,14 +158,16 @@
                         },
                         success: function(res) {
                             if (res['success'] == true) {
-                                swalWithBootstrapButtons.fire(
+                             
+                                setTimeout(function() {
+                                    Swal.fire(
                                     "Success!",
                                     "Your request success.",
                                     "success"
                                 );
-                                setTimeout(function() {
-                                    window.location.reload(true);
+                                   
                                 }, 1000);
+                                window.location.reload(true);
                             } else {
                                 swalWithBootstrapButtons.fire(
                                     "Error!",
@@ -187,6 +189,7 @@
                                 );
                                 console.log(data);
                             }
+                           
                         }
                     });
                 } else if (result.dismiss === Swal.DismissReason.cancel) {

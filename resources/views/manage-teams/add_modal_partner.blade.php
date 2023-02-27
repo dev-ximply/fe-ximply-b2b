@@ -70,7 +70,7 @@
                                 style="background-color: #D42A34">Cancel</button>
                             <button class="btn text-white ms-2" style="background-color: #62ca50"
                                 onclick="addPartner('{{ Auth::user()['id'] }}')">
-                                Submit 
+                                Submit
                             </button>
                         </div>
                     </div>
@@ -154,9 +154,8 @@
                             assign_user_id: userAssignId,
                         },
                         beforeSend: function() {
-                            if ($("#main-loader")) {
-                                $("#main-loader").show();
-                            }
+                            $("#main-loader").fadeIn(300);
+
                         },
                         success: function(response) {
 
@@ -169,10 +168,22 @@
                             console.log(response)
 
                             if (success === true) {
+
                                 setTimeout(function() {
-                                    window.location.reload(true);
+                                    Swal.fire(
+                                        'Success',
+                                        'Your request success.',
+                                        'success'
+                                    )
+
                                 }, 1000);
                             }
+                        },
+                        complete: function() {
+                            setTimeout(function() {
+                                $("#main-loader").hide();
+                                window.location.reload(true);
+                            }, 1000)
                         }
 
                     });
