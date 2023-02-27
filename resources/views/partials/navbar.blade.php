@@ -285,6 +285,7 @@
                 <img height="100px" src="{{ asset('img/loader.gif') }}">
             </div>
             <form id="your-modal-form">
+                <input type="text" name="user_id" value="{{ Auth::user()['id'] }}" hidden>
                 <div class="modal-body">
                     <div id="alertModal"></div>
                     <div class="row">
@@ -669,7 +670,7 @@
                                 url: API_URL + "api/user/password/change",
                                 type: "POST",
                                 data: $(this).serialize(),
-                                before: function(data) {
+                                before: function(data) {                                    
                                     if ($("#loader_nav")) {
                                         $("#loader_nav").show();
                                     }
@@ -677,7 +678,7 @@
                                 success: function(response) {
                                     $("#loader_nav").hide();
                                     if (response.status == 200) {
-                                        $('#alertModal').html(`<div class="alert alert-success"   role="alert">
+                                        $('#alertModal').html(`<div class="alert alert-success" role="alert">
                                             success change your password
                                         </div>`)
                                         setTimeout(function() {
@@ -693,10 +694,9 @@
                                                 window.location.reload(
                                                     true);
                                             }
-
                                         }, 1500);
                                     } {
-                                        $('#alertModal').html(`<div class="alert alert-danger"   role="alert">
+                                        $('#alertModal').html(`<div class="alert alert-danger" role="alert">
                                         ${response.message}
                                         </div>`)
                                     }
