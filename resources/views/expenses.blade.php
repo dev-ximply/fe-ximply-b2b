@@ -661,10 +661,9 @@
                                     tableOut += '<td class="text-break text-wrap text-md-start text-end ps-md-4"'+
                                                   'data-label="Merchant" style="color: #000000">'+
                                                  expense.category_name + '</td>';
-                                    tableOut +=
-                                    '<td class="text-break text-wrap text-md-start text-end ps-md-4"'+
-                                    'data-label="Merchant" style="color: #000000">'+
-                                        expense.note + '</td>';
+                                    tableOut +=  '<td class="text-break text-wrap text-md-start text-end ps-md-4"'+
+                                                    'data-label="Merchant" style="color: #000000">'+
+                                                  expense.note + '</td>';
                                     tableOut +=
                                         '<td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between" data-label="Action">' +
                                         ' <button onclick="getExpenseData(' + '`' + expense.id + '`' +
