@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    <div class="row mb-2 flex-md-row flex-column">
+    <div class="row mb-2 flex-md-row flex-column" style="margin-top:-50px">
         @if (session()->get('is_superadmin') == false)
             {{-- quick accesss --}}
             <div class="col-md d-md-none d-block">
@@ -51,15 +51,7 @@
                     <div class="d-flex justify-content-between" style="overflow-x: scroll;">
                         <a href="" class="" type="button" data-bs-toggle="modal"
                             data-bs-target="#modalExpenses" aria-controls="new-expense-form" id="myBtn">
-                            {{-- <a href="" class="" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
                             <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                                {{-- <div class="icon icon-shape  shadow text-center border-radius-md"
-                                style="min-height: 65px; max-height: 65px; min-width: 80px; max-width: 80px;background-color:#19194b">
-                                <i class="ni ni-bag-17 text-lg opacity-10" aria-hidden="true"></i>
-                                <div class="mt-1">
-                                    <span class="text-white" style="font-size: 10px">New&nbsp;Expenses</span>
-                                </div>
-                            </div> --}}
                                 <div>
                                     <img src="{{ asset('img/icons/dashboard/new-expenses.png') }}" alt=""
                                         class="" style="width:85px">
@@ -67,15 +59,7 @@
                             </div>
                         </a>
                         <a href="" class="" data-bs-toggle="modal" data-bs-target="#topUp">
-                            {{-- <a href="" class="" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
                             <div class="col-lg-3 col-md-3 col-sm-3 mb-1 mx-2 py-1" style="cursor:pointer">
-                                {{-- <div class="icon icon-shape shadow text-center border-radius-md"
-                                style="min-height: 65px; max-height: 65px; min-width: 80px; max-width: 80px;background-color:#19194b">
-                                <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
-                                <div class="mt-1">
-                                    <span class="text-white" style="font-size: 10px">Top&nbsp;Up</span>
-                                </div>
-                            </div> --}}
                                 <div>
                                     <img src="{{ asset('img/icons/dashboard/top-up.png') }}" alt="" class=""
                                         style="width:85px">
