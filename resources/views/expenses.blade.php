@@ -613,18 +613,18 @@
                                         '</p></td>';
                                     if (expense.status == 'approved') {
                                         tableOut +=
-                                        '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
-                                           '<span class="badge badge-xs d-flex justify-content-center"'+
-                                             'style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">'+
-                                                        expense.status +
-                                            '</span>'+
-                                        '</td>';
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<span class="badge badge-xs d-flex justify-content-center"' +
+                                            'style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">' +
+                                            expense.status +
+                                            '</span>' +
+                                            '</td>';
                                     } else if (expense.status == 'pending') {
                                         tableOut +=
                                             '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
                                             '<span class="badge badge-xs d-flex justify-content-center"' +
                                             'style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">' +
-                                            expense.status +'</span>' +
+                                            expense.status + '</span>' +
                                             '</p></td>';
                                     } else if (expense.status == 'rejected') {
                                         tableOut +=
@@ -645,24 +645,28 @@
                                         // '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
                                         // expense.purpose_name + '</p></td>';
 
-                                        '<td class="text-md-start ps-md-4 text-end text-break text-wrap"'+
-                                                'data-label="Purpose" style="color: #000000">'+
-                                                 expense.purpose_name +
-                                            '</td>';
+                                        '<td class="text-md-start ps-md-4 text-end text-break text-wrap"' +
+                                        'data-label="Purpose" style="color: #000000">' +
+                                        expense.purpose_name +
+                                        '</td>';
 
                                     tableOut +=
-                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
-                                        expense.merchant + '</p></td>';
+                                        '<td class="text-break text-wrap text-md-start text-end ps-md-4"'+
+                                            'data-label="Merchant" style="color: #000000">'+
+                                               expense.merchant+
+                                        '</td>';
                                     tableOut +=
-                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark">' +
-                                        expense.total_amount + '</p></td>';
+                                    '<td class="text-break text-wrap text-md-start text-end ps-md-4"'+
+                                    'data-label="Merchant" style="color: #000000">'+
+                                        expense.total_amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + '</td>';
                                     tableOut +=
-                                        '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
-                                        expense.category_name + '</p></td>';
-                                    tableOut += '<td class="text-break text-wrap ps-md-4 text-md-start text-end"'+
-                                                'data-label="Expense" style="color: #000000">'+
-                                                 expense.note +
-                                            '</td>';
+                                    '<td class="text-break text-wrap text-md-start text-end ps-md-4"'+
+                                    'data-label="Merchant" style="color: #000000">'+
+                                        expense.category_name + '</td>';
+                                    tableOut +=
+                                    '<td class="text-break text-wrap text-md-start text-end ps-md-4"'+
+                                    'data-label="Merchant" style="color: #000000">'+
+                                        expense.note + '</td>';
                                     tableOut +=
                                         '<td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between" data-label="Action">' +
                                         ' <button onclick="getExpenseData(' + '`' + expense.id + '`' +
@@ -687,4 +691,7 @@
             }
         });
     </script>
+
+
+
 @endsection
