@@ -642,6 +642,7 @@
                 FilterMember = urlParams.get('filter_member');
             }
         }
+
         $.ajaxSetup({
             headers: {
                 "Authorization": "Bearer " + AUTH_TOKEN,
@@ -650,11 +651,11 @@
         });
         $.ajax({
             type: "GET",
-            url: API_URL + "api/v2/analytics/series/" + document.getElementById('user_id').value +
+            url: API_URL + "api/v2/analytics/series/" + USR_ID +
                 "?expense_type=" + FilterExpenseType +
                 "&start_date=" + FilterStartDate +
                 "&end_date=" + FilterEndDate +
-                "&group_id" + FilterGroup +
+                "&group_id=" + FilterGroup +
                 "&member_id=" + FilterMember,
             success: function(res) {
                 var time = [0];
@@ -768,7 +769,7 @@
                 "?expense_type=" + FilterExpenseType +
                 "&start_date=" + FilterStartDate +
                 "&end_date=" + FilterEndDate +
-                "&group_id" + FilterGroup +
+                "&group_id=" + FilterGroup +
                 "&member_id=" + FilterMember,
             success: function(res) {
                 var arrayPie = [];
