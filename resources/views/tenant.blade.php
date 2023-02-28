@@ -328,7 +328,6 @@
             });
 
             var formDatas = new FormData();
-
             formDatas.append('tenant_code', tenant);
             formDatas.append('user_id', userId);
             formDatas.append('company_name', document.getElementById('companyName').value);

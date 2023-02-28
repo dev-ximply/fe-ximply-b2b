@@ -350,11 +350,11 @@
                             <li class="nav-item ">
 
                                 <a class="nav-link @if ($section == 'permission') active @endif "
-                                    href="/permission">
+                                    href="/roles">
 
                                     <span class="sidenav-mini-icon text-white"> O </span>
 
-                                    <span class="nav-link-text ms-1  text-white">Permission</span>
+                                    <span class="nav-link-text ms-1  text-white">Roles Name</span>
 
                                 </a>
 
