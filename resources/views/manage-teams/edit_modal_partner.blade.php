@@ -48,9 +48,7 @@
                         <label class="form-label mt-4" style="color: black; font-weight:500">User</label>
 
                         <select class="form-control " name="user_assign_id" id="edituser_assign_id">
-
-                            <option value="" hidden selected id="edituser_assign_name">Pilih User</option>
-
+                            <option value="" hidden selected id="edituser_assign_name">Select User</option>
                             @foreach ($data['a_partner'] as $member)
                                 <option value="{{ $member->id }}">{{ $member->full_name }}</option>
                             @endforeach
@@ -62,15 +60,13 @@
                     <div class="col-6">
                         <label class="form-label mt-4" style="color: black; font-weight:500">Group</label>
                         <select class="form-control " name="group_id" id="editgroup_id">
-                            <option value="" id="editgroup_name" hidden selected>Pilih Group</option>
+                            <option value="" id="editgroup_name" hidden selected>Select Group</option>
                             @foreach ($data['partners'] as $item_group)
                                 <option value="{{ $item_group->id }}">{{ strtolower($item_group->group_name) }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
-
-
                 </div>
                 <div class="row">
                     <div class="d-flex justify-content-end mt-4">
