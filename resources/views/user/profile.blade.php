@@ -218,7 +218,7 @@
 
 
     <script>
-        changeProfileUser() {
+        function changeProfileUser() {
 
             const userId = document.getElementById('user_id').value;
             const firstName = document.getElementById('firstName').value;
@@ -251,20 +251,29 @@
             $.ajax({
                 url: API_URL + "api/user/profile/update",
                 type: 'post',
-                data: formDataProfile,
+                data: formData,
                 contentType: false,
                 processData: false,
+
+                beforeSend: function() {
+                    if ($("#main-loader")) {
+                        $("#main-loader").fadeIn(300);
+                    }
+                },
                 success: function(res) {
                     if (res['success'] == "true" || res['success'] == true) {
-                        swalWithBootstrapButtons.fire(
-                            "Success!",
-                            "Your request success.",
-                            "success"
-                        );
 
-                        if ($("#loader")) {
-                            $("#loader").hide();
-                        }
+                        setTimeout(() => {
+                            swalWithBootstrapButtons.fire(
+                                "Success!",
+                                "Your request success.",
+                                "success"
+                            );
+                            window.location.reload();
+                        }, 1000);
+
+
+
 
                         // setTimeout(function() {
                         //     location.reload();
@@ -277,6 +286,11 @@
                         );
                     }
                 },
+                complete: function() {
+                    $('#main-loader').hide();
+                    
+                },
+
                 error: function(xhr, status, error) {
                     var errorMessage = xhr.status + ': ' + xhr.statusText;
                     console.log(errorMessage);
