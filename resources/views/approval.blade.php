@@ -449,8 +449,6 @@
                                         '<span class="badge badge-secondary badge-xs">unknown</span>' +
                                         '</td>';
                                 }
-
-
                                 if (obj.status == 'pending') {
                                     tableOut += '<td class="ps-4 text-sm align-middle text-center">' +
                                         '<div class="d-flex flex-row pt-3 d-flex justify-content-center">' +
@@ -497,10 +495,6 @@
                                         '</div>' +
                                         '</td>'
                                 }
-
-
-
-
                             }
                             $("#tableBody").append(tableOut);
                             // $("#totalAmount").html(Intl.NumberFormat().format(totalAmount));
