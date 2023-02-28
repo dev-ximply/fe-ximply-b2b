@@ -293,7 +293,6 @@
                 },
                 complete: function() {
                     $('#main-loader').hide();
-
                 },
 
                 error: function(xhr, status, error) {
