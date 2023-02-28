@@ -501,7 +501,6 @@
                                 if ($("#loader")) {
                                     $("#loader").hide();
                                 }
-
                                 setTimeout(function() {
                                     location.reload();
                                 }, 1000);
