@@ -349,7 +349,7 @@
     {{-- filter untuk category --}}
     <script>
         $(document).ready(function() {
-            var tenant_code = TENANT_CODE;
+            // var tenant_code = TENANT_CODE;
             $.ajaxSetup({
                 headers: {
                     "Authorization": "Bearer " + AUTH_TOKEN,
@@ -363,7 +363,7 @@
                 var urlSearch = "";
                 $('#status').on('change', function() {
                     var status = $('#status').val();
-                    urlSearch = API_URL + "api/expense/approval/list/" + tenant_code +
+                    urlSearch = API_URL + "api/expense/approval/list/" + TENANT_CODE +
                         '/?user_id=' +
                         USR_ID +
                         "&status=" + status;

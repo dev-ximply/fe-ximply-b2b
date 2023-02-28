@@ -380,8 +380,7 @@
                             Expense Data
                         </div>
                         <div>
-                            <button class="btn btn-sm text-white" style="background:#19194b"
-                                onclick="htmlTableToExcel('xlsx')">export
+                            <button class="btn btn-sm text-white" style="background:#19194b" onclick="htmlTableToExcel('xlsx')">export
                                 excel</button>
                         </div>
                     </div>
