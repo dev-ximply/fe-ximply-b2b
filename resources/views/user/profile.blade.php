@@ -128,11 +128,11 @@
                                         </div>
                                     </div>
                                     <div class="col-md mb-2">
-                                        <input type="text" id="handphone" class="form-control bg-white text-dark"
+                                        <input type="text" id="phoneNumber" class="form-control bg-white text-dark"
                                             placeholder="Add your mobile phone number"
                                             value="{{ $data['profile']->handphone }}">
                                         <script>
-                                            new PhoneInput(document.getElementById('handphone'));
+                                            new PhoneInput(document.getElementById('phoneNumber'));
                                         </script>
                                     </div>
                                 </div>
@@ -226,7 +226,7 @@
             const birthdayDate = document.getElementById('birthdayDate').value;
             const birthdayPlace = document.getElementById('birthdayPlace').value;
             const gender = document.getElementById('gender').value;
-            const phone = document.getElementById('handphone').value;
+            const phone = document.getElementById('phoneNumber').value;
 
 
 
@@ -247,6 +247,11 @@
             formData.append('birthday_place', birthdayPlace);
             formData.append('gender', gender);
             formData.append('handphone', phone);
+
+
+            for (var value of formData.values()) {
+                console.log(value);
+            }
 
             $.ajax({
                 url: API_URL + "api/user/profile/update",
@@ -288,7 +293,7 @@
                 },
                 complete: function() {
                     $('#main-loader').hide();
-                    
+
                 },
 
                 error: function(xhr, status, error) {
