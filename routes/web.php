@@ -109,7 +109,7 @@ Route::get('/pre-approval', function () {
 
 // permission
 // Route::get('/setting', [SettingsController::class, 'index'])->name('setting')->middleware('auth');
-Route::get('/permission', [PermissionController::class, 'index'])->name('permission')->middleware('auth');
+Route::get('/roles', [PermissionController::class, 'index'])->name('permission')->middleware('auth');
 Route::put('/permissions', [PermissionController::class, 'changePermission'])->name('permissions.change')->middleware('auth');
 Route::put('/permissions/role-name', [PermissionController::class, 'changeRoleName'])->name('permissions.role-name.change')->middleware('auth');
 

@@ -52,13 +52,13 @@
                                                             id="tesLabel">
 
                                                         <label for="tesLabel"
-                                                            style="position: absolute; top:15px;right:10px"
+                                                            style="position: absolute; top:4px;right:10px"
                                                             data-bs-toggle="tooltip" data-bs-title="Edit">
                                                             <i class="fa-solid fa-pen-to-square text-secondary"></i>
                                                         </label>
                                                     </td>
                                                     <td>
-                                                        <button class="accordion-button font-weight-bold collapsed"
+                                                        {{-- <button class="accordion-button font-weight-bold collapsed"
                                                             type="button" data-bs-toggle="collapse"
                                                             data-bs-target="#collapse-level-{{ $no }}"
                                                             aria-expanded="false"
@@ -67,12 +67,12 @@
                                                                 aria-hidden="true"></i>
                                                             <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
                                                                 aria-hidden="true"></i>
-                                                        </button>
+                                                        </button> --}}
                                                     </td>
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div id="collapse-level-{{ $no }}" class="accordion-collapse collapse"
+                                        {{-- <div id="collapse-level-{{ $no }}" class="accordion-collapse collapse"
                                             aria-labelledby="heading-level-2" data-bs-parent="#accordion-level-2"
                                             style="">
                                             <div class="accordion-body text-sm ">
@@ -94,12 +94,12 @@
                                                                         <th class="text-center text-dark">
                                                                             <p class="mb-0 text-dark">Approval Topup</p>
                                                                         </th>
-                                                                        {{-- <th class="text-center text-dark">
+                                                                        <th class="text-center text-dark">
                                                                         <p class="mb-0 text-dark">Approval PreBudget</p>
-                                                                    </th> --}}
-                                                                        {{-- <th class="text-center text-dark">
+                                                                    </th>
+                                                                        <th class="text-center text-dark">
                                                                         <p class="mb-0 text-dark">Manage Tenant</p>
-                                                                    </th> --}}
+                                                                    </th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -140,15 +140,15 @@
                                                                                     {{ $permission['permission'][0]['approval_topup'] ? 'checked' : '' }}>
                                                                             </div>
                                                                         </td>
-                                                                        {{-- <td>
+                                                                        <td>
                                                                         <div
                                                                             class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
                                                                             <input class="form-check-input" type="checkbox"
                                                                                 onchange="changePermission('approval_prebudget', this, {{ $permission['id'] }})"
                                                                                 {{ $permission['permission'][0]['approval_prebudget'] ? 'checked' : '' }}>
                                                                         </div>
-                                                                    </td> --}}
-                                                                        {{-- <td>
+                                                                    </td>
+                                                                        <td>
                                                                         <div
                                                                             class="form-check form-switch mb-0 d-flex align-items-center justify-content-center">
                                                                             <input class="form-check-input" type="checkbox"
@@ -156,7 +156,7 @@
                                                                                 {{ $permission['permission'][0]['manage_tenant'] ? 'checked' : '' }}
                                                                                 value="{{ $permission['permission'][0]['manage_tenant'] ? 'on' : 'off' }}">
                                                                         </div>
-                                                                    </td> --}}
+                                                                    </td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -165,7 +165,7 @@
                                                 @endif
 
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <?php $no++; ?>
                                 @endforeach
