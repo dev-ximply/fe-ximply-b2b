@@ -307,9 +307,9 @@
                                         "Your request success.",
                                         "success"
                                     );
-                                    // setTimeout(function() {
-                                    //     window.location.reload(true);
-                                    // }, 1000);
+                                    setTimeout(function() {
+                                        window.location.reload(true);
+                                    }, 1000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
                                         "oops!",
@@ -563,10 +563,10 @@
                 if (res) {
                     var response = res['data'];
                     for (const obj of response) {
-                        var CategoryId = obj.id;
-                        var CategoryName = obj.purpose;
-                        $("#purpose").append('<option value="' + CategoryName +
-                            '">' + CategoryName + '</option>');
+                        var PurposeId = obj.id;
+                        var PurposeName = obj.purpose;
+                        $("#purpose").append('<option value="' + PurposeId +
+                            '">' + PurposeName + '</option>');
                     }
                 } else {
                     $("#purpose").empty();

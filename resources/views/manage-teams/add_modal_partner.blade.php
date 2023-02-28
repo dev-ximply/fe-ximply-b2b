@@ -45,7 +45,7 @@
 
                         <select class="form-select" name="user_assign_id" id="user_assign_id">
 
-                            <option hidden selected>Pilih User</option>
+                            <option hidden selected>Select User</option>
 
                             @foreach ($data['a_partner'] as $member)
                                 <option value="{{ $member->id }}" data-group="{{ $member->group_id }}">
