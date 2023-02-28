@@ -378,8 +378,12 @@
                 $.ajaxSetup({
                     headers: {
                         "Authorization": "Bearer " + AUTH_TOKEN,
+<<<<<<< HEAD
                         "Accept": "application/json",
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+=======
+                        "Accept": "application/json"
+>>>>>>> 4c6ff35d1a9c6753411dc53b329216f7e9f8dc94
                     }
                 });
                 $.ajax({
@@ -400,12 +404,37 @@
                                 // console.log(totalAmount);
                                 tableOut += '<tr>' +
                                     '<td class="align-middle text-start text-capitalize text-xs">' +
+<<<<<<< HEAD
                                     '<div class="d-flex">' + '<img  src="' + STORAGE_URL + obj.receipt_picture_directory + '"' +
                                     'class="img-fluid ms-3" alt="receipt" style="width: 50px">' +
                                     '<div class="ms-3 my-auto show-modal">' + '<div>' +
                                     '<span class="text-xs text-dark text-bold">' +  obj.sub_category_name + '</span>' +  '</div>' +   '<div>' +
                                     '<span class="text-xs text-dark">' +  obj.full_name + '</span>' + '</div>' + '<div>' +
                                     '<span class="text-xxs text-dark">' +  obj.date +  '</span>' +  '</div>' + '</div>' + '</div>' + '</td>';
+=======
+                                    '<div class="d-flex">' +
+                                    '<img  src="' + STORAGE_URL + obj.receipt_picture_directory + '"' +
+                                    'class="img-fluid ms-3" alt="receipt" style="width: 50px">' +
+                                    '<div class="ms-3 my-auto show-modal">' +
+                                    '<div>' +
+                                    '<span class="text-xs text-dark text-bold">' +
+                                    obj.sub_category_name +
+                                    '</span>' +
+                                    '</div>' +
+                                    '<div>' +
+                                    '<span class="text-xs text-dark">' +
+                                    obj.full_name +
+                                    '</span>' +
+                                    '</div>' +
+                                    '<div>' +
+                                    '<span class="text-xxs text-dark">' +
+                                    obj.date +
+                                    '</span>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</td>'
+>>>>>>> 4c6ff35d1a9c6753411dc53b329216f7e9f8dc94
 
                                 tableOut +=
                                     '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark">' +
@@ -433,28 +462,55 @@
                                     tableOut += '<td class="ps-4 align-middle text-start text-xs">' +
                                         '<span class="badge badge-xs d-flex justify-content-center"' +
                                         'style="border:1px solid #FFCF23; color:#FFCF23; width: 55px">pending</span>' +
+<<<<<<< HEAD
                                         '</td>';
+=======
+                                        '</td>'
+>>>>>>> 4c6ff35d1a9c6753411dc53b329216f7e9f8dc94
                                 } else if (obj.status == 'approved') {
                                     tableOut += '<td class="ps-4 align-middle text-start text-xs">' +
                                         '<span class="badge badge-xs d-flex justify-content-center"' +
                                         'style="border:1px solid #50B720; color:#50B720; width: 55px">approved</span>' +
+<<<<<<< HEAD
                                         '</td>';
+=======
+                                        '</td>'
+>>>>>>> 4c6ff35d1a9c6753411dc53b329216f7e9f8dc94
                                 } else if (obj.status == 'rejected') {
                                     tableOut += '<td class="ps-4 align-middle text-start text-xs">' +
                                         '<span class="badge badge-xs d-flex justify-content-center"' +
                                         'style="border:1px solid #E40909; color:#E40909; width: 55px">rejected</span>' +
+<<<<<<< HEAD
                                         '</td>';
                                 } else {
                                     tableOut += '<td class="ps-4 align-middle text-start text-xs">' +
                                         '<span class="badge badge-secondary badge-xs">unknown</span>' +
                                         '</td>';
+=======
+                                        '</td>'
+                                } else {
+                                    tableOut += '<td class="ps-4 align-middle text-start text-xs">' +
+                                        '<span class="badge badge-secondary badge-xs">unknown</span>' +
+                                        '</td>'
+>>>>>>> 4c6ff35d1a9c6753411dc53b329216f7e9f8dc94
                                 }
 
 
                                 if (obj.status == 'pending') {
                                     tableOut += '<td class="ps-4 text-sm align-middle text-center">' +
                                         '<div class="d-flex flex-row pt-3 d-flex justify-content-center">' +
+<<<<<<< HEAD
                                         '<button onclick="getExpenseData(`' + obj.receipt_picture_directory + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`, `' + obj.total_amount + '`,`' + obj.location + '`,`' + obj.category_name + '`,`' + obj.sub_category_name + '`,`' + obj.client_name + '`,`' + obj.purpose_name + '`,`' + obj.expense_of + '`,`' + obj.note + '`,`' + obj.status + '`,`' + obj.approval_id + '`)"' +
+=======
+                                        '<button onclick="getExpenseData(`' + obj
+                                    .receipt_picture_directory + '`,`' + obj
+                                    .additional_picture_directory + '`,`' + obj.receipt_date +
+                                    '`,`' + obj.merchant + '`, `' + obj.total_amount + '`,`' + obj
+                                    .location + '`,`' + obj.category_name + '`,`' + obj
+                                    .sub_category_name + '`,`' + obj.client_name + '`,`' + obj
+                                    .purpose_name + '`,`' + obj.expense_of + '`,`' + obj.note +
+                                    '`,`' + obj.status + '`,`' + obj.approval_id + '`)"' +
+>>>>>>> 4c6ff35d1a9c6753411dc53b329216f7e9f8dc94
                                         'class="mx-1 btn text-white d-flex align-items-center d-flex justify-content-center"' +
                                         'data-bs-original-title="approve" data-toggle="tooltip"' +
                                         'data-placement="left" title="Review"' +
@@ -463,7 +519,12 @@
                                         '<i class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>' +
                                         '<span style="font-size: 0.6em">Review</span>' +
                                         '</button>' +
+<<<<<<< HEAD
                                         '<button onclick="approvalDecision(`' + USR_ID + '`,`' + obj.approval_id + '`,` approved`)"' +
+=======
+                                        '<button onclick="approvalDecision(`' + USR_ID + '`,`' + obj
+                                    .approval_id + '`,`approved`)"' +
+>>>>>>> 4c6ff35d1a9c6753411dc53b329216f7e9f8dc94
                                         'data-bs-toggle="tooltip"' +
                                         'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"' +
                                         'data-bs-original-title="Approve" data-toggle="tooltip"' +
@@ -472,7 +533,12 @@
                                         '<i class="fas fa-circle-check text-white text-md me-1"></i>' +
                                         '<span style="font-size: 0.6em">Approve</span>' +
                                         '</button>' +
+<<<<<<< HEAD
                                         '<button onclick="approvalDecision(`' + USR_ID + '`,' + '`' + obj.approval_id + '`,`rejected`)"' +
+=======
+                                        '<button onclick="approvalDecision(`' + USR_ID + '`,' + '`' +
+                                    obj.approval_id + '`,`rejected`)"' +
+>>>>>>> 4c6ff35d1a9c6753411dc53b329216f7e9f8dc94
                                         'data-bs-toggle="tooltip"' +
                                         // '<button onclick="getExpenseData(' + '`' + expense.id + '`' + ')"' +
                                         'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"' +
@@ -485,9 +551,23 @@
                                         '</div>' +
                                         '</td>'
                                 } else {
+<<<<<<< HEAD
                                     tableOut += '<td class="ps-4 text-sm align-middle text-center">' +
                                         '<div class="pt-3 d-flex justify-content-center">' +
                                         '<button onclick="getExpenseData(`' + obj.receipt_picture_directory + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`,`' + obj.total_amount + '`,`' + obj.location + '`,`' + obj.category_name + '`,`' + obj.sub_category_name + '`,`' + obj.client_name + '`,`' + obj.purpose_name + '`,`' + obj.expense_of + '`,`' + obj.note + '`,`' + obj.status + '`,`' + obj.approval_id + '`)"' +
+=======
+                                    tableOut +=
+                                        '<td class="ps-4 text-sm align-middle text-center">' +
+                                        '<div class="pt-3 d-flex justify-content-center">' +
+                                        '<button onclick="getExpenseData(`' + obj
+                                    .receipt_picture_directory + '`,`' + obj
+                                    .additional_picture_directory + '`,`' + obj.receipt_date +
+                                    '`,`' + obj.merchant + '`,`' + obj.total_amount + '`,`' + obj
+                                    .location + '`,`' + obj.category_name + '`,`' + obj
+                                    .sub_category_name + '`,`' + obj.client_name + '`,`' + obj
+                                    .purpose_name + '`,`' + obj.expense_of + '`,`' + obj.note +
+                                    '`,`' + obj.status + '`,`' + obj.approval_id + '`)"' +
+>>>>>>> 4c6ff35d1a9c6753411dc53b329216f7e9f8dc94
                                         'data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"' +
                                         'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"' +
                                         'style="width: 60px; height:25px; background-color:#FFCF23">' +
