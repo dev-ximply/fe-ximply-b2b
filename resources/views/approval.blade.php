@@ -407,28 +407,21 @@
                                     '<span class="text-xs text-dark">' +  obj.full_name + '</span>' + '</div>' + '<div>' +
                                     '<span class="text-xxs text-dark">' +  obj.date +  '</span>' +  '</div>' + '</div>' + '</div>' + '</td>';
 
-                                tableOut +=
-                                    '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark">' +
-                                    obj.category_name +
-                                    '</td>';
-                                tableOut +=
-                                    '<td class="ps-4 align-middle text-start text-xs text-dark">' +
-                                    obj.purpose_name +
-                                    '</td>';
-                                tableOut +=
-                                    '<td class="ps-4 align-middle text-start text-xs text-dark text-break text-wrap">' +
-                                    obj.merchant +
-                                    '</td>';
-                                tableOut +=
-                                    '<td class="ps-4 align-middle text-start text-xs text-dark">' +
-                                    obj.total_amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g,
-                                        "$1,") +
-                                    '</td>';
-
-                                tableOut +=
-                                    '<td class="ps-4 align-middle text-start text-xs text-dark">' +
-                                    obj.note +
-                                    '</td>';
+                                tableOut += '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark">' +
+                                             obj.category_name +
+                                            '</td>';
+                                tableOut += '<td class="ps-4 align-middle text-start text-xs text-dark">' +
+                                                obj.purpose_name +
+                                            '</td>';
+                                tableOut += '<td class="ps-4 align-middle text-start text-xs text-dark text-break text-wrap">' +
+                                                 obj.merchant +
+                                            '</td>';
+                                tableOut += '<td class="ps-4 align-middle text-start text-xs text-dark">' +
+                                                obj.total_amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") +
+                                            '</td>';
+                                tableOut += '<td class="ps-4 align-middle text-start text-xs text-dark">' +
+                                                obj.note +
+                                            '</td>';
                                 if (obj.status == 'pending') {
                                     tableOut += '<td class="ps-4 align-middle text-start text-xs">' +
                                         '<span class="badge badge-xs d-flex justify-content-center"' +
@@ -449,8 +442,6 @@
                                         '<span class="badge badge-secondary badge-xs">unknown</span>' +
                                         '</td>';
                                 }
-
-
                                 if (obj.status == 'pending') {
                                     tableOut += '<td class="ps-4 text-sm align-middle text-center">' +
                                         '<div class="d-flex flex-row pt-3 d-flex justify-content-center">' +
@@ -497,7 +488,6 @@
                                         '</div>' +
                                         '</td>'
                                 }
-
                             }
                             $("#tableBody").append(tableOut);
                             // $("#totalAmount").html(Intl.NumberFormat().format(totalAmount));
