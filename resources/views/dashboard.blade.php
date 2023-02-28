@@ -376,11 +376,12 @@
             <div class="col-md">
                 <div class="card py-4 px-3" style="border-radius:5px">
                     <div class="d-flex justify-content-between">
-                        <div>
+                        <div class="text-dark ps-2" style="font-size: 16px;color:black;font-weight:500">
                             Expense Data
                         </div>
                         <div>
-                            <button class="btn btn-secondary btn-sm" onclick="htmlTableToExcel('xlsx')">export
+                            <button class="btn btn-sm text-white" style="background:#19194b"
+                                onclick="htmlTableToExcel('xlsx')">export
                                 excel</button>
                         </div>
                     </div>
@@ -642,6 +643,7 @@
                 FilterMember = urlParams.get('filter_member');
             }
         }
+
         $.ajaxSetup({
             headers: {
                 "Authorization": "Bearer " + AUTH_TOKEN,

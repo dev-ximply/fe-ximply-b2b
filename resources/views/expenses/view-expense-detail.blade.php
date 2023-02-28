@@ -156,12 +156,12 @@
                 </div>
             </div>
             <div class="modal-footer text-end" id="decisionButton" style="display: none">
-                <button onclick="approvalDecision({{ Auth::user()['id'] }}, approvalID, 'approved')" type="button"
+                <button onclick="approvalDecision('{{ Auth::user()['id'] }}', approvalID, 'approved')" type="button"
                     class="btn text-white" style="width: 140px; background-color:#50B720">
                     <i class="fas fa-circle-check text-white text-lg me-1"></i>
                     Approve
                 </button>
-                <button onclick="approvalDecision({{ Auth::user()['id'] }}, approvalID, 'rejected')" type="button"
+                <button onclick="approvalDecision('{{ Auth::user()['id'] }}', approvalID, 'rejected')" type="button"
                     class="btn text-white" style="width: 140px; background-color: #E40909">
                     <i class="fas fa-circle-xmark text-white text-lg me-1"></i>
                     Reject
