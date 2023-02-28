@@ -642,6 +642,7 @@
                 FilterMember = urlParams.get('filter_member');
             }
         }
+
         $.ajaxSetup({
             headers: {
                 "Authorization": "Bearer " + AUTH_TOKEN,

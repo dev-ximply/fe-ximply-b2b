@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Http;
 class DashboardController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
         return view(
             'dashboard',
@@ -24,7 +24,7 @@ class DashboardController extends Controller
                 'section' => 'dashboard',
                 'data' => [
                     'limit' => SpendsController::get_balance(Auth::user()['id']),
-                    'reports' => self::list_report(Auth::user()['id']),
+                    'reports' => self::list_report($request, Auth::user()['id']),
                     'voucher' =>  self::list_voucher(Auth::user()['id']),
                     'recent_expenses' =>  self::recent_expenses(Auth::user()['id']),
                     'purpose' => self::list_purpose(Auth::user()['id']),
@@ -53,7 +53,7 @@ class DashboardController extends Controller
         return false;
     }
 
-    public static function list_report($user_id, $token = false)
+    public static function list_report(Request $request, $user_id, $token = false)
     {
         $client = new Client();
 
@@ -62,7 +62,29 @@ class DashboardController extends Controller
             'Accept' => 'application/json'
         ];
 
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/reports/expenses/' . $user_id, $headers);
+        $endpoint = config('api.base_url') . 'api/reports/expenses/' . $user_id . '?';
+
+        if (isset($request->filter_expense_type) && $request->filter_expense_type != "") {
+            $endpoint .= "expense_type=" . $request->expense_type . "&";
+        }
+
+        if (isset($request->filter_start_date) && $request->filter_start_date != "") {
+            $endpoint .= "start_date=" . $request->start_date . "&";
+        }
+
+        if (isset($request->filter_end_date) && $request->filter_end_date != "") {
+            $endpoint .= "end_date=" . $request->end_date . "&";
+        }
+
+        if (isset($request->filter_group) && $request->filter_group != "") {
+            $endpoint .= "group_id=" . $request->group_id . "&";
+        }
+
+        if (isset($request->filter_member) && $request->filter_member != "") {
+            $endpoint .= "member_id=" . $request->member_id . "&";
+        }
+
+        $request = new Psr7Request('GET', $endpoint, $headers);
 
         try {
             $res = $client->sendAsync($request)->wait();
