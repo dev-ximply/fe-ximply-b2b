@@ -56,8 +56,6 @@ class DashboardController extends Controller
     {
         $client = new Client();
 
-        return $request;
-
         $headers = [
             'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json'
