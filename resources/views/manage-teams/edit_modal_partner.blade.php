@@ -52,7 +52,7 @@
                             <option value="" hidden selected id="edituser_assign_name">Pilih User</option>
 
                             @foreach ($data['a_partner'] as $member)
-                            <option value="{{ $member->id }}">{{ $member->full_name }}</option>
+                                <option value="{{ $member->id }}">{{ $member->full_name }}</option>
                             @endforeach
 
                         </select>
@@ -61,11 +61,11 @@
 
                     <div class="col-6">
                         <label class="form-label mt-4" style="color: black; font-weight:500">Group</label>
-                        <select class="form-select " name="group_id" id="editgroup_id">
+                        <select class="form-control " name="group_id" id="editgroup_id">
                             <option value="" id="editgroup_name" hidden selected>Pilih Group</option>
                             @foreach ($data['partners'] as $item_group)
-                            <option value="{{ $item_group->id }}">{{ strtolower($item_group->group_name) }}
-                            </option>
+                                <option value="{{ $item_group->id }}">{{ strtolower($item_group->group_name) }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -78,7 +78,8 @@
                             <button class="btn text-white" data-bs-dismiss="modal" style="background-color: #D42A34">
                                 Cancel
                             </button>
-                            <button type="button" class="btn text-white" style="background-color: #62ca50" onclick="updatePartner(
+                            <button type="button" class="btn text-white" style="background-color: #62ca50"
+                                onclick="updatePartner(
                                     document.getElementById('pertner_id').value,
                                     document.getElementById('editcompanyName').value,
                                     document.getElementById('editPartnerName').value,
@@ -98,10 +99,12 @@
     </div>
 </div>
 
-<script>
-    function updatePartner(partnerId, companyName, partnerName,  email, phone, assignUserId, groupId) {
 
-        console.log(partnerId, companyName, partnerName,  email, phone, assignUserId, groupId)
+
+<script>
+    function updatePartner(partnerId, companyName, partnerName, email, phone, assignUserId, groupId) {
+
+        console.log(partnerId, companyName, partnerName, email, phone, assignUserId, groupId)
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: "btn btn-success-cstm mx-2",
@@ -140,6 +143,9 @@
                             group_id: groupId,
                             assign_user_id: assignUserId,
                         },
+                        beforeSend: function() {
+                            $('#main-loader').fadeIn(300);
+                        },
 
                         success: function(response) {
 
@@ -154,15 +160,25 @@
                             if (success === true) {
 
                                 setTimeout(function() {
-                                    window.location.reload(true);
+                                    Swal.fire(
+                                        'Success',
+                                        'Your request data success.',
+                                        'success'
+                                    )
                                 }, 1000);
-                            }else{
+                            } else {
                                 swalWithBootstrapButtons.fire(
                                     "Failed",
                                     message,
                                     "error"
                                 );
                             }
+                        },
+                        complete: function() {
+                            setTimeout(function() {
+                                $('#main-loader').hide();
+                                window.location.reload(true);
+                            }, 1000);
                         }
 
                     });

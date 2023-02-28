@@ -171,7 +171,7 @@
                                         {{ $item->company_name }}
                                     </td>
                                     <td class="text-sm" data-label="Contact Name" style="color: #000000">
-                                        {{ $item->contact_name != '' ? $item->contact_name : '-'}}
+                                        {{ $item->contact_name != '' ? $item->contact_name : '-' }}
                                     </td>
                                     <td class="text-sm" data-label="Contact Info" style="color: #000000">
                                         {{ $item->email }}
@@ -212,7 +212,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="7" class="  " style="font-size: 15px; font-weight:700" >
+                                <td colspan="7" class="  " style="font-size: 15px; font-weight:700">
                                     <div class="text-center d-flex align-items-center justify-content-center">
                                         Data Empty
                                     </div>
@@ -268,14 +268,12 @@
                             url: API_URL + "api/partner/delete",
                             // url: "{{ route('partners.delete') }}",
                             data: {
-                                user_id:userId,
-                                tenant_code:tenant,
+                                user_id: userId,
+                                tenant_code: tenant,
                                 partner_id: id,
                             },
                             beforeSend: function() {
-                                if ($("#main-loader")) {
-                                    $("#main-loader").show();
-                                }
+                                $("#main-loader").fadeIn(300);
                             },
                             success: function(response) {
                                 const {
@@ -287,7 +285,11 @@
 
                                 if (status === true) {
                                     setTimeout(function() {
-                                        window.location.reload(true);
+                                        Swal.fire(
+                                            'Success',
+                                            'Your request success.',
+                                            'success'
+                                        )
                                     }, 1000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
@@ -296,6 +298,12 @@
                                         "error"
                                     );
                                 }
+                            },
+                            complete: function() {
+                                setTimeout(function() {
+                                    $('#main-loader').hide();
+                                    window.location.reload(true);
+                                }, 1000)
                             }
                         });
 
@@ -309,7 +317,7 @@
                 });
         }
     </script>
-    
+
     <script>
         function getData(id) {
             $.ajax({
