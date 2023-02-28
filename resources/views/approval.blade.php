@@ -407,19 +407,26 @@
                                     '<span class="text-xs text-dark">' +  obj.full_name + '</span>' + '</div>' + '<div>' +
                                     '<span class="text-xxs text-dark">' +  obj.date +  '</span>' +  '</div>' + '</div>' + '</div>' + '</td>';
 
-                                tableOut += '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark">' +
-                                             obj.category_name +
+                                tableOut +=
+                                    '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark">' +
+                                                 obj.category_name +
                                             '</td>';
-                                tableOut += '<td class="ps-4 align-middle text-start text-xs text-dark">' +
+                                tableOut +=
+                                    '<td class="ps-4 align-middle text-start text-xs text-dark">' +
                                                 obj.purpose_name +
                                             '</td>';
-                                tableOut += '<td class="ps-4 align-middle text-start text-xs text-dark text-break text-wrap">' +
-                                                 obj.merchant +
+                                tableOut +=
+                                    '<td class="ps-4 align-middle text-start text-xs text-dark text-break text-wrap">' +
+                                                obj.merchant +
                                             '</td>';
-                                tableOut += '<td class="ps-4 align-middle text-start text-xs text-dark">' +
-                                                obj.total_amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") +
+                                tableOut +=
+                                    '<td class="ps-4 align-middle text-start text-xs text-dark">' +
+                                    obj.total_amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g,
+                                        "$1,") +
                                             '</td>';
-                                tableOut += '<td class="ps-4 align-middle text-start text-xs text-dark">' +
+
+                                tableOut +=
+                                    '<td class="ps-4 align-middle text-start text-xs text-dark">' +
                                                 obj.note +
                                             '</td>';
                                 if (obj.status == 'pending') {
@@ -442,10 +449,27 @@
                                         '<span class="badge badge-secondary badge-xs">unknown</span>' +
                                         '</td>';
                                 }
+
+
                                 if (obj.status == 'pending') {
                                     tableOut += '<td class="ps-4 text-sm align-middle text-center">' +
                                         '<div class="d-flex flex-row pt-3 d-flex justify-content-center">' +
-                                        '<button onclick="getExpenseData(`' + obj.receipt_picture_directory + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`,                            '<i class="fas fa-circle-check text-white text-md me-1"></i>' +
+                                        '<button onclick="getExpenseData(`' + obj.receipt_picture_directory + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`, `' + obj.total_amount + '`,`' + obj.location + '`,`' + obj.category_name + '`,`' + obj.sub_category_name + '`,`' + obj.client_name + '`,`' + obj.purpose_name + '`,`' + obj.expense_of + '`,`' + obj.note + '`,`' + obj.status + '`,`' + obj.approval_id + '`)"' +
+                                        'class="mx-1 btn text-white d-flex align-items-center d-flex justify-content-center"' +
+                                        'data-bs-original-title="approve" data-toggle="tooltip"' +
+                                        'data-placement="left" title="Review"' +
+                                        'style="width: 60px; height:25px; background-color:#FFCF23"' +
+                                        'data-bs-toggle="modal" data-bs-target="#viewExpenseDetail">' +
+                                        '<i class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>' +
+                                        '<span style="font-size: 0.6em">Review</span>' +
+                                        '</button>' +
+                                        '<button onclick="approvalDecision(`' + USR_ID + '`,`' + obj.approval_id + '`,` approved`)"' +
+                                        'data-bs-toggle="tooltip"' +
+                                        'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"' +
+                                        'data-bs-original-title="Approve" data-toggle="tooltip"' +
+                                        'data-placement="left" title="Approve this expenses"' +
+                                        'style="width: 60px; height:25px; background-color:#50B720">' +
+                                        '<i class="fas fa-circle-check text-white text-md me-1"></i>' +
                                         '<span style="font-size: 0.6em">Approve</span>' +
                                         '</button>' +
                                         '<button onclick="approvalDecision(`' + USR_ID + '`,' + '`' + obj.approval_id + '`,`rejected`)"' +
@@ -473,6 +497,10 @@
                                         '</div>' +
                                         '</td>'
                                 }
+
+
+
+
                             }
                             $("#tableBody").append(tableOut);
                             // $("#totalAmount").html(Intl.NumberFormat().format(totalAmount));
