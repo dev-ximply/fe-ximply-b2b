@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Http;
 
 class DashboardController extends Controller
 {
-    //
     public function index(Request $request)
     {
         return view(
@@ -57,6 +56,8 @@ class DashboardController extends Controller
     {
         $client = new Client();
 
+        return $request;
+
         $headers = [
             'Authorization' => 'Bearer ' . Session::get('AuthToken'),
             'Accept' => 'application/json'
@@ -64,23 +65,23 @@ class DashboardController extends Controller
 
         $endpoint = config('api.base_url') . 'api/reports/expenses/' . $user_id . '?';
 
-        if (isset($request->filter_expense_type) && $request->filter_expense_type != "") {
+        if (isset($request->filter_expense_type) && $request->filter_expense_type != "" && $request->filter_expense_type != null) {
             $endpoint .= "expense_type=" . $request->expense_type . "&";
         }
 
-        if (isset($request->filter_start_date) && $request->filter_start_date != "") {
+        if (isset($request->filter_start_date) && $request->filter_start_date != "" && $request->filter_start_date != null) {
             $endpoint .= "start_date=" . $request->start_date . "&";
         }
 
-        if (isset($request->filter_end_date) && $request->filter_end_date != "") {
+        if (isset($request->filter_end_date) && $request->filter_end_date != "" && $request->filter_end_date != null) {
             $endpoint .= "end_date=" . $request->end_date . "&";
         }
 
-        if (isset($request->filter_group) && $request->filter_group != "") {
+        if (isset($request->filter_group) && $request->filter_group != "" && $request->filter_group != null) {
             $endpoint .= "group_id=" . $request->group_id . "&";
         }
 
-        if (isset($request->filter_member) && $request->filter_member != "") {
+        if (isset($request->filter_member) && $request->filter_member != "" && $request->filter_member != null) {
             $endpoint .= "member_id=" . $request->member_id . "&";
         }
 
