@@ -55,19 +55,18 @@
                         </div>
                         <div class="col-md-10">
                             <div class="row mb-2">
+                                <input type="text" id="user_id" hidden>
                                 <div class="col-md-6 mt-3">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">First
                                         Name</label>
-                                    <input onchange="changeInfoProfile(this.value, 'first_name')" type="text"
-                                        class="form-control text-dark text-capitalize" placeholder="First Name"
-                                        value="{{ $data['profile']->first_name }}">
+                                    <input id="firstName" type="text" class="form-control text-dark text-capitalize"
+                                        placeholder="First Name" value="{{ $data['profile']->first_name }}">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="" class="text-dark text-xs" style="font-weight:600">Last
                                         Name</label>
-                                    <input onchange="changeInfoProfile(this.value, 'last_name')" type="text"
-                                        class="form-control text-dark text-capitalize" placeholder="Last Name"
-                                        value="{{ $data['profile']->last_name }}">
+                                    <input id="lastName" type="text" class="form-control text-dark text-capitalize"
+                                        placeholder="Last Name" value="{{ $data['profile']->last_name }}">
                                 </div>
                             </div>
                             <div class="row">
@@ -79,8 +78,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md mb-2">
-                                        <input onchange="changeInfoProfile(this.value, 'birthday_date')" type="date"
-                                            onfocus="(this.type='date')" class="form-control bg-white text-dark"
+                                        <input type="date" class="form-control bg-white text-dark" id="birthdayDate"
                                             placeholder="add your birthday date"
                                             value="{{ $data['profile']->birthday_date }}">
                                     </div>
@@ -93,8 +91,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md mb-2">
-                                        <input onchange="changeInfoProfile(this.value, 'birthday_place')" type="text"
-                                            class="form-control bg-white text-dark" placeholder="add your birthday place"
+                                        <input type="text" class="form-control bg-white text-dark" id="birthdayPlace"
+                                            placeholder="add your birthday place"
                                             value="{{ $data['profile']->birthday_place }}">
                                     </div>
                                 </div>
@@ -109,7 +107,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <select onchange="changeInfoProfile(this.value, 'gender')" class="form-select">
+                                        <select class="form-select" id="gender">
                                             @if ($data['profile']->gender == 'nan')
                                                 ? <option value='' selected>Choose</option> :
                                             @endif
@@ -130,10 +128,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md mb-2">
-                                        <input onchange="changeInfoProfile(this.value, 'phone')" type="text"
-                                            id="handphone" class="form-control bg-white text-dark"
+                                        <input type="text" id="handphone" class="form-control bg-white text-dark"
                                             placeholder="Add your mobile phone number"
-                                            value="{{ $data['profile']->handphone }}" readonly>
+                                            value="{{ $data['profile']->handphone }}">
                                         <script>
                                             new PhoneInput(document.getElementById('handphone'));
                                         </script>
@@ -142,7 +139,8 @@
                             </div>
                             <div class="row">
                                 <div class="text-end">
-                                    <button class="btn text-white" style="background: #62ca50">Save</button>
+                                    <button class="btn text-white" style="background: #62ca50"
+                                        onclick="changeProfileUser()">Save</button>
                                 </div>
                             </div>
                             <div class="row">
@@ -217,6 +215,91 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        function changeProfileUser() {
+
+            const userId = document.getElementById('user_id').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const birthdayDate = document.getElementById('birthdayDate').value;
+            const birthdayPlace = document.getElementById('birthdayPlace').value;
+            const gender = document.getElementById('gender').value;
+            const phone = document.getElementById('handphone').value;
+
+
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success-cstm mx-2",
+                    cancelButton: "btn btn-danger-cstm mx-2",
+                },
+                buttonsStyling: false,
+            });
+
+            var formData = new FormData();
+
+            formData.append('user_id', userId);
+            formData.append('first_name', firstName);
+            formData.append('last_name', lastName);
+            formData.append('birthday_date', birthdayDate);
+            formData.append('birthday_place', birthdayPlace);
+            formData.append('gender', gender);
+            formData.append('handphone', phone);
+
+            $.ajax({
+                url: API_URL + "api/user/profile/update",
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+
+                beforeSend: function() {
+                    if ($("#main-loader")) {
+                        $("#main-loader").fadeIn(300);
+                    }
+                },
+                success: function(res) {
+                    if (res['success'] == "true" || res['success'] == true) {
+
+                        setTimeout(() => {
+                            swalWithBootstrapButtons.fire(
+                                "Success!",
+                                "Your request success.",
+                                "success"
+                            );
+                            window.location.reload();
+                        }, 1000);
+
+
+
+
+                        // setTimeout(function() {
+                        //     location.reload();
+                        // }, 1000);
+                    } else {
+                        swalWithBootstrapButtons.fire(
+                            "Error!",
+                            "Your request Failed",
+                            "error"
+                        );
+                    }
+                },
+                complete: function() {
+                    $('#main-loader').hide();
+                    
+                },
+
+                error: function(xhr, status, error) {
+                    var errorMessage = xhr.status + ': ' + xhr.statusText;
+                    console.log(errorMessage);
+                    return errorMessage
+                }
+            });
+
+        }
+    </script>
 
     <script>
         function changeInfoProfile(value, field) {
