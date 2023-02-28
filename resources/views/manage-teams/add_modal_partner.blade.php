@@ -167,22 +167,29 @@
 
                             console.log(response)
 
-                            if (success === true) {
+                            if (success == true) {
 
                                 setTimeout(function() {
                                     Swal.fire(
                                         'Success',
-                                        'Your request success.',
+                                         message,
                                         'success'
                                     )
 
                                 }, 1000);
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text:   message,
+
+                                });
                             }
                         },
                         complete: function() {
                             setTimeout(function() {
                                 $("#main-loader").hide();
-                                window.location.reload(true);
+                                // window.location.reload(true);
                             }, 1000)
                         }
 

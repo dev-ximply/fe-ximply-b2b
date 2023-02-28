@@ -147,6 +147,8 @@
                     $.ajax({
                         type: "PUT",
                         url: "{{ route('employees.update') }}",
+                        contentType: false,
+                        processData: false,
                         data: {
                             user_id: userId,
                             first_name: firstNameId,
@@ -160,21 +162,21 @@
                             $("#main-loader").show();
                         },
                         success: function(res) {
-                            if (res['success'] == true) {
+                            if (res['success'] == "true" || res['success'] == true) {
 
-                                setTimeout(function() {
+                                // setTimeout(function() {
                                     Swal.fire(
                                         "Success!",
-                                        "Your request success.",
+                                        res["message"],
                                         "success"
                                     );
 
-                                }, 1000);
-                                window.location.reload(true);
+                                // }, 1000);
+                                // window.location.reload(true);
                             } else {
-                                swalWithBootstrapButtons.fire(
+                                Swal.fire(
                                     "Error!",
-                                    res['message'],
+                                    res["message"],
                                     "error"
                                 );
                                 // setTimeout(function() {
