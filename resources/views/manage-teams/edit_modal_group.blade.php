@@ -251,20 +251,19 @@
                         },
                         beforeSend: function() {
                             if ($("#main-loader")) {
-                                $("#main-loader").show();
+                                $("#main-loader").fadeIn(300);
                             }
                         },
                         success: function(res) {
                             if (res['success'] == "true" || res['success'] == true) {
-                                swalWithBootstrapButtons.fire({
-                                    title:"Success",
-                                    text:'Your request success.',
-                                    timer:1000
-                                }
-                                    // "Success!",
-                                    // "Your request success.",
-                                    // "success"
-                                );
+                                setTimeout(function() {
+                                    Swal.fire(
+                                        "Success!",
+                                        "Your request success.",
+                                        "success"
+                                    )
+                                },1000);
+
                             } else {
                                 swalWithBootstrapButtons.fire(
                                     "Error!",
@@ -274,11 +273,9 @@
                             }
                         },
                         complete: function(data) {
-                            if ($("#main-loader")) {
-                                $("#main-loader").hide();
-                            }
                             setTimeout(function() {
-                                location.reload();
+                                $("#main-loader").hide();
+                                window.location.reload();
                             }, 1000);
                         }
 

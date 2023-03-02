@@ -89,9 +89,9 @@
                         contentType: false,
                         processData: false,
                         beforeSend: function() {
-                            if ($("#loader")) {
-                                $("#loader").show();
-                            }
+                            // if ($("#loader")) {
+                                $("#main-loader").fadeIn(300);
+                            // }
                         },
                         success: function(res) {
                             if (res['success'] == "true" || res['success'] == true) {
@@ -109,8 +109,8 @@
                             }
                         },
                         complete: function(data) {
-                            if ($("#loader")) {
-                                $("#loader").hide();
+                            if ($("#main-loader")) {
+                                $("#main-loader").hide();
                             }
                             setTimeout(function() {
                                 location.reload();

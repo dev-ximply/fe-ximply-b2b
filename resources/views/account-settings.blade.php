@@ -157,10 +157,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md mb-2">
-                                        <input onchange="changeInfoProfile(this.value, 'phone')" type="text"
-                                            id="handphone" class="form-control bg-white text-dark"
+                                        {{-- <input onchange="changeInfoProfile(this.value, 'phone')" type="text" --}}
+                                        <input type="text" id="handphone" class="form-control bg-white text-dark"
                                             placeholder="Add your mobile phone number"
-                                            value="{{ $data['user']->handphone }}" readonly>
+                                            value="{{ $data['user']->handphone }}">
                                         <script>
                                             new PhoneInput(document.getElementById('handphone'));
                                         </script>
@@ -438,6 +438,8 @@
                         formData.append('user_id', id_user);
                         formData.append('company_name', company);
                         formData.append('industry', industrial_name);
+                        formData.append('company_contact', contact_company);
+                        formData.append('country', address);
 
                         $.ajax({
                             url: API_URL + "api/tenant/info/update",
@@ -476,6 +478,11 @@
                     formDataProfile.append('user_id', id_user);
                     formDataProfile.append('first_name', firstname);
                     formDataProfile.append('last_name', lastname);
+                    formDataProfile.append('handphone', admin_phone);
+
+                    for (var value of formDataProfile.values()) {
+                        console.log(value);
+                    }
 
                     $.ajax({
                         url: API_URL + "api/user/profile/update",
@@ -494,7 +501,6 @@
                                 if ($("#loader")) {
                                     $("#loader").hide();
                                 }
-
                                 setTimeout(function() {
                                     location.reload();
                                 }, 1000);

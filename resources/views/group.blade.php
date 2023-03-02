@@ -386,7 +386,7 @@
                             },
                             beforeSend: function() {
                                 if ($("#main-loader")) {
-                                    $("#main-loader").show();
+                                    $("#main-loader").fadeIn(300);
                                 }
                             },
                             success: function(response) {
@@ -402,7 +402,11 @@
                                 if (status === true) {
 
                                     setTimeout(function() {
-                                        window.location.reload(true);
+                                       Swal.fire(
+                                        'Success',
+                                        'Your request success.',
+                                        'success'
+                                       );
                                     }, 1000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
@@ -411,6 +415,10 @@
                                         "error"
                                     );
                                 }
+                            },
+                            complete:function(){
+                                $('#main-loader').hide();
+                                window.location.reload(true);
                             }
 
                         });

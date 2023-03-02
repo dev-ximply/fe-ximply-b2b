@@ -191,7 +191,7 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class=" mb-3" style="width: 100%; height:15px">
+                                        <div class="me-2 mb-3" style="width: 100%; height:15px">
                                             <select name="filter_member" id="filter_member" class="form-select text-dark"
                                                 style="font-size:9px; line-height:10px !important;border-radius:5px !important;">
                                                 @if (session()->get('is_superadmin') == false)
@@ -201,7 +201,7 @@
                                                 @endif
                                             </select>
                                         </div>
-                                        <div class="me-2 mb-3" style="width: 100%; height:15px">
+                                        <div class="mb-3" style="width: 100%; height:15px">
                                             <select name="filter_expense_type" id="filter_expense_type"
                                                 class="form-select text-dark"
                                                 style="font-size:9px; line-height:10px !important;border-radius:5px !important; ">
@@ -210,7 +210,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="d-flex  justify-content-end ms-auto  mt-1"
+                                    <div class="d-flex justify-content-end ms-auto  mt-1"
                                         style="width: 100%; max-width:65px">
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
@@ -376,11 +376,11 @@
             <div class="col-md">
                 <div class="card py-4 px-3" style="border-radius:5px">
                     <div class="d-flex justify-content-between">
-                        <div>
+                        <div class="text-dark ps-2" style="font-size:16px;font-weight:500">
                             Expense Data
                         </div>
                         <div>
-                            <button class="btn btn-secondary btn-sm" onclick="htmlTableToExcel('xlsx')">export
+                            <button class="btn text-white btn-sm" style="background:#19194b" onclick="htmlTableToExcel('xlsx')">export
                                 excel</button>
                         </div>
                     </div>
@@ -650,11 +650,11 @@
         });
         $.ajax({
             type: "GET",
-            url: API_URL + "api/v2/analytics/series/" + document.getElementById('user_id').value +
+            url: API_URL + "api/v2/analytics/series/" + USR_ID +
                 "?expense_type=" + FilterExpenseType +
                 "&start_date=" + FilterStartDate +
                 "&end_date=" + FilterEndDate +
-                "&group_id" + FilterGroup +
+                "&group_id=" + FilterGroup +
                 "&member_id=" + FilterMember,
             success: function(res) {
                 var time = [0];
@@ -768,7 +768,7 @@
                 "?expense_type=" + FilterExpenseType +
                 "&start_date=" + FilterStartDate +
                 "&end_date=" + FilterEndDate +
-                "&group_id" + FilterGroup +
+                "&group_id=" + FilterGroup +
                 "&member_id=" + FilterMember,
             success: function(res) {
                 var arrayPie = [];
@@ -965,34 +965,5 @@
                 $("#filter_member").empty();
             }
         });
-
-        // $(document).ready(function() {
-        //     $.ajaxSetup({
-        //         headers: {
-        //             "Authorization": "Bearer " + AUTH_TOKEN,
-        //             "Accept": "application/json"
-        //         }
-        //     });
-        //     $.ajax({
-        //         type: "GET",
-        //         url: API_URL + "api/spend/list/assigned/" + TENANT_CODE +
-        //             "?user_id=" + document.getElementById(
-        //                 'user_id').value,
-        //         success: function(res) {
-        //             if (res) {
-        //                 var response = res['data'];
-        //                 for (const obj of response) {
-        //                     var uid = obj.id;
-        //                     var uname = obj.full_name;
-        //                     $("#filter_member").append('<option value="' + uid +
-        //                         '"' + (uid == params.filter_member ? 'selected' :
-        //                             '') + '>' + uname + '</option>');
-        //                 }
-        //             } else {
-        //                 $("#filter_member").empty();
-        //             }
-        //         }
-        //     });
-        // });
     </script>
 @endsection
