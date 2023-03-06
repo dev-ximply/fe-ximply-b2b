@@ -174,9 +174,6 @@
                                     res['message'],
                                     "error"
                                 );
-                                // setTimeout(function() {
-                                //     window.location.reload(true);
-                                // }, 1000);
                             }
                         },
                         complete: function(data) {

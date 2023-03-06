@@ -75,12 +75,14 @@
         <input type="text" id="TenantCode" value="{{ Session::get('TenantCode') }}" hidden>
         <input type="text" id="config_api_url" value="{{ config('api.base_url') }}" hidden>
         <input type="text" id="config_storage_url" value="{{ config('storage.base_url') }}" hidden>
+        <input type="text" id="admin_session" value="{{ Session::get('is_superadmin') }}" hidden>
         <script>
             const USR_ID = document.getElementById('usr_id').value;
             const AUTH_TOKEN = document.getElementById('AuthToken').value;
             const TENANT_CODE = document.getElementById('TenantCode').value;
             const API_URL = document.getElementById('config_api_url').value;
             const STORAGE_URL = document.getElementById('config_storage_url').value;
+            const ADMIN_SESSION = document.getElementById('admin_session').value;
         </script>
     @else
         <script>
@@ -89,6 +91,7 @@
             const TENANT_CODE = "";
             const API_URL = "";
             const STORAGE_URL = "";
+            const ADMIN_SESSION = "";
         </script>
     @endif
 
@@ -100,8 +103,8 @@
     @include('partials.sidebar')
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         @include('partials.navbar')
-        <div class="container-fluid py-4">
-            <div style="min-height: 70vh" class="mb-4 position-relative">
+        <div class="container-fluid py-4" style="position:relative">
+            <div style="min-height: 70vh; height:100%" class="mb-5 position-relative">
                 @yield('container')
             </div>
             @include('partials.footer')

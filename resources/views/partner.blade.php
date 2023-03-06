@@ -136,94 +136,270 @@
     </div>
     <div class="col-12">
         <div class="card" style="border-radius: 5px">
-            <div class="table-responsive">
-                <table class="table  text-dark">
-                    <thead>
-                        <tr>
-                            <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">Company Name
-                            </th>
-                            <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
-                                Contact Name
-                            </th>
-                            <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
-                                Contact Company
-                            </th>
-                            <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
-                                Group
-                            </th>
-                            <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
-                                Added By
-                            </th>
-                            <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
-                                Created
-                            </th>
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-3">
+                    <div class="col-md-2">
+                        <select name="select_group" id="select_group" class="form-select">
+                            <option value="">Filter Group</option>
+                            @foreach ($data['list_groups'] as $item)
+                                <option value="{{ $item->id }}" class="text-dark">{{ $item->group_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table  text-dark">
+                        <thead>
+                            <tr>
+                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">Company
+                                    Name
+                                </th>
+                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+                                    Contact Name
+                                </th>
+                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+                                    Contact Company
+                                </th>
+                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+                                    Group
+                                </th>
+                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+                                    Added By
+                                </th>
+                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+                                    Created
+                                </th>
 
-                            <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (count($data['t_partner']) > 0)
-                            @foreach ($data['t_partner'] as $item)
-                                <tr class="">
-                                    <td class="text-sm" data-label="Company Name" style="color: #000000">
-                                        {{ $item->company_name }}
-                                    </td>
-                                    <td class="text-sm" data-label="Contact Name" style="color: #000000">
-                                        {{ $item->contact_name != '' ? $item->contact_name : '-' }}
-                                    </td>
-                                    <td class="text-sm" data-label="Contact Info" style="color: #000000">
-                                        {{ $item->email }}
-                                        <br>
-                                        {{ $item->handphone }}
-                                    </td>
-                                    <td class="text-sm" data-label="Contact Info" style="color: #000000">
-                                        {{ $item->group_name }}
-                                    </td>
-                                    <td class="text-sm" data-label="Contact Info" style="color: #000000">
-                                        {{ $item->created_by }}
-                                    </td>
-                                    <td class="text-sm" data-label="Contact Info" style="color: #000000">
-                                        {{-- {{ Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
-                                        {{ $item->created_date }}
+                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            @if (count($data['t_partner']) > 0)
+                                @foreach ($data['t_partner'] as $item)
+                                    <tr class="">
+                                        <td class="text-sm" data-label="Company Name" style="color: #000000">
+                                            {{ $item->company_name }}
+                                        </td>
+                                        <td class="text-sm" data-label="Contact Name" style="color: #000000">
+                                            {{ $item->contact_name != '' ? $item->contact_name : '-' }}
+                                        </td>
+                                        <td class="text-sm" data-label="Contact Info" style="color: #000000">
+                                            {{ $item->email }}
+                                            <br>
+                                            {{ $item->handphone }}
+                                        </td>
+                                        <td class="text-sm" data-label="Contact Info" style="color: #000000">
+                                            {{ $item->group_name }}
+                                        </td>
+                                        <td class="text-sm" data-label="Contact Info" style="color: #000000">
+                                            {{ $item->created_by }}
+                                        </td>
+                                        <td class="text-sm" data-label="Contact Info" style="color: #000000">
+                                            {{-- {{ Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
+                                            {{ $item->created_date }}
 
-                                    </td>
-                                    <td class="text-sm d-flex justify-content-md-center justify-content-between"
-                                        data-label="Action">
-                                        <button type="button"
-                                            class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
-                                            data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                            data-bs-target="#editModalPartner"
-                                            onclick="getDataPartner('{{ $item->id }}','{{ $item->company_name }}', '{{ $item->contact_name }}', '{{ $item->email }}', '{{ $item->handphone }}')"
-                                            style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;">
-                                            Edit
-                                        </button>
-                                        <button
-                                            class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
-                                            data-bs-title="View Your Expense Member" data-id="{{ $item->id }}"
-                                            onclick="deletePartner('{{ $item->id }}')"
-                                            style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                            onclick="">
-                                            Delete
-                                        </button>
+                                        </td>
+                                        <td class="text-sm d-flex justify-content-md-center justify-content-between"
+                                            data-label="Action">
+                                            <button type="button"
+                                                class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
+                                                data-bs-title="View Your Expense Member" data-bs-toggle="modal"
+                                                data-bs-target="#editModalPartner"
+                                                onclick="getDataPartner('{{ $item->id }}','{{ $item->company_name }}', '{{ $item->contact_name }}', '{{ $item->email }}', '{{ $item->handphone }}')"
+                                                style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;">
+                                                Edit
+                                            </button>
+                                            <button
+                                                class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
+                                                data-bs-title="View Your Expense Member" data-id="{{ $item->id }}"
+                                                onclick="deletePartner('{{ $item->id }}')"
+                                                style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                onclick="">
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="7" class="  " style="font-size: 15px; font-weight:700">
+                                        <div class="text-center d-flex align-items-center justify-content-center">
+                                            Data Empty
+                                        </div>
                                     </td>
                                 </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="7" class="  " style="font-size: 15px; font-weight:700">
-                                    <div class="text-center d-flex align-items-center justify-content-center">
-                                        Data Empty
-                                    </div>
-                                </td>
-                            </tr>
-                        @endif
-                    </tbody>
-                </table>
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // $(document).ready(function() {
+        //     var urlSearch = "";
+        //     $('#select_group').on('change', function() {
+        //         var group_id = $('#select_group').val();
+        //         urlSearch = API_URL + "api/partner/list/" + TENANT_CODE + "?user_id=" + USR_ID;
+        //         new getGroupPartner(urlSearch);
+        //     });
+
+        //     function getGroupPartner(urlSearch) {
+        //         $('#tableBody').html("");
+        //         $.ajaxSetup({
+        //             headers: {
+        //                 "Authorization": "Bearer " + AUTH_TOKEN,
+        //                 "Accept": "application/json"
+        //             }
+        //         });
+
+        //         $.ajax({
+        //             type: "GET",
+        //             url: urlSearch,
+        //             beforeSend: function() {
+        //                 $('#main-loader').show();
+        //             },
+        //             success: function(res) {
+        //                 if (res) {
+        //                     console.log('tess', res);
+        //                     var response = res['data'];
+        //                     var tableOut = "";
+
+        //                     for (const obj of response) {
+        //                         tableOut += '<tr class="">' +
+        //                             '<td class="text-sm" data-label="Company Name" style="color: #000000">' +
+        //                             obj.company_name +
+        //                             '</td>'
+        //                         tableOut += '<tr class="">' +
+        //                             '<td class="text-sm" data-label="Contact Name" style="color: #000000">' +
+        //                             obj.contact_name +
+        //                             '</td>'
+
+        //                         tableOut += '<tr class="">' +
+        //                             '<td class="text-sm" data-label="Contact Info" style="color: #000000">' +
+        //                             obj.email +
+        //                             '<br>' +
+        //                             obj.handphone +
+        //                             '</td>'
+        //                         tableOut += '<tr class="">' +
+        //                             '<td class="text-sm" data-label="Contact Info" style="color: #000000">' +
+        //                             obj.group_name +
+        //                             '</td>'
+        //                         tableOut += '<tr class="">' +
+        //                             '<td class="text-sm" data-label="Contact Info" style="color: #000000">' +
+        //                             obj.created_by +
+        //                             '</td>'
+
+        //                         tableOut += '<tr class="">' +
+        //                             '<td class="text-sm" data-label="Contact Info" style="color: #000000">' +
+        //                             obj.created_date +
+        //                             '</td>'
+        //                     }
+        //                     $("#tableBody").append(tableOut);
+
+        //                 } else {
+        //                     $("tableBody").empty();
+        //                 }
+        //             }
+        //         };)
+        //     }
+        // });
+
+
+        $(document).ready(function() {
+            var urlSearch = "";
+            $('#select_group').on('change', function() {
+                var group_id = $('#select_group').val();
+                urlSearch = API_URL + "api/partner/list/" + TENANT_CODE + "/web" + "?user_id=" + USR_ID + "&group_id=" + group_id;
+                new getDataGroup(urlSearch);
+            });
+            // });
+
+            function getDataGroup(urlSearch) {
+                $("#tableBody").html("");
+                $.ajaxSetup({
+                    headers: {
+                        "Authorization": "Bearer " + AUTH_TOKEN,
+                        "Accept": "application/json"
+                    }
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: urlSearch,
+                    beforeSend: function() {
+                        $("#main-loader").show();
+                    },
+                    success: function(res) {
+                        if (res) {
+                            console.log(res);
+                            var response = res['data'];
+                            var tableOut = "";
+                            var empty = "Empty";
+                            for (const obj of response) {
+                                tableOut += '<tr class="">' +
+                                    '<td class="text-sm" data-label="Company Name" style="color: #000000">' +
+                                    obj.company_name +
+                                    '</td>'
+                                tableOut += 
+                                    '<td class="text-sm" data-label="Contact Name" style="color: #000000">' +
+                                    obj.contact_name +
+                                    '</td>'
+
+                                tableOut += 
+                                    '<td class="text-sm" data-label="Contact Info" style="color: #000000">' +
+                                    obj.email +
+                                    '<br>' +
+                                    obj.handphone +
+                                    '</td>'
+                                tableOut += 
+                                    '<td class="text-sm" data-label="Contact Info" style="color: #000000">' +
+                                    obj.group_name +
+                                    '</td>'
+                                tableOut += 
+                                    '<td class="text-sm" data-label="Contact Info" style="color: #000000">' +
+                                    obj.created_by +
+                                    '</td>'
+
+                                tableOut += 
+                                    '<td class="text-sm" data-label="Contact Info" style="color: #000000">' +
+                                    obj.created_date +
+                                    '</td>'
+                                
+                                tableOut += 
+                                '<td class="text-sm d-flex justify-content-md-center justify-content-between" data-label="Action">'+
+                                            '<button type="button" class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"'+
+                                                'data-bs-title="View Your Expense Member" data-bs-toggle="modal"'+
+                                                'data-bs-target="#editModalPartner"'+
+                                                'onclick="getDataPartner(`' + obj.id  + '`,`' + obj.company_name + '`,`' + obj.contact_name + '`,`' + obj.email + '`,`' + obj.handphone + '`)"'+
+                                                'style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;">'+
+                                                'Edit'+
+                                            '</button>'+
+                                            '<button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"'+
+                                                'data-bs-title="View Your Expense Member"'+
+                                                'onclick="deletePartner(`' + obj.id + '`)"'+
+                                                'style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"'+
+                                                'onclick="">'+
+                                                'Delete'+
+                                            '</button>'+
+                                        '</td>'
+                            }
+                            $("#tableBody").append(tableOut);
+                        } else {
+                            $("#tableBody").append(empty);
+                        }
+
+                    },
+                    complete: function() {
+                        $('#main-loader').hide();
+                    }
+                });
+            }
+        });
+    </script>
     <script>
         function getDataPartner(id, company_name, contact_name, email, handphone) {
             document.getElementById('pertner_id').value = id;

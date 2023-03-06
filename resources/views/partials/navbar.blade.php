@@ -655,7 +655,11 @@
                         document.getElementById('navbar_profilepict').src = STORAGE_URL + response[
                             'profile_picture'];
                     }
-                    document.getElementById('navbar_group_Name').innerHTML = response['group_name'];
+                    if(ADMIN_SESSION == true){
+                        document.getElementById('navbar_group_Name').innerHTML = " " + response['group_name'];
+                    }else{
+                        document.getElementById('navbar_group_Name').innerHTML =  "Group - " + response['group_name'];
+                    }
                     $subscription_type = response['subscription_type'];
                     if ($subscription_type == "trial") {
                         document.getElementById('show_hide_subs').style.display = "block";

@@ -147,8 +147,6 @@
                     $.ajax({
                         type: "PUT",
                         url: "{{ route('employees.update') }}",
-                        contentType: false,
-                        processData: false,
                         data: {
                             user_id: userId,
                             first_name: firstNameId,
@@ -159,42 +157,36 @@
                             role_id: roleId,
                         },
                         beforeSend: function() {
-                            $("#main-loader").show();
+                            if ($("#main-loader")) {
+                                $("#main-loader").show();
+                            }
                         },
-                        success: function(res) {
-                            if (res['success'] == "true" || res['success'] == true) {
-
-                                // setTimeout(function() {
+                        success: function(response) {
+                            console.log(response);
+                            const {
+                                success,
+                                status,
+                                message
+                            } = response;
+                            if (success === true) {
+                                setTimeout(function() {
                                     Swal.fire(
-                                        "Success!",
-                                        res["message"],
+                                        "Success",
+                                        "Your request success.",
                                         "success"
-                                    );
-
-                                // }, 1000);
-                                // window.location.reload(true);
+                                    )
+                                    window.location.reload(true);
+                                }, 1000);
                             } else {
-                                Swal.fire(
-                                    "Error!",
-                                    res["message"],
+                                swalWithBootstrapButtons.fire(
+                                    "Failed",
+                                    message,
                                     "error"
                                 );
-                                // setTimeout(function() {
-                                //     window.location.reload(true);
-                                // }, 1000);
                             }
                         },
-                        complete: function(data) {
+                        complete:function(){
                             $("#main-loader").hide();
-                            if (data.status != 200) {
-                                Swal.fire(
-                                    "opps!",
-                                    data.message,
-                                    "error"
-                                );
-                                console.log(data);
-                            }
-
                         }
                     });
 

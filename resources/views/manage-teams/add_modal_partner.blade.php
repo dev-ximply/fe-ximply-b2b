@@ -168,7 +168,6 @@
                             console.log(response)
 
                             if (success == true) {
-
                                 setTimeout(function() {
                                     Swal.fire(
                                         'Success',
