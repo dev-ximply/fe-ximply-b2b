@@ -254,43 +254,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    @if (session()->get('is_superadmin') == true)
-                        <div class="col-md mb-3">
-                            <div class="coloumn_top_3">
-                                <p style="font-weight: 500; font-size:16px; color:black">Top 3 Expense</p>
-                                @foreach ($data['top_user_expense'] as $topUser)
-                                    <div class="d-flex justify-content-between align-items-center">
-
-                                        <div class="d-flex align-items-center">
-
-                                            <div class="mt-2" style="">
-                                                @if ($topUser->profile_picture == true)
-                                                    <img src="{{ config('storage.base_url') . $topUser->profile_picture }}"
-                                                        class="img-fluid"
-                                                        style="border:1px solid gray; border-radius:50%; width:40px; height:40px"
-                                                        alt="" id="imgUser">
-                                                @else
-                                                    <img src="{{ asset('img/team-2.jpg') }}" class="img-fluid"
-                                                        style="border:1px solid gray; border-radius:50%; width:40px"
-                                                        alt="" id="imgUser">
-                                                @endif
-                                            </div>
-                                            <div class="ms-3">
-                                                <span class="text-dark text-sm"
-                                                    id="full_Name">{{ $topUser->full_name }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md mt-2 text-end">
-                                            <span style="font-size:12px;">Total Amount
-                                                <p class="text-sm text-dark" id="amountUser" style="font-weight:600">
-                                                    {{ number_format($topUser->total_amount, 2) }}</p>
-                                            </span>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    @else
+                    @if (session()->get('is_superadmin') == false)
                         <div class="col-md-6 mb-3">
                             <div class="coloumn_top_3">
                                 <p style="font-weight: 500; font-size:16px; color:black">Top 3 Expense</p>
@@ -339,7 +303,7 @@
                                             <th class="text-dark" style="font-size:13px;font-weight:600">Merchant Name
                                             </th>
                                             <th class="text-dark" style="font-size:13px;font-weight:600">Visited</th>
-                                            <th class="text-dark" style="font-size:13px;font-weight:600">Total Amont</th>
+                                            <th class="text-dark" style="font-size:13px;font-weight:600">Total Amount</th>
                                         </thead>
                                         <tbody>
                                             @foreach ($data['top_merchant_expense'] as $topMerchant)
@@ -456,7 +420,7 @@
                         @if (session()->get('is_superadmin') == true)
                             <div class="coloumn__recent__expense" style="margin-top: 11px; border-radius:5px">
                                 <div class="d-flex justify-content-between">
-                                    <p style="font-weight: 500; font-size:13px">Recent Expense</p>
+                                    <p style="font-weight: 500; font-size:13px">Your Recent Expense</p>
                                     <div class="ms-auto">
                                         <span class="text-sm mb-0 text-capitalize font-weight-normal">
                                             <a
@@ -512,7 +476,7 @@
                         @else
                             <div class="coloumn__recent__expenses" style="margin-top: 10px; border-radius:5px">
                                 <div class="d-flex justify-content-between">
-                                    <p style="font-weight: 500; font-size:13px">Recent Expense</p>
+                                    <p style="font-weight: 500; font-size:13px">Your Recent Expense</p>
                                     <div class="ms-auto">
                                         <span class="text-sm mb-0 text-capitalize font-weight-normal">
                                             <a
@@ -573,7 +537,7 @@
                             <div class="coloumn__recent__expense_group"
                                 style="margin-top: 11px; border-radius:5px; max-hight:200px; overflow-y:scroll">
                                 <div class="d-flex justify-content-between">
-                                    <p style="font-weight: 500; font-size:13px">Recent Expense Group</p>
+                                    <p style="font-weight: 500; font-size:13px">Recent Expense Team</p>
                                     <div class="ms-auto">
                                         <span class="text-sm mb-0 text-capitalize font-weight-normal">
                                             <a
@@ -665,7 +629,7 @@
                             <div class="coloumn__recent__expense_group_manager"
                                 style="margin-top: 11px; border-radius:5px; max-hight:200px; overflow-y:scroll">
                                 <div class="d-flex justify-content-between">
-                                    <p style="font-weight: 500; font-size:13px">Recent Expense Group</p>
+                                    <p style="font-weight: 500; font-size:13px">Recent Expense Team</p>
                                     <div class="ms-auto">
                                         <span class="text-sm mb-0 text-capitalize font-weight-normal">
                                             <a
@@ -757,9 +721,9 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="row">
-            @if (session()->get('is_superadmin') == true)
-                <div class="col-md mb-3">
+        @if (session()->get('is_superadmin') == true)
+            <div class="row">
+                <div class="col-md-4 mb-3">
                     <div class="coloumn_top_3">
                         <p style="font-weight: 500; font-size:16px; color:black">Top 3 Expense</p>
                         @foreach ($data['top_user_expense'] as $topUser)
@@ -793,45 +757,7 @@
                         @endforeach
                     </div>
                 </div>
-            @else
-                <div class="col-md mb-3">
-                    <div class="coloumn_top_3">
-                        <p style="font-weight: 500; font-size:16px; color:black">Top 3 Expense</p>
-                        @foreach ($data['top_user_expense'] as $topUser)
-                            <div class="d-flex justify-content-between align-items-center">
-
-                                <div class="d-flex align-items-center">
-
-                                    <div class="mt-2" style="">
-                                        @if ($topUser->profile_picture == true)
-                                            <img src="{{ config('storage.base_url') . $topUser->profile_picture }}"
-                                                class="img-fluid"
-                                                style="border:1px solid gray; border-radius:50%; width:40px; height:40px"
-                                                alt="" id="imgUser">
-                                        @else
-                                            <img src="{{ asset('img/team-2.jpg') }}" class="img-fluid"
-                                                style="border:1px solid gray; border-radius:50%; width:40px"
-                                                alt="" id="imgUser">
-                                        @endif
-                                    </div>
-                                    <div class="ms-3">
-                                        <span class="text-dark text-sm" id="full_Name">{{ $topUser->full_name }}</span>
-                                    </div>
-                                </div>
-                                <div class="col-md mt-2 text-end">
-                                    <span style="font-size:12px;">Total Amount
-                                        <p class="text-sm text-dark" id="amountUser" style="font-weight:600">
-                                            {{ number_format($topUser->total_amount, 2) }}</p>
-                                    </span>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
-
-            @if (session()->get('is_superadmin') == true)
-                <div class="col-md mb-3">
+                <div class="col-md-4 mb-3">
                     <div class="coloumn_top_3">
                         <p style="font-weight: 500; font-size:16px; color:#000000">Top 3 Group Expense</p>
                         <figure class="highcharts-figure">
@@ -839,36 +765,53 @@
                         </figure>
                     </div>
                 </div>
-<<<<<<< HEAD
-            @endif
-            <div class="col-md-4 mb-3">
-                <div class="coloumn_top_3">
-                    <p style="font-weight: 500; font-size:16px;color:#000000">Most Visited Merchants</p>
-                    @php
-                        $num = 1;
-                    @endphp
-                    <div class="table-responsive" style="max-height:200px;overflow-y:auto">
-                        <table class="table table-borderless">
-=======
-            </div>
-        </div>
-    </div>
-    @if (session()->get('is_superadmin') == true)
-        <div class="row">
-            <div class="col-md">
-                <div class="card py-4 px-3" style="border-radius:5px">
-                    <div class="d-flex justify-content-between">
-                        <div class="text-dark ps-2" style="font-size:16px;font-weight:500">
-                            Expense Data
+                <div class="col-md-4 mb-3">
+                    <div class="coloumn_top_3">
+                        <p style="font-weight: 500; font-size:16px;color:#000000">Most Visited Merchants</p>
+                        @php
+                            $num = 1;
+                        @endphp
+                        <div class="table-responsive" style="max-height:200px;overflow-y:auto">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <th class="text-dark" style="font-size:13px;font-weight:600">No</th>
+                                    <th class="text-dark ps-2" style="font-size:13px;font-weight:600">Merchant Name
+                                    </th>
+                                    <th class="text-dark" style="font-size:13px;font-weight:600">Visited</th>
+                                    <th class="text-dark" style="font-size:13px;font-weight:600">Total Amount</th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($data['top_merchant_expense'] as $topMerchant)
+                                        <tr>
+                                            <td class="align-middle">
+                                                <div class="d-flex justify-content-center text-dark"
+                                                    style="font-size:13px;">
+                                                    {{ $num++ }}
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="d-flex justify-content-start text-start text-dark"
+                                                    style="font-size:13px;">
+                                                    {{ $topMerchant->merchant }}
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="d-flex justify-content-center text-dark"
+                                                    style="font-size:13px; font-weight:600">
+                                                    {{ $topMerchant->count }}
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="d-flex justify-content-center text-dark"
+                                                    style="font-size:13px;">Rp.
+                                                    {{ number_format($topMerchant->total_amount, 2) }}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                        <div>
-                            <button class="btn text-white btn-sm" style="background:#19194b" onclick="htmlTableToExcel('xlsx')">export
-                                excel</button>
-                        </div>
-                    </div>
-                    <div class="table-responsive" style="max-height:400px; overflow-y:auto">
-                        <table id="reportsToExcel" class="table align-items-center mb-0">
->>>>>>> d166856baea3226e853befe9c9edefaa67751ae4
                             <thead>
                                 <th class="text-dark" style="font-size:13px;font-weight:600">No</th>
                                 <th class="text-dark" style="font-size:13px;font-weight:600">Merchant Name</th>
@@ -907,7 +850,8 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        @endif
+
         @if (session()->get('is_superadmin') == true)
             <div class="row">
                 <div class="col-md">
