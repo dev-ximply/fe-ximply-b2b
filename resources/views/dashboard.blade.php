@@ -303,7 +303,7 @@
                                             <th class="text-dark" style="font-size:13px;font-weight:600">Merchant Name
                                             </th>
                                             <th class="text-dark" style="font-size:13px;font-weight:600">Visited</th>
-                                            <th class="text-dark" style="font-size:13px;font-weight:600">Total Amont</th>
+                                            <th class="text-dark" style="font-size:13px;font-weight:600">Total Amount</th>
                                         </thead>
                                         <tbody>
                                             @foreach ($data['top_merchant_expense'] as $topMerchant)
