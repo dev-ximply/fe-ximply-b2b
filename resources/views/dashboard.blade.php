@@ -851,7 +851,6 @@
                             </div>
                         @endforeach
                     </div>
-<<<<<<< HEAD
                 </div>
             @else
                 <div class="col-md mb-3">
@@ -908,10 +907,6 @@
                     @endphp
                     <div class="table-responsive" style="max-height:200px;overflow-y:auto">
                         <table class="table table-borderless">
-=======
-                    <div class="table-responsive" style="max-height:400px; overflow-y:auto">
-                        <table id="reportsToExcel" class="table align-items-center mb-0">
->>>>>>> d166856baea3226e853befe9c9edefaa67751ae4
 >>>>>>> a8d48a156f670885e499b03ba27d79914ec5ab39
                             <thead>
                                 <th class="text-dark" style="font-size:13px;font-weight:600">No</th>
