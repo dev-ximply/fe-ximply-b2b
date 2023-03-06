@@ -6,6 +6,7 @@
     @include('approval.popUpimage')
     @include('expenses.view-expense-detail')
 
+
     <div class="row">
         <div class="col-12">
             <div class="row mb-4 mx-1">
@@ -33,10 +34,21 @@
                         <div class="d-flex mb-4 justify-content-start justify-content-md-end">
                             <form id="formSearch" action="" style="z-index: 0" onsubmit="handleChangeStatus(event)">
                                 <div class="row">
+                                    {{-- <div class="col-md mt-2">
+                                       
+                                        <input type="date" class="form-control rounded text-secondary px-2"
+                                            style="font-size:12px; height: 35px; width: 180px; background:#fbfbfb">
+                                    </div>
                                     <div class="col-md mt-2">
-                                        <select name="statusType"  id="status"
-                                            class="rounded border border-secondary text-secondary"
-                                            style="font-size:12px; height: 25px; width: 150px">
+                                        
+                                        <input type="date" class="form-control rounded text-secondary px-2"
+                                            style="font-size:12px; height: 35px; width: 180px; background:#fbfbfb">
+                                    </div> --}}
+                                    <div class="col-md mt-2">
+                                        {{-- <select name="statusType" id="" class="text-secondary form-control d-flex align-items-center"
+                                            style="font-size:12px; height: 35px; width:180px; min-width:200px; border-radius:8px;background:#fbfbfb"> --}}
+                                        <select name="statusType" id="status" class="text-secondary "
+                                            style="font-size:12px; height: 30px; width:120px; max-width:120px; border:1px solid #efefef; border-radius:8px;background:#fbfbfb">
                                             <option value="">Status</option>
                                             <option
                                                 {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
@@ -52,6 +64,15 @@
                                                 value="done">Done</option>
                                         </select>
                                     </div>
+                                    {{-- <div class="col-md mt-2 position-relative">
+                                        <input type="text" class="px-2 border" placeholder="Search member..."
+                                            style="width:180px; border-radius:8px; height:35px; background:#fbfbfb;font-size:12px">
+                                        <div class="position-absolute" style="top:5px;right:25px">
+                                            <button type="submit" id="filter_button" class="" style="background:transparent">
+                                                <i class="fa-solid fa-magnifying-glass" style="font-size:15px;color:gray"></i>
+                                            </button>
+                                        </div>
+                                    </div> --}}
                                     {{-- <div class="col-md mt-2">
                                         <button type="submit" value="submit"
                                             style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
@@ -76,6 +97,9 @@
                                         Expenses
                                     </th>
                                     <th class="text-uppercase  text-xxs font-weight-bolder opacity-9" style="color:black">
+                                        Submit Date
+                                    </th>
+                                    <th class="text-uppercase  text-xxs font-weight-bolder opacity-9" style="color:black">
                                         Expenses
                                         Type</th>
                                     <th class="text-uppercase  text-xxs font-weight-bolder opacity-9" style="color:black">
@@ -93,12 +117,12 @@
                                     <th class="text-uppercase  text-xxs font-weight-bolder opacity-9" style="color:black">
                                         Status
                                     </th>
-                                    <th class="text-uppercase  text-xxs text-start ps-5 font-weight-bolder opacity-9"
+                                    <th class="text-uppercase  text-xxs text-start ps-3 font-weight-bolder opacity-9"
                                         style="color:black">Action
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody  id="tableBody">
+                            <tbody id="tableBody">
                                 @foreach ($data['expense_approval'] as $expense_approval)
                                     <tr>
                                         <td class="align-middle text-start text-capitalize text-xs">
@@ -123,6 +147,12 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </td>
+                                        <td
+                                            class="ps-4 align-middle text-start text-xs text-capitalize text-dark text-break text-wrap">
+                                            {{-- {{ $expense_approval->created_at }} --}}
+                                            {{ Carbon\Carbon::parse($expense_approval->created_at)->format('Y-m-d') }}
+
                                         </td>
                                         <td class="ps-4 align-middle text-start text-xs text-capitalize text-dark">
                                             {{ $expense_approval->category_name }}
@@ -153,7 +183,7 @@
                                                 <span class="badge badge-secondary badge-xs">unknown</span>
                                             @endif
                                         </td>
-                                        <td class="ps-4 text-sm align-middle text-center">
+                                        <td class="ps-md-2 text-sm align-middle text-center">
                                             @if ($expense_approval->status == 'pending')
                                                 <div class="d-flex flex-row pt-3 d-flex justify-content-center">
                                                     <button
@@ -191,7 +221,7 @@
                                                     </button>
                                                 </div>
                                             @else
-                                                <div class="pt-3 d-flex justify-content-center">
+                                                <div class="ps-md-0 pt-3 d-flex justify-content-start">
                                                     <button
                                                         onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category_name }}', '{{ $expense_approval->sub_category_name }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose_name }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->note }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
                                                         data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"
@@ -400,35 +430,45 @@
                                 // console.log(totalAmount);
                                 tableOut += '<tr>' +
                                     '<td class="align-middle text-start text-capitalize text-xs">' +
-                                    '<div class="d-flex">' + '<img  src="' + STORAGE_URL + obj.receipt_picture_directory + '"' +
+                                    '<div class="d-flex">' + '<img  src="' + STORAGE_URL + obj
+                                    .receipt_picture_directory + '"' +
                                     'class="img-fluid ms-3" alt="receipt" style="width: 50px">' +
                                     '<div class="ms-3 my-auto show-modal">' + '<div>' +
-                                    '<span class="text-xs text-dark text-bold">' +  obj.sub_category_name + '</span>' +  '</div>' +   '<div>' +
-                                    '<span class="text-xs text-dark">' +  obj.full_name + '</span>' + '</div>' + '<div>' +
-                                    '<span class="text-xxs text-dark">' +  obj.date +  '</span>' +  '</div>' + '</div>' + '</div>' + '</td>';
+                                    '<span class="text-xs text-dark text-bold">' + obj
+                                    .sub_category_name + '</span>' + '</div>' + '<div>' +
+                                    '<span class="text-xs text-dark">' + obj.full_name + '</span>' +
+                                    '</div>' + '<div>' +
+                                    '<span class="text-xxs text-dark">' + obj.date + '</span>' +
+                                    '</div>' + '</div>' + '</div>' + '</td>';
+
+                                tableOut += 
+                                        '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark text-break text-wrap">'+
+                                            obj.created_at +  
+
+                                        '</td>'
 
                                 tableOut +=
                                     '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark">' +
-                                                 obj.category_name +
-                                            '</td>';
+                                    obj.category_name +
+                                    '</td>';
                                 tableOut +=
                                     '<td class="ps-4 align-middle text-start text-xs text-dark">' +
-                                                obj.purpose_name +
-                                            '</td>';
+                                    obj.purpose_name +
+                                    '</td>';
                                 tableOut +=
                                     '<td class="ps-4 align-middle text-start text-xs text-dark text-break text-wrap">' +
-                                                obj.merchant +
-                                            '</td>';
+                                    obj.merchant +
+                                    '</td>';
                                 tableOut +=
                                     '<td class="ps-4 align-middle text-start text-xs text-dark">' +
                                     obj.total_amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g,
                                         "$1,") +
-                                            '</td>';
+                                    '</td>';
 
                                 tableOut +=
                                     '<td class="ps-4 align-middle text-start text-xs text-dark">' +
-                                                obj.note +
-                                            '</td>';
+                                    obj.note +
+                                    '</td>';
                                 if (obj.status == 'pending') {
                                     tableOut += '<td class="ps-4 align-middle text-start text-xs">' +
                                         '<span class="badge badge-xs d-flex justify-content-center"' +
@@ -452,9 +492,16 @@
 
 
                                 if (obj.status == 'pending') {
-                                    tableOut += '<td class="ps-4 text-sm align-middle text-center">' +
+                                    tableOut += '<td class="ps-2 text-sm align-middle text-center">' +
                                         '<div class="d-flex flex-row pt-3 d-flex justify-content-center">' +
-                                        '<button onclick="getExpenseData(`' + obj.receipt_picture_directory + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`, `' + obj.total_amount + '`,`' + obj.location + '`,`' + obj.category_name + '`,`' + obj.sub_category_name + '`,`' + obj.client_name + '`,`' + obj.purpose_name + '`,`' + obj.expense_of + '`,`' + obj.note + '`,`' + obj.status + '`,`' + obj.approval_id + '`)"' +
+                                        '<button onclick="getExpenseData(`' + obj
+                                    .receipt_picture_directory + '`,`' + obj
+                                    .additional_picture_directory + '`,`' + obj.receipt_date +
+                                    '`,`' + obj.merchant + '`, `' + obj.total_amount + '`,`' + obj
+                                    .location + '`,`' + obj.category_name + '`,`' + obj
+                                    .sub_category_name + '`,`' + obj.client_name + '`,`' + obj
+                                    .purpose_name + '`,`' + obj.expense_of + '`,`' + obj.note +
+                                    '`,`' + obj.status + '`,`' + obj.approval_id + '`)"' +
                                         'class="mx-1 btn text-white d-flex align-items-center d-flex justify-content-center"' +
                                         'data-bs-original-title="approve" data-toggle="tooltip"' +
                                         'data-placement="left" title="Review"' +
@@ -463,7 +510,8 @@
                                         '<i class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>' +
                                         '<span style="font-size: 0.6em">Review</span>' +
                                         '</button>' +
-                                        '<button onclick="approvalDecision(`' + USR_ID + '`,`' + obj.approval_id + '`,` approved`)"' +
+                                        '<button onclick="approvalDecision(`' + USR_ID + '`,`' + obj
+                                    .approval_id + '`,` approved`)"' +
                                         'data-bs-toggle="tooltip"' +
                                         'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"' +
                                         'data-bs-original-title="Approve" data-toggle="tooltip"' +
@@ -472,7 +520,8 @@
                                         '<i class="fas fa-circle-check text-white text-md me-1"></i>' +
                                         '<span style="font-size: 0.6em">Approve</span>' +
                                         '</button>' +
-                                        '<button onclick="approvalDecision(`' + USR_ID + '`,' + '`' + obj.approval_id + '`,`rejected`)"' +
+                                        '<button onclick="approvalDecision(`' + USR_ID + '`,' + '`' +
+                                    obj.approval_id + '`,`rejected`)"' +
                                         'data-bs-toggle="tooltip"' +
                                         // '<button onclick="getExpenseData(' + '`' + expense.id + '`' + ')"' +
                                         'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"' +
@@ -485,9 +534,16 @@
                                         '</div>' +
                                         '</td>'
                                 } else {
-                                    tableOut += '<td class="ps-4 text-sm align-middle text-center">' +
+                                    tableOut += '<td class="ps-2 text-sm align-middle text-center">' +
                                         '<div class="pt-3 d-flex justify-content-center">' +
-                                        '<button onclick="getExpenseData(`' + obj.receipt_picture_directory + '`,`' + obj.additional_picture_directory + '`,`' + obj.receipt_date + '`,`' + obj.merchant + '`,`' + obj.total_amount + '`,`' + obj.location + '`,`' + obj.category_name + '`,`' + obj.sub_category_name + '`,`' + obj.client_name + '`,`' + obj.purpose_name + '`,`' + obj.expense_of + '`,`' + obj.note + '`,`' + obj.status + '`,`' + obj.approval_id + '`)"' +
+                                        '<button onclick="getExpenseData(`' + obj
+                                    .receipt_picture_directory + '`,`' + obj
+                                    .additional_picture_directory + '`,`' + obj.receipt_date +
+                                    '`,`' + obj.merchant + '`,`' + obj.total_amount + '`,`' + obj
+                                    .location + '`,`' + obj.category_name + '`,`' + obj
+                                    .sub_category_name + '`,`' + obj.client_name + '`,`' + obj
+                                    .purpose_name + '`,`' + obj.expense_of + '`,`' + obj.note +
+                                    '`,`' + obj.status + '`,`' + obj.approval_id + '`)"' +
                                         'data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"' +
                                         'class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"' +
                                         'style="width: 60px; height:25px; background-color:#FFCF23">' +

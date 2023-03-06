@@ -1,5 +1,5 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs  border-0 border-radius-xl  fixed-start" id=""
-    style="border-radius: 0 !important; background:#19194b">
+    style="border-radius: 0 !important; background:white">
 
     <div class="sidenav-header d-flex justify-content-center">
 
@@ -8,7 +8,7 @@
 
         <a class="navbar-brand m-0" href="/">
 
-            <img src="{{ asset('img/logos/logo-new/ximply-white.png') }}" class="navbar-brand-img" alt="main_logo">
+            <img src="{{ asset('img/logos/logo-new/logo-companyy.png') }}" class="navbar-brand-img" alt="main_logo">
 
         </a>
 
@@ -55,7 +55,7 @@
                     </div>
 
                     <span
-                        class="nav-link-text ms-1 {{ $section == 'dashboard' ? 'text-orange' : 'text-white' }}">Dashboard</span>
+                        class="nav-link-text ms-1 {{ $section == 'dashboard' ? 'text-orange' : 'text-purple' }}">Dashboard</span>
 
                 </a>
 
@@ -79,7 +79,7 @@
                         </div>
 
                         <span
-                            class="nav-link-text ms-1 {{ $section == 'analytic' ? 'text-orange' : 'text-white' }}">Analytics</span>
+                            class="nav-link-text ms-1 {{ $section == 'analytic' ? 'text-orange' : 'text-purple' }}">Analytics</span>
 
                     </a>
 
@@ -103,7 +103,7 @@
                         </div>
 
                         <span
-                            class="nav-link-text ms-1 {{ $section == 'expense' ? 'text-orange' : 'text-white' }}">Expenses</span>
+                            class="nav-link-text ms-1 {{ $section == 'expense' ? 'text-orange' : 'text-purple' }}">Expenses</span>
 
                     </a>
 
@@ -128,7 +128,7 @@
                         </div>
 
                         <span
-                            class="nav-link-text ms-1 {{ $section == 'approval' ? 'text-orange' : 'text-white' }}">Approval</span>
+                            class="nav-link-text ms-1 {{ $section == 'approval' ? 'text-orange' : 'text-purple' }}">Approval</span>
 
                     </a>
 
@@ -157,7 +157,7 @@
                         </div>
 
                         <span
-                            class="nav-link-text ms-1 {{ $section == 'employee' || $section == 'group' || $section == 'partner' ? 'text-orange' : 'text-white' }}">Manage
+                            class="nav-link-text ms-1 {{ $section == 'employee' || $section == 'group' || $section == 'partner' ? 'text-orange' : 'text-purple' }}">Manage
 
                             Teams</span>
 
@@ -173,25 +173,25 @@
                                     <a class="nav-link @if ($section == 'group') active @endif "
                                         href="/group">
 
-                                        <span class="sidenav-mini-icon text-white"> O </span>
+                                        <span class="sidenav-mini-icon text-purple"> O </span>
 
-                                        <span class="nav-link-text ms-1  text-white">Group</span>
+                                        <span class="nav-link-text ms-1  text-purple">Group</span>
 
                                     </a>
                                 @endif
 
                                 <a class="nav-link @if ($section == 'employee') active @endif" href="/employee">
 
-                                    <span class="sidenav-mini-icon text-white"> O </span>
+                                    <span class="sidenav-mini-icon text-purple"> O </span>
 
-                                    <span class="nav-link-text ms-1 text-white">Member</span>
+                                    <span class="nav-link-text ms-1 text-purple">Member</span>
 
                                 </a>
                                 <a class="nav-link @if ($section == 'partner') active @endif " href="/partner">
 
-                                    <span class="sidenav-mini-icon text-white"> O </span>
+                                    <span class="sidenav-mini-icon text-purple"> O </span>
 
-                                    <span class="nav-link-text ms-1  text-white">Client/Vendor</span>
+                                    <span class="nav-link-text ms-1  text-purple">Client/Vendor</span>
 
                                 </a>
                             </li>
@@ -225,7 +225,7 @@
                         </div>
 
                         <span
-                            class="nav-link-text ms-1 {{ $section == 'budget' || $section == 'top_up_approval' || $section == 'pre-approval' ? 'text-orange' : 'text-white' }}">Manage
+                            class="nav-link-text ms-1 {{ $section == 'budget' || $section == 'top_up_approval' || $section == 'pre-approval' ? 'text-orange' : 'text-purple' }}">Manage
 
                             Budget</span>
 
@@ -241,9 +241,9 @@
                                     <a class="nav-link @if ($section == 'budget') active @endif"
                                         href="/budget">
 
-                                        <span class="sidenav-mini-icon text-white"> O </span>
+                                        <span class="sidenav-mini-icon text-purple"> O </span>
 
-                                        <span class="nav-link-text ms-1 text-white">Budget</span>
+                                        <span class="nav-link-text ms-1 text-purple">Budget</span>
 
                                     </a>
 
@@ -254,9 +254,9 @@
                                     <a class="nav-link @if ($section == 'top_up_approval') active @endif "
                                         href="/spend/request">
 
-                                        <span class="sidenav-mini-icon text-white"> O </span>
+                                        <span class="sidenav-mini-icon text-purple"> O </span>
 
-                                        <span class="nav-link-text ms-1  text-white">Top Up Approval</span>
+                                        <span class="nav-link-text ms-1  text-purple">Top Up Approval</span>
 
                                     </a>
                                 @endif
@@ -288,7 +288,7 @@
                         </div>
 
                         <span
-                            class="nav-link-text ms-1 {{ $section == 'card' ? 'text-orange' : 'text-white' }}">Card</span>
+                            class="nav-link-text ms-1 {{ $section == 'card' ? 'text-orange' : 'text-purple' }}">Card</span>
 
                     </a>
 
@@ -312,7 +312,7 @@
                         </div>
 
                         <span
-                            class="nav-link-text ms-1 {{ $section == 'report' ? 'text-orange' : 'text-white' }}">Report</span>
+                            class="nav-link-text ms-1 {{ $section == 'report' ? 'text-orange' : 'text-purple' }}">Report</span>
 
                     </a>
 
@@ -339,7 +339,7 @@
                         </div>
 
                         <span
-                            class="nav-link-text ms-1 {{ $section == 'settings' || $section == 'permission' || $section == 'account_settings' ? 'text-orange' : 'text-white' }}">Settings</span>
+                            class="nav-link-text ms-1 {{ $section == 'settings' || $section == 'permission' || $section == 'account_settings' ? 'text-orange' : 'text-purple' }}">Settings</span>
 
                     </a>
 
@@ -352,18 +352,18 @@
                                 <a class="nav-link @if ($section == 'permission') active @endif "
                                     href="/roles">
 
-                                    <span class="sidenav-mini-icon text-white"> O </span>
+                                    <span class="sidenav-mini-icon text-purple"> O </span>
 
-                                    <span class="nav-link-text ms-1  text-white">Roles Name</span>
+                                    <span class="nav-link-text ms-1  text-purple">Roles Name</span>
 
                                 </a>
 
                                 <a class="nav-link @if ($section == 'account_settings') active @endif "
                                     href="/account-settings">
 
-                                    <span class="sidenav-mini-icon text-white"> O </span>
+                                    <span class="sidenav-mini-icon text-purple"> O </span>
 
-                                    <span class="nav-link-text ms-1  text-white">Account Settings</span>
+                                    <span class="nav-link-text ms-1  text-purple">Account Settings</span>
 
                                 </a>
 
@@ -382,28 +382,28 @@
 
     </div>
 
-    <div class="sidenav-footer mx-3 mt-5">
+    <div class="sidenav-footer mx-3 mt-5 pt-5">
 
-        <div class="card card-background shadow-none " id="sidenavCard" style="border: 1px solid #dddddd">
+        <div class="card card-background shadow-none " id="sidenavCard" style="border: 1px solid #dddddd; background:#191a4d">
 
             <div class="card-body text-start p-3 w-100">
 
-                <div class="icon icon-shape icon-sm  shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md"
+                {{-- <div class="icon icon-shape icon-sm  shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md"
                     style="background-color: #e9ecef">
 
                     <i class="fa-solid fa-phone text-purple  text-lg top-0" id="sidenavCardIcon"></i>
 
-                </div>
+                </div> --}}
 
                 <div class="docs-info">
 
-                    <h6 class="text-purple up mb-0 text-md font-weight-bold" style="color:#191a4d">Need help?</h6>
+                    <h6 class="text-white up mb-0 text-md font-weight-bold" style="color:#191a4d">Need help?</h6>
 
-                    <span class="text-xs font-weight-bold text-purple" style="color:#191a4d">Please call us</span>
+                    <span class="text-xs font-weight-bold text-white" style="color:#191a4d">Please call us</span>
 
                     <a href="https://api.whatsapp.com/send?phone=6281388837989&text=Hello%2C%20thank%20you%20for%20contacting%20Ximply.%20We%20will%20reply%20your%20message%20shortly.%20%0A%0AThank%20you"
-                        target="_blank" class="btn  btn-sm w-100 mb-0 text-white text-sm"
-                        style="background:#191a4d">Contact
+                        target="_blank" class="btn  btn-sm w-100 mb-0 text-purple text-sm"
+                        style="background:#fff">Contact
 
                         Us</a>
 

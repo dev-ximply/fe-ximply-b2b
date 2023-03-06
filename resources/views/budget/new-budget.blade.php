@@ -22,14 +22,16 @@
             </div>
             <div class="card card-body mt-3">
                 @if (session('error'))
-                    <div style="width: 100%; text-align:right" class="text-danger">
-                        {{ session('error') }}
+                    <div style="width: 100%; text-align:center" class="text-danger text-capitalize">
+                        <div class="alert alert-danger text-white" role="alert">
+                            {{ session('error') }}
+                          </div>
+                       
                     </div>
                 @endif
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mb-3">
                     <div>
                         <h6 class="mb-0 text-dark font-weight-bolder">New Budget</h6>
-                        <p class="text-xs mb-0 text-secondary">Create new budget</p>
                     </div>
                 </div>
                 <form action="{{ route('add_spend') }}" id="add_spend" method="post">

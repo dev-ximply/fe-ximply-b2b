@@ -1,6 +1,6 @@
-<footer class="footer pt-3">
-    <div class="container-fluid px-0">
-        <div class="row  align-items-center justify-content-lg-between">
+<footer class="footer pt-5" style="position: relative">
+    <div class="container-fluid px-0 pt-5" style="position:absolute; bottom:0;right:0">
+        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
             <div class="col-lg mb-lg-0 mb-4">
                 <div class="copyright text-center text-sm text-muted text-lg-start">
                     ©
