@@ -812,6 +812,41 @@
                                 </tbody>
                             </table>
                         </div>
+                            <thead>
+                                <th class="text-dark" style="font-size:13px;font-weight:600">No</th>
+                                <th class="text-dark" style="font-size:13px;font-weight:600">Merchant Name</th>
+                                <th class="text-dark" style="font-size:13px;font-weight:600">Visited</th>
+                                <th class="text-dark" style="font-size:13px;font-weight:600">Total Amont</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($data['top_merchant_expense'] as $topMerchant)
+                                    <tr>
+                                        <td class="align-middle">
+                                            <div class="d-flex justify-content-center text-dark" style="font-size:13px;">
+                                                {{ $num++ }}
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <div class="d-flex justify-content-center text-dark" style="font-size:13px;">
+                                                {{ $topMerchant->merchant }}
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <div class="d-flex justify-content-center text-dark" style="font-size:13px;">
+
+                                                {{ $topMerchant->count }}
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <div class="d-flex justify-content-center text-dark"
+                                                style="font-size:13px;font-weight:600">
+                                                {{ number_format($topMerchant->total_amount, 2) }}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
