@@ -393,10 +393,10 @@
                 var urlSearch = "";
                 $('#status').on('change', function() {
                     var status = $('#status').val();
-                    urlSearch = API_URL + "api/expense/approval/list/" + TENANT_CODE +
+                    urlSearch = API_URL + "api/expense/approval/list/" + TENANT_CODE + "&status=" + status
                         '/?user_id=' +
-                        USR_ID +
-                        "&status=" + status;
+                        USR_ID;
+                      
                     new getDataExpenses(urlSearch);
                 });
             });
@@ -424,27 +424,40 @@
                             var response = res['data'];
                             var tableOut = "";
                             var storage = [];
+                            // var newDate = Carbon::parse($date)->now()->format('Y-m-d H:i:s');
                             // var totalAmount = 0;
+                            
                             for (const obj of response) {
                                 // totalAmount = totalAmount + parseFloat(obj.total_amount);
                                 // console.log(totalAmount);
+                          
+
                                 tableOut += '<tr>' +
-                                    '<td class="align-middle text-start text-capitalize text-xs">' +
-                                    '<div class="d-flex">' + '<img  src="' + STORAGE_URL + obj
-                                    .receipt_picture_directory + '"' +
-                                    'class="img-fluid ms-3" alt="receipt" style="width: 50px">' +
-                                    '<div class="ms-3 my-auto show-modal">' + '<div>' +
-                                    '<span class="text-xs text-dark text-bold">' + obj
-                                    .sub_category_name + '</span>' + '</div>' + '<div>' +
-                                    '<span class="text-xs text-dark">' + obj.full_name + '</span>' +
-                                    '</div>' + '<div>' +
-                                    '<span class="text-xxs text-dark">' + obj.date + '</span>' +
-                                    '</div>' + '</div>' + '</div>' + '</td>';
+                                    '<td class="align-middle text-start text-capitalize text-xs">'+
+                                            '<div class="d-flex">'+
+                                                '<img src="' + STORAGE_URL + obj.receipt_picture_directory + '" class="img-fluid ms-3" alt="receipt" style="width: 50px">'+
+                                                '<div class="ms-3 my-auto show-modal">'+
+                                                    '<div> <span class="text-xs text-dark text-bold">'+
+                                                            obj.sub_category_name +
+                                                        '</span>'+
+                                                    '</div>'+
+                                                    '<div>'+
+                                                        '<span class="text-xs text-dark">'+
+                                                            obj.full_name +
+                                                        '</span>'+
+                                                    '</div>'+
+                                                    '<div>'+
+                                                        '<span class="text-xxs text-dark">'+
+                                                            obj.date +
+                                                        '</span>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</td>'
 
                                 tableOut += 
                                         '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark text-break text-wrap">'+
-                                            obj.created_at +  
-
+                                            moment(obj.created_at).format("YYYY-MM-DD")+
                                         '</td>'
 
                                 tableOut +=
@@ -572,4 +585,6 @@
             }
         });
     </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
 @endsection
