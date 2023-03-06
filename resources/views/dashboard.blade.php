@@ -798,7 +798,6 @@
                                             <td class="align-middle">
                                                 <div class="d-flex justify-content-center text-dark"
                                                     style="font-size:13px; font-weight:600">
-
                                                     {{ $topMerchant->count }}
                                                 </div>
                                             </td>
