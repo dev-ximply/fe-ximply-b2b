@@ -177,130 +177,132 @@
         <div class="col-12">
 
             <div class="card" style="border-radius: 5px">
+                <div class="card-body">
+                    <div class="table-responsive">
 
-                <div class="table-responsive">
+                        <table class="table  text-dark">
 
-                    <table class="table  text-dark">
+                            <thead>
 
-                        <thead>
+                                <tr>
 
-                            <tr>
+                                    <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">Group
+                                        Name
 
-                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">Group Name
+                                    </th>
 
-                                </th>
+                                    <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+                                        Have Client Vendor
+                                    </th>
 
-                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
-                                    Have Client Vendor
-                                </th>
+                                    <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
 
-                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+                                        Member
 
-                                    Member
+                                    </th>
+                                    <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+                                        Created
+                                    </th>
 
-                                </th>
-                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
-                                    Created
-                                </th>
+                                    <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
 
-                                <th class="col font-weight-bold text-dark" style="color: #000000; font-size:13px">
+                                        Action
 
-                                    Action
-
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody>
-
-                            @foreach ($data['groups'] as $item)
-                                <tr class="">
-
-                                    <td class="text-sm" data-label="Group Name" style="color: #000000">
-                                        {{ $item->group_name }} <br>
-
-                                    </td>
-
-                                    <td class="text-sm" data-label="Have Partner" style="color: #000000">
-                                        {{ $item->have_partnership == '1' ? 'yes' : 'no' }}
-                                    </td>
-
-                                    <td class="text-sm" data-label="Member" style="color: #000000">
-
-                                        <span class="text-dark" style="font-size: 15px">
-
-                                            {{ $item->count_members }} members
-
-                                        </span>
-
-                                    </td>
-                                    <td>
-                                        <span class="text-dark" style="font-size: 15px">
-
-                                            {{-- {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
-                                            {{ $item->created_date }} <br>
-                                            {{ $item->created_time }}
-
-                                        </span>
-                                    </td>
-
-                                    <td class="align-middle text-sm d-flex justify-content-md-center justify-content-between pb-4"
-                                        data-label="Action">
-
-                                        {{-- <button onclick=""
-
-                                            class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
-
-                                            data-bs-toggle="modal" data-bs-target="#editModalGroup"
-
-                                            style="background-color: #ff720c;width:65px;height:25px;font-size:12px;font-weight:500">
-
-                                            Edit
-
-                                        </button> --}}
-
-                                        <div class="">
-                                            <a href="/group-info/{{ $item->id }}"
-                                                class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
-                                                data-bs-title="View Your Expense Member"
-                                                style="background-color: #85CDFD;width:50px;height:25px;font-size:12px; font-weight:500;">
-                                                Info
-                                            </a>
-                                        </div>
-
-                                        <div class="me-2">
-                                            <button
-                                                class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
-                                                data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                                data-id="{{ $item->id }}" data-bs-target="#editModalGroup"
-                                                style="background-color: #ff720c;width:50px;height:25px;font-size:12px; font-weight:500;"
-                                                onclick="getDataGroup('{{ $item->id }}', '{{ $item->group_name }}', '{{ $item->have_partnership }}')">
-
-                                                Edit
-
-                                            </button>
-                                        </div>
-                                        <div class="me-2">
-                                            <button
-                                                class="btn text-white d-flex justify-content-center me-2 align-items-center text-capitalize btn-update"
-                                                data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                                data-id="{{ $item->id }}" data-bs-target="#deleteGroup"
-                                                style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                onclick="deleteGroups('{{ $item->id }}')">
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </td>
+                                    </th>
 
                                 </tr>
-                            @endforeach
 
-                        </tbody>
+                            </thead>
 
-                    </table>
+                            <tbody>
 
+                                @foreach ($data['groups'] as $item)
+                                    <tr class="">
+
+                                        <td class="text-sm" data-label="Group Name" style="color: #000000">
+                                            {{ $item->group_name }} <br>
+
+                                        </td>
+
+                                        <td class="text-sm" data-label="Have Partner" style="color: #000000">
+                                            {{ $item->have_partnership == '1' ? 'yes' : 'no' }}
+                                        </td>
+
+                                        <td class="text-sm" data-label="Member" style="color: #000000">
+
+                                            <span class="text-dark" style="font-size: 15px">
+
+                                                {{ $item->count_members }} members
+
+                                            </span>
+
+                                        </td>
+                                        <td>
+                                            <span class="text-dark" style="font-size: 15px">
+
+                                                {{-- {{  Carbon\Carbon::parse($item->created_at)->format('m-d-Y') }} --}}
+                                                {{ $item->created_date }} <br>
+                                                {{ $item->created_time }}
+
+                                            </span>
+                                        </td>
+
+                                        <td class="align-middle text-sm d-flex justify-content-md-center justify-content-between pb-4"
+                                            data-label="Action">
+
+                                            {{-- <button onclick=""
+    
+                                                class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
+    
+                                                data-bs-toggle="modal" data-bs-target="#editModalGroup"
+    
+                                                style="background-color: #ff720c;width:65px;height:25px;font-size:12px;font-weight:500">
+    
+                                                Edit
+    
+                                            </button> --}}
+
+                                            <div class="">
+                                                <a href="/group-info/{{ $item->id }}"
+                                                    class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
+                                                    data-bs-title="View Your Expense Member"
+                                                    style="background-color: #85CDFD;width:50px;height:25px;font-size:12px; font-weight:500;">
+                                                    Info
+                                                </a>
+                                            </div>
+
+                                            <div class="me-2">
+                                                <button
+                                                    class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update"
+                                                    data-bs-title="View Your Expense Member" data-bs-toggle="modal"
+                                                    data-id="{{ $item->id }}" data-bs-target="#editModalGroup"
+                                                    style="background-color: #ff720c;width:50px;height:25px;font-size:12px; font-weight:500;"
+                                                    onclick="getDataGroup('{{ $item->id }}', '{{ $item->group_name }}', '{{ $item->have_partnership }}')">
+
+                                                    Edit
+
+                                                </button>
+                                            </div>
+                                            <div class="me-2">
+                                                <button
+                                                    class="btn text-white d-flex justify-content-center me-2 align-items-center text-capitalize btn-update"
+                                                    data-bs-title="View Your Expense Member" data-bs-toggle="modal"
+                                                    data-id="{{ $item->id }}" data-bs-target="#deleteGroup"
+                                                    style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                    onclick="deleteGroups('{{ $item->id }}')">
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
                 </div>
 
             </div>
@@ -402,11 +404,11 @@
                                 if (status === true) {
 
                                     setTimeout(function() {
-                                       Swal.fire(
-                                        'Success',
-                                        'Your request success.',
-                                        'success'
-                                       );
+                                        Swal.fire(
+                                            'Success',
+                                            'Your request success.',
+                                            'success'
+                                        );
                                     }, 1000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
@@ -416,7 +418,7 @@
                                     );
                                 }
                             },
-                            complete:function(){
+                            complete: function() {
                                 $('#main-loader').hide();
                                 window.location.reload(true);
                             }

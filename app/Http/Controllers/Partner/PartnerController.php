@@ -22,6 +22,7 @@ class PartnerController extends Controller
                 'section' => 'partner',
                 'data'  => [
                     'groups' => self::groups(Auth::user()['id']),
+                    'list_groups' => self::list_groups(Auth::user()['id']),
                     'partners' => self::partners(Auth::user()['id']),
                     't_partner' => self::list_partners(Auth::user()['id']),
                     'a_partner' => self::assign_partner(Auth::user()['id'])
@@ -306,5 +307,23 @@ class PartnerController extends Controller
         }
 
         $response->json()['message'];
+    }
+    public function list_groups($user_id)
+    {
+        $client = new Client();
+        $headers = [
+            'Authorization' => 'Bearer ' . Session::get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode') . '?user_id=' .   $user_id, $headers);
+        $res = $client->sendAsync($request)->wait();
+        $response = json_decode($res->getBody());
+
+        if ($response->success == false) {
+            return [];
+        }
+
+        return $response->data;
     }
 }

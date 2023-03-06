@@ -182,7 +182,7 @@
                                                     <div class="" style="max-width: 300px">
                                                         <div><span>Purpose : </span><span class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">
-                                                               {{ $approval['purpose'] }}
+                                                               {{ $approval['purpose_name'] }}
                                                             </span></div>
                                                         <div><span>Note : </span><span class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">

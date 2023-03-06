@@ -95,15 +95,20 @@
                         },
                         success: function(res) {
                             if (res['success'] == "true" || res['success'] == true) {
-                                swalWithBootstrapButtons.fire(
+                                setTimeout(()=>{
+                                    swalWithBootstrapButtons.fire(
                                     "Success!",
                                     "Your request success.",
                                     "success"
                                 );
+                                window.location.reload();
+                                },1000);
+                           
+
                             } else {
                                 swalWithBootstrapButtons.fire(
                                     "Error!",
-                                    "Your request can't processed." + res['message'],
+                                    "Your request can't processed." + "<br>" + res['message'],
                                     "error"
                                 );
                             }
@@ -112,9 +117,6 @@
                             if ($("#main-loader")) {
                                 $("#main-loader").hide();
                             }
-                            setTimeout(function() {
-                                location.reload();
-                            }, 1000);
                         }
                     });
                 } else if (result.dismiss === Swal.DismissReason.cancel) {

@@ -21,6 +21,7 @@ class BudgetController extends Controller
                 'data' => [
                     'limit' => self::get_limit(Auth::user()['id']),
                     'members' => self::list_member(Auth::user()['id']),
+                    'list_group'=> self::list_group(Auth::user()['id'])
                     // 'approval' => self::list_approval(Auth::user()['id'])
                 ]
             ]
@@ -35,6 +36,24 @@ class BudgetController extends Controller
             'Accept' => 'application/json'
         ];
         $request = new Psr7Request('GET', config('api.base_url') . 'api/spend/balance?user_id=' . $user_id, $headers);
+        $res = $client->sendAsync($request)->wait();
+        $response = json_decode($res->getBody());
+
+        if ($response->success == false) {
+            return [];
+        }
+
+        return $response->data;
+    }
+
+    public static function list_group($user_id)
+    {
+        $client = new Client();
+        $headers = [
+            'Authorization' => 'Bearer ' . Session::get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/group/list/' . Session::get('TenantCode') . '?user_id=' .  $user_id, $headers);
         $res = $client->sendAsync($request)->wait();
         $response = json_decode($res->getBody());
 

@@ -49,104 +49,123 @@
         <div class="row mt-1">
             <div class="col-12">
                 <div class="card" style="border-radius: 5px">
-                    <div class="table-responsive">
-                        <table class="table table-flush text-dark" id="datatable-search">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th class="text-sm ps-5" style="font-weight: 600">Name</th>
-                                    <th class="text-sm px-0" style="font-weight: 600">Contact Member</th>
-                                    <th class="text-sm px-0" style="font-weight: 600">Group</th>
-                                    <th class="text-sm px-0" style="font-weight: 600">Role</th>
-                                    <th class="text-sm px-0" style="font-weight: 600">Approver</th>
-                                    <th class="text-sm px-0" style="font-weight: 600">Created</th>
-                                    <th class="text-sm px-0 text-center" style="font-weight: 600">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data['employee'] as $item)
-                                    <tr class="align-middle">
-                                        <td class="text-xs font-weight-bold text-capitalize ps-5 pb-0 pt-3">
-                                            <p class="text-dark" style="font-size: 13px">
-                                                {{ $item->full_name }}
-                                            </p>
-                                        </td>
-                                        <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
-                                            <p class="text-dark" style="font-size: 13px">
-                                                {{ $item->email }}
-                                            </p>
-                                            <p class="text-dark" style="font-size: 13px">
-                                                {{ $item->handphone != '' ? $item->handphone : '-' }}
-                                            </p>
-                                        </td>
-                                        <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
-                                            <p class="text-dark" style="font-size: 13px">
-                                                {{ $item->group_name != '' ? $item->group_name : '-' }}
-                                            </p>
-                                        </td>
-                                        <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
-                                            <p class="text-dark" style="font-size: 13px">
-                                                {{ $item->role_name != '' ? $item->role_name : '-' }}
-                                            </p>
-                                        </td>
-                                        <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
-                                            <p class="text-dark" style="font-size: 13px">
-                                                {{ $item->approver != '' ? $item->approver : '-' }}
-                                            </p>
-                                        </td>
-                                        <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
-                                            <p class="text-dark" style="font-size: 13px">
-                                                {{ $item->created_date }}
-                                            </p>
-                                        </td>
-
-                                        <td class="text-xs font-weight-bold">
-                                            <div class="d-flex justify-content-center pb-0 mt-3">
-                                                @if (session()->get('is_superadmin') == false)
-                                                    @if($item->is_activate == 0)
-                                                        <p class="p-1" style="background:#efefef; color:black; border-radius:8px; font-size:12px" >
-                                                            Inactive
-                                                        </p>
-                                                    @else
-                                                        <button
-                                                            class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
-                                                            style="background-color: #85cdfd;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                            data-bs-target="#modalInfoMember" data-bs-toggle="modal"
-                                                            onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->employee_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')">
-                                                            Info
-                                                        </button>
-                                                    @endif
-                                                @else
-                                                    @if ($item->is_activate == 0)
-                                                    <p class="p-1" style="background:#efefef; color:black; border-radius:8px; font-size:12px" >
-                                                        Inactive
-                                                    </p>
-                                                    @else
-                                                        <button
-                                                            class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
-                                                            data-bs-title="Edit" data-bs-toggle="modal"
-                                                            data-id="'{{ $item->id }}'"
-                                                            data-bs-target="#edit_modal_users"
-                                                            style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                            onclick="getDataMember('{{ $item->id }}', '{{ $item->first_name }}',  '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->employee_id }}' ,  '{{ $item->group_name }}', '{{ $item->role_name }}' )">
-                                                            View
-                                                        </button>
-                                                        <button
-                                                            class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
-                                                            data-bs-title="View Your Expense Member" data-bs-toggle="modal"
-                                                            data-id="'{{ $item->id }}'"
-                                                            data-bs-target="#editModalPartner"
-                                                            style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
-                                                            onclick="deactivedMember('{{ $item->id }}')">
-                                                            Deactived
-                                                        </button>
-                                                    @endif
-                                                @endif
-                                            </div>
-                                        </td>
+                    <div class="card-body">
+                        @if(session()->get('is_superadmin') == true)
+                        <div class="d-flex justify-content-end  mb-3">
+                            <div class="col-md-2">
+                                {{-- <form action=""> --}}
+                                    <select name="select_group" id="select_group" class="form-select">
+                                        <option value="">Filter Group</option>
+                                        @foreach ($data['list_department'] as $item)
+                                            <option value="{{ $item->id }}" class="text-dark">{{ $item->group_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                {{-- </form> --}}
+                            </div>
+                        </div>
+                        @endif
+                        <div class="table-responsive">
+                            <table class="table table-flush text-dark" id="datatable-search">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="text-sm ps-5" style="font-weight: 600">Name</th>
+                                        <th class="text-sm px-0" style="font-weight: 600">Contact Member</th>
+                                        <th class="text-sm px-0" style="font-weight: 600">Group</th>
+                                        <th class="text-sm px-0" style="font-weight: 600">Role</th>
+                                        <th class="text-sm px-0" style="font-weight: 600">Approver</th>
+                                        <th class="text-sm px-0" style="font-weight: 600">Created</th>
+                                        <th class="text-sm px-0 text-center" style="font-weight: 600">Action</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody id="tableBody">
+                                    @foreach ($data['employee'] as $item)
+                                        <tr class="align-middle">
+                                            <td class="text-xs font-weight-bold text-capitalize ps-5 pb-0 pt-3">
+                                                <p class="text-dark" style="font-size: 13px">
+                                                    {{ $item->full_name }}
+                                                </p>
+                                            </td>
+                                            <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
+                                                <p class="text-dark" style="font-size: 13px">
+                                                    {{ $item->email }}
+                                                </p>
+                                                <p class="text-dark" style="font-size: 13px">
+                                                    {{ $item->handphone != '' ? $item->handphone : '-' }}
+                                                </p>
+                                            </td>
+                                            <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
+                                                <p class="text-dark" style="font-size: 13px">
+                                                    {{ $item->group_name != '' ? $item->group_name : '-' }}
+                                                </p>
+                                            </td>
+                                            <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
+                                                <p class="text-dark" style="font-size: 13px">
+                                                    {{ $item->role_name != '' ? $item->role_name : '-' }}
+                                                </p>
+                                            </td>
+                                            <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
+                                                <p class="text-dark" style="font-size: 13px">
+                                                    {{ $item->approver != '' ? $item->approver : '-' }}
+                                                </p>
+                                            </td>
+                                            <td class="text-xs font-weight-bold px-0 pt-3 pb-0">
+                                                <p class="text-dark" style="font-size: 13px">
+                                                    {{ $item->created_date }}
+                                                </p>
+                                            </td>
+
+                                            <td class="text-xs font-weight-bold">
+                                                <div class="d-flex justify-content-center pb-0 mt-3">
+                                                    @if (session()->get('is_superadmin') == false)
+                                                        @if ($item->is_activate == 0)
+                                                            <p class="p-1"
+                                                                style="background:#efefef; color:black; border-radius:8px; font-size:12px">
+                                                                Inactive
+                                                            </p>
+                                                        @else
+                                                            <button
+                                                                class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"
+                                                                style="background-color: #85cdfd;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                                data-bs-target="#modalInfoMember" data-bs-toggle="modal"
+                                                                onclick="getInfoMember('{{ $item->id }}','{{ $item->first_name }}', '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->employee_id }}','{{ $item->group_name }}', '{{ $item->role_name }}')">
+                                                                Info
+                                                            </button>
+                                                        @endif
+                                                    @else
+                                                        @if ($item->is_activate == 0)
+                                                            <p class="p-1"
+                                                                style="background:#efefef; color:black; border-radius:8px; font-size:12px">
+                                                                Inactive
+                                                            </p>
+                                                        @else
+                                                            <button
+                                                                class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"
+                                                                data-bs-title="Edit" data-bs-toggle="modal"
+                                                                data-id="'{{ $item->id }}'"
+                                                                data-bs-target="#edit_modal_users"
+                                                                style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                                onclick="getDataMember('{{ $item->id }}', '{{ $item->first_name }}',  '{{ $item->last_name }}', '{{ $item->email }}', '{{ $item->employee_id }}' ,  '{{ $item->group_name }}', '{{ $item->role_name }}' )">
+                                                                View
+                                                            </button>
+                                                            <button
+                                                                class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"
+                                                                data-bs-title="View Your Expense Member"
+                                                                data-bs-toggle="modal" data-id="'{{ $item->id }}'"
+                                                                data-bs-target="#editModalPartner"
+                                                                style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"
+                                                                onclick="deactivedMember('{{ $item->id }}')">
+                                                                Deactived
+                                                            </button>
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -160,6 +179,183 @@
             </div>
         </div>
     @endif
+
+
+    <script>
+        // $(document).ready(function() {
+        //     var tenant = TENANT_CODE;
+        //     var userId = USR_ID;
+        //     $.ajaxSetup({
+        //         headers: {
+        //             "Authorization": "Bearer " + AUTH_TOKEN,
+        //             "Accept": "application/json"
+        //         }
+        //     });
+
+        //     $.ajax({
+        //         type: "GET",
+        //         url: API_URL + "api/member/list/" + tenant + "?user_id=" + userId,
+        //         success: function(res) {
+        //             if (res) {
+        //                 var response = res['data'];
+        //                 for (const obj of response) {
+        //                     var groupId = obj.id;
+        //                     var groupName = obj.group_name;
+        //                     $('#select_group').append('<option value"' + groupId + '">' + groupName +
+        //                         '</option>');
+        //                 }
+        //             } else {
+        //                 $('select_group').empty();
+        //             }
+        //         }
+
+        //     });
+        // });
+
+        $(document).ready(function() {
+            var urlSearch = "";
+            $('#select_group').on('change', function() {
+                var group_id = $('#select_group').val();
+                urlSearch = API_URL + "api/member/list/" + TENANT_CODE +  "?user_id=" + USR_ID +
+                    "&group_id=" + group_id;
+                new getDataGroup(urlSearch);
+            });
+            // });
+
+            function getDataGroup(urlSearch) {
+                $("#tableBody").html("");
+                $.ajaxSetup({
+                    headers: {
+                        "Authorization": "Bearer " + AUTH_TOKEN,
+                        "Accept": "application/json"
+                    }
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: urlSearch,
+                    beforeSend: function() {
+                        $("#main-loader").show();
+                    },
+                    success: function(res) {
+                        if (res) {
+                            console.log(res);
+                            var response = res['data'];
+                            var tableOut = "";
+                            var empty = "Empty";
+                            for (const obj of response) {
+                                tableOut += '<tr class="align-middle">' +
+                                    '<td class="text-xs font-weight-bold text-capitalize ps-5 pb-0 pt-3">' +
+                                    '<p class="text-dark" style="font-size: 13px">' +
+                                    obj.full_name +
+                                    '</p>' +
+                                    '</td>'
+                                tableOut +=
+                                    '<td class="text-xs font-weight-bold px-0 pt-3 pb-0">' +
+                                    '<p class="text-dark" style="font-size: 13px">' +
+                                    obj.email +
+                                    '</p>' +
+                                    '<p class="text-dark" style="font-size: 13px">' +
+                                    obj.handphone +
+                                    '</p>' +
+                                    '</td>'
+                                tableOut +=
+                                    '<td class="text-xs font-weight-bold px-0 pt-3 pb-0">' +
+                                    '<p class="text-dark" style="font-size: 13px">' +
+                                    obj.group_name +
+                                    '</p>' +
+                                    '</td>'
+                                tableOut +=
+                                    '<td class="text-xs font-weight-bold px-0 pt-3 pb-0">' +
+                                    '<p class="text-dark" style="font-size: 13px">' +
+                                    obj.role_name +
+                                    '</p>' +
+                                    '</td>'
+                                tableOut +=
+                                    '<td class="text-xs font-weight-bold px-0 pt-3 pb-0">' +
+                                    '<p class="text-dark" style="font-size: 13px">' +
+                                    obj.approver +
+                                    '</p>' +
+                                    '</td>'
+                                tableOut +=
+                                    '<td class="text-xs font-weight-bold px-0 pt-3 pb-0">' +
+                                    '<p class="text-dark" style="font-size: 13px">' +
+                                    obj.created_date +
+                                    '</p>' +
+                                    '</td>'
+                                
+
+                                if( ADMIN_SESSION == false){
+                                    
+                                    if(obj.is_activate == 0){
+                                        tableOut +=  '<td class="text-xs font-weight-bold">'+
+                                                '<div class="d-flex justify-content-center pb-0 mt-3">'+
+                                                    '<p class="p-1"'+
+                                                        'style="background:#efefef; color:black; border-radius:8px; font-size:12px">'+
+                                                                'Inactive'+
+                                                    '</p>'+
+                                                    '</div>'+
+                                                    '</td>'
+                                    }else{
+                                        tableOut +=  '<td class="text-xs font-weight-bold">'+
+                                                '<div class="d-flex justify-content-center pb-0 mt-3">'+
+                                                         '<button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-1"'+
+                                                            'style="background-color: #85cdfd;width:60px;height:25px;font-size:11px; font-weight:500;"'+
+                                                            'data-bs-target="#modalInfoMember" data-bs-toggle="modal"'+
+                                                            'onclick="getInfoMember(`' + obj.id  + '`,`'  + obj.first_name + '`, `' + obj.last_name + '`, `'  + obj.email + '`, `' +  obj.employee_id + '`,`' + obj.group_name + '`,`' + obj.role_name + '`)">'+
+                                                            'Info'+
+                                                        '</button>'
+                                                            '</div>'+
+                                                    '</td>'
+                                    }
+                                }else{
+                                    if(obj.is_activate == 0){
+                                      tableOut +=  '<td class="text-xs font-weight-bold">'+
+                                                '<div class="d-flex justify-content-center pb-0 mt-3">'+
+                                                    '<p class="p-1"'+
+                                                        'style="background:#efefef; color:black; border-radius:8px; font-size:12px">'+
+                                                                'Inactive'+
+                                                    '</p>'+
+                                        '</div>'+
+                                        '</td>'
+                                    }else{
+                                        tableOut += '<td class="text-xs font-weight-bold">'+
+                                                '<div class="d-flex justify-content-center pb-0 mt-3">'+
+                                                    '<button class="btn text-white d-flex justify-content-center align-items-center text-capitalize btn-update me-2"'+
+                                                        'data-bs-title="Edit" data-bs-toggle="modal"'+
+                                                                'data-bs-target="#edit_modal_users"'+
+                                                                'style="background-color: #ff720c;width:60px;height:25px;font-size:11px; font-weight:500;"'+
+                                                                'onclick="getDataMember(`' + obj.id + '`,`'  + obj.first_name + '`, `' + obj.last_name + '`,`' + obj.email + '`,`' +  obj.employee_id + '`,`' + obj.group_name + '`,`' + obj.role_name + '`)">'+
+                                                                'View'+
+                                                            '</button>'+
+                                                            '<button class="btn text-white d-flex justify-content-center align-items-center me-2 text-capitalize btn-update"'+
+                                                                'data-bs-title="View Your Expense Member"'+
+                                                                'data-bs-toggle="modal"'+
+                                                                'data-bs-target="#editModalPartner"'+
+                                                                'style="background-color: #E40909;width:60px;height:25px;font-size:11px; font-weight:500;"'+
+                                                                'onclick="deactivedMember(`' + obj.id + '`)">' +
+                                                                'Deactived'+
+                                                            '</button>'+
+                                                            '</div>'+
+                                                    '</td>'
+                                    }
+                                }
+                            }
+                            $("#tableBody").append(tableOut);
+                        } else {
+                            $("#tableBody").append(empty);
+                        }
+
+                    },
+                    complete: function() {
+                        $('#main-loader').hide();
+                    }
+                });
+            }
+        });
+        // });
+    </script>
+
     <script>
         function changeEmploye(value) {
             console.log(value)
