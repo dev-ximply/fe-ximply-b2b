@@ -839,6 +839,7 @@
                         </figure>
                     </div>
                 </div>
+<<<<<<< HEAD
             @endif
             <div class="col-md-4 mb-3">
                 <div class="coloumn_top_3">
@@ -848,6 +849,26 @@
                     @endphp
                     <div class="table-responsive" style="max-height:200px;overflow-y:auto">
                         <table class="table table-borderless">
+=======
+            </div>
+        </div>
+    </div>
+    @if (session()->get('is_superadmin') == true)
+        <div class="row">
+            <div class="col-md">
+                <div class="card py-4 px-3" style="border-radius:5px">
+                    <div class="d-flex justify-content-between">
+                        <div class="text-dark ps-2" style="font-size:16px;font-weight:500">
+                            Expense Data
+                        </div>
+                        <div>
+                            <button class="btn text-white btn-sm" style="background:#19194b" onclick="htmlTableToExcel('xlsx')">export
+                                excel</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive" style="max-height:400px; overflow-y:auto">
+                        <table id="reportsToExcel" class="table align-items-center mb-0">
+>>>>>>> d166856baea3226e853befe9c9edefaa67751ae4
                             <thead>
                                 <th class="text-dark" style="font-size:13px;font-weight:600">No</th>
                                 <th class="text-dark" style="font-size:13px;font-weight:600">Merchant Name</th>
