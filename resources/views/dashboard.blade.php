@@ -775,10 +775,10 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <th class="text-dark" style="font-size:13px;font-weight:600">No</th>
-                                    <th class="text-dark" style="font-size:13px;font-weight:600">Merchant Name
+                                    <th class="text-dark ps-2" style="font-size:13px;font-weight:600">Merchant Name
                                     </th>
                                     <th class="text-dark" style="font-size:13px;font-weight:600">Visited</th>
-                                    <th class="text-dark" style="font-size:13px;font-weight:600">Total Amont</th>
+                                    <th class="text-dark" style="font-size:13px;font-weight:600">Total Amount</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($data['top_merchant_expense'] as $topMerchant)
@@ -790,21 +790,21 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <div class="d-flex justify-content-center text-dark"
+                                                <div class="d-flex justify-content-start text-start text-dark"
                                                     style="font-size:13px;">
                                                     {{ $topMerchant->merchant }}
                                                 </div>
                                             </td>
                                             <td class="align-middle">
                                                 <div class="d-flex justify-content-center text-dark"
-                                                    style="font-size:13px;">
+                                                    style="font-size:13px; font-weight:600">
 
                                                     {{ $topMerchant->count }}
                                                 </div>
                                             </td>
                                             <td class="align-middle">
                                                 <div class="d-flex justify-content-center text-dark"
-                                                    style="font-size:13px;font-weight:600">
+                                                    style="font-size:13px;">Rp.
                                                     {{ number_format($topMerchant->total_amount, 2) }}
                                                 </div>
                                             </td>
@@ -852,6 +852,7 @@
                             </div>
                         @endforeach
                     </div>
+<<<<<<< HEAD
                 </div>
             @else
                 <div class="col-md mb-3">
@@ -908,6 +909,11 @@
                     @endphp
                     <div class="table-responsive" style="max-height:200px;overflow-y:auto">
                         <table class="table table-borderless">
+=======
+                    <div class="table-responsive" style="max-height:400px; overflow-y:auto">
+                        <table id="reportsToExcel" class="table align-items-center mb-0">
+>>>>>>> d166856baea3226e853befe9c9edefaa67751ae4
+>>>>>>> a8d48a156f670885e499b03ba27d79914ec5ab39
                             <thead>
                                 <th class="text-dark" style="font-size:13px;font-weight:600">No</th>
                                 <th class="text-dark" style="font-size:13px;font-weight:600">Merchant Name</th>
