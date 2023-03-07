@@ -658,11 +658,8 @@
                                                 <div class=" w-100 ">
                                                     <div class="d-flex flex-column bg-white border p-2 align-items-center w-100"
                                                         style="margin-bottom:10px; border-radius:10px;">
-
                                                         <div class="col-md d-flex w-100 align-items-center">
-
                                                             <div class="col-md-3" style="">
-                                                                {{-- <label for="">Status</label> --}}
                                                                 <div>
                                                                     @if ($recentExpenses->status == 'pending')
                                                                         <span
