@@ -166,7 +166,7 @@
                                         <td class="ps-4 align-middle text-start text-xs text-dark">
                                             {{ number_format($expense_approval->total_amount, 2) }}
                                         </td>
-                                        <td class="ps-4 align-middle text-start text-xs text-dark text-break text-wrap">
+                                        <td class="ps-4 align-middle text-start text-xs text-dark">
                                             {{ $expense_approval->note }}
                                         </td>
                                         <td class="ps-4 align-middle text-start text-xs">
@@ -393,9 +393,8 @@
                 var urlSearch = "";
                 $('#status').on('change', function() {
                     var status = $('#status').val();
-                    urlSearch = API_URL + "api/expense/approval/list/" + TENANT_CODE + "&status=" + status
-                        '/?user_id=' +
-                        USR_ID;
+                    urlSearch = API_URL + "api/expense/approval/list/" + TENANT_CODE +  
+                        '?user_id=' + USR_ID + "&status=" + status;
                       
                     new getDataExpenses(urlSearch);
                 });
@@ -433,6 +432,18 @@
                           
 
                                 tableOut += '<tr>' +
+                                    // '<td class="align-middle text-start text-capitalize text-xs">' +
+                                    // '<div class="d-flex">' + '<img  src="' + STORAGE_URL + obj
+                                    // .receipt_picture_directory + '"' +
+                                    // 'class="img-fluid ms-3" alt="receipt" style="width: 50px">' +
+                                    // '<div class="ms-3 my-auto show-modal">' + 
+                                    // '<div> <span class="text-xs text-dark text-bold text-break text-wrap">' + obj
+                                    // .sub_category_name + '</span>' + '</div>' + '<div>' +
+                                    // '<span class="text-xs text-dark">' + obj.full_name + '</span>' +
+                                    // '</div>' + '<div>' +
+                                    // '<span class="text-xxs text-dark">' + obj.date + '</span>' +
+                                    // '</div>' + '</div>' + '</div>' + '</td>';
+
                                     '<td class="align-middle text-start text-capitalize text-xs">'+
                                             '<div class="d-flex">'+
                                                 '<img src="' + STORAGE_URL + obj.receipt_picture_directory + '" class="img-fluid ms-3" alt="receipt" style="width: 50px">'+
@@ -461,11 +472,11 @@
                                         '</td>'
 
                                 tableOut +=
-                                    '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark">' +
+                                    '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark text-break text-wrap">' +
                                     obj.category_name +
                                     '</td>';
                                 tableOut +=
-                                    '<td class="ps-4 align-middle text-start text-xs text-dark">' +
+                                    '<td class="ps-4 align-middle text-start text-xs text-dark text-break text-wrap">' +
                                     obj.purpose_name +
                                     '</td>';
                                 tableOut +=
