@@ -1088,6 +1088,41 @@
     font-weight: 700;
     font-size: 15px;
 }
+.coloumn__recent__expense_group_container {
+    background-color: #ffffff;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+    /* box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09); */
+    height: 15.3rem;
+    max-height: 100%;
+}
+
+.coloumn__recent__expense_group_container p {
+    color: black;
+    font-weight: 700;
+    font-size: 15px;
+}
+.coloumn__recent__expense_group_container_manager {
+    background-color: #ffffff;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+    /* box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.09); */
+    height: 12.3rem;
+    max-height: 100%;
+}
+.coloumn__recent__expense_group_container_manager p {
+    color: black;
+    font-weight: 700;
+    font-size: 15px;
+}
 .coloumn__recent__expense_group_manager {
     background-color: #ffffff;
     margin: 10px 0;

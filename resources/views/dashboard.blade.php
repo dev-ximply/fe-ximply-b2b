@@ -300,7 +300,8 @@
                                     <table class="table table-borderless">
                                         <thead>
                                             <th class="text-dark" style="font-size:13px;font-weight:600">No</th>
-                                            <th class="text-dark" style="font-size:13px;font-weight:600">Merchant Name
+                                            <th class="text-dark ps-2" style="font-size:13px;font-weight:600">Merchant
+                                                Name
                                             </th>
                                             <th class="text-dark" style="font-size:13px;font-weight:600">Visited</th>
                                             <th class="text-dark" style="font-size:13px;font-weight:600">Total Amount</th>
@@ -315,7 +316,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="align-middle">
-                                                        <div class="d-flex justify-content-center text-dark"
+                                                        <div class="d-flex justify-content-start ps-0  text-dark"
                                                             style="font-size:13px;">
                                                             {{ $topMerchant->merchant }}
                                                         </div>
@@ -418,7 +419,7 @@
                         @if (session()->get('is_superadmin') == true)
                             <div class="coloumn__recent__expense" style="margin-top: 11px; border-radius:5px">
                                 <div class="d-flex justify-content-between">
-                                    <p style="font-weight: 500; font-size:13px">Your Recent Expense</p>
+                                    <p style="font-weight: 500; font-size:13px">Recent Expense</p>
                                     <div class="ms-auto">
                                         <span class="text-sm mb-0 text-capitalize font-weight-normal">
                                             <a
@@ -430,7 +431,7 @@
                                 @php
                                     $no = 0;
                                 @endphp
-                                <div class="table-responsive" style="max-height:330px; overflow-y:auto">
+                                <div class="table-responsive" style="max-height:300px; overflow-y:auto">
                                     <table class="table">
                                         <tbody>
                                             <tr class="text-start" style="font-size:12px;color:#000000">
@@ -533,8 +534,7 @@
                     @if (session()->get('manage_budget') == 1)
                         @if (session()->get('is_superadmin') == true)
                             <div class="col-md">
-                                <div class="coloumn__recent__expense_group"
-                                    style="margin-top: 11px; border-radius:5px; max-hight:200px; overflow-y:scroll">
+                                <div class="coloumn__recent__expense_group" style="margin-top: 11px; border-radius:5px;">
                                     <div class="d-flex justify-content-between">
                                         <p style="font-weight: 500; font-size:13px">Recent Expense Team</p>
                                         <div class="ms-auto">
@@ -548,93 +548,96 @@
                                     @php
                                         $no = 0;
                                     @endphp
-                                    @foreach ($data['recent_approval'] as $recentExpenses)
-                                        <div class="d-flex" style="">
-                                            <div class=" w-100 ">
-                                                <div class="d-flex flex-column bg-white border p-2 align-items-center w-100"
-                                                    style="margin-bottom:10px; border-radius:10px;">
+                                    <div class="coloumn__recent__expense_group_container"
+                                        style="max-hight:200px; overflow-y:scroll">
+                                        @foreach ($data['recent_approval'] as $recentExpenses)
+                                            <div class="d-flex" style="">
+                                                <div class=" w-100 ">
+                                                    <div class="d-flex flex-column bg-white border p-2 align-items-center w-100"
+                                                        style="margin-bottom:10px; border-radius:10px;">
 
-                                                    <div class="col-md d-flex w-100 align-items-center">
+                                                        <div class="col-md d-flex w-100 align-items-center">
 
-                                                        <div class="col-md-3" style="">
-                                                            {{-- <label for="">Status</label> --}}
-                                                            <div>
-                                                                @if ($recentExpenses->status == 'pending')
-                                                                    <span
-                                                                        class="badge badge-xs d-flex justify-content-center"
-                                                                        style="border:1px solid #FFCF23; color:#FFCF23; width: 55px;font-size:9px">pending</span>
-                                                                @elseif ($recentExpenses->status == 'approved')
-                                                                    <span
-                                                                        class="badge badge-xs d-flex justify-content-center"
-                                                                        style="border:1px solid #50B720; color:#50B720; width: 55px;font-size:9px">approved</span>
-                                                                @elseif ($recentExpenses->status == 'rejected')
-                                                                    <span
-                                                                        class="badge badge-xs d-flex justify-content-center"
-                                                                        style="border:1px solid #E40909; color:#E40909; width: 55px;font-size:9px">rejected</span>
-                                                                @else
-                                                                    <span
-                                                                        class="badge badge-secondary badge-xs">unknown</span>
-                                                                @endif
+                                                            <div class="col-md-3" style="">
+                                                                {{-- <label for="">Status</label> --}}
+                                                                <div>
+                                                                    @if ($recentExpenses->status == 'pending')
+                                                                        <span
+                                                                            class="badge badge-xs d-flex justify-content-center"
+                                                                            style="border:1px solid #FFCF23; color:#FFCF23; width: 55px;font-size:9px">pending</span>
+                                                                    @elseif ($recentExpenses->status == 'approved')
+                                                                        <span
+                                                                            class="badge badge-xs d-flex justify-content-center"
+                                                                            style="border:1px solid #50B720; color:#50B720; width: 55px;font-size:9px">approved</span>
+                                                                    @elseif ($recentExpenses->status == 'rejected')
+                                                                        <span
+                                                                            class="badge badge-xs d-flex justify-content-center"
+                                                                            style="border:1px solid #E40909; color:#E40909; width: 55px;font-size:9px">rejected</span>
+                                                                    @else
+                                                                        <span
+                                                                            class="badge badge-secondary badge-xs">unknown</span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md mx-2 d-flex flex-column">
+                                                                <span
+                                                                    style="font-size:11px;font-weight:600">{{ $recentExpenses->category_name }}</span>
+                                                                <span
+                                                                    style="font-size:11px">{{ $recentExpenses->merchant }}</span>
+                                                            </div>
+                                                            <div
+                                                                class="col-md d-flex flex-column justify-content-end text-end">
+                                                                <span style="font-size:10px;">Total</span>
+                                                                <span style="font-size:11px;font-weight:600">Rp
+                                                                    {{ number_format($recentExpenses->total_amount, 2) }}</span>
+
                                                             </div>
                                                         </div>
-                                                        <div class="col-md mx-2 d-flex flex-column">
-                                                            <span
-                                                                style="font-size:11px;font-weight:600">{{ $recentExpenses->category_name }}</span>
-                                                            <span
-                                                                style="font-size:11px">{{ $recentExpenses->merchant }}</span>
-                                                        </div>
-                                                        <div
-                                                            class="col-md d-flex flex-column justify-content-end text-end">
-                                                            <span style="font-size:10px;">Total</span>
-                                                            <span style="font-size:11px;font-weight:600">Rp
-                                                                {{ number_format($recentExpenses->total_amount, 2) }}</span>
 
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md d-flex justify-content-end w-100">
-                                                        <div class="col-md">
-                                                            @if ($recentExpenses->status == 'pending')
-                                                                <div
-                                                                    class="d-flex flex-row pt-3 d-flex justify-content-end">
-                                                                    <button
-                                                                        onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $recentExpenses->approval_id }}', 'approved')"
-                                                                        data-bs-toggle="tooltip"
-                                                                        class="mx-0 btn text-white d-flex align-items-center d-flex justify-content-center"
-                                                                        data-bs-original-title="Approve"
-                                                                        data-toggle="tooltip" data-placement="left"
-                                                                        title="Approve this expenses"
-                                                                        style="width:65px;height:25px; background-color:#50B720;border:none;border-radius:5px">
-                                                                        <i
-                                                                            class="fas fa-circle-check text-white text-md me-1"></i>
-                                                                        <span style="font-size: 0.6em">Approved</span>
-                                                                    </button>
-                                                                    <button
-                                                                        onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $recentExpenses->approval_id }}', 'rejected')"
-                                                                        data-bs-toggle="tooltip"
-                                                                        class="ms-2  btn text-white d-flex align-items-center d-flex justify-content-center"
-                                                                        data-bs-original-title="reject"
-                                                                        data-toggle="tooltip" data-placement="left"
-                                                                        title="Reject this expenses"
-                                                                        style="width:65px;height:25px; background-color:#E40909;border:none;border-radius:5px">
-                                                                        <i
-                                                                            class="fas fa-circle-xmark text-white text-md me-1"></i>
-                                                                        <span style="font-size: 0.6em;">Reject</span>
-                                                                    </button>
-                                                                </div>
-                                                            @endif
+                                                        <div class="col-md d-flex justify-content-end w-100">
+                                                            <div class="col-md">
+                                                                @if ($recentExpenses->status == 'pending')
+                                                                    <div
+                                                                        class="d-flex flex-row pt-3 d-flex justify-content-end">
+                                                                        <button
+                                                                            onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $recentExpenses->approval_id }}', 'approved')"
+                                                                            data-bs-toggle="tooltip"
+                                                                            class="mx-0 btn text-white d-flex align-items-center d-flex justify-content-center"
+                                                                            data-bs-original-title="Approve"
+                                                                            data-toggle="tooltip" data-placement="left"
+                                                                            title="Approve this expenses"
+                                                                            style="width:65px;height:25px; background-color:#50B720;border:none;border-radius:5px">
+                                                                            <i
+                                                                                class="fas fa-circle-check text-white text-md me-1"></i>
+                                                                            <span style="font-size: 0.6em">Approved</span>
+                                                                        </button>
+                                                                        <button
+                                                                            onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $recentExpenses->approval_id }}', 'rejected')"
+                                                                            data-bs-toggle="tooltip"
+                                                                            class="ms-2  btn text-white d-flex align-items-center d-flex justify-content-center"
+                                                                            data-bs-original-title="reject"
+                                                                            data-toggle="tooltip" data-placement="left"
+                                                                            title="Reject this expenses"
+                                                                            style="width:65px;height:25px; background-color:#E40909;border:none;border-radius:5px">
+                                                                            <i
+                                                                                class="fas fa-circle-xmark text-white text-md me-1"></i>
+                                                                            <span style="font-size: 0.6em;">Reject</span>
+                                                                        </button>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         @else
                             <div class="col-md">
                                 <div class="coloumn__recent__expense_group_manager"
-                                    style="margin-top: 11px; border-radius:5px; max-hight:200px; overflow-y:scroll">
+                                    style="margin-top: 11px; border-radius:5px;">
                                     <div class="d-flex justify-content-between">
                                         <p style="font-weight: 500; font-size:13px">Recent Expense Team</p>
                                         <div class="ms-auto">
@@ -648,87 +651,87 @@
                                     @php
                                         $no = 0;
                                     @endphp
-                                    @foreach ($data['recent_approval'] as $recentExpenses)
-                                        <div class="d-flex" style="">
-                                            <div class=" w-100 ">
-                                                <div class="d-flex flex-column bg-white border p-2 align-items-center w-100"
-                                                    style="margin-bottom:10px; border-radius:10px;">
+                                    <div class="coloumn__recent__expense_group_container_manager"
+                                        style="max-hight:200px; overflow-y:scroll">
+                                        @foreach ($data['recent_approval'] as $recentExpenses)
+                                            <div class="d-flex" style="">
+                                                <div class=" w-100 ">
+                                                    <div class="d-flex flex-column bg-white border p-2 align-items-center w-100"
+                                                        style="margin-bottom:10px; border-radius:10px;">
+                                                        <div class="col-md d-flex w-100 align-items-center">
+                                                            <div class="col-md-3" style="">
+                                                                <div>
+                                                                    @if ($recentExpenses->status == 'pending')
+                                                                        <span
+                                                                            class="badge badge-xs d-flex justify-content-center"
+                                                                            style="border:1px solid #FFCF23; color:#FFCF23; width: 55px;font-size:9px">pending</span>
+                                                                    @elseif ($recentExpenses->status == 'approved')
+                                                                        <span
+                                                                            class="badge badge-xs d-flex justify-content-center"
+                                                                            style="border:1px solid #50B720; color:#50B720; width: 55px;font-size:9px">approved</span>
+                                                                    @elseif ($recentExpenses->status == 'rejected')
+                                                                        <span
+                                                                            class="badge badge-xs d-flex justify-content-center"
+                                                                            style="border:1px solid #E40909; color:#E40909; width: 55px;font-size:9px">rejected</span>
+                                                                    @else
+                                                                        <span
+                                                                            class="badge badge-secondary badge-xs">unknown</span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md mx-2 d-flex flex-column">
+                                                                <span
+                                                                    style="font-size:11px;font-weight:600">{{ $recentExpenses->category_name }}</span>
+                                                                <span
+                                                                    style="font-size:11px">{{ $recentExpenses->merchant }}</span>
+                                                            </div>
+                                                            <div
+                                                                class="col-md d-flex flex-column justify-content-end text-end">
+                                                                <span style="font-size:10px;">Total</span>
+                                                                <span style="font-size:11px;font-weight:600">Rp
+                                                                    {{ number_format($recentExpenses->total_amount, 2) }}</span>
 
-                                                    <div class="col-md d-flex w-100 align-items-center">
-
-                                                        <div class="col-md-3" style="">
-                                                            {{-- <label for="">Status</label> --}}
-                                                            <div>
-                                                                @if ($recentExpenses->status == 'pending')
-                                                                    <span
-                                                                        class="badge badge-xs d-flex justify-content-center"
-                                                                        style="border:1px solid #FFCF23; color:#FFCF23; width: 55px;font-size:9px">pending</span>
-                                                                @elseif ($recentExpenses->status == 'approved')
-                                                                    <span
-                                                                        class="badge badge-xs d-flex justify-content-center"
-                                                                        style="border:1px solid #50B720; color:#50B720; width: 55px;font-size:9px">approved</span>
-                                                                @elseif ($recentExpenses->status == 'rejected')
-                                                                    <span
-                                                                        class="badge badge-xs d-flex justify-content-center"
-                                                                        style="border:1px solid #E40909; color:#E40909; width: 55px;font-size:9px">rejected</span>
-                                                                @else
-                                                                    <span
-                                                                        class="badge badge-secondary badge-xs">unknown</span>
-                                                                @endif
                                                             </div>
                                                         </div>
-                                                        <div class="col-md mx-2 d-flex flex-column">
-                                                            <span
-                                                                style="font-size:11px;font-weight:600">{{ $recentExpenses->category_name }}</span>
-                                                            <span
-                                                                style="font-size:11px">{{ $recentExpenses->merchant }}</span>
-                                                        </div>
-                                                        <div
-                                                            class="col-md d-flex flex-column justify-content-end text-end">
-                                                            <span style="font-size:10px;">Total</span>
-                                                            <span style="font-size:11px;font-weight:600">Rp
-                                                                {{ number_format($recentExpenses->total_amount, 2) }}</span>
 
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md d-flex justify-content-end w-100">
-                                                        <div class="col-md">
-                                                            @if ($recentExpenses->status == 'pending')
-                                                                <div
-                                                                    class="d-flex flex-row pt-3 d-flex justify-content-end">
-                                                                    <button
-                                                                        onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $recentExpenses->approval_id }}', 'approved')"
-                                                                        data-bs-toggle="tooltip"
-                                                                        class="mx-0 btn text-white d-flex align-items-center d-flex justify-content-center"
-                                                                        data-bs-original-title="Approve"
-                                                                        data-toggle="tooltip" data-placement="left"
-                                                                        title="Approve this expenses"
-                                                                        style="width:65px;height:25px; background-color:#50B720;border:none;border-radius:5px">
-                                                                        <i
-                                                                            class="fas fa-circle-check text-white text-md me-1"></i>
-                                                                        <span style="font-size: 0.6em">Approved</span>
-                                                                    </button>
-                                                                    <button
-                                                                        onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $recentExpenses->approval_id }}', 'rejected')"
-                                                                        data-bs-toggle="tooltip"
-                                                                        class="ms-2  btn text-white d-flex align-items-center d-flex justify-content-center"
-                                                                        data-bs-original-title="reject"
-                                                                        data-toggle="tooltip" data-placement="left"
-                                                                        title="Reject this expenses"
-                                                                        style="width:65px;height:25px; background-color:#E40909;border:none;border-radius:5px">
-                                                                        <i
-                                                                            class="fas fa-circle-xmark text-white text-md me-1"></i>
-                                                                        <span style="font-size: 0.6em;">Reject</span>
-                                                                    </button>
-                                                                </div>
-                                                            @endif
+                                                        <div class="col-md d-flex justify-content-end w-100">
+                                                            <div class="col-md">
+                                                                @if ($recentExpenses->status == 'pending')
+                                                                    <div
+                                                                        class="d-flex flex-row pt-3 d-flex justify-content-end">
+                                                                        <button
+                                                                            onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $recentExpenses->approval_id }}', 'approved')"
+                                                                            data-bs-toggle="tooltip"
+                                                                            class="mx-0 btn text-white d-flex align-items-center d-flex justify-content-center"
+                                                                            data-bs-original-title="Approve"
+                                                                            data-toggle="tooltip" data-placement="left"
+                                                                            title="Approve this expenses"
+                                                                            style="width:65px;height:25px; background-color:#50B720;border:none;border-radius:5px">
+                                                                            <i
+                                                                                class="fas fa-circle-check text-white text-md me-1"></i>
+                                                                            <span style="font-size: 0.6em">Approved</span>
+                                                                        </button>
+                                                                        <button
+                                                                            onclick="approvalDecision('{{ Auth::user()['id'] }}', '{{ $recentExpenses->approval_id }}', 'rejected')"
+                                                                            data-bs-toggle="tooltip"
+                                                                            class="ms-2  btn text-white d-flex align-items-center d-flex justify-content-center"
+                                                                            data-bs-original-title="reject"
+                                                                            data-toggle="tooltip" data-placement="left"
+                                                                            title="Reject this expenses"
+                                                                            style="width:65px;height:25px; background-color:#E40909;border:none;border-radius:5px">
+                                                                            <i
+                                                                                class="fas fa-circle-xmark text-white text-md me-1"></i>
+                                                                            <span style="font-size: 0.6em;">Reject</span>
+                                                                        </button>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         @endif

@@ -250,8 +250,7 @@
                             </div>
                         </div>
                         <div class="col-md-10">
-                            <form action="" enctype="multipart/form-data" onsubmit="changeForm()">
-                                @csrf
+                            <form onsubmit="changeForm()">
                                 {{-- @method('PUT') --}}
                                 <div class="row mb-2">
                                     <div class="col-md-6 mt-3">
