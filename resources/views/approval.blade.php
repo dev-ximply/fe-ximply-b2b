@@ -154,7 +154,8 @@
                                             {{ Carbon\Carbon::parse($expense_approval->created_at)->format('Y-m-d') }}
 
                                         </td>
-                                        <td class="ps-4 align-middle text-start text-xs text-capitalize text-dark text-break text-wrap">
+                                        <td
+                                            class="ps-4 align-middle text-start text-xs text-capitalize text-dark text-break text-wrap">
                                             {{ $expense_approval->category_name }}
                                         </td>
                                         <td class="ps-4 align-middle text-start text-xs text-dark text-break text-wrap">
@@ -167,7 +168,9 @@
                                             {{ number_format($expense_approval->total_amount, 2) }}
                                         </td>
                                         <td class="ps-4 align-middle text-start text-xs text-dark">
-                                            {{ $expense_approval->note }}
+                                            <span class="text-break text-wrap">
+                                                {{ $expense_approval->note }}
+                                            </span>
                                         </td>
                                         <td class="ps-4 align-middle text-start text-xs">
                                             @if ($expense_approval->status == 'pending')
@@ -393,9 +396,9 @@
                 var urlSearch = "";
                 $('#status').on('change', function() {
                     var status = $('#status').val();
-                    urlSearch = API_URL + "api/expense/approval/list/" + TENANT_CODE +  
+                    urlSearch = API_URL + "api/expense/approval/list/" + TENANT_CODE +
                         '?user_id=' + USR_ID + "&status=" + status;
-                      
+
                     new getDataExpenses(urlSearch);
                 });
             });
@@ -425,11 +428,11 @@
                             var storage = [];
                             // var newDate = Carbon::parse($date)->now()->format('Y-m-d H:i:s');
                             // var totalAmount = 0;
-                            
+
                             for (const obj of response) {
                                 // totalAmount = totalAmount + parseFloat(obj.total_amount);
                                 // console.log(totalAmount);
-                          
+
 
                                 tableOut += '<tr>' +
                                     // '<td class="align-middle text-start text-capitalize text-xs">' +
@@ -444,32 +447,33 @@
                                     // '<span class="text-xxs text-dark">' + obj.date + '</span>' +
                                     // '</div>' + '</div>' + '</div>' + '</td>';
 
-                                    '<td class="align-middle text-start text-capitalize text-xs pe-4">'+
-                                            '<div class="d-flex">'+
-                                                '<img src="' + STORAGE_URL + obj.receipt_picture_directory + '" class="img-fluid ms-3" alt="receipt" style="width: 50px">'+
-                                                '<div class="ms-3 my-auto show-modal">'+
-                                                    '<div> <span class="text-xs text-dark text-bold text-break text-wrap">'+
-                                                            obj.sub_category_name +
-                                                        '</span>'+
-                                                    '</div>'+
-                                                    '<div>'+
-                                                        '<span class="text-xs text-dark">'+
-                                                            obj.full_name +
-                                                        '</span>'+
-                                                    '</div>'+
-                                                    '<div>'+
-                                                        '<span class="text-xxs text-dark">'+
-                                                            obj.date +
-                                                        '</span>'+
-                                                    '</div>'+
-                                                '</div>'+
-                                            '</div>'+
-                                        '</td>'
+                                    '<td class="align-middle text-start text-capitalize text-xs pe-4">' +
+                                    '<div class="d-flex">' +
+                                    '<img src="' + STORAGE_URL + obj.receipt_picture_directory +
+                                    '" class="img-fluid ms-3" alt="receipt" style="width: 50px">' +
+                                    '<div class="ms-3 my-auto show-modal">' +
+                                    '<div> <span class="text-xs text-dark text-bold text-break text-wrap">' +
+                                    obj.sub_category_name +
+                                    '</span>' +
+                                    '</div>' +
+                                    '<div>' +
+                                    '<span class="text-xs text-dark">' +
+                                    obj.full_name +
+                                    '</span>' +
+                                    '</div>' +
+                                    '<div>' +
+                                    '<span class="text-xxs text-dark">' +
+                                    obj.date +
+                                    '</span>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</td>'
 
-                                tableOut += 
-                                        '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark text-break text-wrap">'+
-                                            moment(obj.created_at).format("YYYY-MM-DD")+
-                                        '</td>'
+                                tableOut +=
+                                    '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark text-break text-wrap">' +
+                                    moment(obj.created_at).format("YYYY-MM-DD") +
+                                    '</td>'
 
                                 tableOut +=
                                     '<td class="ps-4 align-middle text-start text-xs text-capitalize text-dark text-break text-wrap">' +
@@ -490,9 +494,9 @@
                                     '</td>';
 
                                 tableOut +=
-                                    '<td class="ps-4 align-middle text-start text-xs text-dark">' +
+                                    '<td class="ps-4 align-middle text-start text-xs text-dark"><span class="text-break text-wrap">' +
                                     obj.note +
-                                    '</td>';
+                                    '</span></td>';
                                 if (obj.status == 'pending') {
                                     tableOut += '<td class="ps-4 align-middle text-start text-xs">' +
                                         '<span class="badge badge-xs d-flex justify-content-center"' +
@@ -597,5 +601,5 @@
         });
     </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
 @endsection
