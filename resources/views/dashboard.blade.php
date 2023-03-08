@@ -460,8 +460,8 @@
                                                             @endif
                                                         </td>
                                                         <td><span
-                                                                class="fw-bold">{{ $recentExpenses->category_name }}</span><br><span
-                                                                style="font-size:10px">{{ $recentExpenses->merchant }}</span>
+                                                                class="fw-bold">{{ $recentExpenses->merchant }}</span><br><span
+                                                                style="font-size:10px">{{ $recentExpenses->category_name }}</span>
                                                         </td>
                                                         <td class="fw-bold">Rp
                                                             {{ number_format($recentExpenses->total_amount, 2) }}</td>
@@ -516,8 +516,8 @@
                                                             @endif
                                                         </td>
                                                         <td><span
-                                                                class="fw-bold">{{ $recentExpenses->category_name }}</span><br><span
-                                                                style="font-size:10px">{{ $recentExpenses->merchant }}</span>
+                                                                class="fw-bold">{{ $recentExpenses->merchant }}</span><br><span
+                                                                style="font-size:10px">{{ $recentExpenses->category_name }}</span>
                                                         </td>
                                                         <td class="fw-bold">Rp
                                                             {{ number_format($recentExpenses->total_amount, 2) }}</td>
@@ -581,9 +581,9 @@
                                                             </div>
                                                             <div class="col-md mx-2 d-flex flex-column">
                                                                 <span
-                                                                    style="font-size:11px;font-weight:600">{{ $recentExpenses->category_name }}</span>
+                                                                    style="font-size:11px;font-weight:600">{{ $recentExpenses->merchant }}</span>
                                                                 <span
-                                                                    style="font-size:11px">{{ $recentExpenses->merchant }}</span>
+                                                                    style="font-size:11px">{{ $recentExpenses->category_name }}</span>
                                                             </div>
                                                             <div
                                                                 class="col-md d-flex flex-column justify-content-end text-end">
@@ -681,9 +681,9 @@
                                                             </div>
                                                             <div class="col-md mx-2 d-flex flex-column">
                                                                 <span
-                                                                    style="font-size:11px;font-weight:600">{{ $recentExpenses->category_name }}</span>
+                                                                    style="font-size:11px;font-weight:600">{{ $recentExpenses->merchant }}</span>
                                                                 <span
-                                                                    style="font-size:11px">{{ $recentExpenses->merchant }}</span>
+                                                                    style="font-size:11px">{{ $recentExpenses->category_name }}</span>
                                                             </div>
                                                             <div
                                                                 class="col-md d-flex flex-column justify-content-end text-end">
