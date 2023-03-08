@@ -78,46 +78,115 @@
                     @endif
                 </div>
             </div>
-            <div class="card">
-                <!-- Card header -->
-                <div class="card-header pb-0">
-                    <div class="row">
-                        <div class="d-flex mb-4 justify-content-start justify-content-md-end">
-                            <form id="formSearch" action="" style="z-index: 0" onsubmit="handleChangeStatus(event)">
-                                <div class="row">
-                                    <div class="col-md mt-2">
-                                        <select name="statusType" id="status"
-                                            class="rounded border border-secondary text-secondary mb-4"
-                                            style="font-size:12px; height: 25px; width: 150px">
-                                            <option value="">Status</option>
-                                            <option class=""
-                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
-                                                value="pending">Pending</option>
-                                            <option
-                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'rejected' ? 'selected' : '' }}
-                                                value="rejected">Rejected</option>
-                                            <option
-                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'approved' ? 'selected' : '' }}
-                                                value="approved">Approved</option>
-                                            <option
-                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
-                                                value="done">Done</option>
-                                        </select>
-                                    </div>
-                                    {{-- <div class="col-md mt-2">
-                                        <button type="submit" value="submit"
-                                            style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
-                                            class="form-control text-bold d-flex justify-content-center" id="filter_button">
-                                            <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
-                                        </button>
-                                    </div> --}}
+
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#listTopUp">List Top Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#history">History</a>
+                </li>
+            </ul>
+
+            <div class="card" style="border-radius: 5px">
+
+
+                <div class="tab-content w-100">
+                    <div id="listTopUp" class="container tab-pane active"><br>
+                        <div class="pb-0">
+                            <div class="row">
+                                <div class="d-flex  justify-content-start justify-content-md-end">
+                                    <form id="formSearch" action="" style="z-index: 0"
+                                        onsubmit="handleChangeStatuss(event)">
+                                        <div class="row">
+                                            {{-- <div class="col-md mt-2">
+                                                <select name="statusType" id="status"
+                                                    class="rounded border border-secondary text-secondary mb-4"
+                                                    style="font-size:12px; height: 25px; width: 150px">
+                                                    <option value="">Status</option>
+                                                    <option class=""
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
+                                                        value="pending">Pending</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'rejected' ? 'selected' : '' }}
+                                                        value="rejected">Rejected</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'approved' ? 'selected' : '' }}
+                                                        value="approved">Approved</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
+                                                        value="done">Done</option>
+                                                </select>
+                                            </div> --}}
+                                            {{-- <div class="col-md mt-2">
+                                                <button type="submit" value="submit"
+                                                    style="line-height:10px; height:25px; font-size:9px;background:#19194b;color:white"
+                                                    class="form-control text-bold d-flex justify-content-center" id="filter_button">
+                                                    <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"></i></span>
+                                                </button>
+                                            </div> --}}
+
+                                            <div class="col-md mt-2">
+                                                <input type="date" class="form-control rounded text-dark px-2"
+                                                    name="start" value="{{ old(isset($_GET['start'])) }}"
+                                                    style="font-size:12px; height: 30px; width: 130px; background:#fbfbfb">
+                                            </div>
+                                            <div class="col-md mt-2">
+                                                <input type="date" class="form-control rounded text-dark px-2"
+                                                    name="end" value="{{ old(isset($_GET['end'])) }}"
+                                                    style="font-size:12px; height: 30px; width: 130px; background:#fbfbfb">
+                                            </div>
+                                            <div class="col-md mt-2">
+                                                <select name="filter_user" id="filter_user"
+                                                    class="form-select text-capitalize text-dark"
+                                                    style="font-size:12px; line-height: 13px; width:130px; background:#fbfbfb">
+                                                    {{-- <option value="" >All</option> --}}
+                                                    @foreach ($data['list_group_users'] as $members)
+                                                        <option {{ isset($_GET['filter_user']) }}
+                                                            value="{{ $members->id }}" class="text-capitalize">
+                                                            {{ $members->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            {{-- <div class="col-md mt-2">
+                                                <select name="statusType" id="" class="text-secondary "
+                                                    style="font-size:12px; height: 30px; width:120px; max-width:120px; border:1px solid #efefef; border-radius:8px;background:#fbfbfb">
+                                                    <option value="">Status</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
+                                                        value="pending">Pending</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'rejected' ? 'selected' : '' }}
+                                                        value="rejected">Rejected</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'approved' ? 'selected' : '' }}
+                                                        value="approved">Approved</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
+                                                        value="done">Done</option>
+                                                </select>
+                                            </div> --}}
+                                            <div class="col-md mt-2">
+                                                <button type="submit" value="submit"
+                                                    style="line-height:10px; height:30px; font-size:11px;background:#19194b;color:white"
+                                                    class="form-control text-bold d-flex justify-content-center align-items-center"
+                                                    id="filter_button">
+
+                                                    <span>FILTER&nbsp;<i class="fa-solid fa-magnifying-glass"
+                                                            style="font-size:9px"></i></span>
+
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md px-2">
-                    <div class="card-text pb-0">
+                        {{-- <div class="col-md">
+                            <div class="card-text pb-0"> --}}
                         <div class="table-responsive">
                             <table class="table table-flush">
                                 <thead class="thead-light">
@@ -147,7 +216,7 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody id="tableBody">
+                                <tbody id="">
                                     @if (count($approvals) > 0)
                                         @foreach ($approvals as $approval)
                                             <tr>
@@ -162,7 +231,8 @@
                                                         </span></div>
                                                     <div><span>
                                                         </span></div>
-                                                    <div><span>Remain Limit : </span><span class="text-xs font-weight-bold">
+                                                    <div><span>Remain Limit : </span><span
+                                                            class="text-xs font-weight-bold">
                                                             {{ number_format($approval['remain_limit'], 2) }}
                                                         </span>
                                                     </div>
@@ -180,9 +250,10 @@
                                                 </td>
                                                 <td class="align-middle text-start text-xs text-dark">
                                                     <div class="" style="max-width: 300px">
-                                                        <div><span>Purpose : </span><span class="font-weight-bold text-wrap"
+                                                        <div><span>Purpose : </span><span
+                                                                class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">
-                                                               {{ $approval['purpose_name'] }}
+                                                                {{ $approval['purpose_name'] }}
                                                             </span></div>
                                                         <div><span>Note : </span><span class="font-weight-bold text-wrap"
                                                                 style="text-align: justify">
@@ -265,8 +336,192 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{-- </div>
+                        </div> --}}
+                    </div>
+                    <div id="history" class="container tab-pane fade"><br>
+
+                        <div class="row">
+                            <div class="d-flex mb-4 justify-content-start justify-content-md-end">
+                                <form id="formSearch" action="" style="z-index: 0"
+                                    onsubmit="handleChangeStatus(event)">
+                                    <div class="row">
+                                        <div class="col-md mt-2">
+                                            <select name="statusType" id="status"
+                                                class="rounded border border-secondary text-dark mb-4"
+                                                style="font-size:12px; height: 25px; width: 150px">
+                                                <option value="done" {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : ''  }}>Status</option>
+                                                {{-- <option class=""
+                                                    {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
+                                                    value="pending">Pending</option> --}}
+                                                <option
+                                                    {{ isset($_GET['statusType']) && $_GET['statusType'] == 'rejected' ? 'selected' : '' }}
+                                                    value="rejected">Rejected</option>
+                                                <option
+                                                    {{ isset($_GET['statusType']) && $_GET['statusType'] == 'approved' ? 'selected' : '' }}
+                                                    value="approved">Approved</option>
+                                                <option
+                                                    {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
+                                                    value="done">Done</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-flush">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th
+                                            class="text-uppercase text-dark  text-xxs font-weight-bolder opacity-9 text-start">
+                                            Time
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-dark  text-xxs font-weight-bolder opacity-9 text-start ">
+                                            Member&nbsp;Info</th>
+                                        <th
+                                            class="text-uppercase text-dark  text-xxs font-weight-bolder opacity-9 text-start ">
+                                            Amount
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-dark  text-xxs font-weight-bolder opacity-9 text-start ">
+                                            Reason
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-dark  text-xxs font-weight-bolder opacity-9 text-center">
+                                            Status
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-dark  text-xxs font-weight-bolder opacity-9 text-center ">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    @if (count($history) > 0)
+                                        @foreach ($history as $histories)
+                                            <tr>
+                                                <td class="align-middle text-start text-xs text-dark">
+                                                    <span>
+                                                        {{ $histories['date'] }}
+                                                    </span>
+                                                </td>
+                                                <td class="align-middle text-start text-capitalize text-xs text-dark">
+                                                    <div><span class="font-weight-bold">
+                                                            {{ $histories['full_name'] }}
+                                                        </span></div>
+                                                    <div><span>
+                                                        </span></div>
+                                                    <div><span>Remain Limit : </span><span
+                                                            class="text-xs font-weight-bold">
+                                                            {{ number_format($histories['remain_limit'], 2) }}
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle text-start text-xs text-dark text-break text-wrap">
+                                                    <span class="text-xs">Top Up : </span><span class="font-weight-bold">
+                                                        {{ number_format($histories['amount'], 2) }}
+                                                    </span><br>
+                                                    <span class="text-xs">
+                                                        Approved :
+                                                        <span class="fw-bold">
+                                                            {{ number_format($histories['approval_amount'], 2) }}
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                                <td class="align-middle text-start text-xs text-dark">
+                                                    <div class="" style="max-width: 300px">
+                                                        <div><span>Purpose : </span><span
+                                                                class="font-weight-bold text-wrap"
+                                                                style="text-align: justify">
+                                                                {{ $histories['purpose_name'] }}
+                                                            </span></div>
+                                                        <div><span>Note : </span><span class="font-weight-bold text-wrap"
+                                                                style="text-align: justify">
+                                                                {{ $histories['note'] }}
+                                                            </span></div>
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle text-center text-xs d-flex justify-content-center">
+                                                    {{-- @if ($histories['status'] == 'pending')
+                                                        <span class="badge badge-xs d-flex justify-content-center mb-4"
+                                                            style="border:1px solid #FFCF23; color:#FFCF23; width: 60px; margin-top:20px">pending</span> --}}
+                                                    @if ($histories['status'] == 'approved')
+                                                        <span class="badge badge-xs d-flex justify-content-center mb-4"
+                                                            style="border: 1px solid #50B720; color:#50B720; width: 60px; margin-top:20px">approved</span>
+                                                    @elseif ($histories['status'] == 'rejected')
+                                                        <span class="badge badge-xs d-flex justify-content-center mb-4"
+                                                            style="border:1px solid #E40909; color:#E40909; width: 60px; margin-top:20px">rejected</span>
+                                                    @else
+                                                        <span class="badge badge-secondary badge-xs">unknown</span>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-xs">
+                                                    @if ($histories['status'] == 'pending')
+                                                        <div class="d-flex flex-row justify-content-center pt-3">
+                                                            <button
+                                                                onclick="getDetail('{{ $histories['topup_id'] }}', '{{ $histories['amount'] }}')"
+                                                                class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center "
+                                                                data-toggle="tooltip" data-placement="left"
+                                                                title="Edit"
+                                                                style="width: 60px; height:25px; background-color:#FFCF23"
+                                                                data-topup-id={{ $histories['topup_id'] }}
+                                                                data-topup-request={{ $histories['amount'] }}
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#approve-ask-dialog">
+                                                                <i
+                                                                    class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>
+                                                                <span style="font-size: 0.6em">Edit</span>
+                                                            </button>
+                                                            <button
+                                                                onclick="topupDecision('{{ $histories['topup_id'] }}', '{{ $histories['amount'] }}', 'approved')"
+                                                                class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center approved"
+                                                                data-toggle="tooltip" data-placement="left"
+                                                                title="Approve"
+                                                                style="width: 60px; height:25px; background-color:#50B720">
+                                                                <i
+                                                                    class="fa-solid fa-circle-check text-white text-lg me-1"></i>
+                                                                <span style="font-size: 0.6em">Approve</span>
+                                                            </button>
+                                                            <button data-bs-toggle="tooltip"
+                                                                onclick="topupDecision('{{ $histories['topup_id'] }}', '{{ $histories['amount'] }}', 'rejected')"
+                                                                class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center rejected"
+                                                                data-bs-original-title="reject" data-toggle="tooltip"
+                                                                data-placement="left" title="Reject"
+                                                                style="width: 60px; height:25px; background-color: #E40909">
+                                                                <i class="fas fa-circle-xmark text-white text-lg me-1"></i>
+                                                                <span style="font-size: 0.6em">Reject</span>
+                                                            </button>
+                                                        </div>
+                                                    @else
+                                                        <span class="badge badge-secondary badge-xs mt-3">done</span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr class="text-center">
+                                            <td colspan="6">
+                                                <div class="row justify-content-center h-100 align-items-center">
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-center flex-column py-5">
+                                                        <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid"
+                                                            alt="" style="width: 100px">
+                                                        <h6 class="font-weight-bold text-dark py-0">no have topup request
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                <!-- Card header -->
+
             </div>
         </div>
     </div>
@@ -549,11 +804,11 @@
                                     '<span class="text-xs">Top Up : </span><span class="font-weight-bold">' +
                                     obj.amount +
                                     '</span><br/>' +
-                                    '<span class="text-xs">Approved :'+
-                                        '<span class="fw-bold">'+
-                                            obj.approval_amount +
-                                        '</span>'+
-                                    '</span>'+
+                                    '<span class="text-xs">Approved :' +
+                                    '<span class="fw-bold">' +
+                                    obj.approval_amount +
+                                    '</span>' +
+                                    '</span>' +
                                     '</td>' +
                                     '<td class="align-middle text-start text-xs text-dark">' +
                                     '<div class="" style="max-width: 300px">' +
@@ -596,7 +851,8 @@
                                 if (obj.status == 'pending') {
                                     tableOut += '<td class="align-middle text-center text-xs">' +
                                         '<div class="d-flex flex-row justify-content-center pt-3">' +
-                                        '<button onclick="getDetail(`' + obj.topup_id + '`,`' + obj.amount + '`,`' + '#approve-ask-dialog' + '`)"' +
+                                        '<button onclick="getDetail(`' + obj.topup_id + '`,`' + obj
+                                    .amount + '`,`' + '#approve-ask-dialog' + '`)"' +
                                         'class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center"' +
                                         'data-toggle="tooltip" data-placement="left"' +
                                         'title="Edit"' +
@@ -607,7 +863,8 @@
                                         '<i class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>' +
                                         '<span style="font-size: 0.6em">Edit</span>' +
                                         '</button>' +
-                                        '<button onclick="topupDecision(`' + obj.topup_id + '`,`' + obj.amount + '`,`approved`)"' +
+                                        '<button onclick="topupDecision(`' + obj.topup_id + '`,`' + obj
+                                    .amount + '`,`approved`)"' +
                                         'class="mx-1 btn text-white d-flex align-items-center  d-flex justify-content-center approved"' +
                                         'data-toggle="tooltip" data-placement="left"' +
                                         'title="Approve"' +
@@ -651,7 +908,12 @@
     </script>
 
     <script>
-        function handleChangeStatus(event) {
+        function handleChangeStatuss(event) {
+            event.submit();
+        }
+    </script>
+    <script>
+        function handleChangeStatuss(event) {
             event.submit();
         }
     </script>
