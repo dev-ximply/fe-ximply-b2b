@@ -25,9 +25,11 @@ class TopUpApprovalController extends Controller
                 'section' => 'top_up_approval',
                 'data' => [
                     'top_up' => self::top_up(Auth::user()['id']),
+                    'list_group_users' => self::list_group_users($request, Auth::user()['id'])
 
                 ],
-                'approvals' => self::asyncGetExpenses(Auth::user()['id'], $statusType),
+                'approvals' => self::asyncGetExpenses($request, Auth::user()['id'], $statusType),
+                'history' => self::historyTopUp(Auth::user()['id'])
             ]
         );
     }
@@ -61,18 +63,31 @@ class TopUpApprovalController extends Controller
         return $response->data;
     }
 
-    public function asyncGetExpenses($userId, $statusType=null){
+    public function asyncGetExpenses(Request $request, $userId, $statusType=null){
         $headers = [
             'Authorization' => 'Bearer ' . session()->get('AuthToken'),
             'Accept' => 'application/json'
         ];
-        $params =[
-            'status' => $statusType,
-        ];
-        $url = config('api.base_url') . 'api/topup/approval/list/' . $userId;
+        // $params =[
+        //     'status' => $statusType,
+        // ];
+        $url = config('api.base_url') . 'api/topup/approval/list/' . $userId . '?status=pending' . '&order=asc' . "&";
+
+        if(isset($request->start)){
+            $url .= "date_start=" . $request->start . "&";
+        }
+
+        if(isset($request->end)){
+            $url .= "date_end=" . $request->end . "&";
+        }
+
+        if(isset($request->filter_user)){
+            $url .= "filter_user=" . $request->filter_user . "&";
+        }
+
         $response = Http::withHeaders($headers)
             ->asForm()
-            ->get($url, $params);
+            ->get($url);
 
         if ($response->successful()) {
             return $response->json()['data'];
@@ -100,5 +115,75 @@ class TopUpApprovalController extends Controller
         throw new \Exception($response->json()['message']);
     }
 
+    // public function list_group_users(Request $request, $userId, $statusType=null){
+    //     $headers = [
+    //         'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+    //         'Accept' => 'application/json'
+    //     ];
+    //     // $params =[
+    //     //     'status' => $statusType,
+    //     // ];
+    //     $url = config('api.base_url') . 'api/list/users';
+
+      
+        
+    //     $response = Http::withHeaders($headers)
+    //         ->asForm()
+    //         ->get($url);
+
+    //     if ($response->successful()) {
+    //         return $response->json()['data'];
+    //     }
+
+    //     throw new \Exception($response->json()['message']);
+    // }
+
+    public function list_group_users(Request $request, $user_id, $statusType = null)
+    {
+        // $client = new Client();
+
+
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $url = config('api.base_url') . 'api/list/users';
+
+        // if (isset($request->filter_user)){
+        //     $url .= "filter_user=" . $request->filter_user . "&";
+        // }
+
+        $response = Http::withHeaders($headers)
+            ->asForm()
+            ->get($url);
+
+        $response = json_decode($response->getBody());
+
+        // dd($response);
+
+        if ($response->success == false) {
+            return [];
+        }
+
+        return $response->data;
+    }
+
+    public static function historyTopUp($user_id){
+        $headers = [
+            'Authorization' => 'Bearer ' . session()->get('AuthToken'),
+            'Accept' => 'application/json'
+        ];
+
+        $url = config('api.base_url') . 'api/topup/approval/list/' . $user_id . '?status=done';
+
+        $response = Http::withHeaders($headers)->asForm()->get($url);
+
+        if ($response->successful()) {
+            return $response->json()['data'];
+        }
+
+        throw new \Exception($response->json()['message']);
+    }
 
 }

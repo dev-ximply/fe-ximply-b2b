@@ -6,6 +6,7 @@
     @include('voucher.side-voucher')
     <script src='{{ asset('js/image-zoom/jquery.zoom.js') }}'></script>
 
+
     <style>
         ::-ms-scrollbar {
             width: 12px;
@@ -242,170 +243,360 @@
             </div>
         </div>
     @endif
+
+
+
+
     <div class="row mt-4 position-relative">
         <div class="col-12">
+
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#rec_date">Receipt Date</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#up_date">Upload Date</a>
+                </li>
+            </ul>
+
             <div class="card" style="border-radius: 5px">
-                <div class="card-header pb-0">
-                    <div class="row">
-                        <div class="d-flex mb-4 justify-content-start justify-content-md-end">
-                            <form id="formSearch" action="" style="z-index: 0" onsubmit="handleChangeStatus(event)">
-                                <div class="row">
-                                    <div class="col-md mt-2">
-                                        <select name="statusType" id="status"
-                                            class="rounded border border-secondary text-secondary"
-                                            style="font-size:12px; height: 25px; width: 150px">
-                                            <option value="">Status</option>
-                                            <option
-                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
-                                                value="pending">Pending</option>
-                                            <option
-                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'rejected' ? 'selected' : '' }}
-                                                value="rejected">Rejected</option>
-                                            <option
-                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'approved' ? 'selected' : '' }}
-                                                value="approved">Approved</option>
-                                            <option
-                                                {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
-                                                value="done">Done</option>
-                                        </select>
-                                    </div>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div id="rec_date" class="container tab-pane active"><br>
+                        <div class="pb-0">
+                            <div class="row">
+                                <div class="d-flex mb-4 justify-content-start justify-content-md-end">
+                                    <form id="formSearch" action="" style="z-index: 0" onsubmit="handleChangeStatus(event)">
+                                        <div class="row">
+                                            <div class="col-md mt-2">
+                                                <select name="statusType" id="status"
+                                                    class="rounded border border-secondary text-dark"
+                                                    style="font-size:12px; height: 25px; width: 130px">
+                                                    <option value="">Status</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
+                                                        value="pending">Pending</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'rejected' ? 'selected' : '' }}
+                                                        value="rejected">Rejected</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'approved' ? 'selected' : '' }}
+                                                        value="approved">Approved</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
+                                                        value="done">Done</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-borderless text-dark" border="1">
+                                <thead>
+                                    <tr>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">Receipt Date 
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">Status
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">Purpose
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">
+                                            Merchant
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">
+                                            Amount
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">
+                                            Expense
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">
+                                            Note
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    @if (count($data['expenses']) != 0)
+                                        @foreach ($data['expenses'] as $item)
+                                            @php
+                                                
+                                                $i = 1;
+                                                
+                                            @endphp
+                                            <tr class="align-middle">
+                                                <td colspan="7" style="color: #000000;font-weight:500;font-size:12px;"
+                                                    class="text-md-start text-end ps-md-4 text-break text-wrap">
+                                                    {{-- <span
+                                                        class="px-md-1 text-break text-wrap text-dark"> --}}
+                                                    {{ $item->long_date }}
+                                                    {{-- </span> --}}
+                                                </td>
+                                            </tr>
+                                            @foreach ($item->expenses as $expense)
+                                                <tr class="">
+                                                    <td>{{ '#' . $i++ }}</td>
+                                                    <td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center"
+                                                        data-label="Status" style="color: #000000;">
+                                                        @if ($expense->status == 'approved')
+                                                            <span class="badge badge-xs d-flex justify-content-center"
+                                                                style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">
+                                                                {{ $expense->status }}
+                                                            </span>
+                                                        @elseif($expense->status == 'pending')
+                                                            <span class="badge badge-xs d-flex justify-content-center"
+                                                                style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">
+                                                                {{ $expense->status }}
+                                                            </span>
+                                                        @elseif($expense->status == 'rejected')
+                                                            <span class="badge badge-xs d-flex justify-content-center"
+                                                                style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">
+                                                                {{ $expense->status }}
+                                                            </span>
+                                                        @else
+                                                            <span class="badge badge-xs d-flex justify-content-center"
+                                                                style=" background:gray; color:gray; padding:5px; border-radius:5px; width:55px">
+                                                                {{ $expense->status }}
+                                                            </span>
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-md-start ps-md-4 text-end text-break text-wrap"
+                                                        data-label="Purpose" style="color: #000000">
+                                                        {{ $expense->purpose_name }}
+                                                    </td>
+                                                    <td class="text-break text-wrap text-md-start text-end ps-md-4"
+                                                        data-label="Merchant" style="color: #000000">
+                                                        {{ $expense->merchant }}
+                                                    </td>
+                                                    <td class="text-break text-wrap ps-md-4 text-md-start text-end"
+                                                        data-label="Total Amount" style="color: #000000">
+                                                        <span class="">
+                                                            {{ number_format($expense->total_amount, 2) }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-break text-wrap ps-md-4 text-md-start text-end"
+                                                        data-label="Expense" style="color: #000000">
+                                                        {{ $expense->category_name }}
+                                                    </td>
+                                                    <td class="text-break text-wrap ps-md-4 text-md-start text-end"
+                                                        data-label="Expense" style="color: #000000">
+                                                        {{ $expense->note }}
+                                                    </td>
+                                                    <td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between"
+                                                        data-label="Action">
+                                                        <button onclick="getExpenseData('{{ $expense->id }}' )"
+                                                            class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
+                                                            data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"
+                                                            style="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">
+                                                            View</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="7">
+                                                <div class="row justify-content-center h-100 align-items-center">
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-center flex-column py-5">
+                                                        <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid"
+                                                            alt="" style="width: 100px">
+                                                        <h6 class="font-weight-bold text-dark py-0">You don't have expense
+                                                        </h6>
+                                                        <span class="text-xs" style="text-align: center">Scan your recepit
+                                                            or
+                                                            create new
+                                                            expense form the button
+                                                            above</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="up_date" class="container tab-pane fade"><br>
+                        <div class="card-header pb-0">
+                            <div class="row">
+                                <div class="d-flex mb-4 justify-content-start justify-content-md-end">
+                                    <form id="formSearch" action="" style="z-index: 0" onsubmit="handleChangeStatus(event)">
+                                        <div class="row">
+                                            <div class="col-md mt-2">
+                                                <select name="statusType" id="statusUpload"
+                                                    class="rounded border border-secondary text-dark"
+                                                    style="font-size:12px; height: 25px; width: 130px">
+                                                    <option value="">Status</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'pending' ? 'selected' : '' }}
+                                                        value="pending">Pending</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'rejected' ? 'selected' : '' }}
+                                                        value="rejected">Rejected</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'approved' ? 'selected' : '' }}
+                                                        value="approved">Approved</option>
+                                                    <option
+                                                        {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
+                                                        value="done">Done</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-borderless text-dark" border="1">
+                                <thead>
+                                    <tr>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">Upload Date
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">Status
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">Purpose
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">
+                                            Merchant
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">
+                                            Amount
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">
+                                            Expense
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">
+                                            Note
+                                        </th>
+                                        <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
+                                            style="color: #000000; ">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBodyUpload">
+                                    @if (count($data['expenses']) != 0)
+                                        @foreach ($data['expenses'] as $item)
+                                            @php
+                                                
+                                                $i = 1;
+                                                
+                                            @endphp
+                                            <tr class="align-middle">
+                                                <td colspan="7" style="color: #000000;font-weight:500;font-size:12px;"
+                                                    class="text-md-start text-end ps-md-4 text-break text-wrap">
+                                                    {{-- <span
+                                                        class="px-md-1 text-break text-wrap text-dark"> --}}
+                                                    {{ $item->long_date }}
+                                                    {{-- </span> --}}
+                                                </td>
+                                            </tr>
+                                            @foreach ($item->expenses as $expense)
+                                                <tr class="">
+                                                    <td>{{ '#' . $i++ }}</td>
+                                                    <td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center"
+                                                        data-label="Status" style="color: #000000;">
+                                                        @if ($expense->status == 'approved')
+                                                            <span class="badge badge-xs d-flex justify-content-center"
+                                                                style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">
+                                                                {{ $expense->status }}
+                                                            </span>
+                                                        @elseif($expense->status == 'pending')
+                                                            <span class="badge badge-xs d-flex justify-content-center"
+                                                                style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">
+                                                                {{ $expense->status }}
+                                                            </span>
+                                                        @elseif($expense->status == 'rejected')
+                                                            <span class="badge badge-xs d-flex justify-content-center"
+                                                                style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">
+                                                                {{ $expense->status }}
+                                                            </span>
+                                                        @else
+                                                            <span class="badge badge-xs d-flex justify-content-center"
+                                                                style=" background:gray; color:gray; padding:5px; border-radius:5px; width:55px">
+                                                                {{ $expense->status }}
+                                                            </span>
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-md-start ps-md-4 text-end text-break text-wrap"
+                                                        data-label="Purpose" style="color: #000000">
+                                                        {{ $expense->purpose_name }}
+                                                    </td>
+                                                    <td class="text-break text-wrap text-md-start text-end ps-md-4"
+                                                        data-label="Merchant" style="color: #000000">
+                                                        {{ $expense->merchant }}
+                                                    </td>
+                                                    <td class="text-break text-wrap ps-md-4 text-md-start text-end"
+                                                        data-label="Total Amount" style="color: #000000">
+                                                        <span class="">
+                                                            {{ number_format($expense->total_amount, 2) }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-break text-wrap ps-md-4 text-md-start text-end"
+                                                        data-label="Expense" style="color: #000000">
+                                                        {{ $expense->category_name }}
+                                                    </td>
+                                                    <td class="text-break text-wrap ps-md-4 text-md-start text-end"
+                                                        data-label="Expense" style="color: #000000">
+                                                        {{ $expense->note }}
+                                                    </td>
+                                                    <td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between"
+                                                        data-label="Action">
+                                                        <button onclick="getExpenseData('{{ $expense->id }}' )"
+                                                            class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
+                                                            data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"
+                                                            style="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">
+                                                            View</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="7">
+                                                <div class="row justify-content-center h-100 align-items-center">
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-center flex-column py-5">
+                                                        <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid"
+                                                            alt="" style="width: 100px">
+                                                        <h6 class="font-weight-bold text-dark py-0">You don't have expense
+                                                        </h6>
+                                                        <span class="text-xs" style="text-align: center">Scan your recepit
+                                                            or
+                                                            create new
+                                                            expense form the button
+                                                            above</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-borderless text-dark" border="1">
-                        <thead>
-                            <tr>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Date Receipts
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Status
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">Purpose
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Merchant
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Amount
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Expense
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Note
-                                </th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                    style="color: #000000; ">
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-                            @if (count($data['expenses']) != 0)
-                                @foreach ($data['expenses'] as $item)
-                                    @php
-                                        
-                                        $i = 1;
-                                        
-                                    @endphp
-                                    <tr class="align-middle">
-                                        <td colspan="7" style="color: #000000;font-weight:500;font-size:12px;"
-                                            class="text-md-start text-end ps-md-4 text-break text-wrap">
-                                            {{-- <span
-                                                class="px-md-1 text-break text-wrap text-dark"> --}}
-                                            {{ $item->long_date }}
-                                            {{-- </span> --}}
-                                        </td>
-                                    </tr>
-                                    @foreach ($item->expenses as $expense)
-                                        <tr class="">
-                                            <td>{{ '#' . $i++ }}</td>
-                                            <td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center"
-                                                data-label="Status" style="color: #000000;">
-                                                @if ($expense->status == 'approved')
-                                                    <span class="badge badge-xs d-flex justify-content-center"
-                                                        style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">
-                                                        {{ $expense->status }}
-                                                    </span>
-                                                @elseif($expense->status == 'pending')
-                                                    <span class="badge badge-xs d-flex justify-content-center"
-                                                        style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">
-                                                        {{ $expense->status }}
-                                                    </span>
-                                                @elseif($expense->status == 'rejected')
-                                                    <span class="badge badge-xs d-flex justify-content-center"
-                                                        style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">
-                                                        {{ $expense->status }}
-                                                    </span>
-                                                @else
-                                                    <span class="badge badge-xs d-flex justify-content-center"
-                                                        style=" background:gray; color:gray; padding:5px; border-radius:5px; width:55px">
-                                                        {{ $expense->status }}
-                                                    </span>
-                                                @endif
-                                            </td>
-                                            <td class="text-md-start ps-md-4 text-end text-break text-wrap"
-                                                data-label="Purpose" style="color: #000000">
-                                                {{ $expense->purpose_name }}
-                                            </td>
-                                            <td class="text-break text-wrap text-md-start text-end ps-md-4"
-                                                data-label="Merchant" style="color: #000000">
-                                                {{ $expense->merchant }}
-                                            </td>
-                                            <td class="text-break text-wrap ps-md-4 text-md-start text-end"
-                                                data-label="Total Amount" style="color: #000000">
-                                                <span class="">
-                                                    {{ number_format($expense->total_amount, 2) }}
-                                                </span>
-                                            </td>
-                                            <td class="text-break text-wrap ps-md-4 text-md-start text-end"
-                                                data-label="Expense" style="color: #000000">
-                                                {{ $expense->category_name }}
-                                            </td>
-                                            <td class="text-break text-wrap ps-md-4 text-md-start text-end"
-                                                data-label="Expense" style="color: #000000">
-                                                {{ $expense->note }}
-                                            </td>
-                                            <td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between"
-                                                data-label="Action">
-                                                <button onclick="getExpenseData('{{ $expense->id }}' )"
-                                                    class="btn text-white d-flex  justify-content-center align-items-center text-capitalize"
-                                                    data-bs-toggle="modal" data-bs-target="#viewExpenseDetail"
-                                                    style="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">
-                                                    View</button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endforeach
-                            @else
-                                <tr>
-                                    <td colspan="7">
-                                        <div class="row justify-content-center h-100 align-items-center">
-                                            <div class="d-flex align-items-center justify-content-center flex-column py-5">
-                                                <img src="{{ asset('img/icons/bill.png') }}" class="img-fluid"
-                                                    alt="" style="width: 100px">
-                                                <h6 class="font-weight-bold text-dark py-0">You don't have expense</h6>
-                                                <span class="text-xs" style="text-align: center">Scan your recepit or
-                                                    create new
-                                                    expense form the button
-                                                    above</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endif
-                        </tbody>
-                    </table>
-                </div>
+
             </div>
         </div>
     </div>
@@ -576,8 +767,6 @@
                     new getDataExpenses(urlSearch);
                 });
             });
-
-
             function getDataExpenses(urlSearch) {
                 $("#tableBody").html("");
                 // $("#totalAmount").html("0.00");
@@ -651,19 +840,23 @@
                                         '</td>';
 
                                     tableOut +=
-                                        '<td class="text-break text-wrap text-md-start text-end ps-md-4"'+
-                                            'data-label="Merchant" style="color: #000000">'+
-                                               expense.merchant+
+                                        '<td class="text-break text-wrap text-md-start text-end ps-md-4"' +
+                                        'data-label="Merchant" style="color: #000000">' +
+                                        expense.merchant +
                                         '</td>';
-                                    tableOut += '<td class="text-break text-wrap text-md-start text-end ps-md-4"'+
-                                                   'data-label="Merchant" style="color: #000000">'+
-                                                   expense.total_amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + '</td>';
-                                    tableOut += '<td class="text-break text-wrap text-md-start text-end ps-md-4"'+
-                                                  'data-label="Merchant" style="color: #000000">'+
-                                                 expense.category_name + '</td>';
-                                    tableOut +=  '<td class="text-break text-wrap text-md-start text-end ps-md-4"'+
-                                                    'data-label="Merchant" style="color: #000000">'+
-                                                  expense.note + '</td>';
+                                    tableOut +=
+                                        '<td class="text-break text-wrap text-md-start text-end ps-md-4"' +
+                                        'data-label="Merchant" style="color: #000000">' +
+                                        expense.total_amount.toString().replace(
+                                            /(\d)(?=(\d{3})+(?!\d))/g, "$1,") + '</td>';
+                                    tableOut +=
+                                        '<td class="text-break text-wrap text-md-start text-end ps-md-4"' +
+                                        'data-label="Merchant" style="color: #000000">' +
+                                        expense.category_name + '</td>';
+                                    tableOut +=
+                                        '<td class="text-break text-wrap text-md-start text-end ps-md-4"' +
+                                        'data-label="Merchant" style="color: #000000">' +
+                                        expense.note + '</td>';
                                     tableOut +=
                                         '<td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between" data-label="Action">' +
                                         ' <button onclick="getExpenseData(' + '`' + expense.id + '`' +
@@ -678,6 +871,140 @@
                             $("#tableBody").append(tableOut);
                         } else {
                             $("#tableBody").empty();
+                        }
+
+                    },
+                    complete: function(data) {
+                        $("#main-loader").hide();
+                    }
+                });
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": "Bearer " + AUTH_TOKEN,
+                    "Accept": "application/json"
+                }
+            });
+
+
+            $(document).ready(function() {
+                var urlSearch = "";
+                $('#statusUpload').on('change', function() {
+                    var status = $('#statusUpload').val();
+                    urlSearch = API_URL + "api/expense/list/nested?user_id=" +
+                        USR_ID +
+                        "&status=" + status;
+                    new getDataExpenses(urlSearch);
+                });
+            });
+            function getDataExpenses(urlSearch) {
+                $("#tableBodyUpload").html("");
+                // $("#totalAmount").html("0.00");
+                $.ajaxSetup({
+                    headers: {
+                        "Authorization": "Bearer " + AUTH_TOKEN,
+                        "Accept": "application/json"
+                    }
+                });
+                $.ajax({
+                    type: "GET",
+                    url: urlSearch,
+                    beforeSend: function() {
+                        $("#main-loader").show();
+                    },
+                    success: function(res) {
+                        if (res) {
+                            console.log(res);
+                            var response = res['data'];
+                            var tableOut = "";
+                            // var totalAmount = 0;
+                            for (const obj of response) {
+                                var i = 1;
+                                tableOut += '<tr class="align-middle">' +
+                                    '<td colspan="7" style="color: #000000;font-weight:500;font-size:12px;" class="text-md-start text-end ps-md-4 text-break text-wrap">' +
+                                    obj.long_date +
+                                    '</td> </tr>'
+                                for (const expense of obj.expenses) {
+                                    tableOut +=
+                                        '<tr><td class="font-weight-bold pt-3">';
+                                    tableOut +=
+                                        '<p class="text-sm text-dark">' + '#' + i++ +
+                                        '</p></td>';
+                                    if (expense.status == 'approved') {
+                                        tableOut +=
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<span class="badge badge-xs d-flex justify-content-center"' +
+                                            'style=" border:1px solid #50B720; color:#50B720; padding:5px; border-radius:5px; width:55px">' +
+                                            expense.status +
+                                            '</span>' +
+                                            '</td>';
+                                    } else if (expense.status == 'pending') {
+                                        tableOut +=
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<span class="badge badge-xs d-flex justify-content-center"' +
+                                            'style=" border:1px solid #FFCF23; color:#FFCF23; padding:5px; border-radius:5px; width:55px">' +
+                                            expense.status + '</span>' +
+                                            '</p></td>';
+                                    } else if (expense.status == 'rejected') {
+                                        tableOut +=
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            '<span class="badge badge-xs d-flex justify-content-center"' +
+                                            'style=" border:1px solid #E40909; color:#E40909; padding:5px; border-radius:5px; width:55px">' +
+                                            expense.status + '</span>' +
+                                            '</td>';
+
+                                    } else {
+                                        tableOut +=
+                                            '<td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center">' +
+                                            expense.status + '</p></td>';
+
+                                    }
+
+                                    tableOut +=
+                                        // '<td class="text-xs font-weight-bold pt-3 px-0"><p class="text-sm text-dark text-break text-wrap">' +
+                                        // expense.purpose_name + '</p></td>';
+
+                                        '<td class="text-md-start ps-md-4 text-end text-break text-wrap"' +
+                                        'data-label="Purpose" style="color: #000000">' +
+                                        expense.purpose_name +
+                                        '</td>';
+
+                                    tableOut +=
+                                        '<td class="text-break text-wrap text-md-start text-end ps-md-4"' +
+                                        'data-label="Merchant" style="color: #000000">' +
+                                        expense.merchant +
+                                        '</td>';
+                                    tableOut +=
+                                        '<td class="text-break text-wrap text-md-start text-end ps-md-4"' +
+                                        'data-label="Merchant" style="color: #000000">' +
+                                        expense.total_amount.toString().replace(
+                                            /(\d)(?=(\d{3})+(?!\d))/g, "$1,") + '</td>';
+                                    tableOut +=
+                                        '<td class="text-break text-wrap text-md-start text-end ps-md-4"' +
+                                        'data-label="Merchant" style="color: #000000">' +
+                                        expense.category_name + '</td>';
+                                    tableOut +=
+                                        '<td class="text-break text-wrap text-md-start text-end ps-md-4"' +
+                                        'data-label="Merchant" style="color: #000000">' +
+                                        expense.note + '</td>';
+                                    tableOut +=
+                                        '<td class="text-sm d-flex justify-content-md-start ps-md-4 justify-content-between" data-label="Action">' +
+                                        ' <button onclick="getExpenseData(' + '`' + expense.id + '`' +
+                                        ')"' +
+                                        'class = "btn text-white d-flex  justify-content-center align-items-center text-capitalize"' +
+                                        'data-bs-toggle = "modal" data-bs-target = "#viewExpenseDetail"' +
+                                        'style ="background-color: #FF720C;width:65px;height:25px;font-size:12px;font-weight:500">' +
+                                        ' View' + ' </button> </td></tr>'
+                                }
+
+                            }
+                            $("#tableBodyUpload").append(tableOut);
+                        } else {
+                            $("#tableBodyUpload").empty();
                         }
 
                     },

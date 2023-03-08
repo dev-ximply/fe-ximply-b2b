@@ -116,21 +116,52 @@
 
                 <li class="nav-item">
 
-                    <a class="nav-link @if ($section == 'approval') active @endif" href="/approval">
+                    <a data-bs-toggle="collapse" href="#manage-approval"
+                        class="nav-link @if ($section == 'approval' || $section == 'top_up_approval') active @endif">
 
                         <div
-                            class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'approval' ? 'bg-orange' : 'bg-purple' }}">
+                            class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'approval' || $section == 'top_up_approval' ? 'bg-orange' : 'bg-purple' }}">
 
-                            <div class="{{ $section == 'approval' ? 'text-white' : 'text-white' }}">
+                            <div
+                                class="{{ $section == 'approval' || $section == 'top_up_approval' ? 'text-white' : 'text-white' }}">
                                 <img src="{{ asset('img/icons/sidebar/approval.png') }}" alt=""
                                     style="width: 35px">
                             </div>
                         </div>
 
                         <span
-                            class="nav-link-text ms-1 {{ $section == 'approval' ? 'text-orange' : 'text-purple' }}">Approval</span>
+                            class="nav-link-text ms-1 {{ $section == 'approval' || $section == 'top_up_approval' ? 'text-orange' : 'text-purple' }}">Approval</span>
 
                     </a>
+                    <div class="collapse @if ($section == 'approval' || $section == 'top_up_approval') show @endif" id="manage-approval">
+
+                        <ul class="nav ms-4 ps-3">
+
+                            <li class="nav-item ">
+
+
+                                <a class="nav-link @if ($section == 'approval') active @endif " href="/approval">
+
+                                    <span class="sidenav-mini-icon text-purple"> O </span>
+
+                                    <span class="nav-link-text ms-1  text-purple">Expense Approval</span>
+
+                                </a>
+
+
+                                <a class="nav-link @if ($section == 'top_up_approval') active @endif"
+                                    href="/spend/request">
+
+                                    <span class="sidenav-mini-icon text-purple"> O </span>
+
+                                    <span class="nav-link-text ms-1 text-purple">Top Up Approval</span>
+
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
 
                 </li>
 
@@ -207,15 +238,13 @@
 
 
             @if (session()->get('manage_budget') == 1 || session()->get('approval_topup') == 1)
-
                 <li class="nav-item">
 
-                    <a data-bs-toggle="collapse" href="#ecommerceExamples"
-                        class="nav-link  @if ($section == 'budget' || $section == 'top_up_approval' || $section == 'pre-approval') active @endif"
+                    <a href="/budget" class="nav-link  @if ($section == 'budget') active @endif"
                         aria-controls="ecommerceExamples" role="button" aria-expanded="false">
 
                         <div
-                            class="icon  icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'budget' || $section == 'top_up_approval' || $section == 'pre-approval' ? 'bg-orange' : 'bg-purple' }}">
+                            class="icon  icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'budget' ? 'bg-orange' : 'bg-purple' }}">
 
                             <div
                                 class="{{ $section == 'budget' || $section == 'top_up_approval' ? 'text-white' : 'text-white' }}">
@@ -224,51 +253,11 @@
                             </div>
                         </div>
 
-                        <span
-                            class="nav-link-text ms-1 {{ $section == 'budget' || $section == 'top_up_approval' || $section == 'pre-approval' ? 'text-orange' : 'text-purple' }}">Manage
-
+                        <span class="nav-link-text ms-1 {{ $section == 'budget' ? 'text-orange' : 'text-purple' }}">
                             Budget</span>
 
                     </a>
-
-                    <div class="collapse @if ($section == 'budget' || $section == 'top_up_approval' || $section == 'pre-approval') show @endif" id="ecommerceExamples">
-
-                        <ul class="nav ms-4 ps-3">
-
-                            <li class="nav-item ">
-
-                                @if (session()->get('manage_budget') == 1 || session()->get('approval_topup') == 1)
-                                    <a class="nav-link @if ($section == 'budget') active @endif"
-                                        href="/budget">
-
-                                        <span class="sidenav-mini-icon text-purple"> O </span>
-
-                                        <span class="nav-link-text ms-1 text-purple">Budget</span>
-
-                                    </a>
-
-                                    {{-- @endif
-
-                                @if (session()->get('approval_topup') == 1) --}}
-
-                                    <a class="nav-link @if ($section == 'top_up_approval') active @endif "
-                                        href="/spend/request">
-
-                                        <span class="sidenav-mini-icon text-purple"> O </span>
-
-                                        <span class="nav-link-text ms-1  text-purple">Top Up Approval</span>
-
-                                    </a>
-                                @endif
-
-                            </li>
-
-                        </ul>
-
-                    </div>
-
                 </li>
-
             @endif
 
 
@@ -349,8 +338,7 @@
 
                             <li class="nav-item ">
 
-                                <a class="nav-link @if ($section == 'permission') active @endif "
-                                    href="/roles">
+                                <a class="nav-link @if ($section == 'permission') active @endif " href="/roles">
 
                                     <span class="sidenav-mini-icon text-purple"> O </span>
 
@@ -384,7 +372,8 @@
 
     <div class="sidenav-footer mx-3 mt-5 pt-5">
 
-        <div class="card card-background shadow-none " id="sidenavCard" style="border: 1px solid #dddddd; background:#191a4d">
+        <div class="card card-background shadow-none " id="sidenavCard"
+            style="border: 1px solid #dddddd; background:#191a4d">
 
             <div class="card-body text-start p-3 w-100">
 
