@@ -55,7 +55,7 @@
                             <div class="col-md-2">
                                 {{-- <form action=""> --}}
                                     <select name="select_group" id="select_group" class="form-select">
-                                        <option value="">Filter Group</option>
+                                        <option value="0">Filter Group</option>
                                         @foreach ($data['list_department'] as $item)
                                             <option value="{{ $item->id }}" class="text-dark">{{ $item->group_name }}
                                             </option>

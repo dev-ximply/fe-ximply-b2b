@@ -460,11 +460,7 @@
                                                             @endif
                                                         </td>
                                                         <td><span
-<<<<<<< HEAD
                                                                 class="fw-bold text-break text-wrap">{{ $recentExpenses->merchant }}</span><br><span
-=======
-                                                                class="fw-bold">{{ $recentExpenses->merchant }}</span><br><span
->>>>>>> 970cb45b5bf6f2f3a1b93ecca122ba7ecd4ad239
                                                                 style="font-size:10px">{{ $recentExpenses->category_name }}</span>
                                                         </td>
                                                         <td class="fw-bold">Rp
@@ -520,11 +516,7 @@
                                                             @endif
                                                         </td>
                                                         <td><span
-<<<<<<< HEAD
                                                                 class="fw-bold text-break text-wrap">{{ $recentExpenses->merchant }}</span><br><span
-=======
-                                                                class="fw-bold">{{ $recentExpenses->merchant }}</span><br><span
->>>>>>> 970cb45b5bf6f2f3a1b93ecca122ba7ecd4ad239
                                                                 style="font-size:10px">{{ $recentExpenses->category_name }}</span>
                                                         </td>
                                                         <td class="fw-bold">Rp
