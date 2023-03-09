@@ -285,7 +285,7 @@ class DashboardController extends Controller
             'Accept' => 'application/json'
         ];
 
-        $request = new Psr7Request('GET', config('api.base_url') . 'api/analytics/most/amount/merchant' . '?limit=3' ,$headers);
+        $request = new Psr7Request('GET', config('api.base_url') . 'api/analytics/most/count/merchant' . '?limit=3' ,$headers);
 
         try {
             $res = $client->sendAsync($request)->wait();
