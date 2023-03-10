@@ -495,7 +495,9 @@
                                                             </button>
                                                         </div>
                                                     @else
-                                                        <span class="badge badge-secondary badge-xs mt-3">done</span>
+                                                    <div class="d-flex  justify-content-center">
+                                                        <span class="badge badge-secondary badge-xs ">done</span>
+                                                    </div>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -796,26 +798,28 @@
                                     '<div><span>' +
                                     '</span></div>' +
                                     '<div><span>Remain Limit : </span><span class="text-xs font-weight-bold">' +
-                                    obj.remain_limit +
+                                    obj.remain_limit.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g,
+                                        "$1,") +
                                     '</span>' +
                                     '</div>' +
                                     '</td>'
                                 tableOut += '<td class="align-middle text-start text-xs text-dark">' +
                                     '<span class="text-xs">Top Up : </span><span class="font-weight-bold">' +
-                                    obj.amount +
+                                    obj.amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g,
+                                        "$1,") +
                                     '</span><br/>' +
                                     '<span class="text-xs">Approved :' +
                                     '<span class="fw-bold">' +
-                                    obj.approval_amount +
+                                    obj.approval_amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g,
+                                        "$1,") +
                                     '</span>' +
                                     '</span>' +
                                     '</td>' +
                                     '<td class="align-middle text-start text-xs text-dark">' +
                                     '<div class="" style="max-width: 300px">' +
-                                    '<div><span>Purpose : </span><span' +
-                                    'class="font-weight-bold text-wrap"' +
+                                    '<div><span>Purpose : </span><span class="font-weight-bold text-wrap"' +
                                     'style="text-align: justify">' +
-                                    obj.purpose +
+                                    obj.purpose_name +
 
                                     '</span></div>' +
                                     '<div><span>Note : </span><span class="font-weight-bold text-wrap"' +
