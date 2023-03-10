@@ -321,7 +321,8 @@
                                             </div> --}}
 
                                             <div class="col-md mt-2">
-                                                <select name="statusType" id="status" class="text-dark border-secondary"
+                                                <select name="statusType" id="status"
+                                                    class="text-dark border-secondary"
                                                     style="font-size:12px; height: 30px; width:130px; max-width:120px; border:1px solid #efefef; border-radius:8px;background:#fbfbfb">
                                                     <option
                                                         {{ isset($_GET['statusType']) && $_GET['statusType'] == 'done' ? 'selected' : '' }}
@@ -579,28 +580,46 @@
                 document.getElementById('decisionButton').style.display = "none";
             }
         }
+
         function getExpenseApprovalData(receipt_picture_directory, additional_picture_directory, receipt_date, merchant,
             total_amount, location,
             category, sub_category, partner, purpose, expense_of, note, status, approval_id) {
-            document.getElementById('detail_receipt_file').src = STORAGE_URL + receipt_picture_directory;
-            document.getElementById('detail_additional_file').src = STORAGE_URL + additional_picture_directory;
-            document.getElementById('detail_date').value = receipt_date;
-            document.getElementById('detail_merchant').value = merchant;
-            document.getElementById('detail_total_amount').value = total_amount;
-            document.getElementById('detail_location').value = location;
-            document.getElementById('detail_category').value = category;
-            document.getElementById('detail_sub_category').value = sub_category;
-            document.getElementById('detail_partner').value = partner;
-            document.getElementById('detail_purpose').value = purpose;
-            document.getElementById('detail_note').value = note;
-            document.getElementById('dataExpenseOf').value = expense_of;
-            approvalID = approval_id;
-            if (status == "pending") {
-                document.getElementById('decisionButton').style.display = "block";
-            } else {
-                document.getElementById('decisionButton').style.display = "none";
-            }
+
+            $.ajax({
+                beforeSend: function() {
+                    $('#main-loader').show();
+                },
+                success: function() {
+                    
+                    document.getElementById('detail_receipt_file').src = STORAGE_URL +
+                    receipt_picture_directory;
+                    document.getElementById('detail_additional_file').src = STORAGE_URL +
+                        additional_picture_directory;
+                    document.getElementById('detail_date').value = receipt_date;
+                    document.getElementById('detail_merchant').value = merchant;
+                    document.getElementById('detail_total_amount').value = total_amount;
+                    document.getElementById('detail_location').value = location;
+                    document.getElementById('detail_category').value = category;
+                    document.getElementById('detail_sub_category').value = sub_category;
+                    document.getElementById('detail_partner').value = partner;
+                    document.getElementById('detail_purpose').value = purpose;
+                    document.getElementById('detail_note').value = note;
+                    document.getElementById('dataExpenseOf').value = expense_of;
+                    approvalID = approval_id;
+                    if (status == "pending") {
+                        document.getElementById('decisionButton').style.display = "block";
+                    } else {
+                        document.getElementById('decisionButton').style.display = "none";
+                    }
+                },
+                complete:function(){
+                    
+                    $('#main-loader').hide();
+                }
+            });
+
         }
+
 
         function approvalDecision(userId, approval_id, decision) {
             console.log(userId);
