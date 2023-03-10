@@ -231,7 +231,7 @@
                                                             <div
                                                                 class="d-flex flex-row pt-3 d-flex justify-content-center">
                                                                 <button
-                                                                    onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category_name }}', '{{ $expense_approval->sub_category_name }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose_name }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->note }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
+                                                                    onclick="getExpenseApprovalData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category_name }}', '{{ $expense_approval->sub_category_name }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose_name }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->note }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
                                                                     class="mx-1
                                                                     btn text-white d-flex align-items-center d-flex
                                                                     justify-content-center"
@@ -558,6 +558,28 @@
 
     <script>
         function getExpenseData(receipt_picture_directory, additional_picture_directory, receipt_date, merchant,
+            total_amount, location,
+            category, sub_category, partner, purpose, expense_of, note, status, approval_id) {
+            document.getElementById('detail_receipt_file').src = STORAGE_URL + receipt_picture_directory;
+            document.getElementById('detail_additional_file').src = STORAGE_URL + additional_picture_directory;
+            document.getElementById('detail_date').value = receipt_date;
+            document.getElementById('detail_merchant').value = merchant;
+            document.getElementById('detail_total_amount').value = total_amount;
+            document.getElementById('detail_location').value = location;
+            document.getElementById('detail_category').value = category;
+            document.getElementById('detail_sub_category').value = sub_category;
+            document.getElementById('detail_partner').value = partner;
+            document.getElementById('detail_purpose').value = purpose;
+            document.getElementById('detail_note').value = note;
+            document.getElementById('dataExpenseOf').value = expense_of;
+            approvalID = approval_id;
+            if (status == "pending") {
+                document.getElementById('decisionButton').style.display = "block";
+            } else {
+                document.getElementById('decisionButton').style.display = "none";
+            }
+        }
+        function getExpenseApprovalData(receipt_picture_directory, additional_picture_directory, receipt_date, merchant,
             total_amount, location,
             category, sub_category, partner, purpose, expense_of, note, status, approval_id) {
             document.getElementById('detail_receipt_file').src = STORAGE_URL + receipt_picture_directory;
