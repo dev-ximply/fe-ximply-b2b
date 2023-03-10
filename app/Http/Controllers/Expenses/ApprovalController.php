@@ -26,7 +26,7 @@ class ApprovalController extends Controller
                 'data' => [
                     'limit' => SpendsController::get_balance(Auth::user()['id']),                    
                     'expense_approval' => self::asyncGetExpenses($request,Auth::user()['id'], $statusType),
-                    'history_approval' => self::history_approval($request,Auth::user()['id'], $statusType),
+                    'history_approval' => self::history_approval(Auth::user()['id']),
                     'list_group_users' => self::list_group_users($request, Auth::user()['id'])
                 ]
             ]
@@ -106,7 +106,7 @@ class ApprovalController extends Controller
     }
 
 
-    public static function history_approval(Request $request, $user_id){
+    public static function history_approval($user_id){
         $headers = [
             'Authorization' => 'Bearer ' . session()->get('AuthToken'),
             'Accept' => 'application/json'
