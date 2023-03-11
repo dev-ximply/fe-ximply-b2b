@@ -472,7 +472,7 @@
                                                             <div
                                                                 class="d-flex flex-row pt-3 d-flex justify-content-center">
                                                                 <button
-                                                                    onclick="getExpenseData('{{ $history_approval->receipt_picture_directory }}', '{{ $history_approval->additional_picture_directory }}', '{{ $history_approval->receipt_date }}', '{{ $history_approval->merchant }}', '{{ $history_approval->total_amount }}', '{{ $history_approval->location }}', '{{ $history_approval->category_name }}', '{{ $history_approval->sub_category_name }}', '{{ $history_approval->client_name }}', '{{ $history_approval->purpose_name }}', '{{ $history_approval->expense_of }}', '{{ $history_approval->note }}', '{{ $history_approval->status }}', '{{ $history_approval->approval_id }}')"
+                                                                    onclick="getExpenseApprovalData('{{ $history_approval->receipt_picture_directory }}', '{{ $history_approval->additional_picture_directory }}', '{{ $history_approval->receipt_date }}', '{{ $history_approval->merchant }}', '{{ $history_approval->total_amount }}', '{{ $history_approval->location }}', '{{ $history_approval->category_name }}', '{{ $history_approval->sub_category_name }}', '{{ $history_approval->client_name }}', '{{ $history_approval->purpose_name }}', '{{ $history_approval->expense_of }}', '{{ $history_approval->note }}', '{{ $history_approval->status }}', '{{ $history_approval->approval_id }}')"
                                                                     class="mx-1
                                                                     btn text-white d-flex align-items-center d-flex
                                                                     justify-content-center"
@@ -480,7 +480,7 @@
                                                                     data-placement="left" title="Review"
                                                                     style="width: 60px; height:25px; background-color:#FFCF23"
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#viewExpenseDetail">
+                                                                    data-bs-target="#viewExpenseDetailReview">
                                                                     <i
                                                                         class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>
                                                                     <span style="font-size: 0.6em">Review</span>
