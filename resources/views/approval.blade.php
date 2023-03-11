@@ -582,44 +582,44 @@
             }
         }
 
-        function getExpenseApprovalData(receipt_picture_directory, additional_picture_directory, receipt_date, merchant,
-            total_amount, location,
-            category, sub_category, partner, purpose, expense_of, note, status, approval_id) {
+        // function getExpenseApprovalData(receipt_picture_directory, additional_picture_directory, receipt_date, merchant,
+        //     total_amount, location,
+        //     category, sub_category, partner, purpose, expense_of, note, status, approval_id) {
 
-            $.ajax({
-                beforeSend: function() {
-                    $('#main-loader').show();
-                },
-                success: function() {
+        //     $.ajax({
+        //         beforeSend: function() {
+        //             $('#main-loader').show();
+        //         },
+        //         success: function() {
                     
-                    document.getElementById('detail_receipt_file_review').src = STORAGE_URL +
-                    receipt_picture_directory;
-                    document.getElementById('detail_additional_file_review').src = STORAGE_URL +
-                        additional_picture_directory;
-                    document.getElementById('detail_date_review').value = receipt_date;
-                    document.getElementById('detail_merchant_review').value = merchant;
-                    document.getElementById('detail_total_amount_review').value = total_amount;
-                    document.getElementById('detail_location_review').value = location;
-                    document.getElementById('detail_category_review').value = category;
-                    document.getElementById('detail_sub_category_review').value = sub_category;
-                    document.getElementById('detail_partner_review').value = partner;
-                    document.getElementById('detail_purpose_review').value = purpose;
-                    document.getElementById('detail_note_review').value = note;
-                    document.getElementById('dataExpenseOf_review').value = expense_of;
-                    approvalID = approval_id;
-                    if (status == "pending") {
-                        document.getElementById('decisionButton').style.display = "block";
-                    } else {
-                        document.getElementById('decisionButton').style.display = "none";
-                    }
-                },
-                complete:function(){
+        //             document.getElementById('detail_receipt_file_review').src = STORAGE_URL +
+        //             receipt_picture_directory;
+        //             document.getElementById('detail_additional_file_review').src = STORAGE_URL +
+        //                 additional_picture_directory;
+        //             document.getElementById('detail_date_review').value = receipt_date;
+        //             document.getElementById('detail_merchant_review').value = merchant;
+        //             document.getElementById('detail_total_amount_review').value = total_amount;
+        //             document.getElementById('detail_location_review').value = location;
+        //             document.getElementById('detail_category_review').value = category;
+        //             document.getElementById('detail_sub_category_review').value = sub_category;
+        //             document.getElementById('detail_partner_review').value = partner;
+        //             document.getElementById('detail_purpose_review').value = purpose;
+        //             document.getElementById('detail_note_review').value = note;
+        //             document.getElementById('dataExpenseOf_review').value = expense_of;
+        //             approvalID = approval_id;
+        //             if (status == "pending") {
+        //                 document.getElementById('decisionButton_review').style.display = "block";
+        //             } else {
+        //                 document.getElementById('decisionButton_review').style.display = "none";
+        //             }
+        //         },
+        //         complete:function(){
                     
-                    $('#main-loader').hide();
-                }
-            });
+        //             $('#main-loader').hide();
+        //         }
+        //     });
 
-        }
+        // }
 
 
         function approvalDecision(userId, approval_id, decision) {

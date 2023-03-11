@@ -155,7 +155,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer text-end" id="decisionButton" style="display: none">
+            <div class="modal-footer text-end" id="decisionButton_review" style="display: none">
                 <button onclick="approvalDecision('{{ Auth::user()['id'] }}', approvalID, 'approved')" type="button"
                     class="btn text-white" style="width: 140px; background-color:#50B720">
                     <i class="fas fa-circle-check text-white text-lg me-1"></i>
@@ -169,6 +169,49 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    function getExpenseApprovalData(receipt_picture_directory, additional_picture_directory, receipt_date, merchant,
+            total_amount, location,
+            category, sub_category, partner, purpose, expense_of, note, status, approval_id) {
+
+            $.ajax({
+                beforeSend: function() {
+                    $('#main-loader').show();
+                },
+                success: function() {
+                    
+                    document.getElementById('detail_receipt_file_review').src = STORAGE_URL +
+                    receipt_picture_directory;
+                    document.getElementById('detail_additional_file_review').src = STORAGE_URL +
+                        additional_picture_directory;
+                    document.getElementById('detail_date_review').value = receipt_date;
+                    document.getElementById('detail_merchant_review').value = merchant;
+                    document.getElementById('detail_total_amount_review').value = total_amount;
+                    document.getElementById('detail_location_review').value = location;
+                    document.getElementById('detail_category_review').value = category;
+                    document.getElementById('detail_sub_category_review').value = sub_category;
+                    document.getElementById('detail_partner_review').value = partner;
+                    document.getElementById('detail_purpose_review').value = purpose;
+                    document.getElementById('detail_note_review').value = note;
+                    document.getElementById('dataExpenseOf_review').value = expense_of;
+                    approvalID = approval_id;
+                    if (status == "pending") {
+                        document.getElementById('decisionButton_review').style.display = "block";
+                    } else {
+                        document.getElementById('decisionButton_review').style.display = "none";
+                    }
+                },
+                complete:function(){
+                    
+                    $('#main-loader').hide();
+                }
+            });
+
+        }
+        
+</script>
 
 
 <script>
