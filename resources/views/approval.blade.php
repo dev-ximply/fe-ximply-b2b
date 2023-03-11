@@ -582,44 +582,44 @@
             }
         }
 
-        // function getExpenseApprovalData(receipt_picture_directory, additional_picture_directory, receipt_date, merchant,
-        //     total_amount, location,
-        //     category, sub_category, partner, purpose, expense_of, note, status, approval_id) {
+        function getExpenseApprovalData(receipt_picture_directory, additional_picture_directory, receipt_date, merchant,
+            total_amount, location,
+            category, sub_category, partner, purpose, expense_of, note, status, approval_id) {
 
-        //     $.ajax({
-        //         beforeSend: function() {
-        //             $('#main-loader').show();
-        //         },
-        //         success: function() {
-                    
-        //             document.getElementById('detail_receipt_file_review').src = STORAGE_URL +
-        //             receipt_picture_directory;
-        //             document.getElementById('detail_additional_file_review').src = STORAGE_URL +
-        //                 additional_picture_directory;
-        //             document.getElementById('detail_date_review').value = receipt_date;
-        //             document.getElementById('detail_merchant_review').value = merchant;
-        //             document.getElementById('detail_total_amount_review').value = total_amount;
-        //             document.getElementById('detail_location_review').value = location;
-        //             document.getElementById('detail_category_review').value = category;
-        //             document.getElementById('detail_sub_category_review').value = sub_category;
-        //             document.getElementById('detail_partner_review').value = partner;
-        //             document.getElementById('detail_purpose_review').value = purpose;
-        //             document.getElementById('detail_note_review').value = note;
-        //             document.getElementById('dataExpenseOf_review').value = expense_of;
-        //             approvalID = approval_id;
-        //             if (status == "pending") {
-        //                 document.getElementById('decisionButton_review').style.display = "block";
-        //             } else {
-        //                 document.getElementById('decisionButton_review').style.display = "none";
-        //             }
-        //         },
-        //         complete:function(){
-                    
-        //             $('#main-loader').hide();
-        //         }
-        //     });
+            $.ajax({
+                beforeSend: function() {
+                    $('#main-loader').show();
+                },
+                success: function() {
 
-        // }
+                    document.getElementById('detail_receipt_file_review').src = STORAGE_URL +
+                        receipt_picture_directory;
+                    document.getElementById('detail_additional_file_review').src = STORAGE_URL +
+                        additional_picture_directory;
+                    document.getElementById('detail_date_review').value = receipt_date;
+                    document.getElementById('detail_merchant_review').value = merchant;
+                    document.getElementById('detail_total_amount_review').value = total_amount;
+                    document.getElementById('detail_location_review').value = location;
+                    document.getElementById('detail_category_review').value = category;
+                    document.getElementById('detail_sub_category_review').value = sub_category;
+                    document.getElementById('detail_partner_review').value = partner;
+                    document.getElementById('detail_purpose_review').value = purpose;
+                    document.getElementById('detail_note_review').value = note;
+                    document.getElementById('dataExpenseOf_review').value = expense_of;
+                    approvalID = approval_id;
+                    if (status == "pending") {
+                        document.getElementById('decisionButton_review').style.display = "block";
+                    } else {
+                        document.getElementById('decisionButton_review').style.display = "none";
+                    }
+                },
+                complete: function() {
+
+                    $('#main-loader').hide();
+                }
+            });
+
+        }
 
 
         function approvalDecision(userId, approval_id, decision) {
@@ -644,55 +644,64 @@
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        var formData = new FormData();
-                        formData.append('tenant_code', TENANT_CODE);
-                        formData.append('user_id', userId);
-                        formData.append('approval_id', approval_id);
-                        formData.append('decision', decision);
 
-                        $.ajaxSetup({
-                            headers: {
-                                "Authorization": "Bearer " + AUTH_TOKEN,
-                                "Accept": "application/json",
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
+                        let check = checkPin("", function() {
+                            Approval();
                         });
 
-                        $.ajax({
-                            url: API_URL + "api/expense/approval",
-                            type: 'post',
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            beforeSend: function() {
-                                if ($("#loader")) {
-                                    $("#loader").show();
+                        function Approval() {
+                            var formData = new FormData();
+                            formData.append('tenant_code', TENANT_CODE);
+                            formData.append('user_id', userId);
+                            formData.append('approval_id', approval_id);
+                            formData.append('decision', decision);
+
+                            $.ajaxSetup({
+                                headers: {
+                                    "Authorization": "Bearer " + AUTH_TOKEN,
+                                    "Accept": "application/json",
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 }
-                            },
-                            success: function(res) {
-                                if (res['success'] == "true" || res['success'] == true) {
-                                    swalWithBootstrapButtons.fire(
-                                        "Success!",
-                                        "Your request success.",
-                                        "success"
-                                    );
-                                } else {
-                                    swalWithBootstrapButtons.fire(
-                                        "Error!",
-                                        "Your request can't processed.",
-                                        "error"
-                                    );
+                            });
+
+                            $.ajax({
+                                url: API_URL + "api/expense/approval",
+                                type: 'post',
+                                data: formData,
+                                contentType: false,
+                                processData: false,
+                                beforeSend: function() {
+                                    if ($("#loader")) {
+                                        $("#loader").show();
+                                    }
+                                },
+                                success: function(res) {
+                                    if (res['success'] == "true" || res['success'] == true) {
+                                        swalWithBootstrapButtons.fire(
+                                            "Success!",
+                                            "Your request success.",
+                                            "success"
+                                        );
+                                    } else {
+                                        swalWithBootstrapButtons.fire(
+                                            "Error!",
+                                            "Your request can't processed.",
+                                            "error"
+                                        );
+                                    }
+                                },
+                                complete: function(data) {
+                                    if ($("#loader")) {
+                                        $("#loader").hide();
+                                    }
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 1000);
                                 }
-                            },
-                            complete: function(data) {
-                                if ($("#loader")) {
-                                    $("#loader").hide();
-                                }
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 1000);
-                            }
-                        });
+                            });
+
+                        }
+
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
                         swalWithBootstrapButtons.fire(
                             "Cancelled",
@@ -730,7 +739,7 @@
                 $('#status').on('change', function() {
                     var status = $('#status').val();
                     urlSearch = API_URL + "api/expense/approval/list/" + TENANT_CODE +
-                        '?user_id=' + USR_ID + "&status=" + status;
+                        '/?user_id=' + USR_ID + "&status=" + status;
 
                     new getDataExpenses(urlSearch);
                 });
