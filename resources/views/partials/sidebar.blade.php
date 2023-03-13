@@ -54,22 +54,6 @@
                 </li>
             @endif
 
-            @if (session()->get('is_superadmin') == false)
-                <li class="nav-item">
-                    <a class="nav-link @if ($section == 'expense') active @endif" href="/expense">
-                        <div
-                            class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'expense' ? 'bg-orange' : 'bg-purple' }}">
-                            <div class="{{ $section == 'expense' ? 'text-white' : 'text-white' }}">
-                                <img src="{{ asset('img/icons/sidebar/expense.png') }}" alt=""
-                                    style="width: 35px">
-                            </div>
-                        </div>
-                        <span
-                            class="nav-link-text ms-1 {{ $section == 'expense' ? 'text-orange' : 'text-purple' }}">Expenses</span>
-                    </a>
-                </li>
-            @endif
-
             @if (session()->get('approval_expense') == 1 || session()->get('manage_user') == 1)
                 {{-- @endif
             @if (session()->get('manage_user') == 1) --}}
@@ -100,7 +84,7 @@
                                 @endif
                                 <a class="nav-link @if ($section == 'employee') active @endif" href="/employee">
                                     <span class="sidenav-mini-icon text-purple"> O </span>
-                                    <span class="nav-link-text ms-1 text-purple">Member</span>
+                                    <span class="nav-link-text ms-1 text-purple">Employee</span>
                                 </a>
                                 <a class="nav-link @if ($section == 'partner') active @endif " href="/partner">
                                     <span class="sidenav-mini-icon text-purple"> O </span>
@@ -141,6 +125,22 @@
                             </li>
                         </ul>
                     </div>
+                </li>
+            @endif
+
+            @if (session()->get('is_superadmin') == false)
+                <li class="nav-item">
+                    <a class="nav-link @if ($section == 'expense') active @endif" href="/expense">
+                        <div
+                            class="icon icon-sm shadow border-radius-md  text-center  me-2 d-flex align-items-center justify-content-center {{ $section == 'expense' ? 'bg-orange' : 'bg-purple' }}">
+                            <div class="{{ $section == 'expense' ? 'text-white' : 'text-white' }}">
+                                <img src="{{ asset('img/icons/sidebar/expense.png') }}" alt=""
+                                    style="width: 35px">
+                            </div>
+                        </div>
+                        <span
+                            class="nav-link-text ms-1 {{ $section == 'expense' ? 'text-orange' : 'text-purple' }}">Expenses</span>
+                    </a>
                 </li>
             @endif
 

@@ -155,7 +155,7 @@
 
                                         <div class="mb-3">
                                             <input type="text" class="form-control form-control-lg"
-                                                placeholder="Mobile Phone Number" aria-label="handphone" name="handphone" id="handphone"
+                                                placeholder="Mobile Phone Number ( exp. 08+ )" aria-label="handphone" name="handphone" id="handphone"
                                                 id="handphone" value="{{ old('handphone') }}" required
                                                 autocomplete="handphone" step="1.0" autofocus maxlength="13">
                                             <script>
