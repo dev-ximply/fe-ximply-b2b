@@ -188,10 +188,7 @@
                                     Last Name</th>
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
-                                    Role Name</th>
-                                <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
-                                    style="color: #000000; ">
-                                    Authorization</th>
+                                    Role Name</th>                                
                                 <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs pt-3"
                                     style="color: #000000; ">
                                     Budget Limit</th>
@@ -220,28 +217,7 @@
                                         </td>
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
-                                            {{ $member->role_name }}</td>
-                                        <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
-                                            style="color: #000000">
-                                            <ul>
-
-                                                {{-- <li>Policies : {{ $member->permission->policies == 0 ? 'No' : 'Yes' }}</li> --}}
-                                                <li>Approval Top Up :
-                                                    {{ $member->permission->approval_topup == 0 ? 'No' : 'Yes' }}</li>
-                                                <li>Approval Expense :
-                                                    {{ $member->permission->approval_expense == 0 ? 'No' : 'Yes' }}</li>
-                                                {{-- <li>Approval Pre Budget :
-                                                    {{ $member->permission->approval_prebudget == 0 ? 'No' : 'Yes' }}</li> --}}
-                                                <li>Manage User :
-                                                    {{ $member->permission->manage_user == 0 ? 'No' : 'Yes' }}</li>
-                                                <li>Manage Budget :
-                                                    {{ $member->permission->manage_budget == 0 ? 'No' : 'Yes' }}</li>
-                                                {{-- <li>Manage Tenant :
-                                                    {{ $member->permission->manage_tenant == 0 ? 'No' : 'Yes' }}</li>
-                                                <li>Manage Cards :
-                                                    {{ $member->permission->manage_cards == 0 ? 'No' : 'Yes' }}</li> --}}
-                                            </ul>
-                                        </td>
+                                            {{ $member->role_name }}</td>                                        
                                         <td class=" ps-md-4 text-sm  justify-content-between text-start pt-4"
                                             style="color: #000000">
                                             {{ number_format($member->limit->remain_limit) }}</td>
