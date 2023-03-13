@@ -46,7 +46,7 @@
                                                         LEVEL&nbsp;{{ $permission['role_level'] }}</td>
                                                     <td width="40%" class="text-sm position-relative">
                                                         <input type="text" placeholder="Role Name..."
-                                                            onchange="changeRoleName(this.value, {{ $permission['id'] }})"
+                                                            onchange="changeRoleName(this.value, '{{ $permission['id'] }}')"
                                                             style="width: 100%; border:0.5px solid rgb(210, 210, 210)"
                                                             class="rounded" value="{{ $permission['role_name'] }}"
                                                             id="tesLabel">
@@ -268,6 +268,9 @@
                     new_role_name: value,
                     role_id: roleId,
                 },
+                beforeSend: function(){
+                    $('#main-loader').show();
+                },
                 success: function(response) {
                     const {
                         success,
@@ -279,7 +282,11 @@
                             "success!",
                             "Role name updated !",
                             "success"
+
                         );
+                        setTimeout(function() {
+                            window.location.reload(true);
+                        }, 1000);
                     } else {
                         swalWithBootstrapButtons.fire(
                             "!",
@@ -288,6 +295,9 @@
                         );
                     }
 
+                },
+                complete:function(){
+                    $('#main-loader').hide();
                 }
 
             });
