@@ -380,7 +380,7 @@
 {{-- Modal New Pin --}}
 <div class="modal fade" id="setPin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="width: 400px">
+    <div class="modal-dialog modal-dialog-centered" style="width: 400px; z-index:99">
         <div class="modal-content" style="border-radius:5px">
             <div id="loader_nav"
                 style="display:none; text-align: center; z-index: 5000; position: absolute; width: 100%; top: 40%">

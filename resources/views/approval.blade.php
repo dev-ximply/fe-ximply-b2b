@@ -5,6 +5,7 @@
 @section('container')
     @include('approval.popUpimage')
     @include('expenses.view-expense-detail')
+    @include('expenses.view-expense-review-detail')
 
 
     <div class="row">
@@ -231,7 +232,7 @@
                                                             <div
                                                                 class="d-flex flex-row pt-3 d-flex justify-content-center">
                                                                 <button
-                                                                    onclick="getExpenseApprovalData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category_name }}', '{{ $expense_approval->sub_category_name }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose_name }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->note }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
+                                                                    onclick="getExpenseApprovalData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', `{{ $expense_approval->merchant }}`, '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category_name }}', '{{ $expense_approval->sub_category_name }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose_name }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->note }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
                                                                     class="mx-1
                                                                     btn text-white d-flex align-items-center d-flex
                                                                     justify-content-center"
@@ -239,7 +240,7 @@
                                                                     data-placement="left" title="Review"
                                                                     style="width: 60px; height:25px; background-color:#FFCF23"
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#viewExpenseDetail">
+                                                                    data-bs-target="#viewExpenseDetailReview">
                                                                     <i
                                                                         class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>
                                                                     <span style="font-size: 0.6em">Review</span>
@@ -270,7 +271,7 @@
                                                         @else
                                                             <div class="ps-md-0 pt-3 d-flex justify-content-start">
                                                                 <button
-                                                                    onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', '{{ $expense_approval->merchant }}', '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category_name }}', '{{ $expense_approval->sub_category_name }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose_name }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->note }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
+                                                                    onclick="getExpenseData('{{ $expense_approval->receipt_picture_directory }}', '{{ $expense_approval->additional_picture_directory }}', '{{ $expense_approval->receipt_date }}', `{{ $expense_approval->merchant }}`, '{{ $expense_approval->total_amount }}', '{{ $expense_approval->location }}', '{{ $expense_approval->category_name }}', '{{ $expense_approval->sub_category_name }}', '{{ $expense_approval->client_name }}', '{{ $expense_approval->purpose_name }}', '{{ $expense_approval->expense_of }}', '{{ $expense_approval->note }}', '{{ $expense_approval->status }}', '{{ $expense_approval->approval_id }}')"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#viewExpenseDetail"
                                                                     class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"
@@ -471,7 +472,7 @@
                                                             <div
                                                                 class="d-flex flex-row pt-3 d-flex justify-content-center">
                                                                 <button
-                                                                    onclick="getExpenseData('{{ $history_approval->receipt_picture_directory }}', '{{ $history_approval->additional_picture_directory }}', '{{ $history_approval->receipt_date }}', '{{ $history_approval->merchant }}', '{{ $history_approval->total_amount }}', '{{ $history_approval->location }}', '{{ $history_approval->category_name }}', '{{ $history_approval->sub_category_name }}', '{{ $history_approval->client_name }}', '{{ $history_approval->purpose_name }}', '{{ $history_approval->expense_of }}', '{{ $history_approval->note }}', '{{ $history_approval->status }}', '{{ $history_approval->approval_id }}')"
+                                                                    onclick="getExpenseApprovalData('{{ $history_approval->receipt_picture_directory }}', '{{ $history_approval->additional_picture_directory }}', '{{ $history_approval->receipt_date }}', `{{ $history_approval->merchant }}`, '{{ $history_approval->total_amount }}', '{{ $history_approval->location }}', '{{ $history_approval->category_name }}', '{{ $history_approval->sub_category_name }}', '{{ $history_approval->client_name }}', '{{ $history_approval->purpose_name }}', '{{ $history_approval->expense_of }}', '{{ $history_approval->note }}', '{{ $history_approval->status }}', '{{ $history_approval->approval_id }}')"
                                                                     class="mx-1
                                                                     btn text-white d-flex align-items-center d-flex
                                                                     justify-content-center"
@@ -479,7 +480,7 @@
                                                                     data-placement="left" title="Review"
                                                                     style="width: 60px; height:25px; background-color:#FFCF23"
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#viewExpenseDetail">
+                                                                    data-bs-target="#viewExpenseDetailReview">
                                                                     <i
                                                                         class="fa-sharp fa-solid fa-pen-to-square text-white text-md me-1"></i>
                                                                     <span style="font-size: 0.6em">Review</span>
@@ -510,9 +511,9 @@
                                                         @else
                                                             <div class="ps-md-0 pt-3 d-flex justify-content-start">
                                                                 <button
-                                                                    onclick="getExpenseData('{{ $history_approval->receipt_picture_directory }}', '{{ $history_approval->additional_picture_directory }}', '{{ $history_approval->receipt_date }}', '{{ $history_approval->merchant }}', '{{ $history_approval->total_amount }}', '{{ $history_approval->location }}', '{{ $history_approval->category_name }}', '{{ $history_approval->sub_category_name }}', '{{ $history_approval->client_name }}', '{{ $history_approval->purpose_name }}', '{{ $history_approval->expense_of }}', '{{ $history_approval->note }}', '{{ $history_approval->status }}', '{{ $history_approval->approval_id }}')"
+                                                                    onclick="getExpenseApprovalData('{{ $history_approval->receipt_picture_directory }}', '{{ $history_approval->additional_picture_directory }}', '{{ $history_approval->receipt_date }}', `{{ $history_approval->merchant }}`, '{{ $history_approval->total_amount }}', '{{ $history_approval->location }}', '{{ $history_approval->category_name }}', '{{ $history_approval->sub_category_name }}', '{{ $history_approval->client_name }}', '{{ $history_approval->purpose_name }}', '{{ $history_approval->expense_of }}', '{{ $history_approval->note }}', '{{ $history_approval->status }}', '{{ $history_approval->approval_id }}')"
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#viewExpenseDetail"
+                                                                    data-bs-target="#viewExpenseDetailReview"
                                                                     class="mx-1 btn  text-white d-flex align-items-center d-flex justify-content-center"
                                                                     style="width: 60px; height:25px; background-color:#FFCF23">
                                                                     <i
@@ -590,30 +591,30 @@
                     $('#main-loader').show();
                 },
                 success: function() {
-                    
-                    document.getElementById('detail_receipt_file').src = STORAGE_URL +
-                    receipt_picture_directory;
-                    document.getElementById('detail_additional_file').src = STORAGE_URL +
+
+                    document.getElementById('detail_receipt_file_review').src = STORAGE_URL +
+                        receipt_picture_directory;
+                    document.getElementById('detail_additional_file_review').src = STORAGE_URL +
                         additional_picture_directory;
-                    document.getElementById('detail_date').value = receipt_date;
-                    document.getElementById('detail_merchant').value = merchant;
-                    document.getElementById('detail_total_amount').value = total_amount;
-                    document.getElementById('detail_location').value = location;
-                    document.getElementById('detail_category').value = category;
-                    document.getElementById('detail_sub_category').value = sub_category;
-                    document.getElementById('detail_partner').value = partner;
-                    document.getElementById('detail_purpose').value = purpose;
-                    document.getElementById('detail_note').value = note;
-                    document.getElementById('dataExpenseOf').value = expense_of;
+                    document.getElementById('detail_date_review').value = receipt_date;
+                    document.getElementById('detail_merchant_review').value = merchant;
+                    document.getElementById('detail_total_amount_review').value = total_amount;
+                    document.getElementById('detail_location_review').value = location;
+                    document.getElementById('detail_category_review').value = category;
+                    document.getElementById('detail_sub_category_review').value = sub_category;
+                    document.getElementById('detail_partner_review').value = partner;
+                    document.getElementById('detail_purpose_review').value = purpose;
+                    document.getElementById('detail_note_review').value = note;
+                    document.getElementById('dataExpenseOf_review').value = expense_of;
                     approvalID = approval_id;
                     if (status == "pending") {
-                        document.getElementById('decisionButton').style.display = "block";
+                        document.getElementById('decisionButton_review').style.display = "block";
                     } else {
-                        document.getElementById('decisionButton').style.display = "none";
+                        document.getElementById('decisionButton_review').style.display = "none";
                     }
                 },
-                complete:function(){
-                    
+                complete: function() {
+
                     $('#main-loader').hide();
                 }
             });
@@ -643,55 +644,64 @@
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        var formData = new FormData();
-                        formData.append('tenant_code', TENANT_CODE);
-                        formData.append('user_id', userId);
-                        formData.append('approval_id', approval_id);
-                        formData.append('decision', decision);
 
-                        $.ajaxSetup({
-                            headers: {
-                                "Authorization": "Bearer " + AUTH_TOKEN,
-                                "Accept": "application/json",
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
+                        let check = checkPin("", function() {
+                            Approval();
                         });
 
-                        $.ajax({
-                            url: API_URL + "api/expense/approval",
-                            type: 'post',
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            beforeSend: function() {
-                                if ($("#loader")) {
-                                    $("#loader").show();
+                        function Approval() {
+                            var formData = new FormData();
+                            formData.append('tenant_code', TENANT_CODE);
+                            formData.append('user_id', userId);
+                            formData.append('approval_id', approval_id);
+                            formData.append('decision', decision);
+
+                            $.ajaxSetup({
+                                headers: {
+                                    "Authorization": "Bearer " + AUTH_TOKEN,
+                                    "Accept": "application/json",
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 }
-                            },
-                            success: function(res) {
-                                if (res['success'] == "true" || res['success'] == true) {
-                                    swalWithBootstrapButtons.fire(
-                                        "Success!",
-                                        "Your request success.",
-                                        "success"
-                                    );
-                                } else {
-                                    swalWithBootstrapButtons.fire(
-                                        "Error!",
-                                        "Your request can't processed.",
-                                        "error"
-                                    );
+                            });
+
+                            $.ajax({
+                                url: API_URL + "api/expense/approval",
+                                type: 'post',
+                                data: formData,
+                                contentType: false,
+                                processData: false,
+                                beforeSend: function() {
+                                    if ($("#loader")) {
+                                        $("#loader").show();
+                                    }
+                                },
+                                success: function(res) {
+                                    if (res['success'] == "true" || res['success'] == true) {
+                                        swalWithBootstrapButtons.fire(
+                                            "Success!",
+                                            "Your request success.",
+                                            "success"
+                                        );
+                                    } else {
+                                        swalWithBootstrapButtons.fire(
+                                            "Error!",
+                                            "Your request can't processed.",
+                                            "error"
+                                        );
+                                    }
+                                },
+                                complete: function(data) {
+                                    if ($("#loader")) {
+                                        $("#loader").hide();
+                                    }
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 1000);
                                 }
-                            },
-                            complete: function(data) {
-                                if ($("#loader")) {
-                                    $("#loader").hide();
-                                }
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 1000);
-                            }
-                        });
+                            });
+
+                        }
+
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
                         swalWithBootstrapButtons.fire(
                             "Cancelled",
@@ -729,7 +739,7 @@
                 $('#status').on('change', function() {
                     var status = $('#status').val();
                     urlSearch = API_URL + "api/expense/approval/list/" + TENANT_CODE +
-                        '?user_id=' + USR_ID + "&status=" + status;
+                        '/?user_id=' + USR_ID + "&status=" + status;
 
                     new getDataExpenses(urlSearch);
                 });
