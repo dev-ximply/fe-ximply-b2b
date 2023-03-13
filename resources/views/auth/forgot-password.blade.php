@@ -50,17 +50,22 @@
 
 <body class="">
 
+    <input type="text" id="config_api_url" value="{{ config('api.base_url') }}" hidden>
+    <script>
+        const API_URL = document.getElementById('config_api_url').value;
+    </script>
+
     <div id="main-loader"
         style="display:none; text-align: center; z-index: 5000; position: absolute; width: 100%; top: 40%">
         <img height="100px" src="{{ asset('img/loader.gif') }}">
-    </div>    
-    <main class="main-content  mt-0" style="background-color: #ffff">        
+    </div>
+    <main class="main-content  mt-0" style="background-color: #ffff">
         <section>
-            <div class="page-header min-vh-100">                
+            <div class="page-header min-vh-100">
                 <div class="container">
                     <a class="btn btn-sm" style="margin-top: -100px; margin-left: 25px" href="/">Home</a>
-                    <div class="row">                        
-                        <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">                        
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                             <div class="card card-plain">
                                 <div style="width: 200px" align="center" class="my-0 px-4">
                                     <img src="{{ asset('img/logos/logo-new/logo-companyy.png') }}" alt=""
