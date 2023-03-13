@@ -33,13 +33,13 @@
         background-color: transparent;
     }
 
-    #ex2 img:hover {
+    /* #ex2 img:hover {
         cursor: url(grab.cur), default;
     }
 
     #ex2 img:active {
         cursor: url(grabbed.cur), default;
-    }
+    } */
 </style>
 
 <div class="modal fade" id="viewExpenseDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

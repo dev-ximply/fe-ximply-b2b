@@ -12,7 +12,7 @@
         <div class="mt-2">
             <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#add_modal_users"
                 style="background-color: #19194b">
-                <span>Add Member</span>&nbsp;
+                <span>Add Employee</span>&nbsp;
                 <i class="fa-solid fa-user-plus ms-2"></i>
             </button>
 

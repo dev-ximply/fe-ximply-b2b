@@ -191,13 +191,13 @@
             background-color: transparent;
         }
 
-        #ex2 img:hover {
+        /* #ex2 img:hover {
             cursor: url(grab.cur), default;
         }
 
         #ex2 img:active {
             cursor: url(grabbed.cur), default;
-        }
+        } */
     </style>
     @if (session()->get('is_superadmin') == false)
         <div class="row mt-2 mb-0">
@@ -267,7 +267,8 @@
                         <div class="pb-0">
                             <div class="row">
                                 <div class="d-flex mb-4 justify-content-start justify-content-md-end">
-                                    <form id="formSearch" action="" style="z-index: 0" onsubmit="handleChangeStatus(event)">
+                                    <form id="formSearch" action="" style="z-index: 0"
+                                        onsubmit="handleChangeStatus(event)">
                                         <div class="row">
                                             <div class="col-md mt-2">
                                                 <select name="statusType" id="status"
@@ -298,7 +299,7 @@
                                 <thead>
                                     <tr>
                                         <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
-                                            style="color: #000000; ">Receipt Date 
+                                            style="color: #000000; ">Receipt Date
                                         </th>
                                         <th class="col font-weight-bolder text-dark text-start text-uppercase text-xxs"
                                             style="color: #000000; ">Status
@@ -347,7 +348,7 @@
                                             </tr>
                                             @foreach ($item->expenses as $expense)
                                                 <tr class="">
-                                                    <td>{{ '#' . $i++ }}</td>
+                                                    <td>{{ $expense->date }}</td>
                                                     <td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center"
                                                         data-label="Status" style="color: #000000;">
                                                         @if ($expense->status == 'approved')
@@ -433,7 +434,8 @@
                         <div class="card-header pb-0">
                             <div class="row">
                                 <div class="d-flex mb-4 justify-content-start justify-content-md-end">
-                                    <form id="formSearch" action="" style="z-index: 0" onsubmit="handleChangeStatus(event)">
+                                    <form id="formSearch" action="" style="z-index: 0"
+                                        onsubmit="handleChangeStatus(event)">
                                         <div class="row">
                                             <div class="col-md mt-2">
                                                 <select name="statusType" id="statusUpload"
@@ -513,7 +515,7 @@
                                             </tr>
                                             @foreach ($item->expenses as $expense)
                                                 <tr class="">
-                                                    <td>{{ '#' . $i++ }}</td>
+                                                    <td>{{ $expense->receipt_date }}</td>
                                                     <td class="align-middle d-flex justify-content-md-start ps-md-4  justify-content-between text-center"
                                                         data-label="Status" style="color: #000000;">
                                                         @if ($expense->status == 'approved')
@@ -639,6 +641,9 @@
             $.ajax({
                 type: "GET",
                 url: API_URL + "api/expense/list/single?expense_id=" + expense_id,
+                beforeSend: function() {
+                    $('#main-loader').show();
+                },
                 success: function(res) {
                     if (res['success'] == true) {
                         var response = res['data'];
@@ -658,13 +663,24 @@
                         document.getElementById('detail_purpose').value = response['purpose_name'];
                         document.getElementById('detail_note').value = response['note'];
                         document.getElementById('dataExpenseOf').value = response['expense_of'];
-                        $('#ex1').zoom();
-                        $('#ex2').zoom();
+
+                        $(document).ready(function() {
+                            $('#ex1').mouseover(function() {
+                                $('#ex1').zoom();
+                            });
+
+                            $('#ex2').mouseover(function() {
+                                $('#ex2').zoom();
+                            });
+                        });
+
+
                     } else {
                         Swal.fire('failed<br>Please contact ximply support');
                     }
                 },
                 complete: function(data) {
+                    $('#main-loader').hide();
                     if (data.status != 200) {
                         Swal.fire('failed<br>Please contact ximply support');
                     }
@@ -767,6 +783,7 @@
                     new getDataExpenses(urlSearch);
                 });
             });
+
             function getDataExpenses(urlSearch) {
                 $("#tableBody").html("");
                 // $("#totalAmount").html("0.00");
@@ -901,6 +918,7 @@
                     new getDataExpenses(urlSearch);
                 });
             });
+
             function getDataExpenses(urlSearch) {
                 $("#tableBodyUpload").html("");
                 // $("#totalAmount").html("0.00");
